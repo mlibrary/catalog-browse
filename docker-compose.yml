@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    ports:
+      - "4567:4567"
+    volumes:
+      - .:/app
+      - gem_cache:/gems
+    command: bundle exec ruby slim-demo.rb  -o 0.0.0.0
+
+volumes:
+  gem_cache:
