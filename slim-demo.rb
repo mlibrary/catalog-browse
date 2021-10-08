@@ -2,5 +2,5 @@ require "sinatra"
 require "slim"
 
 get "/" do
-  slim :index
+  slim :browse
 end
