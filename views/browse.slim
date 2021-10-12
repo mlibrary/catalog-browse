@@ -23,25 +23,27 @@ html lang="en"
           input type="text" name="query" value="Z253 .U6 1963"
           button Search
 
+      div.viewport-container
+        p style="margin-bottom: 0; margin-top: var(--space-small);"
+          strong Search tip: 
+          | Browse by Library of Congress (LC) call number, sorted alphanumerically. (e.g. RC662.4 .H38 2016; QH 105)
+        a href="" Learn more about the meaning of call numbers
     main class="viewport-container" style="margin-top: var(--space-x-large);"
       h1 Browse `Z 253 .U6 1963` in call numbers
 
-      p style="margin-bottom: 0;"
-        strong Browse by call number tip: 
-        | Search a Library of Congress (LC) call number and view an alphabetical list of all LC call numbers and related titles indexed in the Library catalog.
-      a href="" Learn more about the meaning of call numbers
       table class="table browse-table" cellspacing="0"
         thead
           tr
             th Call number
             th Item
         tbody
-          tr
-            td Z 253 .U582 1984
-            td
-              a href="" Patents and trademarks style menu :
-              p United States. Patent and Trademark Office.
-              p [Washington, D.C.] : The Office : For sale by the Supt. of Docs., U.S. G.P.O., 1984.
+          - results.each do |result|
+            tr
+              td = result[:callnumber]
+              td
+                a href="" = result[:title]
+                - result[:subtitles].each do |subtitle|
+                  p = subtitle
 
 
     / footer class="page-footer" style="margin-top: var(--space-xxx-large)"
