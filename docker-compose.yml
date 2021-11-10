@@ -8,7 +8,8 @@ services:
     volumes:
       - .:/app
       - gem_cache:/gems
-    command: bundle exec ruby slim-demo.rb  -o 0.0.0.0
+    env_file:
+      - .env
 
 volumes:
   gem_cache:

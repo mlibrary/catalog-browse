@@ -1,0 +1,84 @@
+<h1>Callnumber browse proof of concept</h1>
+
+
+<!-- The form sends its query to /callnumber/first, which is special-cased to
+     get the two records before your search, look for exact matches, etc.
+-->
+
+<div style="justify-content: center">
+  <%= form_with url: "first", method: :get do |form| %>
+    <%= form.label :query, "Browse starting at:" %>
+    <%= form.text_field :callnumber, value: params[:callnumber] %>
+    <%= form.submit "Go" %>
+  <% end %>
+</div>
+
+
+<div style="display: flex; width: 100%; margin-top: 100px;
+  justify-content: space-between;">
+
+  <!-- callnumber_previous_path is rails' way of auto-generating the path to
+       "/callnumber/previous".
+
+       The provided cnrq (CallNumber Range Query) object can spit out all the
+       correct URL arguments for the previous page and next page, as seen here.
+
+       We can test for the edges of the list by asking if the cnrq.has_previous_page?
+       and cnrq.has_next_page?
+  -->
+
+  <div style="width: 20%">
+    <% if cnrq.has_previous_page? %>
+      <%= link_to "Previous page", callnumber_previous_path(cnrq.previous_page.url_args) %>
+    <% end %>
+  </div>
+  <div style="width: 20%">
+    <% if cnrq.has_next_page? %>
+      <%= link_to "Next page", callnumber_next_path(cnrq.next_page.url_args) %>
+    <% end %>
+  </div>
+</div>
+
+
+
+<!-- cnrq.docs is the raw solr documents (basically just ruby hashes) from which you can grab
+     the data. (We might want to make these smarter objects at some point, but this was good
+     enough for now).
+
+     Besides being able to get the regular fields via, e.g., d['author'] or whatever, there are
+     some special things worth noting:
+       * If the "document" is, instead just the symbol :placeholder, that's where their thing would
+       have appeared.
+       * d.exact_match == true if the callnumber they entered exactly matches this record
+-->
+
+<% cnrq.docs.each do |d| %>
+  <div style="margin-top: 2em;">
+    <% if d == :placeholder %>
+      <div style="margin: 1em; color: red">Your results would have been here</div>
+      <% next %>
+    <% end %>
+
+    <% if d.exact_match %>
+      <div style="color: red">EXACT MATCH</div> <!-- would more likely just use this check to change css class -->
+    <% end %>
+    <div><span style="font-weight: bold">Title</span>: <%= link_to d['title'].first, "https://search.lib.umich.edu/catalog/record/#{d['id']}" %></div>
+    <div><span style="font-weight: bold">Callnumber</span>:
+      <span style="color: forestgreen"><%= d.this_callnumber %></span></div>
+  </div>
+<% end %>
+
+<div style="display: flex; width: 100%; margin-top: 100px;
+  justify-content: space-between;">
+
+  <div style="width: 20%">
+    <% if cnrq.has_previous_page? %>
+      <%= link_to "Previous page", callnumber_previous_path(cnrq.previous_page.url_args) %>
+    <% end %>
+  </div>
+  <div style="width: 20%">
+    <% if cnrq.has_next_page? %>
+      <%= link_to "Next page", callnumber_next_path(cnrq.next_page.url_args) %>
+    <% end %>
+  </div>
+</div>

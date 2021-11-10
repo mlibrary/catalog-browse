@@ -1,6 +1,13 @@
 require "sinatra"
 require "slim"
+require_relative "lib/callnumber_models"
 
+get '/callnumber/first' do
+    callnumber = params[:callnumber]
+    @base_crnq = CallnumberRangeQuery.new(callnumber: callnumber)
+    @cnrq = @base_crnq.clone_to(FirstPage, key: @base_crnq.callnumber)
+    erb :first, :locals  => { :cnrq => @cnrq }
+end
 get "/" do
 
   # This should be the exact same list as Library Search Catalog Fields

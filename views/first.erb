@@ -1,0 +1,18 @@
+<h1>Callnumber browse proof of concept</h1>
+
+<% cnrq.docs.each do |d| %>
+  <div style="margin-top: 2em;">
+    <% if d == :placeholder %>
+      <div style="margin: 1em; color: red">Your results would have been here</div>
+      <% next %>
+    <% end %>
+
+    <% if d.exact_match %>
+      <div style="color: red">EXACT MATCH</div> <!-- would more likely just use this check to change css class -->
+    <% end %>
+    <div><span style="font-weight: bold">Title</span>: <%= d['title'].first %></div>
+    <div><span style="font-weight: bold">Callnumber</span>:
+      <span style="color: forestgreen"><%= d.this_callnumber %></span></div>
+  </div>
+<% end %>
+
