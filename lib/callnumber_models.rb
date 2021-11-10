@@ -1,6 +1,7 @@
 ## frozen_string_literal: true
 
 require 'simple_solr_client'
+require 'byebug'
 
 require 'delegate'
 
@@ -20,14 +21,20 @@ class SolrDocWrapper < SimpleDelegator
 
 end
 
-class CallnumberRangeQuery
-
+class SolrClientWrapper
   SSC          = SimpleSolrClient::Client.new ENV.fetch('CATALOG_SOLR')
   CN_CORE      = SSC.core('callnumbers')
   CATALOG_CORE = SSC.core('biblio')
 
+  def self.cn_core
+    CN_CORE
+  end
+  def self.catalog_core
+    CATALOG_CORE
+  end
+end
 
-  ROWS = 30
+class CallnumberRangeQuery
 
   attr_reader :callnumber, :cn_core, :catalog_core, :rows
   attr_accessor :query, :filters, :results, :key, :page
@@ -37,11 +44,12 @@ class CallnumberRangeQuery
   def initialize(callnumber:,
                  key: nil,
                  page: 0,
-                 cn_core: CN_CORE,
-                 catalog_core: CATALOG_CORE,
+                 cn_core: SolrClientWrapper.cn_core,
+                 catalog_core: SolrClientWrapper.catalog_core,
                  query: '*:*',
                  filters: [],
-                 rows: ROWS)
+                 rows: 30
+   )
     @callnumber   = callnumber
     @page         = page
     @cn_core      = cn_core
