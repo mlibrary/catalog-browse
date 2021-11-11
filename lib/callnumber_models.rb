@@ -77,12 +77,11 @@ class CallnumberRangeQuery
   end
 
   def base_query_args
-    args = {
+    {
       rows: rows,
       q:    query,
       fq:   filters
     }
-    args
   end
 
   def sort
@@ -205,7 +204,7 @@ end
 class FirstPage < NextPage
 
   def leading_results
-    @ppc ||= clone_to(PreviousPage, key: callnumber, rows: 2)
+    @ppc ||= clone_to(PreviousPage, key: callnumber, rows: 5)
   end
 
   def exact_matches
@@ -213,8 +212,8 @@ class FirstPage < NextPage
   end
 
   def next_results
-    puts "Starting with #{rows} rows"
-    rows_needed = rows - exact_matches.docs.size - 2
+    puts "Starting with whatwhatwhat #{rows} rows"
+    rows_needed = rows - exact_matches.docs.size - 5
     puts "Rows needed: #{rows_needed}"
     if exact_matches.docs.empty?
       newkey = callnumber
@@ -315,6 +314,7 @@ class CNKeyQuery
   end
 
   def get_docs
+    byebug
     puts "CNKeyQuery args are " + query_args.to_s
     @resp        ||= cn_core.get('select', query_args_with_one_more_row)
     d            = @resp['response']['docs']

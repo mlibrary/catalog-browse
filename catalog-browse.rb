@@ -1,11 +1,12 @@
 require "sinatra"
 require "slim"
-require_relative "lib/callnumber_models"
+require_relative "lib/models/browse_list"
 
-get '/callnumber/first' do
+get '/callnumber/:callnumber' do
     callnumber = params[:callnumber]
-    @base_crnq = CallnumberRangeQuery.new(callnumber: callnumber)
-    @cnrq = @base_crnq.clone_to(FirstPage, key: @base_crnq.callnumber)
+    #@base_crnq = CallnumberRangeQuery.new(callnumber: callnumber)
+    #@cnrq = @base_crnq.clone_to(FirstPage, key: @base_crnq.callnumber)
+    @cnrq = NextPage.new(callnumber: callnumber, key: callnumber)
     erb :first, :locals  => { :cnrq => @cnrq }
 end
 get "/" do

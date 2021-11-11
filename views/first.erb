@@ -10,6 +10,7 @@
     <% if d.exact_match %>
       <div style="color: red">EXACT MATCH</div> <!-- would more likely just use this check to change css class -->
     <% end %>
+
     <div><span style="font-weight: bold">Title</span>: <%= d['title'].first %></div>
     <div><span style="font-weight: bold">Callnumber</span>:
       <span style="color: forestgreen"><%= d.this_callnumber %></span></div>

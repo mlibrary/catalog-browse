@@ -111,3 +111,6 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 =end
 end
+def fixture(path)
+  File.read("./spec/fixtures/#{path}")
+end
