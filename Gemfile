@@ -5,6 +5,7 @@ gem 'sinatra'
 gem 'simple_solr_client'
 gem 'thin'
 gem 'slim'
+gem 'httparty'
 
 group :development do
   gem 'sinatra-contrib'

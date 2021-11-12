@@ -314,7 +314,6 @@ class CNKeyQuery
   end
 
   def get_docs
-    byebug
     puts "CNKeyQuery args are " + query_args.to_s
     @resp        ||= cn_core.get('select', query_args_with_one_more_row)
     d            = @resp['response']['docs']

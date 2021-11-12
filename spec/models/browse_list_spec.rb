@@ -25,5 +25,14 @@ describe BrowseList::ReferenceAtTop do
       expect(subject.previous_reference_id).to eq('Z 253 .U63 1971')
     end
   end
+  context "#items" do
+    it "returns an Array of Browse Items with the correct number of rows and the correct first and last item" do
+      items = subject.items
+      expect(items.first.class.to_s).to include("BrowseItem")
+      expect(items.count).to eq(3)
+      expect(items.first.callnumber).to eq("Z 253 .U63 1971")
+      expect(items.last.callnumber).to eq("Z 253 .U69 2017")
+    end
+  end
 end
 
