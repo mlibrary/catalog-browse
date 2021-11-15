@@ -28,6 +28,14 @@ h1 {
   font-family: var(--search-font);
 }
 
+/*
+  Sticky footer CSS
+*/
+body {
+  display: grid;
+  grid-template-rows: auto auto auto auto 1fr auto;
+}
+
 h1 {
   font-weight: 400;
   font-size: 2rem;
@@ -54,12 +62,16 @@ h1 {
 .search-box select {
   background: var(--search-neutral-200);
 
-  padding-right: var(--space-x-large);
+  padding-right: var(--space-xx-large);
 }
 
 .search-box input {
   background: white;
   flex-grow: 1;
+}
+
+.search-box input:focus {
+  z-index: 2;
 }
 
 .search-box button {
@@ -156,6 +168,14 @@ a {
   margin: 0;
 }
 
+.browse-table td {
+  border-width: 2px;
+}
+
+.browse-table tr:nth-child(2) td {
+  border: none;
+}
+
 /* global focus styles */
 
 *:focus {
@@ -190,4 +210,21 @@ a {
   border-color: var(--search-blue-400);
   font-weight: 600;
   border-width: 2px;
+}
+
+.menu-nav li:first-child a {
+  padding-left: var(--space-small);
+}
+
+.page-footer {
+  padding: var(--space-xxx-large) 0;
+}
+
+.page-footer > div:first-child {
+  display: flex;
+  justify-content: center;
+}
+
+.page-footer a {
+  margin-right: var(--space-large);
 }

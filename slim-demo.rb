@@ -4,6 +4,10 @@ require "slim"
 get "/" do
   fields = [
     {
+      label: "Browse by (LC) call number",
+      value: "browse-by-callnumber"
+    },
+    {
       label: "Keyword",
       value: "keyword"
     },
@@ -14,10 +18,6 @@ get "/" do
     {
       label: "Title",
       value: "title"
-    },
-    {
-      label: "Browse by (LC) call number",
-      value: "browse-by-callnumber"
     }
   ]
 
@@ -63,6 +63,16 @@ get "/" do
       title: 'Patents and trademarks style menu :',
       subtitles: [
         'United States. Patent and Trademark Office.',
+      ]
+    },
+    {
+      match: true
+    },
+    {
+      callnumber: 'Z 253 .U582 1984',
+      title: 'Patents and trademarks style menu :',
+      subtitles: [
+        'United States. Patent and Trademark Office.',
         'Office : For sale by the Supt. of Docs., U.S. G.P.O., 1984.'
       ]
     },
@@ -73,7 +83,15 @@ get "/" do
         'United States. Patent and Trademark Office.',
         'Office : For sale by the Supt. of Docs., U.S. G.P.O., 1984.'
       ]
-    }
+    },
+    {
+      callnumber: 'Z 253 .U582 1984',
+      title: 'Patents and trademarks style menu :',
+      subtitles: [
+        'United States. Patent and Trademark Office.',
+        'Office : For sale by the Supt. of Docs., U.S. G.P.O., 1984.'
+      ]
+    },
   ]
 
   slim :browse, :locals => {

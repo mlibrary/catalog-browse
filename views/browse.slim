@@ -1,7 +1,12 @@
+// TODO
+// - [ ] Add the datastore navigation to the Catalog Browse UI with this being the future non-React thing for Search as well at some point.
+// - [ ] Finalize the full screen and responsive design of the Search Box.
+// - [ ] The Catalog fielded 
+
 doctype html
 html lang="en"
   head
-    title Library Search | Browse by callnumber
+    title Library Search | Browse by call number
     meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"
     link href="https://unpkg.com/@umich-lib/web@1/umich-lib.css" rel="stylesheet"
     link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700" rel="stylesheet"
@@ -17,7 +22,6 @@ html lang="en"
           div role="presentation" style="position: relative; height: 100%;"
             select
               - fields.each do |field| 
-                option value="" Browse by LC callnumber
                 option value=field[:value] = field[:label]
             <svg width="24px" height="24px" viewBox="0 0 24 24" class="search-box-select-icon"><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg>
           input type="text" name="query" value="Z253 .U6 1963"
@@ -36,14 +40,8 @@ html lang="en"
               - else
                 a href=datastore[:href] = datastore[:label]
 
-        // TODO
-        // - [ ] Add the datastore navigation to the Catalog Browse UI with this being the future non-React thing for Search as well at some point.
-        // - [ ] Finalize the full screen and responsive design of the Search Box.
-        // - [ ] The Catalog fielded 
-
-
     main class="viewport-container" style="margin-top: var(--space-x-large);"
-      h1 Browse `Z 253 .U6 1963` in call numbers
+      h1 style="margin-top: 0;" Browse `Z 253 .U6 1963` in call numbers
       
       p style="margin-bottom: var(--space-medium);"
         a href="" style="margin-right: var(--space-medium);" Previous page
@@ -57,17 +55,29 @@ html lang="en"
         tbody
           - results.each do |result|
             tr
-              td = result[:callnumber]
-              td
-                a href="" = result[:title]
-                - result[:subtitles].each do |subtitle|
-                  p = subtitle
+              - if result[:match] == true
+                td colspan="2" style="background: var(--color-maize-200); padding: var(--space-small); border: solid 2px var(--color-maize-300); margin-top: -2px;"
+                  | We found a matching call number in our catalog for: 
+                  strong Z253 .U6 1963
+              - else
+                td = result[:callnumber]
+                td
+                  a href="" = result[:title]
+                  - result[:subtitles].each do |subtitle|
+                    p = subtitle
 
-    / footer class="page-footer" style="margin-top: var(--space-xxx-large)"
-      div role="presentation"
-        section
-          ol
-            li
-              a href="" TODO
+    footer class="page-footer" style="margin-top: var(--space-xxx-large)"
+      div class="viewport-container"
+        a href="https://search.lib.umich.edu/" Home
+        a href="https://search.lib.umich.edu/accessibility" Accessibility
+        a href="https://guides.lib.umich.edu/c.php?g=914690" Tips for using Library Search
+        a href="https://lib.umich.edu/research-and-scholarship/help-research/how-we-can-help" Get research help
+        a href="https://search.lib.umich.edu/technical-overview" Technical overview
+        a href="https://ill.lib.umich.edu/"
+          | Make an
+          abbr title="Inter Library Loan" I.L.L.
+          | Request
+      div class="viewport-container"
+        p style="color: white; text-align: center; margin-bottom: 0;" ©2018 Regents of the University of Michigan. For details and exceptions, see the Copyright Policy.
     
       
