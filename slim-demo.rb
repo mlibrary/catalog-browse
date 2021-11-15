@@ -42,6 +42,10 @@ get "/" do
     {
       label: "Online Journals",
       href: "http://search.lib.umich.edu/onlinejournals"
+    },
+    {
+      label: "Guides and more",
+      href: "http://search.lib.umich.edu/guidesandmore"
     }
   ]
 

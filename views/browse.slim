@@ -14,10 +14,12 @@ html lang="en"
     form class="search-box" method="get"
       div class="viewport-container" role="presentation"
         div class="search-box-inner-container" role="presentation"
-          select
-            - fields.each do |field| 
-              option value="" Browse by LC callnumber
-              option value=field[:value] = field[:label]
+          div role="presentation" style="position: relative; height: 100%;"
+            select
+              - fields.each do |field| 
+                option value="" Browse by LC callnumber
+                option value=field[:value] = field[:label]
+            <svg width="24px" height="24px" viewBox="0 0 24 24" class="search-box-select-icon"><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg>
           input type="text" name="query" value="Z253 .U6 1963"
           button
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
