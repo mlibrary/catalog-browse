@@ -21,6 +21,30 @@ get "/" do
     }
   ]
 
+  datastores = [
+    {
+      label: "Everything",
+      href: "http://search.lib.umich.edu/everything"
+    },
+    {
+      label: "Catalog",
+      href: "http://search.lib.umich.edu/catalog",
+      current: true
+    },
+    {
+      label: "Articles",
+      href: "http://search.lib.umich.edu/articles"
+    },
+    {
+      label: "Databases",
+      href: "http://search.lib.umich.edu/databases"
+    },
+    {
+      label: "Online Journals",
+      href: "http://search.lib.umich.edu/onlinejournals"
+    }
+  ]
+
   results = [
     {
       callnumber: 'Z 253 .U582 1984',
@@ -48,5 +72,9 @@ get "/" do
     }
   ]
 
-  slim :browse, :locals => { :fields => fields, :results => results}
+  slim :browse, :locals => {
+    :fields => fields,
+    :datastores => datastores,
+    :results => results,
+  }
 end
