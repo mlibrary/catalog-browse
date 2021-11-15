@@ -4,7 +4,7 @@ require "slim"
 get "/" do
   fields = [
     {
-      label: "Browse by (LC) call number",
+      label: "Browse by LC call number",
       value: "browse-by-callnumber"
     },
     {
