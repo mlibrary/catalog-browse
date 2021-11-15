@@ -1,13 +1,16 @@
 require "sinatra"
 require "slim"
+require "byebug"
+require_relative "lib/utilities/solr_client"
 require_relative "lib/models/browse_list"
+require_relative "lib/models/browse_item"
+
 
 get '/callnumber/:callnumber' do
     callnumber = params[:callnumber]
-    #@base_crnq = CallnumberRangeQuery.new(callnumber: callnumber)
-    #@cnrq = @base_crnq.clone_to(FirstPage, key: @base_crnq.callnumber)
-    @cnrq = NextPage.new(callnumber: callnumber, key: callnumber)
-    erb :first, :locals  => { :cnrq => @cnrq }
+    reference_id = params[:reference_id] || callnumber 
+    list = BrowseList.for(direction: params[:direction], reference_id: reference_id, num_rows_to_display: 20, original_reference: callnumber)
+    erb :list, :locals  => { :list => list }
 end
 get "/" do
 

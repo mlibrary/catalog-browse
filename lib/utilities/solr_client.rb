@@ -4,20 +4,31 @@ class SolrClient
   include HTTParty
   base_uri "#{ENV.fetch('CATALOG_SOLR')}"
 
-  def browse_reference_on_top(reference_id:, rows: 5, core: "callnumbers")
-    range = "id:[\"#{reference_id}\" TO *]"
+  #So arrayed filter queries are sent the way Solr wants them
+  query_string_normalizer proc { |query|
+    query.map do |key, value|
+     if value.class.to_s == 'Array'
+       value.map {|v| "#{key}=#{v}"} 
+     else
+       "#{key}=#{value}"
+     end
+   end.join('&')
+  }
+
+  def browse_reference_on_top(reference_id:, rows: 20, core: "callnumbers")
+    range = "id:{\"#{reference_id}\" TO *}"
     sort = "id asc"
     browse(core: core, rows: rows, sort: sort, range: range)
   end
 
-  def browse_reference_on_bottom(reference_id:, rows: 5, core: "callnumbers")
-    range = "id:[* TO \"#{reference_id}\"]"
+  def browse_reference_on_bottom(reference_id:, rows: 20, core: "callnumbers")
+    range = "id:{* TO \"#{reference_id}\"}"
     sort = "id desc"
     browse(core: core, rows: rows, sort: sort, range: range)
   end
 
 
-  def browse(core: "callnumbers",rows: 5,sort: "id asc",range:'id:{"Z 253 .U6 1963" TO *}')
+  def browse(core: "callnumbers",rows:,sort:,range:)
     query = {
       rows: rows,
       q: '*:*',
@@ -34,5 +45,6 @@ class SolrClient
     }
     self.class.get("/#{core}/select", query: query)
   end
+
 end
 
