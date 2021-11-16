@@ -30,4 +30,4 @@ ENV BUNDLE_PATH /gems
 
 WORKDIR /app
 
-CMD ["bundle", "exec", "ruby", "slim-demo.rb", "-o", "0.0.0.0"]
+CMD ["bundle", "exec", "ruby", "catalog-browse.rb", "-o", "0.0.0.0"]

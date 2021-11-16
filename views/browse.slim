@@ -10,7 +10,7 @@ html lang="en"
     meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"
     link href="https://unpkg.com/@umich-lib/web@1/umich-lib.css" rel="stylesheet"
     link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700" rel="stylesheet"
-    link href="browse.css" rel="stylesheet"
+    link href="/browse.css" rel="stylesheet"
     script type="module" src="https://unpkg.com/@umich-lib/web@1/dist/umich-lib/umich-lib.esm.js">
   body
     m-universal-header
@@ -24,7 +24,7 @@ html lang="en"
               - fields.each do |field| 
                 option value=field[:value] = field[:label]
             <svg width="24px" height="24px" viewBox="0 0 24 24" class="search-box-select-icon"><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg>
-          input type="text" name="query" value="Z253 .U6 1963"
+          input type="text" name="query" value=list.original_reference
           button
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" clip-rule="evenodd" d="M5.77778 0C8.9688 0 11.5556 2.5868 11.5556 5.77778C11.5556 7.21324 11.032 8.52649 10.1655 9.53698L10.4063 9.77778H11.1111L15.5556 14.2222L14.2222 15.5556L9.77778 11.1111V10.4063L9.53698 10.1655C8.52649 11.032 7.21324 11.5556 5.77778 11.5556C2.5868 11.5556 0 8.9688 0 5.77778C0 2.5868 2.5868 0 5.77778 0ZM5.77778 1.77779C3.56864 1.77779 1.77778 3.56865 1.77778 5.77779C1.77778 7.98693 3.56864 9.77778 5.77778 9.77778C7.98693 9.77778 9.77778 7.98693 9.77778 5.77779C9.77778 3.56865 7.98693 1.77779 5.77778 1.77779Z" fill="white"/>
@@ -41,11 +41,11 @@ html lang="en"
                 a href=datastore[:href] = datastore[:label]
 
     main class="viewport-container" style="margin-top: var(--space-x-large);"
-      h1 style="margin-top: 0;" Browse `Z 253 .U6 1963` in call numbers
+      h1 style="margin-top: 0;" Browse `#{list.original_reference}` in call numbers
       
       p style="margin-bottom: var(--space-medium);"
-        a href="" style="margin-right: var(--space-medium);" Previous page
-        a href="" Next page
+        a href=list.previous_url style="margin-right: var(--space-medium);" Previous page
+        a href=list.next_url Next page
 
       table class="table browse-table" cellspacing="0"
         thead
@@ -53,27 +53,27 @@ html lang="en"
             th Call number
             th Item
         tbody
-          - results.each do |result|
+          - list.items.each do |result|
             tr
-              - if result[:match] == true
+              - if result.match? == true
                 td colspan="2" style="background: var(--color-maize-200); padding: var(--space-small); border: solid 2px var(--color-maize-300);"
                   | We found a matching call number in our catalog for: 
                   strong Z253 .U6 1963
-              - elsif result[:match] == false
+              - elsif result.match? == false
                 td colspan="2" style="background: var(--search-neutral-200); padding: var(--space-small); border: solid 2px var(--search-neutral-100);"
                   strong Z253 .U6 1963 
                   | would appear here. There's no exact match for that call number in our catalog. 
                   
               - else
-                td = result[:callnumber]
+                td = result.callnumber
                 td
-                  a href="" = result[:title]
-                  - result[:subtitles].each do |subtitle|
+                  a href=result.url = result.title
+                  - result.subtitles.each do |subtitle|
                     p = subtitle
 
       p style="margin-bottom: var(--space-medium);"
-        a href="" style="margin-right: var(--space-medium);" Previous page
-        a href="" Next page
+        a href=list.previous_url style="margin-right: var(--space-medium);" Previous page
+        a href=list.next_url Next page
 
     footer class="page-footer" style="margin-top: var(--space-xxx-large)"
       div class="viewport-container"
