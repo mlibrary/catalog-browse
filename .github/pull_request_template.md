@@ -15,9 +15,9 @@ Once you are ready, be sure to delete this `details` section before opening your
 # Overview
 Talk about the intent and scope of the original issue. Go over the general changes that have been made between this branch and the branch the pull request will merge into. Displaying screenshots can help!
 
-Add links to any documentation or issues that can help give more background information. Be sure to link GitHub issues with [closing keywords](https://docs.github.com/articles/closing-issues-using-keywords), if possible.
+Add links to any documentation or issues that can help give more background information. Is the pull request related to a GitHub or JIRA issue? Link to them while using [closing keywords](https://docs.github.com/articles/closing-issues-using-keywords), like so:
 
-> This pull request resolves/closes/fixes #_issue_.
+> This pull request resolves/closes/fixes #_1234_/[JIRA-1234](https://tools.lib.umich.edu/jira/browse/JIRA-1234).
 
 ## Anything else?
 _Optional_. If appropriate, provide additional notes the reviewers should be made aware of. They can be about any "gotchas" or even changes that are expected to be made in the future, but are not applied to this pull request.
