@@ -11,8 +11,8 @@ class BrowseList
       index_response = solr_client.browse_reference_on_bottom(reference_id: reference_id, rows: num_rows_to_display + 1)
     else
   #index_before:, index_after:, index_exact:, 
-      index_before = solr_client.browse_reference_on_bottom(reference_id: reference_id, rows: 2)
-      index_after = solr_client.browse_reference_on_top(reference_id: reference_id, rows: num_rows_to_display)
+      index_before = solr_client.browse_reference_on_bottom(reference_id: reference_id, rows: 3)
+      index_after = solr_client.browse_reference_on_top(reference_id: reference_id, rows: num_rows_to_display - 1)
       index_exact = solr_client.browse_reference_on_top(reference_id: reference_id, rows: 1)
       #need above and below
     end
@@ -56,10 +56,12 @@ class BrowseList
     'callnumber'
   end
   def previous_url
-    "/callnumber/#{@original_reference}?direction=previous&reference_id=#{previous_reference_id}&num_rows_to_display=#{@num_rows_to_display}"
+    #"/callnumber/#{@original_reference}?direction=previous&reference_id=#{previous_reference_id}&num_rows_to_display=#{@num_rows_to_display}"
+    "/callnumber/#{@original_reference}?direction=previous&reference_id=#{previous_reference_id}"
   end
   def next_url
-    "/callnumber/#{@original_reference}?direction=next&reference_id=#{next_reference_id}&num_rows_to_display=#{@num_rows_to_display}"
+    #"/callnumber/#{@original_reference}?direction=next&reference_id=#{next_reference_id}&num_rows_to_display=#{@num_rows_to_display}"
+    "/callnumber/#{@original_reference}?direction=next&reference_id=#{next_reference_id}"
   end
   def items
     @index_docs[*item_range].map do |index_doc|
@@ -108,7 +110,7 @@ class BrowseList::ReferenceOnBottom < BrowseList
     @index_docs[0][reference_field].strip if has_previous_list?
   end
   def item_range
-    [0, @num_rows_to_display]
+    [1, @num_rows_to_display]
   end
 end
 

@@ -9,7 +9,7 @@ require_relative "lib/models/browse_item"
 get '/callnumber/:callnumber' do
     callnumber = params[:callnumber]
     reference_id = params[:reference_id] || callnumber 
-    list = BrowseList.for(direction: params[:direction], reference_id: reference_id, num_rows_to_display: 20, original_reference: callnumber)
+    list = BrowseList.for(direction: params[:direction], reference_id: reference_id, num_rows_to_display: 5, original_reference: callnumber)
     erb :list, :locals  => { :list => list }
 end
 get "/" do
