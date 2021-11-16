@@ -27,7 +27,7 @@ _Optional_. If appropriate, provide additional notes the reviewers should be mad
 ## Testing
 List instructions on how to test the pull request. Some examples:
 
-- Run the tests to make sure they pass (`docker-compose run --rm web npm run test`).
+- Run the tests to make sure they pass (`docker-compose run --rm web bundle exec rspec`/`docker-compose run --rm web npm run test`).
   - Break the new/updated unit tests to make sure they're working properly.
 - Make sure the PR is consistent in these browsers:
   - [x] Chrome
