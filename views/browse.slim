@@ -59,7 +59,7 @@ html lang="en"
                 td colspan="2" style="background: var(--color-maize-200); padding: var(--space-small); border: solid 2px var(--color-maize-300);"
                   | We found a matching call number in our catalog for: 
                   strong Z253 .U6 1963
-              - elsif result[:match] == false
+              - elsif result.match? == false
                 td colspan="2" style="background: var(--search-neutral-200); padding: var(--space-small); border: solid 2px var(--search-neutral-100);"
                   strong Z253 .U6 1963 
                   | would appear here. There's no exact match for that call number in our catalog. 
