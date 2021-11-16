@@ -4,7 +4,7 @@ describe BrowseList::ReferenceOnTop do
     #rows would be 3.
     @params = {
       index_response: JSON.parse(fixture('callnumbers_results.json')),
-      biblio_response: JSON.parse(fixture('biblio_results.json')),
+      catalog_response: JSON.parse(fixture('biblio_results.json')),
       num_rows_to_display: 3,
       original_reference: 'Z 253 .U6 1963' 
     }
