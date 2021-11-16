@@ -2,6 +2,10 @@ require "sinatra"
 require "slim"
 
 get "/" do
+
+  # This should be the exact same list as Library Search Catalog Fields
+  # Which should be able to pull from Spectrum? search.lib.umich.edu/spectrum
+  # Albert can answer or know more. There is a chance this is in Solr too.
   fields = [
     {
       label: "Browse by LC call number",
@@ -21,6 +25,8 @@ get "/" do
     }
   ]
 
+  # Same as above, this should probably come from Spectrum's response.
+  # search.lib.umich.edu/spectrum
   datastores = [
     {
       label: "Everything",
@@ -66,7 +72,9 @@ get "/" do
       ]
     },
     {
-      match: true
+      # Set to false if not a match.
+      # The FE will render unable to find a match if true or found if false.
+      match: false
     },
     {
       callnumber: 'Z 253 .U582 1984',
