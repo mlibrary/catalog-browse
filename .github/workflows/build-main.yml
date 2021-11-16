@@ -1,0 +1,68 @@
+name: Build latest from main and AutoDeploy to Testing and Staging
+
+on:
+  workflow_run:
+    workflows: [ 'Run Tests' ]
+    branches: [ 'main' ]
+    types: [ completed ]
+
+env:
+  IMAGE_NAME: get-this-unstable
+
+jobs:
+  build:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    environment: testing
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Log into Github Container Registry
+      uses: docker/login-action@v1
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    - name: Build and Push
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        file: Dockerfile.prod
+        push: true
+        tags: | 
+           ghcr.io/mlibrary/${{ secrets.IMAGE_NAME }}:latest
+           ghcr.io/mlibrary/${{ secrets.IMAGE_NAME }}:${{ github.sha }}
+
+  deploy-testing:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: testing
+    steps:
+    - name: Deploy to Testing
+      uses: mlibrary/deploy-to-kubernetes@v1
+      with:
+        github_username: ${{ github.actor }}
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        image: mlibrary/${{ secrets.IMAGE_NAME }}:${{ github.sha }}
+        cluster_ca: ${{ secrets.HATCHER_CLUSTER_CA }}
+        cluster_server: https://hatcher.kubernetes.lib.umich.edu
+        namespace_token: ${{ secrets.HATCHER_TOKEN }}
+        namespace: ${{ secrets.NAMESPACE }}
+
+  #deploy-staging:
+    #needs: build
+    #runs-on: ubuntu-latest
+    #environment: staging
+    #steps:
+    #- name: Deploy to Staging
+      #uses: mlibrary/deploy-to-kubernetes@v1
+      #with:
+        #github_username: ${{ github.actor }}
+        #github_token: ${{ secrets.GITHUB_TOKEN }}
+        #image: mlibrary/${{ secrets.IMAGE_NAME }}:${{ github.sha }}
+        #cluster_ca: ${{ secrets.HATCHER_CLUSTER_CA }}
+        #cluster_server: https://hatcher.kubernetes.lib.umich.edu
+        #namespace_token: ${{ secrets.HATCHER_TOKEN }}
+        #namespace: ${{ secrets.NAMESPACE }}
+
