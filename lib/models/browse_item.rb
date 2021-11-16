@@ -47,6 +47,9 @@ class BrowseItem
   def publisher
     @catalog_doc["publisher"]&.first
   end
+  def match?
+    false
+  end
   def not_found?
     false
   end
