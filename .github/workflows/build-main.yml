@@ -41,13 +41,11 @@ jobs:
       with:
         github_username: ${{ github.actor }}
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        #image: mlibrary/${{ secrets.IMAGE_NAME }}:${{ github.sha }}
-        image: mlibrary/catalog-browse-unstable:${{ github.sha }}
+        image: mlibrary/${{ secrets.IMAGE_NAME }}:${{ github.sha }}
         cluster_ca: ${{ secrets.HATCHER_CLUSTER_CA }}
         cluster_server: https://hatcher.kubernetes.lib.umich.edu
         namespace_token: ${{ secrets.HATCHER_TOKEN }}
-        #namespace: ${{ secrets.NAMESPACE }}
-        namespace: browse-testing
+        namespace: ${{ secrets.NAMESPACE }}
 
   #deploy-staging:
     #needs: build
