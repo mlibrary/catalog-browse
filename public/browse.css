@@ -9,8 +9,8 @@ body {
   --search-blue-500: #0c5292;
   --search-blue-600: var(--color-blue-400);
 
-  --search-neutral-100: #f2f2f2;
-  --search-neutral-200: #fafafa;
+  --search-neutral-100: #fafafa;
+  --search-neutral-200: #f2f2f2;
   --search-neutral-300: #e5e5e5;
   --search-neutral-400: #ccc;
   --search-neutral-500: #6e6e6e;
@@ -60,7 +60,7 @@ h1 {
 }
 
 .search-box select {
-  background: var(--search-neutral-200);
+  background: var(--search-neutral-100);
 
   padding-right: var(--space-xx-large);
 }
@@ -186,8 +186,8 @@ a {
 
 .datastores-nav {
   padding-top: var(--space-small);
-  border-bottom: solid 2px var(--search-neutral-100);
-  background: var(--search-neutral-200)
+  border-bottom: solid 2px var(--search-neutral-200);
+  background: var(--search-neutral-100)
 }
 
 .menu-nav {
