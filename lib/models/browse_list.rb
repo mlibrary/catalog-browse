@@ -85,10 +85,10 @@ class BrowseList::ReferenceOnTop < BrowseList
       [1,@num_rows_to_display] 
   end
   def next_reference_id
-    @index_docs[@index_docs.count - 2][reference_field].strip if has_next_list?
+    @index_docs[@index_docs.count - 2]["id"].strip if has_next_list?
   end
   def previous_reference_id
-    @index_docs[1][reference_field].strip if has_previous_list?
+    @index_docs[1]["id"].strip if has_previous_list?
   end
 end
 
@@ -104,10 +104,10 @@ class BrowseList::ReferenceOnBottom < BrowseList
     @index_docs.count == @num_rows_to_display + 1
   end
   def next_reference_id
-    @index_docs[@index_docs.count - 1][reference_field].strip if has_next_list?
+    @index_docs[@index_docs.count - 1]["id"].strip if has_next_list?
   end
   def previous_reference_id
-    @index_docs[0][reference_field].strip if has_previous_list?
+    @index_docs[0]["id"].strip if has_previous_list?
   end
   def item_range
     [1, @num_rows_to_display]

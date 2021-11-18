@@ -14,7 +14,7 @@ describe BrowseList::ReferenceOnTop do
   end
   context "#next_reference_id" do
     it "for edgeless list, returns next to last ref id" do
-      expect(subject.next_reference_id).to eq('Z 253 .U69 2017')
+      expect(subject.next_reference_id).to eq('Z 253 .U69 2017 ||990155473530106381')
     end
     it "for edged list, returns nil" do
       @params[:num_rows_to_display] = 4
@@ -23,7 +23,7 @@ describe BrowseList::ReferenceOnTop do
   end
   context "#previous_reference_id" do
     it "returns the second item in the list" do
-      expect(subject.previous_reference_id).to eq('Z 253 .U63 1971')
+      expect(subject.previous_reference_id).to eq('Z 253 .U63 1971||990017586110106381')
     end
   end
   context "#items" do
