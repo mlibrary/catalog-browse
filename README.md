@@ -1,16 +1,30 @@
-# slim-demo
+# catalog-browse
 
-# To start
-1. Build the image
+## To start
+Connect to the U-M Library VPN
+
+![Screen Shot 2021-11-18 at 2 44 56 PM](https://user-images.githubusercontent.com/27687379/142486728-5fe21b80-b02c-4e89-a2ef-e74440e99bfa.png)
+
+Copy the environment file example
+```
+cp -r .env-example .env
+```
+
+Get the actual `CATALOG_SOLR` value from a developer, and update the `.env` file.
+```
+CATALOG_SOLR='http://catalog-solr-server'
+```
+
+Build the image
 ```
 docker-compose build
 ```
-2. Install the gems
+Install the gems
 ```
 docker-compose run --rm web bundle install
 ```
-3. Start the app
+Start the app
 ```
 docker-compose up
 ```
-4. In a browser go to http://localhost:4567
+In a browser go to http://localhost:4567/callnumber/U-M
