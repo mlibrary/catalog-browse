@@ -6,7 +6,7 @@ require_relative "lib/models/browse_list"
 require_relative "lib/models/browse_item"
 
 
-get '/callnumber/:callnumber' do
+get '/callnumber' do
   fields = [
     {
       label: "Browse by LC call number",
@@ -53,7 +53,9 @@ get '/callnumber/:callnumber' do
       href: "http://search.lib.umich.edu/guidesandmore"
     }
   ]
-    callnumber = params[:callnumber]
+    
+    callnumber = params[:query]
+    redirect "/" if callnumber.nil?
     reference_id = params[:reference_id] || callnumber 
     list = BrowseList.for(direction: params[:direction], reference_id: reference_id, num_rows_to_display: 20, original_reference: callnumber)
     slim :browse, :locals  => {

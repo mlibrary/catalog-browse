@@ -69,11 +69,11 @@ class BrowseList
   end
   def previous_url
     #"/callnumber/#{@original_reference}?direction=previous&reference_id=#{previous_reference_id}&num_rows_to_display=#{@num_rows_to_display}"
-    "/callnumber/#{@original_reference}?direction=previous&reference_id=#{previous_reference_id}"
+    "/callnumber?query=#{@original_reference}&direction=previous&reference_id=#{previous_reference_id}"
   end
   def next_url
     #"/callnumber/#{@original_reference}?direction=next&reference_id=#{next_reference_id}&num_rows_to_display=#{@num_rows_to_display}"
-    "/callnumber/#{@original_reference}?direction=next&reference_id=#{next_reference_id}"
+    "/callnumber?query=#{@original_reference}&direction=next&reference_id=#{next_reference_id}"
   end
   def items
     match_notice = OpenStruct.new(callnumber: @original_reference.upcase, match_notice?: true)
