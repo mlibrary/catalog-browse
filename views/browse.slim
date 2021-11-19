@@ -30,8 +30,23 @@ html lang="en"
         div class="search-box-inner-container" role="presentation"
           div role="presentation" style="position: relative; height: 100%;"
             select
-              - fields.each do |field| 
-                option value=field[:value] = field[:label]
+              optgroup label=("Search by") 
+                option value="keyword" Keyword
+                option value="title" Title
+                option value="title_starts_with" Title starts with
+                option value="author" Author
+                option value="journal_title" Journal/Serial Title
+                option value="subject" Subject
+                option value="academic_discipline" Academic Discipline
+                option value="call_number_starts_with" Call Number starts with
+                option value="series" Series (transcribed)
+                option value="publication_date" Year of Publication
+                option value="isn" ISBN/ISSN/OCLC/etc.
+              optgroup label=("Browse by") 
+                option selected="true" value="browse_by_lc_callnumber" Browse by LC call number
+                option value="browse_by_lc_callnumber" Browse by subject (coming soon)
+
+
             <svg width="24px" height="24px" viewBox="0 0 24 24" class="search-box-select-icon"><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg>
           input type="text" name="query" value=list.original_reference
           button
