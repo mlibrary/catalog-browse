@@ -43,9 +43,16 @@ html lang="en"
     main class="viewport-container" style="margin-top: var(--space-x-large);"
       h1 style="margin-top: 0;" Browse `#{list.original_reference}` in call numbers
       
-      p style="margin-bottom: var(--space-medium);"
-        a href=list.previous_url style="margin-right: var(--space-medium);" Previous page
-        a href=list.next_url Next page
+      nav class="pagination" aria-label="Top pagination"
+        ul
+          li
+            a href=list.previous_url
+              m-icon name="keyboard-arrow-left"
+              | Previous page
+          li
+            a href=list.next_url
+              | Next page
+              m-icon name="keyboard-arrow-right"
 
       table class="table browse-table" cellspacing="0"
         thead
@@ -71,9 +78,16 @@ html lang="en"
                   - result.subtitles.each do |subtitle|
                     p = subtitle
 
-      p style="margin-bottom: var(--space-medium);"
-        a href=list.previous_url style="margin-right: var(--space-medium);" Previous page
-        a href=list.next_url Next page
+      nav class="pagination" aria-label="Bottom pagination"
+        ul
+          li
+            a href=list.previous_url
+              m-icon name="keyboard-arrow-left"
+              | Previous page
+          li
+            a href=list.next_url
+              | Next page
+              m-icon name="keyboard-arrow-right"
 
     footer class="page-footer" style="margin-top: var(--space-xxx-large)"
       div class="viewport-container"

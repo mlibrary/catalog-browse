@@ -48,6 +48,13 @@ h1 {
 }
 
 /*
+  Images
+*/
+m-icon svg {
+  height: auto;
+}
+
+/*
   Reset input and select styles.
 */
 .search-box select,
@@ -150,6 +157,33 @@ h1 {
 
 a {
   color: var(--search-blue-400);
+}
+
+/*
+  Pagination
+*/
+nav.pagination ul {
+  display: flex;
+  line-height: 1;
+  list-style: none;
+  padding-left: 0;
+}
+
+nav.pagination ul li + li {
+  border-left: 1px solid var(--color-neutral-400);
+  margin-left: var(--space-small);
+  padding-left: var(--space-small);
+}
+
+nav.pagination a {
+  align-items: center;
+  display: flex;
+}
+
+nav.pagination m-icon svg {
+  position: relative;
+  top: var(--space-xxx-small);
+  width: 24px;
 }
 
 /*
