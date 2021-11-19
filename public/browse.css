@@ -162,25 +162,25 @@ a {
 /*
   Pagination
 */
-ul.pagination {
+nav.pagination ul {
   display: flex;
   line-height: 1;
   list-style: none;
   padding-left: 0;
 }
 
-ul.pagination li + li {
+nav.pagination ul li + li {
   border-left: 1px solid var(--color-neutral-400);
   margin-left: var(--space-small);
   padding-left: var(--space-small);
 }
 
-ul.pagination li a {
+nav.pagination a {
   align-items: center;
   display: flex;
 }
 
-ul.pagination li m-icon svg {
+nav.pagination m-icon svg {
   position: relative;
   top: var(--space-xxx-small);
   width: 24px;
