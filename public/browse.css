@@ -1,3 +1,6 @@
+html {
+  scroll-behavior: smooth;
+}
 body {
   /*
     Search Product original colors.
@@ -36,9 +39,43 @@ body {
   grid-template-rows: auto auto auto auto 1fr auto;
 }
 
+/*
+  Skip links
+*/
+.site-skip-links {
+  background: var(--color-blue-400);
+}
+
+.site-skip-links:not(:focus-within) {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.site-skip-links a {
+  color: white;
+  padding: var(--space-x-small);
+}
+.site-skip-links ul {
+    margin: var(--space-medium) 0;
+    text-align: center;
+}
+
+.site-skip-links ul li + li {
+  margin-top: var(--space-medium);
+}
+
+
 h1 {
   font-weight: 400;
   font-size: 2rem;
+}
+
+h1#maincontent {
+  margin-top: var(--space-xx-large);
 }
 
 .search-box {
