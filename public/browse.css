@@ -180,11 +180,9 @@ ul.pagination li a {
   display: flex;
 }
 
-ul.pagination li a span {
-  margin-bottom: var(--space-xx-small);
-}
-
 ul.pagination li m-icon svg {
+  position: relative;
+  top: var(--space-xxx-small);
   width: 24px;
 }
 
