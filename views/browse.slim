@@ -86,15 +86,18 @@ html lang="en"
         tbody
           - list.items.each do |result|
             tr
-              - if result.match? == true
+              - if result.match_notice? && list.num_matches == 1
                 td colspan="2" style="background: var(--color-maize-200); padding: var(--space-small); border: solid 2px var(--color-maize-300);"
                   | We found a matching call number in our catalog for: 
-                  strong Z253 .U6 1963
-              - elsif result.match? == false
+                  strong = list.original_reference
+              - elsif result.match_notice? && list.num_matches == 0 
                 td colspan="2" style="background: var(--search-neutral-200); padding: var(--space-small); border: solid 2px var(--search-neutral-100);"
-                  strong Z253 .U6 1963 
-                  | would appear here. There's no exact match for that call number in our catalog. 
-                  
+                  strong =list.original_reference
+                  |  would appear here. There's no exact match for that call number in our catalog. 
+              - elsif result.match_notice?
+                td colspan="2" style="background: var(--color-maize-200); padding: var(--space-small); border: solid 2px var(--color-maize-300);"
+                  | We found #{list.num_matches} matching items in our catalog for call number: 
+                  strong =list.original_reference
               - else
                 td = result.callnumber
                 td

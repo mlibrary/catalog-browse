@@ -1,10 +1,6 @@
 class BrowseItem
   def self.for(catalog_doc, index_doc)
-    if catalog_doc
       self.new(catalog_doc, index_doc)
-    else
-      BrowseItem::NotFound.new(catalog_doc, index_doc)
-    end
   end
   def initialize(catalog_doc, index_doc)
     @catalog_doc = catalog_doc || {}
@@ -21,7 +17,7 @@ class BrowseItem
     [alternate_bib_title, alternate_author].join(" ")
   end
   def callnumber
-    @index_doc["callnumber"].strip
+    @index_doc["callnumber"]&.strip
   end
   def subtitles
     [ author, publisher].compact
@@ -47,15 +43,7 @@ class BrowseItem
   def publisher
     @catalog_doc["publisher"]&.first
   end
-  def match?
-    nil
-  end
-  def not_found?
+  def match_notice?
     false
-  end
-end
-class BrowseItem::NotFound < BrowseItem
-  def not_found?
-    true
   end
 end
