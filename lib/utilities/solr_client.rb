@@ -46,5 +46,18 @@ class SolrClient
     self.class.get("/#{core}/select", query: query)
   end
 
+  def num_matches(callnumber:, core: "callnumbers")
+    query = {
+      q: '*:*',
+      fq: %Q(callnumber:"#{callnumber}")
+    }
+    result = self.class.get("/#{core}/select", query: query)
+    if result.code != 200
+      0
+    else
+      result.parsed_response["response"]["numFound"].to_i
+    end
+  end
+
 end
 
