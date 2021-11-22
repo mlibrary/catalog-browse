@@ -21,7 +21,7 @@ require 'simplecov'
 require 'climate_control'
 SimpleCov.start
 ENV['RACK_ENV'] = 'test'
-require File.expand_path '../../catalog-browse.rb', __FILE__
+require File.expand_path '../../lib/catalog_browse.rb', __FILE__
 module RSpecMixin
   include Rack::Test::Methods
   def app() Sinatra::Application end
