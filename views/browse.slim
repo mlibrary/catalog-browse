@@ -116,19 +116,33 @@ html lang="en"
               | Next page
               m-icon name="keyboard-arrow-right"
 
-    footer class="page-footer" style="margin-top: var(--space-xxx-large)"
-      div class="viewport-container"
-        a href="https://search.lib.umich.edu/" Home
-        a href="https://search.lib.umich.edu/accessibility" Accessibility
-        a href="https://guides.lib.umich.edu/c.php?g=914690" Tips for using Library Search
-        a href="https://lib.umich.edu/research-and-scholarship/help-research/how-we-can-help" Get research help
-        a href="https://search.lib.umich.edu/technical-overview" Technical overview
-        a href="https://ill.lib.umich.edu/"
-          | Make an
-          abbr title="Inter Library Loan" I.L.L.
-          | Request
-      div class="viewport-container"
-        p style="color: white; text-align: center; margin-bottom: 0;" ©2018 Regents of the University of Michigan. For details and exceptions, see the Copyright Policy.
+    footer class="page-footer"
+      div class="page-footer__content"
+        div class="viewport-container"
+          nav class="footer-nav" aria-label="Footer navigation"
+            ul
+              li
+                a href="https://search.lib.umich.edu/" Home
+              li
+                a href="https://search.lib.umich.edu/accessibility" Accessibility
+              li
+                a href="https://guides.lib.umich.edu/c.php?g=914690" Tips for using Library Search
+              li
+                a href="https://lib.umich.edu/research-and-scholarship/help-research/how-we-can-help" Get research help
+              li
+                a href="https://search.lib.umich.edu/technical-overview" Technical overview
+              li
+                a href="https://ill.lib.umich.edu/"
+                  | Make an 
+                  abbr title="Inter Library Loan" I.L.L.
+                  | Request
+      div class="page-footer__disclaimer"
+        div class="viewport-container"
+          span &copy; #{Date.today.year}, Regents of the University of Michigan. 
+          span
+            | For details and exceptions, see the 
+            a href="https://lib.umich.edu/about-us/policies/copyright-policy" Copyright&nbsp;Policy
+            | .
     
     m-chat
       div id="chat" tabindex="-1"

@@ -74,10 +74,6 @@ h1 {
   font-size: 2rem;
 }
 
-h1#maincontent {
-  margin-top: var(--space-xx-large);
-}
-
 .search-box {
   background: var(--search-blue-200);
   border-bottom: 2px solid var(--search-blue-300);
@@ -197,6 +193,22 @@ a {
 }
 
 /*
+  Main
+*/
+main {
+  margin-bottom: var(--space-xx-large);
+  margin-top: var(--space-xx-large);
+}
+
+main > *:first-child {
+  margin-top: 0;
+}
+
+main > *:last-child {
+  margin-bottom: 0;
+}
+
+/*
   Pagination
 */
 nav.pagination ul {
@@ -287,15 +299,29 @@ nav.pagination m-icon svg {
   padding-left: var(--space-small);
 }
 
+/*
+  Footer
+*/
 .page-footer {
-  padding: var(--space-xxx-large) 0;
+  text-align: center;
 }
 
-.page-footer > div:first-child {
-  display: flex;
-  justify-content: center;
+.page-footer__content,
+.page-footer__disclaimer span {
+  display: block;
 }
 
-.page-footer a {
-  margin-right: var(--space-large);
+@media only screen and (min-width: 720px) {
+  .page-footer__content nav ul {
+    margin: 0 -1rem;
+  }
+  
+  .page-footer__content nav li {
+    display: inline-block;
+    padding: 0 1rem;
+  }
+  
+  .page-footer__disclaimer span {
+    display: initial;
+  }
 }
