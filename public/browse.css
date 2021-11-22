@@ -226,60 +226,60 @@ nav.pagination m-icon svg {
 /*
   Browse table
 */
-table.m-table {
+table.browse-table {
   border-collapse: collapse;
   border-spacing: 0;
   text-align: left;
   width: 100%;
 }
 
-.m-table tr > * {
+.browse-table tr > * {
   border-top: solid var(--space-xxx-small) var(--search-neutral-400);
   padding: var(--space-medium) 0;
   vertical-align: top;
 }
 
-.m-table tr > *:not(:last-child) {
+.browse-table tr > *:not(:last-child) {
   padding-right: var(--space-x-large);
 }
 
-.m-table th:not([scope^='row']) {
+.browse-table th:not([scope^='row']) {
   border-top: 0;
 }
 
-.m-table th,
-.m-table td:first-of-type {
+.browse-table th,
+.browse-table td:first-of-type {
   white-space: nowrap;
 }
 
-.m-table tr[class^="match-"] > * {
+.browse-table tr[class^="match-"] > * {
   background: var(--search-neutral-200);
   padding: var(--space-small);
 }
 
-.m-table tr.match-notice > * {
+.browse-table tr.match-notice > * {
   background: var(--color-maize-200);
   border-color: var(--color-maize-300);
 }
 
-.m-table tr.match-notice + tr > td {
+.browse-table tr.match-notice + tr > td {
   border-color: var(--color-maize-300);
 }
 
-.m-table td > * {
+.browse-table td > * {
   margin: 0;
 }
 
-.m-table td a {
+.browse-table td a {
   font-weight: var(--semibold);
 }
 
-.m-table td p {
+.browse-table td p {
   font-size: 0.875em;
 }
 
 @media only screen and (max-width: 720px) {
-  .m-table thead {
+  .browse-table thead {
     position: absolute !important;
     height: 1px;
     width: 1px;
@@ -288,15 +288,15 @@ table.m-table {
     clip: rect(1px, 1px, 1px, 1px);
   }
 
-  .m-table tr > * {
+  .browse-table tr > * {
     display: block;
   }
 
-  .m-table tr > *:not(:first-child) {
+  .browse-table tr > *:not(:first-child) {
     border-top: 0;
   }
 
-  .m-table tr > *:not(:last-child) {
+  .browse-table tr > *:not(:last-child) {
     padding-bottom: 0;
     padding-right: 0;
   }
