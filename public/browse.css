@@ -70,10 +70,6 @@ h1 {
   font-weight: 400;
 }
 
-h1#maincontent {
-  margin-top: var(--space-xx-large);
-}
-
 .strong {
   font-weight: var(--bold);
 }
@@ -194,6 +190,22 @@ m-icon svg {
 
 a {
   color: var(--search-blue-400);
+}
+
+/*
+  Main
+*/
+main {
+  margin-bottom: var(--space-xx-large);
+  margin-top: var(--space-xx-large);
+}
+
+main > *:first-child {
+  margin-top: 0;
+}
+
+main > *:last-child {
+  margin-bottom: 0;
 }
 
 /*
@@ -342,15 +354,29 @@ table.browse-table {
   padding-left: var(--space-small);
 }
 
+/*
+  Footer
+*/
 .page-footer {
-  padding: var(--space-xxx-large) 0;
+  text-align: center;
 }
 
-.page-footer > div:first-child {
-  display: flex;
-  justify-content: center;
+.page-footer__content,
+.page-footer__disclaimer span {
+  display: block;
 }
 
-.page-footer a {
-  margin-right: var(--space-large);
+@media only screen and (min-width: 720px) {
+  .page-footer__content nav ul {
+    margin: 0 -1rem;
+  }
+  
+  .page-footer__content nav li {
+    display: inline-block;
+    padding: 0 1rem;
+  }
+  
+  .page-footer__disclaimer span {
+    display: initial;
+  }
 }
