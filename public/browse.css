@@ -254,7 +254,7 @@ table.browse-table {
 }
 
 .browse-table th,
-.browse-table td:first-of-type {
+.browse-table td:first-of-type:not([colspan]) {
   white-space: nowrap;
 }
 
