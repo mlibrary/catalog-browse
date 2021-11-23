@@ -74,17 +74,39 @@ h1 {
   font-weight: var(--bold);
 }
 
-.search-box {
-  background: var(--search-blue-200);
-  border-bottom: 2px solid var(--search-blue-300);
-  padding: var(--space-medium) 0;
-}
-
 /*
   Images
 */
+
+m-icon {
+  line-height: 0;
+}
+
 m-icon svg {
   height: auto;
+  width: 24px;
+}
+
+/*
+  Search box
+*/
+
+.search-box {
+  background: var(--search-blue-200);
+  border-bottom: solid var(--space-xxx-small) var(--search-blue-300);
+  padding: var(--space-medium) 0;
+}
+
+.search-box .viewport-container {
+  display: flex;
+}
+
+.search-box .viewport-container > * {
+  flex: 1 1 auto;
+}
+
+.search-box .search-box-dropdown {
+  position: relative;
 }
 
 /*
@@ -101,7 +123,6 @@ m-icon svg {
 
 .search-box select {
   background: var(--search-neutral-100);
-
   padding-right: var(--space-xx-large);
 }
 
@@ -232,7 +253,6 @@ nav.pagination a {
 nav.pagination m-icon svg {
   position: relative;
   top: var(--space-xxx-small);
-  width: 24px;
 }
 
 /*
