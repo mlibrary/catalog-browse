@@ -78,27 +78,25 @@ html lang="en"
               | Next page
               m-icon name="keyboard-arrow-right"
 
-      table class="table browse-table" cellspacing="0"
+      table class="browse-table"
         thead
           tr
             th Call number
             th Item
         tbody
           - list.items.each do |result|
-            tr
-              - if result.match_notice? && list.num_matches == 1
-                td colspan="2" style="background: var(--color-maize-200); padding: var(--space-small); border: solid 2px var(--color-maize-300);"
-                  | We found a matching call number in our catalog for: 
-                  strong = list.original_reference
-              - elsif result.match_notice? && list.num_matches == 0 
-                td colspan="2" style="background: var(--search-neutral-200); padding: var(--space-small); border: solid 2px var(--search-neutral-100);"
-                  strong =list.original_reference
-                  |  would appear here. There's no exact match for that call number in our catalog. 
-              - elsif result.match_notice?
-                td colspan="2" style="background: var(--color-maize-200); padding: var(--space-small); border: solid 2px var(--color-maize-300);"
-                  | We found #{list.num_matches} matching items in our catalog for call number: 
-                  strong =list.original_reference
-              - else
+            - if result.match_notice?
+              tr class="match-#{list.num_matches == 0 ? "none" : "notice"}"
+                td colspan="2"
+                  - if list.num_matches == 1
+                    | We found a matching call number in our catalog for: 
+                  - elsif list.num_matches > 1
+                    | We found #{list.num_matches} matching items in our catalog for call number: 
+                  span class="strong" = list.original_reference
+                  - if list.num_matches == 0 
+                    |  would appear here. There's no exact match for that call number in our catalog. 
+            - else
+              tr
                 td = result.callnumber
                 td
                   a href=result.url = result.title

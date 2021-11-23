@@ -21,13 +21,8 @@ body {
   --search-neutral-700: #262626;
 
   --search-font: 'Source Sans Pro';
-}
-
-/*
-  Search Product Typography
-*/
-body,
-h1 {
+  
+  color: var(--search-neutral-600);
   font-family: var(--search-font);
 }
 
@@ -70,12 +65,17 @@ body {
 
 
 h1 {
-  font-weight: 400;
+  font-family: inherit;
   font-size: 2rem;
+  font-weight: 400;
 }
 
 h1#maincontent {
   margin-top: var(--space-xx-large);
+}
+
+.strong {
+  font-weight: var(--bold);
 }
 
 .search-box {
@@ -226,25 +226,80 @@ nav.pagination m-icon svg {
 /*
   Browse table
 */
-
-.browse-table th {
-  color: var(--search-neutral-600);
+table.browse-table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  text-align: left;
+  width: 100%;
 }
 
-.browse-table a {
-  font-weight: 600;
+.browse-table tr > * {
+  border-top: solid var(--space-xxx-small) var(--search-neutral-400);
+  padding: var(--space-medium) 0;
+  vertical-align: top;
 }
 
-.browse-table a ~ p {
+.browse-table tr > *:not(:last-child) {
+  padding-right: var(--space-x-large);
+}
+
+.browse-table th:not([scope^='row']) {
+  border-top: 0;
+}
+
+.browse-table th,
+.browse-table td:first-of-type {
+  white-space: nowrap;
+}
+
+.browse-table tr[class^="match-"] > * {
+  background: var(--search-neutral-200);
+  padding: var(--space-small);
+}
+
+.browse-table tr.match-notice > * {
+  background: var(--color-maize-200);
+  border-color: var(--color-maize-300);
+}
+
+.browse-table tr.match-notice + tr > td {
+  border-color: var(--color-maize-300);
+}
+
+.browse-table td > * {
   margin: 0;
 }
 
-.browse-table td {
-  border-width: 2px;
+.browse-table td a {
+  font-weight: var(--semibold);
 }
 
-.browse-table tr:nth-child(2) td {
-  border: none;
+.browse-table td p {
+  font-size: 0.875em;
+}
+
+@media only screen and (max-width: 720px) {
+  .browse-table thead {
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    clip: rect(1px 1px 1px 1px);
+    clip: rect(1px, 1px, 1px, 1px);
+  }
+
+  .browse-table tr > * {
+    display: block;
+  }
+
+  .browse-table tr > *:not(:first-child) {
+    border-top: 0;
+  }
+
+  .browse-table tr > *:not(:last-child) {
+    padding-bottom: 0;
+    padding-right: 0;
+  }
 }
 
 /* global focus styles */
