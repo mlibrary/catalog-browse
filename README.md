@@ -27,4 +27,4 @@ Start the app
 ```
 docker-compose up
 ```
-In a browser go to http://localhost:4567/callnumber/U-M
+In a browser go to http://localhost:4567/callnumber?query=U-M
