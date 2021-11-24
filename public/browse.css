@@ -85,7 +85,7 @@ m-icon svg {
 }
 
 /*
-  Search specific anchors
+  Anchors
 */
 
 a {
@@ -124,6 +124,14 @@ a {
   box-sizing: border-box;
   line-height: 1.6 !important;
   padding: var(--space-x-small) var(--space-small);
+}
+
+.search-box select:focus,
+.search-box input:focus,
+.search-box button:focus {
+  outline: 0;
+  box-shadow: 0 0 0 2px var(--color-maize-400),
+    0 0 0 3px var(--color-neutral-400) !important;
 }
 
 .search-box select,
@@ -165,6 +173,11 @@ a {
   flex-grow: 0!important;
   font-weight: 600;
   margin-left: var(--space-small);
+}
+
+.search-box button:active {
+  background: var(--search-blue-500);
+  border-bottom-color: var(--search-blue-600);
 }
 
 @media only screen and (max-width: 720px) {
