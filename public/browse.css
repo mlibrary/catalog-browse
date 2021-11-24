@@ -1,9 +1,11 @@
 html {
   scroll-behavior: smooth;
 }
+
 body {
   /*
-    Search Product original colors.
+    Search Product original colors:
+    https://github.com/mlibrary/search/blob/master/src/stylesheets/modules/_colors.scss
   */
   --search-blue-100: #f2f9ff;
   --search-blue-200: #e6f3ff;
@@ -20,16 +22,9 @@ body {
   --search-neutral-600: #4e4e4e;
   --search-neutral-700: #262626;
 
-  --search-font: 'Source Sans Pro';
-  
   color: var(--search-neutral-600);
-  font-family: var(--search-font);
-}
-
-/*
-  Sticky footer CSS
-*/
-body {
+  font-family: 'Source Sans Pro', sans-serif;
+  /* Sticky footer CSS */
   display: grid;
   grid-template-rows: auto auto auto auto 1fr auto;
 }
@@ -37,6 +32,7 @@ body {
 /*
   Skip links
 */
+
 .site-skip-links {
   background: var(--color-blue-400);
 }
@@ -190,6 +186,7 @@ a {
 /*
   Main
 */
+
 main {
   margin-bottom: var(--space-xx-large);
   margin-top: var(--space-xx-large);
@@ -206,6 +203,7 @@ main > *:last-child {
 /*
   Pagination
 */
+
 nav.pagination ul {
   display: flex;
   line-height: 1;
@@ -232,6 +230,7 @@ nav.pagination m-icon svg {
 /*
   Browse table
 */
+
 table.browse-table {
   border-collapse: collapse;
   border-spacing: 0;
@@ -308,14 +307,6 @@ table.browse-table {
   }
 }
 
-/* global focus styles */
-
-*:focus {
-  outline: 0;
-  box-shadow: 0 0 0 2px var(--color-maize-400),
-    0 0 0 3px var(--color-neutral-400) !important;
-}
-
 /*
   Datastores navigation
 */
@@ -378,6 +369,7 @@ table.browse-table {
 /*
   Footer
 */
+
 .page-footer {
   text-align: center;
 }
