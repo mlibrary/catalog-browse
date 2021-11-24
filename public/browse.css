@@ -1,19 +1,16 @@
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  /*
-    Search Product original colors:
-    https://github.com/mlibrary/search/blob/master/src/stylesheets/modules/_colors.scss
-  */
+/*
+  Search Product original colors:
+  https://github.com/mlibrary/search/blob/master/src/stylesheets/modules/_colors.scss
+*/
+:root {
+  /* Blue */
   --search-blue-100: #f2f9ff;
   --search-blue-200: #e6f3ff;
   --search-blue-300: #cce6ff;
   --search-blue-400: #126dc1;
   --search-blue-500: #0c5292;
   --search-blue-600: var(--color-blue-400);
-
+  /* Neutral */
   --search-neutral-100: #fafafa;
   --search-neutral-200: #f2f2f2;
   --search-neutral-300: #e5e5e5;
@@ -21,12 +18,55 @@ body {
   --search-neutral-500: #6e6e6e;
   --search-neutral-600: #4e4e4e;
   --search-neutral-700: #262626;
+}
 
+html {
+  scroll-behavior: smooth;
+}
+
+body {
   color: var(--search-neutral-600);
   font-family: 'Source Sans Pro', sans-serif;
   /* Sticky footer CSS */
   display: grid;
   grid-template-rows: auto auto auto auto 1fr auto;
+}
+
+
+/*
+  Text
+*/
+
+h1 {
+  font-family: inherit;
+  font-size: 2rem;
+  font-weight: 400;
+}
+
+.strong {
+  font-weight: var(--bold);
+}
+
+/*
+  Anchors
+*/
+
+a {
+  color: var(--search-blue-400);
+}
+
+/*
+  Images
+*/
+
+m-icon {
+  display: block;
+  line-height: 0;
+}
+
+m-icon svg {
+  height: auto;
+  width: 24px;
 }
 
 /*
@@ -57,39 +97,6 @@ body {
 
 .site-skip-links ul li + li {
   margin-top: var(--space-medium);
-}
-
-
-h1 {
-  font-family: inherit;
-  font-size: 2rem;
-  font-weight: 400;
-}
-
-.strong {
-  font-weight: var(--bold);
-}
-
-/*
-  Images
-*/
-
-m-icon {
-  display: block;
-  line-height: 0;
-}
-
-m-icon svg {
-  height: auto;
-  width: 24px;
-}
-
-/*
-  Anchors
-*/
-
-a {
-  color: var(--search-blue-400);
 }
 
 /*
