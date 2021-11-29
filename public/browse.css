@@ -32,6 +32,30 @@ body {
   grid-template-rows: auto auto auto auto 1fr auto;
 }
 
+/*
+  Website Header
+*/
+
+m-website-header .website-header-inner-container {
+  margin: 0 calc(-1 * var(--space-small));
+}
+
+@media only screen and (max-width: 720px) {
+  m-website-header .website-header-inner-container {
+    margin-top: var(--space-small);
+  }
+}
+
+m-website-header a {
+  color: white;
+  text-decoration: none;
+  padding: var(--space-small);
+}
+
+m-website-header a:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
 
 /*
   Text
