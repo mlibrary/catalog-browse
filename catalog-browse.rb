@@ -6,23 +6,65 @@ require_relative "lib/models/browse_item"
 
 
 get '/callnumber' do
-  fields = [
-    {
-      label: "Browse by LC call number",
-      value: "browse-by-callnumber"
-    },
-    {
-      label: "Keyword",
-      value: "keyword"
-    },
-    {
-      label: "Author",
-      value: "author"
-    },
-    {
-      label: "Title",
-      value: "title"
-    }
+  fields = 
+  [
+    [
+      { 
+        label: "(\"Search by\"\)",
+        options: [
+          {
+            label: "Keyword",
+            value: "keyword"
+          },
+          {
+            label: "Title",
+            value: "title"
+          },
+          {
+            label: "Author",
+            value: "author"
+          },
+          {
+            label: "Journal/Serial Title",
+            value: "journal_title"
+          },
+          {
+            label: "Academic Discipline",
+            value: "academic_discipline"
+          },
+          {
+            label: "Call Number starts with",
+            value: "call_number_starts_with"
+          },
+          {
+            label: "Series (transcribed)",
+            value: "series"
+          },
+          {
+            label: "Year of Publication",
+            value: "publication_date",
+          },
+          {
+            label: "ISBN/ISSN/OCLC/etc",   
+            value: "isn"
+          },
+        ]
+      },
+      {
+        label: "(\"Browse by\")",
+        options: [
+          {
+            label: "Browse by LC call number" 
+            value: "browse_by_lc_callnumber"
+            selected: "true"
+          },
+          {
+            label: "Browse by subject (coming soon)" 
+            value: "browse_by_subject"
+          }
+        ]
+      }
+    ]
   ]
 
   datastores = [
