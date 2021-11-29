@@ -68,16 +68,24 @@ class BrowseList
     @num_matches = num_matches
   end
   def previous_url
-    #"/callnumber/#{@original_reference}?direction=previous&reference_id=#{previous_reference_id}&num_rows_to_display=#{@num_rows_to_display}"
-    "/callnumber?query=#{@original_reference}&direction=previous&reference_id=#{previous_reference_id}"
+    params = URI.encode_www_form({
+      query: @original_reference, 
+      direction: "previous",
+      reference_id: previous_reference_id
+    })
+    "/callnumber?#{params}"
   end
   def next_url
-    #"/callnumber/#{@original_reference}?direction=next&reference_id=#{next_reference_id}&num_rows_to_display=#{@num_rows_to_display}"
-    "/callnumber?query=#{@original_reference}&direction=next&reference_id=#{next_reference_id}"
+    params = URI.encode_www_form({
+      query: @original_reference, 
+      direction: "next",
+      reference_id: next_reference_id
+    })
+    "/callnumber?#{params}"
   end
   def items
     match_notice = OpenStruct.new(callnumber: @original_reference.upcase, match_notice?: true)
-    my_items = @index_docs[*item_range].map do |index_doc|
+    my_items = @index_docs[1, @num_rows_to_display].map do |index_doc|
       BrowseItem.new(catalog_doc_for_mms_id(index_doc["bib_id"]), index_doc)
     end
     my_items.unshift(match_notice)
@@ -111,9 +119,6 @@ class BrowseList::ReferenceOnTop < BrowseList
   def has_previous_list?
     true
   end
-  def item_range
-      [1,@num_rows_to_display] 
-  end
   def next_reference_id
     @index_docs[@index_docs.count - 2]["id"].strip if has_next_list?
   end
@@ -134,13 +139,10 @@ class BrowseList::ReferenceOnBottom < BrowseList
     @index_docs.count == @num_rows_to_display + 1
   end
   def next_reference_id
-    @index_docs[@index_docs.count - 1]["id"].strip if has_next_list?
+    @index_docs.last["id"].strip if has_next_list?
   end
   def previous_reference_id
-    @index_docs[0]["id"].strip if has_previous_list?
-  end
-  def item_range
-    [1, @num_rows_to_display]
+    @index_docs[1]["id"].strip if has_previous_list?
   end
 end
 
