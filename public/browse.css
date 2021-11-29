@@ -54,7 +54,7 @@ m-website-header a {
 
 m-website-header a:hover {
   text-decoration: underline;
-  text-underline-offset: 2px;
+  text-underline-offset: var(--space-xxx-small);
 }
 
 /*
