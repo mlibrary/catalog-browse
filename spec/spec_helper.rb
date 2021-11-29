@@ -114,3 +114,15 @@ end
 def fixture(path)
   File.read("./spec/fixtures/#{path}")
 end
+def stub_solr_get_request(url:, output: "{}", status: 200, query: nil)
+    req_attributes = Hash.new
+    req_attributes[:headers] = {   
+      accept: 'application/json', 
+      'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+      'User-Agent'=>'Ruby',
+      'Content-Type' => 'application/json'
+    }
+    req_attributes[:query] = query unless query.nil?
+    resp = { headers: {content_type: 'application/json'}, status: status, body: output }
+    stub_request(name, "#{ENV["CATALOG_SOLR"]}/#{url}").with( **req_attributes).to_return(**resp)   
+end
