@@ -30,10 +30,10 @@ class BrowseItem
     @index_doc["bib_id"]
   end
   def bib_title
-    @catalog_doc["title"]&.first
+    @catalog_doc["title_display"]&.first
   end
   def vernacular_bib_title
-    @catalog_doc["title"]&.slice(1)
+    @catalog_doc["title_display"]&.slice(1)
   end
   def author
     @catalog_doc["mainauthor"]&.first

@@ -14,10 +14,10 @@ describe BrowseItem do
     expect(subject.url).to eq("https://search.lib.umich.edu/catalog/record/990039902820106381")
   end
   it "shows appropriate title" do
-    expect(subject.title).to eq("Zhiznʹ gospodina de Molʹera / Bulgakov, Mikhail, 1891-1940.")
+    expect(subject.title).to eq("Zhiznʹ gospodina de Molʹera / M. Bulgakov ; [podgot. teksta i poslesl. V.I. Loseva]. Bulgakov, Mikhail, 1891-1940.")
   end
   it "shows appropriate vernacular title" do
-    expect(subject.vernacular_title).to eq("Жизнь господина де Мольера / Булгаков, Михаил, 1891-1940.")
+    expect(subject.vernacular_title).to eq("Жизнь господина де Мольера / М. Булгаков ; [подгот. текста и послесл. В.И. Лосева]. Булгаков, Михаил, 1891-1940.")
   end
   it "shows callnumber" do
     expect(subject.callnumber).to eq("PQ 1852 .B85 1992")
