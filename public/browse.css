@@ -40,16 +40,11 @@ m-website-header .website-header-inner-container {
   margin: 0 calc(-1 * var(--space-small));
 }
 
-@media only screen and (max-width: 720px) {
-  m-website-header .website-header-inner-container {
-    margin-top: var(--space-small);
-  }
-}
-
 m-website-header a {
   color: white;
+  display: inline-block;
   text-decoration: none;
-  padding: var(--space-small);
+  padding: var(--space-xx-small) var(--space-small);
 }
 
 m-website-header a:hover {
