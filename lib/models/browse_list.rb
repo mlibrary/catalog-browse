@@ -78,7 +78,7 @@ class BrowseList
   def items
     match_notice = OpenStruct.new(callnumber: @original_reference.upcase, match_notice?: true)
     my_items = @index_docs[*item_range].map do |index_doc|
-      BrowseItem.for(catalog_doc_for_mms_id(index_doc["bib_id"]), index_doc)
+      BrowseItem.new(catalog_doc_for_mms_id(index_doc["bib_id"]), index_doc)
     end
     my_items.unshift(match_notice)
     my_items.sort_by!{|x| x.callnumber} 

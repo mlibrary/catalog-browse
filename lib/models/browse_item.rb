@@ -1,7 +1,4 @@
 class BrowseItem
-  def self.for(catalog_doc, index_doc)
-      self.new(catalog_doc, index_doc)
-  end
   def initialize(catalog_doc, index_doc)
     @catalog_doc = catalog_doc || {}
     @index_doc = index_doc
@@ -15,9 +12,6 @@ class BrowseItem
   end
   def title
     [bib_title, author].join(" ") 
-  end
-  def alternate_title
-    vernacular_title
   end
   def vernacular_title
     [vernacular_bib_title, vernacular_author].join(" ")
