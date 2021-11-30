@@ -323,10 +323,6 @@ table.browse-table {
   font-weight: var(--semibold);
 }
 
-.browse-table td p {
-  font-size: 0.875em;
-}
-
 @media only screen and (max-width: 720px) {
   .browse-table thead {
     position: absolute !important;
