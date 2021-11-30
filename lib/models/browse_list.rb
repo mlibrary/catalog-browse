@@ -3,6 +3,7 @@ class BrowseList
   def self.for(direction:,reference_id:,num_rows_to_display:, original_reference:,
                solr_client: SolrClient.new)
 
+    exact_matches = solr_client.num_matches(callnumber: original_reference)
     num_matches = solr_client.num_matches(callnumber: original_reference)
     case direction
     when 'next'
@@ -38,7 +39,8 @@ class BrowseList
         catalog_response: catalog_response.parsed_response, 
         num_rows_to_display: num_rows_to_display, 
         original_reference: original_reference,
-        num_matches: num_matches
+        num_matches: num_matches,
+        exact_matches: exact_matches
       ) 
     when "previous"
       BrowseList::ReferenceOnBottom.new(
@@ -46,7 +48,8 @@ class BrowseList
         catalog_response: catalog_response.parsed_response, 
         num_rows_to_display: num_rows_to_display, 
         original_reference: original_reference,
-        num_matches: num_matches
+        num_matches: num_matches,
+        exact_matches: exact_matches
       ) 
     else
       BrowseList::ReferenceInMiddle.new(
@@ -55,17 +58,19 @@ class BrowseList
         catalog_response: catalog_response.parsed_response, 
         num_rows_to_display: num_rows_to_display,
         original_reference: original_reference,
-        num_matches: num_matches
+        num_matches: num_matches,
+        exact_matches: exact_matches
       ) 
     end
 
   end
-  def initialize(index_response:, catalog_response:, num_rows_to_display:, original_reference:, num_matches:)
+  def initialize(index_response:, catalog_response:, num_rows_to_display:, original_reference:, num_matches:, exact_matches:)
     @original_reference = original_reference
     @catalog_docs = catalog_response&.dig("response","docs")
     @num_rows_to_display = num_rows_to_display
     @index_docs = index_response&.dig("response","docs")
     @num_matches = num_matches
+    @exact_matches = exact_matches
   end
   def previous_url
     params = URI.encode_www_form({
@@ -128,7 +133,7 @@ class BrowseList::ReferenceOnTop < BrowseList
 end
 
 class BrowseList::ReferenceOnBottom < BrowseList
-  def initialize(index_response:, catalog_response:, num_rows_to_display:, original_reference:, num_matches:)
+  def initialize(index_response:, catalog_response:, num_rows_to_display:, original_reference:, num_matches:, exact_matches:)
     super
     @index_docs.reverse!
   end
@@ -149,8 +154,9 @@ end
 class BrowseList::ReferenceInMiddle < BrowseList::ReferenceOnTop
   def initialize(index_before:, index_after:, 
                  catalog_response:, num_rows_to_display:, 
-                 original_reference:, num_matches:
+                 original_reference:, num_matches:, exact_matches:
                 )
+    @exact_matches = exact_matches
     @num_matches = num_matches
     @original_reference = original_reference
     @catalog_docs = catalog_response&.dig("response","docs")

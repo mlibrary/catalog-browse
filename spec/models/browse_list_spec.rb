@@ -7,7 +7,8 @@ describe BrowseList::ReferenceOnTop do
       catalog_response: JSON.parse(fixture('biblio_results.json')),
       num_rows_to_display: 3,
       original_reference: 'Z 253 .U6 1963',
-      num_matches: 1
+      num_matches: 1,
+      exact_matches: []
     }
   end
   subject do
@@ -76,7 +77,8 @@ describe BrowseList::ReferenceOnBottom do
       catalog_response: JSON.parse(fixture('biblio_results.json')),
       num_rows_to_display: 4,
       original_reference: 'Z 253 .U6 1963',
-      num_matches: 1
+      num_matches: 1,
+      exact_matches: []
     }
   end
   subject do
@@ -119,7 +121,8 @@ describe BrowseList::ReferenceInMiddle do
       catalog_response: JSON.parse(fixture('biblio_results_middle.json')),
       num_rows_to_display: 6,
       original_reference: 'Z 253 .U6 1963',
-      num_matches: 1
+      num_matches: 1,
+      exact_matches: []
     }
   end
   subject do
