@@ -74,6 +74,11 @@ a {
   color: var(--search-blue-400);
 }
 
+a:hover,
+a:focus {
+  text-decoration-thickness: 2px;
+}
+
 /*
   Images
 */
@@ -110,8 +115,9 @@ m-icon svg {
   padding: var(--space-x-small);
 }
 .site-skip-links ul {
-    margin: var(--space-medium) 0;
-    text-align: center;
+  margin: var(--space-medium) 0;
+  text-align: center;
+  list-style: none;
 }
 
 .site-skip-links ul li + li {
@@ -322,10 +328,6 @@ table.browse-table {
 
 .browse-table td a {
   font-weight: var(--semibold);
-}
-
-.browse-table td p {
-  font-size: 0.875em;
 }
 
 @media only screen and (max-width: 719px) {
