@@ -298,7 +298,7 @@ table.browse-table {
 
 @media only screen and (min-width: 720px) {
   .browse-table td:first-of-type:not([colspan]) {
-    min-width: 200px;
+    width: 200px;
   }
 }
 
