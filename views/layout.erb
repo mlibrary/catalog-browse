@@ -81,7 +81,7 @@
         Search a Library of Congress (LC) call number and view an alphabetical list of all LC call numbers and related titles indexed in the Library catalog.
       </p>
       <%= erb :'components/pagination', locals: {label: 'Top pagination', list: list} %>
-      <table class="browse-table">
+      <table class="browse-table" aria-labelledby="maincontent">
         <thead>
           <tr>
             <th>Call number</th>
