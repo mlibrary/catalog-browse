@@ -86,23 +86,26 @@ class BrowseList
   end
   def items
     match_index = nil
+    would_be_index = nil 
     match_notice = OpenStruct.new(callnumber: @original_reference.upcase, match_notice?: true)
     my_items = @index_docs[1, @num_rows_to_display].map.with_index do |index_doc, index|
       exact_match = exact_match_for?(index_doc["id"])
       match_index = index if exact_match && match_index.nil?
+      would_be_index = index if @original_reference.upcase < index_doc["callnumber"].upcase && would_be_index.nil?
       BrowseItem.new(catalog_doc_for_mms_id(index_doc["bib_id"]), index_doc, exact_match)
     end
+    match_index = would_be_index if match_index.nil? && !would_be_index.nil? && would_be_index > 0
     match_index.nil? ? my_items : my_items.insert(match_index, match_notice) 
   end
 
   def match_text
     case @num_matches
     when 0
-      "<span class=\"strong\">#{@original_reference}</span> would appear here. There's no exact match for that call number in our catalog."
+      "<strong>#{@original_reference}</strong> would appear here. There's no exact match for that call number in our catalog."
     when 1
-      "We found a matching call number in our catalog for: <span class=\"strong\">#{original_reference}</span>."
+      "We found a matching call number in our catalog for: <strong>#{original_reference}</strong>."
     else
-      "We found #{@num_matches} matching items in our catalog for the call number: <span class=\"strong\">#{original_reference}</span>"
+      "We found #{@num_matches} matching items in our catalog for the call number: <strong>#{original_reference}</strong>"
     end
   end
 
