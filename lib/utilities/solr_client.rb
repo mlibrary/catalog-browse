@@ -46,6 +46,19 @@ class SolrClient
     self.class.get("/#{core}/select", query: query)
   end
 
+  def exact_matches(callnumber:, core: "callnumbers")
+    query = {
+      q: '*:*',
+      fq: %Q(callnumber:"#{callnumber}"),
+      sort: "id asc"
+    }
+    result = self.class.get("/#{core}/select", query: query)
+    if result.code != 200
+      [] 
+    else
+      result.parsed_response["response"]["docs"]&.map{|x| x["id"]}
+    end
+  end
   def num_matches(callnumber:, core: "callnumbers")
     query = {
       q: '*:*',

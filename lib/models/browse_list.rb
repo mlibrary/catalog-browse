@@ -3,7 +3,7 @@ class BrowseList
   def self.for(direction:,reference_id:,num_rows_to_display:, original_reference:,
                solr_client: SolrClient.new)
 
-    num_matches = solr_client.num_matches(callnumber: original_reference)
+    exact_matches = solr_client.exact_matches(callnumber: original_reference)
     case direction
     when 'next'
       #includes reference in results
@@ -38,7 +38,7 @@ class BrowseList
         catalog_response: catalog_response.parsed_response, 
         num_rows_to_display: num_rows_to_display, 
         original_reference: original_reference,
-        num_matches: num_matches
+        exact_matches: exact_matches
       ) 
     when "previous"
       BrowseList::ReferenceOnBottom.new(
@@ -46,7 +46,7 @@ class BrowseList
         catalog_response: catalog_response.parsed_response, 
         num_rows_to_display: num_rows_to_display, 
         original_reference: original_reference,
-        num_matches: num_matches
+        exact_matches: exact_matches
       ) 
     else
       BrowseList::ReferenceInMiddle.new(
@@ -55,17 +55,18 @@ class BrowseList
         catalog_response: catalog_response.parsed_response, 
         num_rows_to_display: num_rows_to_display,
         original_reference: original_reference,
-        num_matches: num_matches
+        exact_matches: exact_matches
       ) 
     end
 
   end
-  def initialize(index_response:, catalog_response:, num_rows_to_display:, original_reference:, num_matches:)
+  def initialize(index_response:, catalog_response:, num_rows_to_display:, original_reference:, exact_matches:)
     @original_reference = original_reference
     @catalog_docs = catalog_response&.dig("response","docs")
     @num_rows_to_display = num_rows_to_display
     @index_docs = index_response&.dig("response","docs")
-    @num_matches = num_matches
+    @num_matches = exact_matches.count
+    @exact_matches = exact_matches
   end
   def previous_url
     params = URI.encode_www_form({
@@ -84,15 +85,14 @@ class BrowseList
     "/callnumber?#{params}"
   end
   def items
+    match_index = nil
     match_notice = OpenStruct.new(callnumber: @original_reference.upcase, match_notice?: true)
-    my_items = @index_docs[1, @num_rows_to_display].map do |index_doc|
-      BrowseItem.new(catalog_doc_for_mms_id(index_doc["bib_id"]), index_doc)
+    my_items = @index_docs[1, @num_rows_to_display].map.with_index do |index_doc, index|
+      exact_match = exact_match_for?(index_doc["id"])
+      match_index = index if exact_match && match_index.nil?
+      BrowseItem.new(catalog_doc_for_mms_id(index_doc["bib_id"]), index_doc, exact_match)
     end
-    my_items.unshift(match_notice)
-    my_items.sort_by!{|x| x.callnumber} 
-    my_items.delete_at(0) if my_items.first.match_notice?
-    my_items.delete_at(my_items.length - 1) if my_items.last.match_notice?
-    my_items
+    match_index.nil? ? my_items : my_items.insert(match_index, match_notice) 
   end
 
   def match_text
@@ -109,6 +109,9 @@ class BrowseList
   private
   def catalog_doc_for_mms_id(mms_id)
     @catalog_docs.find{|x| x["id"] == mms_id}
+  end
+  def exact_match_for?(id)
+    @exact_matches.any?(id)
   end
 end
 
@@ -128,7 +131,7 @@ class BrowseList::ReferenceOnTop < BrowseList
 end
 
 class BrowseList::ReferenceOnBottom < BrowseList
-  def initialize(index_response:, catalog_response:, num_rows_to_display:, original_reference:, num_matches:)
+  def initialize(index_response:, catalog_response:, num_rows_to_display:, original_reference:, exact_matches:)
     super
     @index_docs.reverse!
   end
@@ -149,9 +152,10 @@ end
 class BrowseList::ReferenceInMiddle < BrowseList::ReferenceOnTop
   def initialize(index_before:, index_after:, 
                  catalog_response:, num_rows_to_display:, 
-                 original_reference:, num_matches:
+                 original_reference:, exact_matches:
                 )
-    @num_matches = num_matches
+    @exact_matches = exact_matches
+    @num_matches = exact_matches.count
     @original_reference = original_reference
     @catalog_docs = catalog_response&.dig("response","docs")
     @num_rows_to_display = num_rows_to_display

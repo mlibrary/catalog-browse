@@ -3,9 +3,10 @@ describe BrowseItem do
   before(:each) do
     @catalog_doc = JSON.parse(fixture('zhizn_bib.json'))
     @index_doc = JSON.parse(fixture('zhizn_browse.json'))
+    @exact_match = false
   end
   subject do
-    described_class.new(@catalog_doc, @index_doc)
+    described_class.new(@catalog_doc, @index_doc, @exact_match)
   end
   it "has false match_notice?" do
     expect(subject.match_notice?).to eq(false)

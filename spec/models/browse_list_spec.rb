@@ -7,7 +7,7 @@ describe BrowseList::ReferenceOnTop do
       catalog_response: JSON.parse(fixture('biblio_results.json')),
       num_rows_to_display: 3,
       original_reference: 'Z 253 .U6 1963',
-      num_matches: 1
+      exact_matches: []
     }
   end
   subject do
@@ -15,16 +15,16 @@ describe BrowseList::ReferenceOnTop do
   end
   context "match_text" do
     it "returns appropriate text for no matches" do
-      @params[:num_matches] = 0
+      @params[:exact_matches] = [] 
       expect(subject.match_text).to include("no exact match")
     end
     it "returns appropriate text for 1 match" do
-      @params[:num_matches] = 1
+      @params[:exact_matches] = ['match_id1'] 
       expect(subject.match_text).to include("a matching call number")
     end
     it "returns appropriate text for 20 matches" do
-      @params[:num_matches] = 20 
-      expect(subject.match_text).to include("We found 20 matching items")
+      @params[:exact_matches] = ['match_id1', 'match_id2'] 
+      expect(subject.match_text).to include("We found 2 matching items")
     end
   end
   context "#next_reference_id" do
@@ -76,7 +76,7 @@ describe BrowseList::ReferenceOnBottom do
       catalog_response: JSON.parse(fixture('biblio_results.json')),
       num_rows_to_display: 4,
       original_reference: 'Z 253 .U6 1963',
-      num_matches: 1
+      exact_matches: []
     }
   end
   subject do
@@ -119,22 +119,12 @@ describe BrowseList::ReferenceInMiddle do
       catalog_response: JSON.parse(fixture('biblio_results_middle.json')),
       num_rows_to_display: 6,
       original_reference: 'Z 253 .U6 1963',
-      num_matches: 1
+      exact_matches: []
     }
   end
   subject do
     described_class.new(**@params)
   end
   context "#items" do
-    it "returns number of display rows plus match notice" do
-      expect(subject.items.count).to eq(7)
-    end
-    it "returns docs with match notice in 3rd positions in the list" do
-      #set inexact reference
-      expect(subject.items[2].match_notice?).to eq(true)
-    end
-    it "returns matching doc in 4th position in array (third item in list)" do
-      expect(subject.items[3].callnumber).to eq(@params[:original_reference])
-    end
   end
 end
