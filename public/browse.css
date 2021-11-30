@@ -115,8 +115,9 @@ m-icon svg {
   padding: var(--space-x-small);
 }
 .site-skip-links ul {
-    margin: var(--space-medium) 0;
-    text-align: center;
+  margin: var(--space-medium) 0;
+  text-align: center;
+  list-stype: none;
 }
 
 .site-skip-links ul li + li {
