@@ -23,7 +23,7 @@
     </section>
     <m-universal-header></m-universal-header>
     <m-website-header name="Search" to="https://search.lib.umich.edu/" variant="dark">
-      <div role="presenation" class="website-header-inner-container">
+      <div role="presentation" class="website-header-inner-container">
         <a href="https://apps.lib.umich.edu/my-account">Account</a>
         <a href="https://apps.lib.umich.edu/my-account/favorites">My Favorites</a>
       </div>
@@ -81,7 +81,7 @@
         Search a Library of Congress (LC) call number and view an alphabetical list of all LC call numbers and related titles indexed in the Library catalog.
       </p>
       <%= erb :'components/pagination', locals: {label: 'Top pagination', list: list} %>
-      <table class="browse-table">
+      <table class="browse-table" aria-labelledby="maincontent">
         <thead>
           <tr>
             <th>Call number</th>
@@ -93,20 +93,16 @@
             <% if result.match_notice? %>
               <tr class="match-<%= list.num_matches == 0 ? 'none' : 'notice' %>">
                 <td colspan="2">
-                  <% if list.num_matches == 1 %>
-                    We found a matching call number in our catalog for: 
-                  <% elsif list.num_matches > 1 %>
-                    We found <%= list.num_matches %> matching items in our catalog for call number: 
-                  <% end %>
-                  <span class="strong"><%= list.original_reference %></span>
-                  <% if list.num_matches == 0 %>
-                    would appear here. There's no exact match for that call number in our catalog. 
-                  <% end %>
+                  <%= list.match_text %>
                 </td>
               </tr>
             <% else %>
-              <tr>
-                <td><%= result.callnumber %></td>
+              <tr <% if result.exact_match? %>class="exact-match"<% end %>>
+                <td>
+                  <span <% if result.exact_match? %>class="strong"<% end %>>
+                    <%= result.callnumber %>
+                  </span>
+                </td>
                 <td>
                   <a href="<%= result.url %>"><%= result.title %></a>
                   <% result.subtitles.each do |subtitle| %>
