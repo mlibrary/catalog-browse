@@ -117,7 +117,7 @@ m-icon svg {
 .site-skip-links ul {
   margin: var(--space-medium) 0;
   text-align: center;
-  list-stype: none;
+  list-style: none;
 }
 
 .site-skip-links ul li + li {
