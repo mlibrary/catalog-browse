@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Library Search | Browse by call number</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://unpkg.com/@umich-lib/web@1/umich-lib.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700">
+    <link rel="stylesheet" href="/browse.css">
+    <script type="module" src="https://unpkg.com/@umich-lib/web@1/dist/umich-lib/umich-lib.esm.js"></script>
+  </head>
+  <body>
+    <section aria-label="Skip links" class="site-skip-links">
+      <div class="viewport-container">
+        <ul>
+          <li>
+            <a href="#maincontent">Skip to main content</a>
+          </li>
+          <li>
+            <a href="#chat">Skip to Ask a Librarian chat</a>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <m-universal-header></m-universal-header>
+    <m-website-header name="Search" to="https://search.lib.umich.edu/" variant="dark">
+      <div role="presenation" class="website-header-inner-container">
+        <a href="https://apps.lib.umich.edu/my-account">Account</a>
+        <a href="https://apps.lib.umich.edu/my-account/favorites">My Favorites</a>
+      </div>
+    </m-website-header>
+    <form class="search-box" role="search" method="get">
+      <div class="viewport-container">
+        <div class="search-box-dropdown">
+          <select aria-label="Search or browse by" autocomplete="off">
+            <optgroup label="Search by">
+              <option value="keyword">Keyword</option>
+              <option value="title">Title</option>
+              <option value="title_starts_with">Title starts with</option>
+              <option value="author">Author</option>
+              <option value="journal_title">Journal/Serial Title</option>
+              <option value="subject">Subject</option>
+              <option value="academic_discipline">Academic Discipline</option>
+              <option value="call_number_starts_with">Call Number starts with</option>
+              <option value="series">Series (transcribed)</option>
+              <option value="publication_date">Year of Publication</option>
+              <option value="isn">ISBN/ISSN/OCLC/etc.</option>
+            </optgroup>
+            <optgroup label="Browse by">
+              <option selected="true" value="browse_by_lc_callnumber">Browse by LC call number</option>
+              <option value="browse_by_lc_callnumber">Browse by subject (coming soon)</option>
+            </optgroup>
+          </select>
+          <m-icon name="keyboard-arrow-down"></m-icon>
+        </div>
+        <input aria-label="Browse text" type="text" autocomplete="on" name="query" value="<%= list.original_reference %>">
+        <button>
+          <m-icon name="search"></m-icon>
+          <span class="visually-hidden">Search</span>
+        </button>
+      </div>
+    </form>
+    <div class="datastores-nav">
+      <nav class="viewport-container menu-nav" aria-label="Datastores">
+        <ol>
+          <% datastores.each do |datastore| %>
+            <li>
+              <a href="<%= datastore[:href] %>" <% if datastore[:current] == true %>aria-current="page"<% end %>>
+                <%= datastore[:label] %>
+              </a>
+            </li>
+          <% end %>
+        </ol>
+      </nav>
+    </div>
+    <main class="viewport-container">
+      <h1 id="maincontent" tabindex="-1">
+        Browse `<%= list.original_reference %>` in call numbers
+      </h1>
+      <%= erb :'components/pagination', locals: {label: 'Top pagination', list: list} %>
+      <table class="browse-table">
+        <thead>
+          <tr>
+            <th>Call number</th>
+            <th>Item</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% list.items.each do |result| %>
+            <% if result.match_notice? %>
+              <tr class="match-<%= list.num_matches == 0 ? 'none' : 'notice' %>">
+                <td colspan="2">
+                  <% if list.num_matches == 1 %>
+                    We found a matching call number in our catalog for: 
+                  <% elsif list.num_matches > 1 %>
+                    We found <%= list.num_matches %> matching items in our catalog for call number: 
+                  <% end %>
+                  <span class="strong"><%= list.original_reference %></span>
+                  <% if list.num_matches == 0 %>
+                    would appear here. There's no exact match for that call number in our catalog. 
+                  <% end %>
+                </td>
+              </tr>
+            <% else %>
+              <tr>
+                <td><%= result.callnumber %></td>
+                <td>
+                  <a href="<%= result.url %>"><%= result.title %></a>
+                  <% result.subtitles.each do |subtitle| %>
+                    <p><%= subtitle %></p>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+      <%= erb :'components/pagination', locals: {label: 'Bottom pagination', list: list} %>
+    </main>
+    <footer class="page-footer">
+      <div class="page-footer__content">
+        <div class="viewport-container">
+          <nav class="footer-nav" aria-label="Footer">
+            <ul>
+              <li>
+                <a href="https://search.lib.umich.edu/">Home</a>
+              </li>
+              <li>
+                <a href="https://search.lib.umich.edu/accessibility">Accessibility</a>
+              </li>
+              <li>
+                <a href="https://guides.lib.umich.edu/c.php?g=914690">Tips for using Library Search</a>
+              </li>
+              <li>
+                <a href="https://lib.umich.edu/research-and-scholarship/help-research/how-we-can-help">Get research help</a>
+              </li>
+              <li>
+                <a href="https://search.lib.umich.edu/technical-overview">Technical overview</a>
+              </li>
+              <li>
+                <a href="https://ill.lib.umich.edu/">Make an <abbr title="Inter Library Loan">I.L.L.</abbr> Request</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <div class="page-footer__disclaimer">
+        <div class="viewport-container">
+          <span>&copy; <%= Date.today.year %>, Regents of the University of Michigan.</span>
+          <span>For details and exceptions, see the <a href="https://lib.umich.edu/about-us/policies/copyright-policy">Copyright&nbsp;Policy</a>.</span>
+        </div>
+      </div>
+    </footer>
+    <m-chat>
+      <div id="chat" tabindex="-1"></div>
+    </m-chat>
+  </body>
+</html>

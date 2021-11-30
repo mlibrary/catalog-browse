@@ -1,5 +1,4 @@
 require "sinatra"
-require "slim"
 require "byebug"
 require_relative "lib/utilities/solr_client"
 require_relative "lib/models/browse_list"
@@ -58,7 +57,7 @@ get '/callnumber' do
     redirect "/" if callnumber.nil?
     reference_id = params[:reference_id] || callnumber 
     list = BrowseList.for(direction: params[:direction], reference_id: reference_id, num_rows_to_display: 20, original_reference: callnumber)
-    slim :browse, :locals  => {
+    erb :layout, :locals  => {
       :fields => fields,
       :datastores => datastores,
       :list => list 
