@@ -32,23 +32,13 @@
       <div class="viewport-container">
         <div class="search-box-dropdown">
           <select aria-label="Search or browse by" autocomplete="off">
-            <optgroup label="Search by">
-              <option value="keyword">Keyword</option>
-              <option value="title">Title</option>
-              <option value="title_starts_with">Title starts with</option>
-              <option value="author">Author</option>
-              <option value="journal_title">Journal/Serial Title</option>
-              <option value="subject">Subject</option>
-              <option value="academic_discipline">Academic Discipline</option>
-              <option value="call_number_starts_with">Call Number starts with</option>
-              <option value="series">Series (transcribed)</option>
-              <option value="publication_date">Year of Publication</option>
-              <option value="isn">ISBN/ISSN/OCLC/etc.</option>
-            </optgroup>
-            <optgroup label="Browse by">
-              <option selected="true" value="browse_by_lc_callnumber">Browse by LC call number</option>
-              <option value="browse_by_lc_callnumber">Browse by subject (coming soon)</option>
-            </optgroup>
+            <% fields.each do |group| %>
+              <optgroup label="<%=group[:label]%>">
+                <% group[:options].each do |option| %>
+                  <option <%=option[:selected]%> value="<%=option[:value]%>"><%=option[:label]%></option>
+                <% end %>
+            <% end %>
+                   
           </select>
           <m-icon name="keyboard-arrow-down"></m-icon>
         </div>

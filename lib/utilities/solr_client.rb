@@ -50,7 +50,8 @@ class SolrClient
     query = {
       q: '*:*',
       fq: %Q(callnumber:"#{callnumber}"),
-      sort: "id asc"
+      sort: "id asc",
+      rows: 5000
     }
     result = self.class.get("/#{core}/select", query: query)
     if result.code != 200
