@@ -76,22 +76,7 @@
       <h1 id="maincontent" tabindex="-1">
         Browse `<%= list.original_reference %>` in call numbers
       </h1>
-      <nav class="pagination" aria-label="Top pagination">
-        <ul>
-          <li>
-            <a href="<%= list.previous_url %>">
-              <m-icon name="keyboard-arrow-left"></m-icon>
-              Previous page
-            </a>
-          </li>
-          <li>
-            <a href="<%= list.next_url %>">
-              Next page
-              <m-icon name="keyboard-arrow-right"></m-icon>
-            </a>
-          </li>
-        </ul>
-      </nav>
+      <%= erb :'components/pagination', locals: {label: 'Top pagination', list: list} %>
       <table class="browse-table">
         <thead>
           <tr>
@@ -129,22 +114,7 @@
           <% end %>
         </tbody>
       </table>
-      <nav class="pagination" aria-label="Bottom pagination">
-        <ul>
-          <li>
-            <a href="<%= list.previous_url %>">
-              <m-icon name="keyboard-arrow-left"></m-icon>
-              Previous page
-            </a>
-          </li>
-          <li>
-            <a href="<%= list.next_url %>">
-              Next page
-              <m-icon name="keyboard-arrow-right"></m-icon>
-            </a>
-          </li>
-        </ul>
-      </nav>
+      <%= erb :'components/pagination', locals: {label: 'Bottom pagination', list: list} %>
     </main>
     <footer class="page-footer">
       <div class="page-footer__content">

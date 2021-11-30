@@ -1,0 +1,20 @@
+<nav class="pagination" aria-label="<%= label %>">
+  <ul>
+    <% if list.has_previous_list? %>
+      <li>
+        <a href="<%= list.previous_url %>">
+          <m-icon name="keyboard-arrow-left"></m-icon>
+          Previous page
+        </a>
+      </li>
+    <% end %>
+    <% if list.has_next_list? %>
+      <li>
+        <a href="<%= list.next_url %>">
+          Next page
+          <m-icon name="keyboard-arrow-right"></m-icon>
+        </a>
+      </li>
+    <% end %>
+  </ul>
+</nav>
