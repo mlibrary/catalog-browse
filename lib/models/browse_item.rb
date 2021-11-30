@@ -1,10 +1,14 @@
 class BrowseItem
-  def initialize(catalog_doc, index_doc)
+  def initialize(catalog_doc, index_doc, exact_match)
     @catalog_doc = catalog_doc || {}
     @index_doc = index_doc
+    @exact_match = exact_match
   end
   def match_notice?
     false
+  end
+  def exact_match?
+    !!@exact_match
   end
   #for the view
   def url

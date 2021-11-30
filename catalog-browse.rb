@@ -62,6 +62,7 @@ get '/callnumber' do
       :datastores => datastores,
       :list => list 
     }
+    byebug
 end
 get "/" do
   # Landing page
