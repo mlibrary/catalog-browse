@@ -4,7 +4,6 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 gem 'sinatra'
 gem 'simple_solr_client'
 gem 'puma'
-gem 'slim'
 gem 'httparty'
 
 group :development do
