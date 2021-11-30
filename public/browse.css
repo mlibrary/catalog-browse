@@ -206,7 +206,7 @@ m-icon svg {
   border-bottom-color: var(--search-blue-600);
 }
 
-@media only screen and (max-width: 720px) {
+@media only screen and (max-width: 719px) {
   .search-box .viewport-container {
     flex-wrap: wrap;
   }
@@ -296,6 +296,12 @@ table.browse-table {
   white-space: nowrap;
 }
 
+@media only screen and (min-width: 720px) {
+  .browse-table td:first-of-type:not([colspan]) {
+    min-width: 200px;
+  }
+}
+
 .browse-table tr[class^="match-"] > * {
   background: var(--search-neutral-200);
   padding: var(--space-small);
@@ -322,7 +328,7 @@ table.browse-table {
   font-size: 0.875em;
 }
 
-@media only screen and (max-width: 720px) {
+@media only screen and (max-width: 719px) {
   .browse-table thead {
     position: absolute !important;
     height: 1px;
@@ -379,7 +385,7 @@ table.browse-table {
   font-weight: 600;
 }
 
-@media only screen and (max-width: 720px) {
+@media only screen and (max-width: 719px) {
   .datastores-nav .menu-nav {
     padding: 0;
   }
