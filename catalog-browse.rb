@@ -3,6 +3,7 @@ require "byebug"
 require_relative "lib/utilities/solr_client"
 require_relative "lib/models/browse_list"
 require_relative "lib/models/browse_item"
+require_relative "lib/models/search_dropdown"
 
 
 get '/callnumber' do
@@ -60,6 +61,7 @@ get '/callnumber' do
         {
           label: "Browse by subject (coming soon)", 
           value: "browse_by_subject",
+          disabled: "disabled"
         }
       ]
     }

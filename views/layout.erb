@@ -35,7 +35,7 @@
             <% fields.each do |group| %>
               <optgroup label="<%=group[:label]%>">
                 <% group[:options].each do |option| %>
-                  <option <%=option[:selected]%> value="<%=option[:value]%>"><%=option[:label]%></option>
+                  <option <%=option[:disabled]%> <%=option[:selected]%> value="<%=option[:value]%>"><%=option[:label]%></option>
                 <% end %>
             <% end %>
                    
