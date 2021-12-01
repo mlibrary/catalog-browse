@@ -279,29 +279,24 @@ nav.pagination m-icon svg {
 table.browse-table {
   border-collapse: collapse;
   border-spacing: 0;
+  margin: 0 calc(var(--viewport-margin) * -1);
   text-align: left;
-  width: 100%;
+  width: calc(var(--viewport-margin) * 2 + 100%);
+}
+
+.browse-table thead {
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  width: 1px;
 }
 
 .browse-table tr > * {
-  border-top: solid var(--space-xxx-small) var(--search-neutral-400);
+  display: block;
   padding: var(--space-small) var(--space-medium);
   vertical-align: top;
-}
-
-.browse-table th:not([scope^='row']) {
-  border-top: 0;
-}
-
-.browse-table th,
-.browse-table td:first-of-type:not([colspan]) {
-  white-space: nowrap;
-}
-
-@media only screen and (min-width: 720px) {
-  .browse-table td:first-of-type:not([colspan]) {
-    width: 200px;
-  }
 }
 
 .browse-table tr[class^="match-"] > * {
@@ -309,12 +304,16 @@ table.browse-table {
 }
 
 .browse-table tr.match-notice > * {
-  background: var(--color-maize-200);
-  border-color: var(--color-maize-300);
+  background: var(--color-teal-100);
 }
 
-.browse-table tr.match-notice + tr > td {
-  border-color: var(--color-maize-300);
+.browse-table tr > * + * {
+  padding-top: 0;
+}
+
+.browse-table th,
+.browse-table td:first-of-type:not([colspan]) {
+  white-space: nowrap;
 }
 
 .browse-table td > * {
@@ -325,32 +324,26 @@ table.browse-table {
   font-weight: var(--semibold);
 }
 
-@media only screen and (max-width: 719px) {
+@media only screen and (min-width: 720px) {
   table.browse-table {
-    margin-left: calc(var(--viewport-margin) * -1);
-    margin-right: calc(var(--viewport-margin) * -1);
-    width: calc(var(--viewport-margin) * 2 + 100%);
+    margin: 0;
+    width: 100%;
   }
+
   .browse-table thead {
-    position: absolute !important;
-    height: 1px;
-    width: 1px;
-    overflow: hidden;
-    clip: rect(1px 1px 1px 1px);
-    clip: rect(1px, 1px, 1px, 1px);
+    all: revert;
   }
 
   .browse-table tr > * {
-    display: block;
+    display: table-cell;
   }
 
-  .browse-table tr > *:not(:first-child) {
-    border-top: 0;
+  .browse-table tr > * + * {
+    padding-top: var(--space-small);
   }
 
-  .browse-table tr > *:not(:last-child) {
-    padding-bottom: 0;
-    padding-right: 0;
+  .browse-table td:first-of-type:not([colspan]) {
+    width: 200px;
   }
 }
 
