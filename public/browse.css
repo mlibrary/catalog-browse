@@ -294,6 +294,9 @@ table.browse-table {
 }
 
 .browse-table tr > * {
+  border-color: var(--search-neutral-400);
+  border-style: solid;
+  border-width: 0;
   display: block;
   padding: var(--space-small) var(--space-medium);
   vertical-align: top;
