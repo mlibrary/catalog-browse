@@ -106,6 +106,9 @@ get '/callnumber' do
       :list => list 
     }
 end
+post "/search" do
+  redirect SearchDropdown.new(type: params["type"], query: params["query"]).url
+end
 get "/" do
   # Landing page
 end

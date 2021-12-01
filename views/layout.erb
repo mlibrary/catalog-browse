@@ -28,10 +28,10 @@
         <a href="https://apps.lib.umich.edu/my-account/favorites">My Favorites</a>
       </div>
     </m-website-header>
-    <form class="search-box" role="search" method="get">
+    <form class="search-box" role="search" method="post" action="/search">
       <div class="viewport-container">
         <div class="search-box-dropdown">
-          <select aria-label="Search or browse by" autocomplete="off">
+          <select aria-label="Search or browse by" autocomplete="off" name="type">
             <% fields.each do |group| %>
               <optgroup label="<%=group[:label]%>">
                 <% group[:options].each do |option| %>
