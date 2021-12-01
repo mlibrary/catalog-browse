@@ -285,12 +285,8 @@ table.browse-table {
 
 .browse-table tr > * {
   border-top: solid var(--space-xxx-small) var(--search-neutral-400);
-  padding: var(--space-medium) 0;
+  padding: var(--space-small) var(--space-medium);
   vertical-align: top;
-}
-
-.browse-table tr > *:not(:last-child) {
-  padding-right: var(--space-x-large);
 }
 
 .browse-table th:not([scope^='row']) {
@@ -310,7 +306,6 @@ table.browse-table {
 
 .browse-table tr[class^="match-"] > * {
   background: var(--search-neutral-200);
-  padding: var(--space-small);
 }
 
 .browse-table tr.match-notice > * {
@@ -331,6 +326,11 @@ table.browse-table {
 }
 
 @media only screen and (max-width: 719px) {
+  table.browse-table {
+    margin-left: calc(var(--viewport-margin) * -1);
+    margin-right: calc(var(--viewport-margin) * -1);
+    width: calc(var(--viewport-margin) * 2 + 100%);
+  }
   .browse-table thead {
     position: absolute !important;
     height: 1px;
