@@ -337,6 +337,11 @@ table.browse-table {
     all: revert;
   }
 
+  .browse-table thead tr > * {
+    border-bottom-width: var(--space-xxx-small);
+    border-color: var(--color-maize-400);
+  }
+
   .browse-table tr > * {
     display: table-cell;
   }
