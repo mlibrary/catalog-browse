@@ -310,6 +310,10 @@ table.browse-table {
   background: var(--color-teal-100);
 }
 
+.browse-table tbody tr > *:first-of-type {
+  border-top-width: var(--space-xxx-small);
+}
+
 .browse-table tr > * + * {
   padding-top: 0;
 }
@@ -344,6 +348,10 @@ table.browse-table {
 
   .browse-table tr > * {
     display: table-cell;
+  }
+
+  .browse-table tbody tr > * {
+    border-top-width: var(--space-xxx-small);
   }
 
   .browse-table tr > * + * {
