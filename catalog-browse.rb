@@ -107,7 +107,7 @@ get '/callnumber' do
     }
 end
 post "/search" do
-  redirect SearchDropdown.new(type: params["type"], query: params["query"]).url
+  redirect SearchDropdown.for(type: params["type"], query: params["query"]).url
 end
 get "/" do
   # Landing page
