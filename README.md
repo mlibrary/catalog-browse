@@ -10,9 +10,10 @@ Copy the environment file example
 cp -r .env-example .env
 ```
 
-Get the actual `CATALOG_SOLR` value from a developer, and update the `.env` file.
+Get the actual `CATALOG_SOLR` and `CALLNUMBERS_CORE` values from a developer, and update the `.env` file.
 ```
 CATALOG_SOLR='http://catalog-solr-server'
+CALLNUMBERS_CORE='callnumbers'
 ```
 
 Build the image

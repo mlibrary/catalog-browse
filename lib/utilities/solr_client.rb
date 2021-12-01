@@ -15,20 +15,20 @@ class SolrClient
    end.join('&')
   }
 
-  def browse_reference_on_top(reference_id:, rows: 20, core: "callnumbers")
+  def browse_reference_on_top(reference_id:, rows: 20, core: ENV.fetch("CALLNUMBERS_CORE"))
     range = "id:{\"#{reference_id}\" TO *}"
     sort = "id asc"
     browse(core: core, rows: rows, sort: sort, range: range)
   end
 
-  def browse_reference_on_bottom(reference_id:, rows: 20, core: "callnumbers")
+  def browse_reference_on_bottom(reference_id:, rows: 20, core: ENV.fetch("CALLNUMBERS_CORE"))
     range = "id:{* TO \"#{reference_id}\"}"
     sort = "id desc"
     browse(core: core, rows: rows, sort: sort, range: range)
   end
 
 
-  def browse(core: "callnumbers",rows:,sort:,range:)
+  def browse(core: ENV.fetch("CALLNUMBERS_CORE"),rows:,sort:,range:)
     query = {
       rows: rows,
       q: '*:*',
@@ -46,7 +46,7 @@ class SolrClient
     self.class.get("/#{core}/select", query: query)
   end
 
-  def exact_matches(callnumber:, core: "callnumbers")
+  def exact_matches(callnumber:, core: ENV.fetch("CALLNUMBERS_CORE"))
     query = {
       q: '*:*',
       fq: %Q(callnumber:"#{callnumber}"),
@@ -60,18 +60,5 @@ class SolrClient
       result.parsed_response["response"]["docs"]&.map{|x| x["id"]}
     end
   end
-  def num_matches(callnumber:, core: "callnumbers")
-    query = {
-      q: '*:*',
-      fq: %Q(callnumber:"#{callnumber}")
-    }
-    result = self.class.get("/#{core}/select", query: query)
-    if result.code != 200
-      0
-    else
-      result.parsed_response["response"]["numFound"].to_i
-    end
-  end
-
 end
 
