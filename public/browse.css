@@ -37,6 +37,7 @@ body {
 */
 
 m-website-header .website-header-inner-container {
+  background-color: var(--color-blue-400);
   margin: 0 calc(-1 * var(--space-small));
 }
 
