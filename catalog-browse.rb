@@ -14,7 +14,7 @@ get '/callnumber' do
   callnumber = params[:query]
   redirect "/" if callnumber.nil?
   reference_id = params[:reference_id] || callnumber 
-  list = BrowseList.for(direction: params[:direction], reference_id: reference_id, num_rows_to_display: 20, original_reference: callnumber)
+  list = BrowseList.for(direction: params[:direction], reference_id: reference_id, num_rows_to_display: 20, original_reference: callnumber, banner_reference: params[:banner_reference])
   erb :layout, :locals  => {
     :fields => fields,
     :datastores => datastores,

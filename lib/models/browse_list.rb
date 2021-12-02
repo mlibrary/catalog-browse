@@ -1,8 +1,10 @@
 class BrowseList
   attr_reader :original_reference, :num_rows_to_display, :num_matches
   def self.for(direction:,reference_id:,num_rows_to_display:, original_reference:,
+               banner_reference:,
                solr_client: SolrClient.new)
 
+    my_banner_reference = banner_reference 
     exact_matches = solr_client.exact_matches(callnumber: original_reference)
     case direction
     when 'next'
@@ -15,6 +17,7 @@ class BrowseList
     #index_before:, index_after:
       index_before = solr_client.browse_reference_on_bottom(reference_id: reference_id, rows: 3)
       index_after = solr_client.browse_reference_on_top(reference_id: reference_id, rows: num_rows_to_display - 1)
+      my_banner_reference = index_after.parsed_response.dig("response","docs").first["id"]
       #need above and below
     end
   
@@ -38,7 +41,8 @@ class BrowseList
         catalog_response: catalog_response.parsed_response, 
         num_rows_to_display: num_rows_to_display, 
         original_reference: original_reference,
-        exact_matches: exact_matches
+        exact_matches: exact_matches,
+        banner_reference: my_banner_reference
       ) 
     when "previous"
       BrowseList::ReferenceOnBottom.new(
@@ -46,7 +50,8 @@ class BrowseList
         catalog_response: catalog_response.parsed_response, 
         num_rows_to_display: num_rows_to_display, 
         original_reference: original_reference,
-        exact_matches: exact_matches
+        exact_matches: exact_matches,
+        banner_reference: my_banner_reference
       ) 
     else
       BrowseList::ReferenceInMiddle.new(
@@ -55,24 +60,27 @@ class BrowseList
         catalog_response: catalog_response.parsed_response, 
         num_rows_to_display: num_rows_to_display,
         original_reference: original_reference,
-        exact_matches: exact_matches
+        exact_matches: exact_matches,
+        banner_reference: my_banner_reference
       ) 
     end
 
   end
-  def initialize(index_response:, catalog_response:, num_rows_to_display:, original_reference:, exact_matches:)
+  def initialize(index_response:, catalog_response:, num_rows_to_display:, original_reference:, exact_matches:, banner_reference:)
     @original_reference = original_reference
     @catalog_docs = catalog_response&.dig("response","docs")
     @num_rows_to_display = num_rows_to_display
     @index_docs = index_response&.dig("response","docs")
     @num_matches = exact_matches.count
     @exact_matches = exact_matches
+    @banner_reference = banner_reference
   end
   def previous_url
     params = URI.encode_www_form({
       query: @original_reference, 
       direction: "previous",
-      reference_id: previous_reference_id
+      reference_id: previous_reference_id,
+      banner_reference: @banner_reference
     })
     "/callnumber?#{params}"
   end
@@ -80,22 +88,21 @@ class BrowseList
     params = URI.encode_www_form({
       query: @original_reference, 
       direction: "next",
-      reference_id: next_reference_id
+      reference_id: next_reference_id,
+      banner_reference: @banner_reference
     })
     "/callnumber?#{params}"
   end
   def items
-    match_index = nil
-    would_be_index = nil 
+    banner_index = nil
     match_notice = OpenStruct.new(callnumber: @original_reference.upcase, match_notice?: true)
     my_items = @index_docs[1, @num_rows_to_display].map.with_index do |index_doc, index|
       exact_match = exact_match_for?(index_doc["id"])
-      match_index = index if exact_match && match_index.nil?
-      would_be_index = index if @original_reference.upcase < index_doc["callnumber"].upcase && would_be_index.nil?
+      banner_match = (@banner_reference == index_doc["id"])
+      banner_index = index if (exact_match || banner_match) && banner_index.nil?
       BrowseItem.new(catalog_doc_for_mms_id(index_doc["bib_id"]), index_doc, exact_match)
     end
-    match_index = would_be_index if match_index.nil? && !would_be_index.nil? && would_be_index > 0
-    match_index.nil? ? my_items : my_items.insert(match_index, match_notice) 
+    banner_index.nil? ? my_items : my_items.insert(banner_index, match_notice) 
   end
 
   def match_text
@@ -134,7 +141,7 @@ class BrowseList::ReferenceOnTop < BrowseList
 end
 
 class BrowseList::ReferenceOnBottom < BrowseList
-  def initialize(index_response:, catalog_response:, num_rows_to_display:, original_reference:, exact_matches:)
+  def initialize(index_response:, catalog_response:, num_rows_to_display:, original_reference:, exact_matches:, banner_reference:)
     super
     @index_docs.reverse!
   end
@@ -155,13 +162,14 @@ end
 class BrowseList::ReferenceInMiddle < BrowseList::ReferenceOnTop
   def initialize(index_before:, index_after:, 
                  catalog_response:, num_rows_to_display:, 
-                 original_reference:, exact_matches:
+                 original_reference:, exact_matches:, banner_reference:
                 )
     @exact_matches = exact_matches
     @num_matches = exact_matches.count
     @original_reference = original_reference
     @catalog_docs = catalog_response&.dig("response","docs")
     @num_rows_to_display = num_rows_to_display
+    @banner_reference = banner_reference
     @index_docs = get_index_docs(index_before, index_after)
   end
   private

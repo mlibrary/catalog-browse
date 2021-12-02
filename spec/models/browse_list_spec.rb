@@ -7,7 +7,8 @@ describe BrowseList::ReferenceOnTop do
       catalog_response: JSON.parse(fixture('biblio_results.json')),
       num_rows_to_display: 3,
       original_reference: 'Z 253 .U6 1963',
-      exact_matches: []
+      exact_matches: [],
+      banner_reference: 'banner_reference'
     }
   end
   subject do
@@ -49,13 +50,13 @@ describe BrowseList::ReferenceOnTop do
   context "#previous_url" do
     it "returns appropriate url" do
       prev_ref = URI.encode_www_form_component("Z 253 .U63 1971||990017586110106381")
-      expect(subject.previous_url).to eq("/callnumber?query=#{URI.encode_www_form_component(@params[:original_reference])}&direction=previous&reference_id=#{prev_ref}")
+      expect(subject.previous_url).to eq("/callnumber?query=#{URI.encode_www_form_component(@params[:original_reference])}&direction=previous&reference_id=#{prev_ref}&banner_reference=banner_reference")
     end
   end
   context "#next_url" do
     it "returns appropriate url" do
       next_ref = URI.encode_www_form_component('Z 253 .U69 2017 ||990155473530106381')
-      expect(subject.next_url).to eq("/callnumber?query=#{URI.encode_www_form_component(@params[:original_reference])}&direction=next&reference_id=#{next_ref}")
+      expect(subject.next_url).to eq("/callnumber?query=#{URI.encode_www_form_component(@params[:original_reference])}&direction=next&reference_id=#{next_ref}&banner_reference=banner_reference")
     end
   end
   context "#items" do
@@ -65,6 +66,19 @@ describe BrowseList::ReferenceOnTop do
       expect(items.count).to eq(3)
       expect(items.first.callnumber).to eq("Z 253 .U63 1971")
       expect(items.last.callnumber).to eq("Z 253 .U69 2017")
+    end
+    it "puts the banner above the banner_match" do
+      @params[:banner_reference] = " Z 253 .U69 2017 ||990155473530106381"
+      items = subject.items
+      expect(items.count).to eq(4)
+      expect(items[2].match_notice?).to eq(true)
+    end
+    
+    it "puts banner above exact match" do
+      @params[:exact_matches] = [" Z 253 .U69 2017 ||990155473530106381"]
+      items = subject.items
+      expect(items.count).to eq(4)
+      expect(items[2].match_notice?).to eq(true)
     end
   end
 end
@@ -76,7 +90,8 @@ describe BrowseList::ReferenceOnBottom do
       catalog_response: JSON.parse(fixture('biblio_results.json')),
       num_rows_to_display: 4,
       original_reference: 'Z 253 .U6 1963',
-      exact_matches: []
+      exact_matches: [],
+      banner_reference: ''
     }
   end
   subject do
@@ -119,7 +134,8 @@ describe BrowseList::ReferenceInMiddle do
       catalog_response: JSON.parse(fixture('biblio_results_middle.json')),
       num_rows_to_display: 6,
       original_reference: 'Z 253 .U6 1963',
-      exact_matches: []
+      exact_matches: [],
+      banner_reference: ''
     }
   end
   subject do
