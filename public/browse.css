@@ -302,8 +302,22 @@ table.browse-table {
   vertical-align: top;
 }
 
+.browse-table tr:last-child > *:last-child {
+  border-bottom-width: var(--space-xxx-small);
+}
+
+.browse-table tr[class] > * {
+  border-left-width: var(--space-xxx-small);
+  border-right-width: var(--space-xxx-small);
+}
+
 .browse-table tr[class^="match-"] > * {
   background: var(--search-neutral-200);
+}
+
+.browse-table tr.match-notice > *,
+.browse-table tr.exact-match > * {
+  border-color: var(--color-teal-400);
 }
 
 .browse-table tr.match-notice > * {
@@ -342,7 +356,6 @@ table.browse-table {
   }
 
   .browse-table thead tr > * {
-    border-bottom-width: var(--space-xxx-small);
     border-color: var(--color-maize-400);
   }
 
@@ -350,8 +363,20 @@ table.browse-table {
     display: table-cell;
   }
 
+  .browse-table tr:last-child > * {
+    border-bottom-width: var(--space-xxx-small);
+  }
+
   .browse-table tbody tr > * {
     border-top-width: var(--space-xxx-small);
+  }
+
+  .browse-table tbody tr > *:not(:first-child) {
+    border-left: 0;
+  }
+
+  .browse-table tbody tr > *:not(:last-child) {
+    border-right: 0;
   }
 
   .browse-table tr > * + * {
