@@ -8,7 +8,7 @@ describe BrowseList::ReferenceOnTop do
       num_rows_to_display: 3,
       original_reference: 'Z 253 .U6 1963',
       exact_matches: [],
-      banner_reference: ''
+      banner_reference: 'banner_reference'
     }
   end
   subject do
@@ -50,13 +50,13 @@ describe BrowseList::ReferenceOnTop do
   context "#previous_url" do
     it "returns appropriate url" do
       prev_ref = URI.encode_www_form_component("Z 253 .U63 1971||990017586110106381")
-      expect(subject.previous_url).to eq("/callnumber?query=#{URI.encode_www_form_component(@params[:original_reference])}&direction=previous&reference_id=#{prev_ref}")
+      expect(subject.previous_url).to eq("/callnumber?query=#{URI.encode_www_form_component(@params[:original_reference])}&direction=previous&reference_id=#{prev_ref}&banner_reference=banner_reference")
     end
   end
   context "#next_url" do
     it "returns appropriate url" do
       next_ref = URI.encode_www_form_component('Z 253 .U69 2017 ||990155473530106381')
-      expect(subject.next_url).to eq("/callnumber?query=#{URI.encode_www_form_component(@params[:original_reference])}&direction=next&reference_id=#{next_ref}")
+      expect(subject.next_url).to eq("/callnumber?query=#{URI.encode_www_form_component(@params[:original_reference])}&direction=next&reference_id=#{next_ref}&banner_reference=banner_reference")
     end
   end
   context "#items" do
