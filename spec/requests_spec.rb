@@ -21,7 +21,7 @@ describe "requests" do
       results = fixture('biblio_results.json')
       stub = stub_solr_get_request(url: "#{@callnumbers_core}/select", query: hash_including({fq: 'callnumber:"Thing"'}), output: fixture('biblio_results.json'))
       stub = stub_solr_get_request(url: "#{@callnumbers_core}/select", query: hash_including({sort: "id desc"}), output: fixture('callnumbers_before.json'))
-      stub = stub_solr_get_request(url: "#{@callnumbers_core}/select", query: hash_including({fq: 'id:{"Thing" TO *}'}), output: fixture('callnumbers_results.json'))
+      stub = stub_solr_get_request(url: "#{@callnumbers_core}/select", query: hash_including({fq: 'id:["Thing" TO *]'}), output: fixture('callnumbers_results.json'))
       stub = stub_solr_get_request(url: "biblio/select", query: hash_including({}), output: fixture('biblio_results_middle.json'))
       get "/callnumber", { query: 'Thing'}
       expect(last_response.status).to eq(200)
