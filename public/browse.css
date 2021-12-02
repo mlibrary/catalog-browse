@@ -324,6 +324,10 @@ table.browse-table {
   background: var(--color-teal-100);
 }
 
+.browse-table tr.exact-match + tr > * {
+  border-top-color: var(--color-teal-400);
+}
+
 .browse-table tbody tr > *:first-of-type {
   border-top-width: var(--space-xxx-small);
 }
