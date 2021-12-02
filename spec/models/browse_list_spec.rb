@@ -67,6 +67,19 @@ describe BrowseList::ReferenceOnTop do
       expect(items.first.callnumber).to eq("Z 253 .U63 1971")
       expect(items.last.callnumber).to eq("Z 253 .U69 2017")
     end
+    it "puts the banner above the banner_match" do
+      @params[:banner_reference] = " Z 253 .U69 2017 ||990155473530106381"
+      items = subject.items
+      expect(items.count).to eq(4)
+      expect(items[2].match_notice?).to eq(true)
+    end
+    
+    it "puts banner above exact match" do
+      @params[:exact_matches] = [" Z 253 .U69 2017 ||990155473530106381"]
+      items = subject.items
+      expect(items.count).to eq(4)
+      expect(items[2].match_notice?).to eq(true)
+    end
   end
 end
 describe BrowseList::ReferenceOnBottom do
