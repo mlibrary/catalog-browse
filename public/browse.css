@@ -136,6 +136,7 @@ m-icon svg {
 
 .search-box .viewport-container {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .search-box .viewport-container > * {
@@ -144,7 +145,6 @@ m-icon svg {
 }
 
 .search-box .search-box-dropdown {
-  max-width: 280px;
   position: relative;
   width: 100%;
 }
@@ -168,13 +168,14 @@ m-icon svg {
 
 .search-box select,
 .search-box input {
+  background: white;
   border: 1px solid var(--search-blue-400);
+  border-radius: var(--radius-default);
   max-width: 100%;
 }
 
 .search-box select {
   background: var(--search-neutral-100);
-  border-radius: var(--radius-default) 0 0 var(--radius-default);
   padding-right: var(--space-xx-large);
   width: 100%;
 }
@@ -186,14 +187,8 @@ m-icon svg {
   pointer-events: none;
 }
 
-.search-box input {
-  background: white;
-  border-left-width: 0;
-  border-radius: 0 var(--radius-default) var(--radius-default) 0;
-}
-
 .search-box input:focus {
-  z-index: 2;
+  z-index: 1;
 }
 
 .search-box button {
@@ -212,19 +207,88 @@ m-icon svg {
   border-bottom-color: var(--search-blue-600);
 }
 
-@media only screen and (max-width: 719px) {
+@media only screen and (min-width: 720px) {
   .search-box .viewport-container {
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
   }
 
   .search-box .search-box-dropdown {
-    max-width: 100%;
+    max-width: 280px;
   }
 
-  .search-box select,
+  .search-box select {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+  }
+
   .search-box input {
-    border-left-width: 1px;
-    border-radius: var(--radius-default);
+    border-bottom-left-radius: 0;
+    border-left: 0;
+    border-top-left-radius: 0;
+  }
+}
+
+/*
+  Datastores navigation
+*/
+
+.datastores-nav,
+.datastores-nav ol li a {
+  border-bottom: solid var(--space-xxx-small) var(--search-neutral-200);
+}
+  
+.datastores-nav {
+  background: var(--search-neutral-100);
+}
+
+.datastores-nav ol {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  list-style: none;
+  margin: 0 calc(var(--space-medium) * -1);
+  margin-bottom: calc(var(--space-xxx-small) * -1);
+  padding: 0;
+}
+
+.datastores-nav ol li a {
+  display: block;
+  padding: var(--space-small) var(--space-medium);
+  position: relative;
+}
+
+.datastores-nav ol li a:not(:hover) {
+  text-decoration: none;
+}
+
+.datastores-nav ol li a[aria-current=page] {
+  font-weight: var(--semibold);
+}
+
+.datastores-nav ol li a:not([aria-current=page]) {
+  color: var(--search-neutral-600);
+}
+
+.datastores-nav ol li a[aria-current=page]:before {
+  background-color: var(--search-blue-400);
+  content: '';
+  display: block;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: var(--space-xxx-small);
+}
+
+@media only screen and (min-width: 720px) {
+  .datastores-nav ol {
+    flex-direction: row;
+  }
+
+  .datastores-nav ol li a[aria-current=page]:before {
+    height: var(--space-xxx-small);
+    top: 100%;
+    width: 100%;
   }
 }
 
@@ -404,65 +468,6 @@ table.browse-table {
 
   .browse-table td:first-of-type:not([colspan]) {
     width: 200px;
-  }
-}
-
-/*
-  Datastores navigation
-*/
-  
-.datastores-nav {
-  background: var(--search-neutral-100);
-  border-bottom: solid var(--space-xxx-small) var(--search-neutral-200);
-}
-
-.datastores-nav .menu-nav {
-  display: flex;
-  justify-content: center;
-}
-
-.datastores-nav .menu-nav ol {
-  border: 0;
-  margin-bottom: calc(var(--space-xxx-small) * -1);
-  padding: 0;
-}
-
-.datastores-nav .menu-nav ol a {
-  border-bottom: solid var(--space-xxx-small) transparent;
-  display: block;
-  height: 100%;
-  padding: var(--space-small);
-}
-
-.datastores-nav .menu-nav ol a[aria-current=page] {
-  border-color: var(--search-blue-400);
-  color: var(--search-blue-400);
-  font-weight: 600;
-}
-
-@media only screen and (max-width: 719px) {
-  .datastores-nav .menu-nav {
-    padding: 0;
-  }
-
-  .datastores-nav .menu-nav ol {
-    flex-direction: column;
-    margin-bottom: 0;
-    width: 100%;
-  }
-
-  .datastores-nav .menu-nav ol a {
-    border-bottom: solid 1px var(--search-neutral-200);
-    border-left: solid var(--space-xxx-small) transparent;
-  }
-
-  .datastores-nav .menu-nav ol li:last-of-type a {
-    border-bottom: 0;
-  }
-  
-  .datastores-nav .menu-nav ol a[aria-current=page] {
-    border-color: var(--search-neutral-200);
-    border-left-color: var(--search-blue-400);
   }
 }
 
