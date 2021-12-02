@@ -82,7 +82,7 @@ class BrowseList
       reference_id: previous_reference_id,
       banner_reference: @banner_reference
     })
-    "/callnumber?#{params}"
+    "#{ENV.fetch("BASE_URL")}/callnumber?#{params}"
   end
   def next_url
     params = URI.encode_www_form({
@@ -91,7 +91,7 @@ class BrowseList
       reference_id: next_reference_id,
       banner_reference: @banner_reference
     })
-    "/callnumber?#{params}"
+    "#{ENV.fetch("BASE_URL")}/callnumber?#{params}"
   end
   def items
     banner_index = nil
