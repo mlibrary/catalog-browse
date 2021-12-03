@@ -66,12 +66,17 @@
     </div>
     <main class="viewport-container">
       <h1 id="maincontent" tabindex="-1">
+        <% if list.original_reference != '' %>
         Browse `<%= list.original_reference %>` in call numbers
+      <% else %>
+          Browse by LC Callnumber
+        <% end %>
       </h1>
       <p>
         <span class="strong">Browse by call number help:</span> 
         Search a Library of Congress (LC) call number and view an alphabetical list of all LC call numbers and related titles indexed in the Library catalog.
       </p>
+    <% if list.original_reference != '' %>
       <%= erb :'components/pagination', locals: {label: 'Top pagination', list: list} %>
       <table class="browse-table" aria-labelledby="maincontent">
         <thead>
@@ -107,6 +112,7 @@
         </tbody>
       </table>
       <%= erb :'components/pagination', locals: {label: 'Bottom pagination', list: list} %>
+    <% end %>
     </main>
     <footer class="page-footer">
       <div class="page-footer__content">
