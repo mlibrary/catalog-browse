@@ -4,7 +4,7 @@
   :options:
   - :label: Keyword
     :value: keyword
-    :tip: Enter one or more keywords. se quotes to search for a phrase. (e.g. solar power; polar bears; “systems of oppression”) See tips about <a href="https://guides.lib.umich.edu/c.php?g=914690&p=6590011">Basic Keyword Searching <span class="visually-hidden">(link redirects to external site)</span></a>.
+    :tip: Enter one or more keywords. Use quotes to search for a phrase. (e.g. solar power; polar bears; “systems of oppression”) See tips about <a href="https://guides.lib.umich.edu/c.php?g=914690&p=6590011">Basic Keyword Searching <span class="visually-hidden">(link redirects to external site)</span></a>.
   - :label: Title
     :value: title
     :tip: Enter the first words in a title. Use quotes to search a phrase. (e.g. One Hundred Years of Solitude; “The Fourth World”; Disability Visibility)
