@@ -50,6 +50,17 @@
           <span class="visually-hidden">Search</span>
         </button>
       </div>
+      <div class="viewport-container search-tip">
+        <m-icon name="info-outline"></m-icon>
+        <% fields.each do |group| %>
+          <% group[:options].each do |option| %>
+            <p data-option="<%=option[:value]%>" style="display: <%= option[:selected] ? 'initial' : 'none' %>;">
+              <span class="strong"><%=group[:tip]%>:</span>
+              <%=option[:tip]%>
+            </p>
+          <% end %>
+        <% end %>
+      </div>
     </form>
     <div class="datastores-nav">
       <nav class="viewport-container" aria-label="Datastores">
@@ -151,5 +162,6 @@
     <m-chat>
       <div id="chat" tabindex="-1"></div>
     </m-chat>
+    <script src="/browse.js"></script>
   </body>
 </html>
