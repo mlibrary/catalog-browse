@@ -10,8 +10,9 @@ Copy the environment file example
 cp -r .env-example .env
 ```
 
-Get the actual `CATALOG_SOLR` and `CALLNUMBERS_CORE` values from a developer, and update the `.env` file.
+Get the actual values from a developer, and update the `.env` file.
 ```
+BIBLIO_SOLR='http://biblio-server'
 CATALOG_SOLR='http://catalog-solr-server'
 CALLNUMBERS_CORE='callnumbers'
 ```
