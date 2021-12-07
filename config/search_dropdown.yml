@@ -4,7 +4,7 @@
   :options:
   - :label: Keyword
     :value: keyword
-    :tip: Enter one or more keywords. Use quotes to search for a phrase. (e.g. solar power; polar bears; “systems of oppression”) See tips about <a href="https://guides.lib.umich.edu/c.php?g=914690&p=6590011">Basic Keyword Searching <span class="visually-hidden">(link redirects to external site)</span></a>.
+    :tip: Enter one or more keywords. Use quotes to search for a phrase. (e.g. solar power; polar bears; “systems of oppression”) See tips about <a href="https://guides.lib.umich.edu/c.php?g=914690&p=6590011">Basic Keyword Searching</a>.
   - :label: Title
     :value: title
     :tip: Enter the first words in a title. Use quotes to search a phrase. (e.g. One Hundred Years of Solitude; “The Fourth World”; Disability Visibility)
@@ -19,7 +19,7 @@
     :tip: Search academic disciplines. <a href="https://search.lib.umich.edu/databases/browse?query=sculpture">Browse all Databases</a> alphabetically or by academic discipline. (e.g. International business; Latin american and caribbean studies)
   - :label: Call Number starts with
     :value: call_number_starts_with
-    :tip: Search the first few letters and numbers of a call number. (e.g. RC662.4 .H38 2016; QH 105) <a href="https://www.loc.gov/catdir/cpso/lcco/">Learn about the meaning of call numbers <span class="visually-hidden">(link redirects to external site)</span></a>.
+    :tip: Search the first few letters and numbers of a call number. (e.g. RC662.4 .H38 2016; QH 105) <a href="https://www.loc.gov/catdir/cpso/lcco/">Learn about the meaning of call numbers<span class="visually-hidden"> (link points to external site)</span></a>.
   - :label: Series (transcribed)
     :value: series
     :tip: Search the series title of a group of thematically-related books. Use ‘title’ search to find unique titles within a series. (e.g., Politics of Race and Ethnicity, Brill's Annotated Bibliographies, Oxford Choral Music)
@@ -34,7 +34,7 @@
   :options:
   - :label: Browse by LC call number
     :value: browse_by_lc_callnumber
-    :tip: Browse by Library of Congress (LC) call number, sorted alphanumerically. Learn about the meaning of call numbers. (e.g. RC662.4 .H38 2016; QH 105) <a href="https://www.loc.gov/catdir/cpso/lcco/">Learn about the meaning of call numbers <span class="visually-hidden">(link redirects to external site)</span></a>.
+    :tip: Browse by Library of Congress (LC) call number, sorted alphanumerically. Learn about the meaning of call numbers. (e.g. RC662.4 .H38 2016; QH 105) <a href="https://www.loc.gov/catdir/cpso/lcco/">Learn about the meaning of call numbers<span class="visually-hidden"> (link points to external site)</span></a>.
     :selected: selected
   - :label: Browse by author (coming soon)
     :value: browse_by_author
