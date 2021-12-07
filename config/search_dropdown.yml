@@ -36,7 +36,15 @@
     :value: browse_by_lc_callnumber
     :tip: Browse by Library of Congress (LC) call number, sorted alphanumerically. Learn about the meaning of call numbers. (e.g. RC662.4 .H38 2016; QH 105) <a href="https://www.loc.gov/catdir/cpso/lcco/">Learn about the meaning of call numbers <span class="visually-hidden">(link redirects to external site)</span></a>.
     :selected: selected
+  - :label: Browse by author (coming soon)
+    :value: browse_by_author
+    :tip: Browse an alphabetical list of authors. Authors can be people (put last names first), organizations, or events. (e.g. Kingston, Maxine Hong; United Nations Development Programme; Pong, Chun-ho)
+    :disabled: disabled
   - :label: Browse by subject (coming soon)
     :value: browse_by_subject
     :tip: Browse an A-Z list of subjects. (e.g. motion pictures; history--United States; Eliot, George)
+    :disabled: disabled
+  - :label: Browse by title (coming soon)
+    :value: browse_by_title
+    :tip: Browse an alphabetical list of titles for books, online journals, serials, media, etc. (Nine stories; Tom Swift and )
     :disabled: disabled
