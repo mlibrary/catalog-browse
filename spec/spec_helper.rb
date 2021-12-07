@@ -128,3 +128,16 @@ def stub_solr_get_request(url:, output: "{}", status: 200, query: nil)
     with( **req_attributes).  
     to_return(**resp) 
 end
+def stub_biblio_get_request(url:, output: "{}", status: 200, query: nil)
+  req_attributes = Hash.new
+  req_attributes[:headers] = {   
+     'Accept'=>'*/*',
+     'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+     'User-Agent'=>'Ruby'
+  }
+  req_attributes[:query] = query unless query.nil?
+  resp = { headers: {content_type: 'application/json'}, status: status, body: output }
+  stub_request(:get, "#{ENV["BIBLIO_SOLR"]}/#{url}").
+    with( **req_attributes).  
+    to_return(**resp) 
+end
