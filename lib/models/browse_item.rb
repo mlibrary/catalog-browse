@@ -49,14 +49,4 @@ class BrowseItem
   def mms_id
     @index_doc["bib_id"]
   end
-  def bib_title
-    @catalog_doc["title_display"]&.first
-  end
-  def bib_edition
-    @catalog_doc["edition"]
-  end
-  def vernacular_bib_title
-    @catalog_doc["title_display"]&.slice(1)
-  end
-  #publish brief?
 end
