@@ -78,14 +78,14 @@
     <main class="viewport-container">
       <h1 id="maincontent" tabindex="-1">
         <% if list.original_reference != '' %>
-          Browse "<%= list.original_reference %>" in call numbers
+          Browse &ldquo;<%= list.original_reference %>&rdquo; in call numbers
         <% else %>
-          Browse by Call Number (Library of Congress and Dewey)
+          Browse by Call Number
         <% end %>
       </h1>
       <p>
         <span class="strong">Browse by call number help:</span> 
-        Search a Library of Congress (LC) or Dewey call number and view an alphabetical list of all call numbers and related titles indexed in the Library catalog.
+        Search a Library of Congress (LC) or Dewey call number and view an alphabetical list of all call numbers and related titles indexed in the Library catalog. <a href="https://guides.lib.umich.edu/c.php?g=282937">Learn more about call numbers<span class="visually-hidden"> (link points to external site)</span></a>.
       </p>
     <% if list.original_reference != '' %>
       <%= erb :'components/pagination', locals: {label: 'Top pagination', list: list} %>
