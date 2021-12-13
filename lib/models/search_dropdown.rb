@@ -16,11 +16,11 @@ class SearchDropdown::Browse < SearchDropdown
   def url
     case @type
     when "browse_by_lc_callnumber"
-      "#{ENV.fetch('BASE_URL')}/callnumber?query=#{encoded_query}"
+      "#{ENV.fetch("BASE_URL")}/callnumber?query=#{encoded_query}"
     else
       #Users shouldn't be able to do this; 
       #Send them back to search without their query if it happens.
-      "#{ENV.fetch('SEARCH_URL')}"
+      ENV.fetch("SEARCH_URL")
     end
   end
   private
@@ -31,7 +31,7 @@ class SearchDropdown::Browse < SearchDropdown
 end
 class SearchDropdown::Search < SearchDropdown
   def url
-    "#{ENV.fetch('SEARCH_URL')}/catalog?query=#{encoded_query}"
+    "#{ENV.fetch("SEARCH_URL")}/catalog?query=#{encoded_query}"
   end
 
   private
