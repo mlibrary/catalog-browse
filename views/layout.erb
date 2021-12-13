@@ -87,43 +87,46 @@
         <span class="strong">Browse by call number help:</span> 
         Search a Library of Congress (LC) or Dewey call number and view an alphabetical list of all call numbers and related titles indexed in the Library catalog.
       </p>
-    <% if list.original_reference != '' %>
-      <%= erb :'components/pagination', locals: {label: 'Top pagination', list: list} %>
-      <table class="browse-table" aria-labelledby="maincontent">
-        <thead>
-          <tr>
-            <th>Call number</th>
-            <th>Item</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% list.items.each do |result| %>
-            <% if result.match_notice? %>
-              <tr class="match-<%= list.num_matches == 0 ? 'none' : 'notice' %>">
-                <td colspan="2">
-                  <%= list.match_text %>
-                </td>
-              </tr>
-            <% else %>
-              <tr <% if result.exact_match? %>class="exact-match"<% end %>>
-                <td>
-                  <span <% if result.exact_match? %>class="strong"<% end %>>
-                    <%= result.callnumber %>
-                  </span>
-                </td>
-                <td>
-                  <a href="<%= result.url %>"><%= result.title %></a>
-                  <% result.subtitles.each do |subtitle| %>
-                    <p><%= subtitle %></p>
-                  <% end %>
-                </td>
-              </tr>
+      <% if list.original_reference != '' %>
+        <%= erb :'components/pagination', locals: {label: 'Top pagination', list: list} %>
+        <table class="browse-table" aria-labelledby="maincontent">
+          <thead>
+            <tr>
+              <th>Call number</th>
+              <th>Item</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% list.items.each do |result| %>
+              <% if result.match_notice? %>
+                <tr class="match-<%= list.num_matches == 0 ? 'none' : 'notice' %>">
+                  <td colspan="2">
+                    <%= list.match_text %>
+                  </td>
+                </tr>
+              <% else %>
+                <tr <% if result.exact_match? %>class="exact-match"<% end %>>
+                  <td>
+                    <span <% if result.exact_match? %>class="strong"<% end %>>
+                      <%= result.callnumber %>
+                    </span>
+                  </td>
+                  <td>
+                    <a href="<%= result.url %>"><%= result.title %></a>
+                    <% result.subtitles.each do |subtitle| %>
+                      <p><%= subtitle %></p>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
             <% end %>
-          <% end %>
-        </tbody>
-      </table>
-      <%= erb :'components/pagination', locals: {label: 'Bottom pagination', list: list} %>
-    <% end %>
+          </tbody>
+        </table>
+        <%= erb :'components/pagination', locals: {label: 'Bottom pagination', list: list} %>
+      <% end %>
+      <section class="give-feedback">
+        <a href="https://umich.qualtrics.com/jfe/form/SV_bCwYIKueEXs8wBf">Give feedback about this page <m-icon name="open-in-new"></m-icon></a>
+      </section>
     </main>
     <footer class="page-footer">
       <div class="page-footer__content">
