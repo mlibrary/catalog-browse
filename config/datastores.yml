@@ -1,14 +1,14 @@
 ---
 - :label: Everything
-  :href: http://search.lib.umich.edu/everything
+  :href: /everything
 - :label: Catalog
-  :href: http://search.lib.umich.edu/catalog
+  :href: /catalog
   :current: true
 - :label: Articles
-  :href: http://search.lib.umich.edu/articles
+  :href: /articles
 - :label: Databases
-  :href: http://search.lib.umich.edu/databases
+  :href: /databases
 - :label: Online Journals
-  :href: http://search.lib.umich.edu/onlinejournals
+  :href: /onlinejournals
 - :label: Guides and more
-  :href: http://search.lib.umich.edu/guidesandmore
+  :href: /guidesandmore

@@ -56,8 +56,8 @@
         <ol>
           <% datastores.each do |datastore| %>
             <li>
-              <a href="<%= datastore[:href] %>" <% if datastore[:current] == true %>aria-current="page"<% end %>>
-                <%= datastore[:label] %>
+              <a href="<%= datastore.href %>" <% if datastore.current? %>aria-current="page"<% end %>>
+                <%= datastore.label %>
               </a>
             </li>
           <% end %>
