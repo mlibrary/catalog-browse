@@ -487,6 +487,20 @@ table.browse-table {
 }
 
 /*
+  Give Feedback
+*/
+
+.give-feedback a {
+  align-items: center;
+  display: flex;
+  gap: var(--space-xx-small);
+}
+
+.give-feedback m-icon svg {
+  width: 1em;
+}
+
+/*
   Footer
 */
 
