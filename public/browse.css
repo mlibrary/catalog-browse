@@ -141,6 +141,7 @@ m-icon svg {
 
 .search-box .viewport-container > * {
   flex: 1 1 auto;
+  margin-bottom: 0;
   margin-top: var(--space-small);
 }
 
@@ -207,13 +208,27 @@ m-icon svg {
   border-bottom-color: var(--search-blue-600);
 }
 
+.search-box .search-tip {
+  flex-wrap: nowrap;
+}
+
+.search-box .search-tip > m-icon {
+  flex-grow: 0;
+  margin-right: var(--space-small);
+  padding-top: var(--space-xx-small);
+}
+
+.search-box .search-tip m-icon svg {
+  width: var(--space-medium);
+}
+
 @media only screen and (min-width: 720px) {
   .search-box .viewport-container {
     flex-wrap: nowrap;
   }
 
   .search-box .search-box-dropdown {
-    max-width: 280px;
+    max-width: 320px;
   }
 
   .search-box select {

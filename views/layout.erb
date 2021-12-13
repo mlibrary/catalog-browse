@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Library Search | Browse by call number</title>
+    <title>Library Search | Browse by Call Number (Library of Congress and Dewey)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <link rel="stylesheet" href="https://unpkg.com/@umich-lib/web@1/umich-lib.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700">
@@ -50,6 +50,17 @@
           <span class="visually-hidden">Search</span>
         </button>
       </div>
+      <div class="viewport-container search-tip">
+        <m-icon name="info-outline"></m-icon>
+        <% fields.each do |group| %>
+          <% group[:options].each do |option| %>
+            <p data-option="<%=option[:value]%>" style="display: <%= option[:selected] ? 'initial' : 'none' %>;">
+              <span class="strong"><%=group[:tip]%>:</span>
+              <%=option[:tip]%>
+            </p>
+          <% end %>
+        <% end %>
+      </div>
     </form>
     <div class="datastores-nav">
       <nav class="viewport-container" aria-label="Datastores">
@@ -67,14 +78,14 @@
     <main class="viewport-container">
       <h1 id="maincontent" tabindex="-1">
         <% if list.original_reference != '' %>
-        Browse `<%= list.original_reference %>` in call numbers
-      <% else %>
-          Browse by LC Callnumber
+          Browse "<%= list.original_reference %>" in call numbers
+        <% else %>
+          Browse by Call Number (Library of Congress and Dewey)
         <% end %>
       </h1>
       <p>
         <span class="strong">Browse by call number help:</span> 
-        Search a Library of Congress (LC) call number and view an alphabetical list of all LC call numbers and related titles indexed in the Library catalog.
+        Search a Library of Congress (LC) or Dewey call number and view an alphabetical list of all call numbers and related titles indexed in the Library catalog.
       </p>
     <% if list.original_reference != '' %>
       <%= erb :'components/pagination', locals: {label: 'Top pagination', list: list} %>
@@ -151,5 +162,6 @@
     <m-chat>
       <div id="chat" tabindex="-1"></div>
     </m-chat>
+    <script src="/browse.js"></script>
   </body>
 </html>
