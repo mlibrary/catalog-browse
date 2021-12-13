@@ -5,11 +5,12 @@ require_relative "lib/utilities/solr_client"
 require_relative "lib/models/browse_list"
 require_relative "lib/models/browse_item"
 require_relative "lib/models/search_dropdown"
+require_relative "lib/models/datastores"
 
 
 get '/callnumber' do
   fields = YAML.load_file("./config/search_dropdown.yml")
-  datastores = YAML.load_file("./config/datastores.yml") 
+  datastores = Datastores.new(YAML.load_file("./config/datastores.yml"))
   
   callnumber = params[:query]
   reference_id = params[:reference_id] || callnumber 

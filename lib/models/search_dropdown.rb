@@ -20,7 +20,7 @@ class SearchDropdown::Browse < SearchDropdown
     else
       #Users shouldn't be able to do this; 
       #Send them back to search without their query if it happens.
-      "https://search.lib.umich.edu"
+      ENV.fetch("SEARCH_URL")
     end
   end
   private
@@ -31,7 +31,7 @@ class SearchDropdown::Browse < SearchDropdown
 end
 class SearchDropdown::Search < SearchDropdown
   def url
-    "https://search.lib.umich.edu/catalog?query=#{encoded_query}"
+    "#{ENV.fetch("SEARCH_URL")}/catalog?query=#{encoded_query}"
   end
 
   private
