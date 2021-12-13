@@ -32,9 +32,9 @@
 - :label: Browse by
   :tip: Browse Tip
   :options:
-  - :label: Browse by LC call number
-    :value: browse_by_lc_callnumber
-    :tip: Browse by Library of Congress (LC) call number, sorted alphanumerically. Learn about the meaning of call numbers. (e.g. RC662.4 .H38 2016; QH 105) <a href="https://www.loc.gov/catdir/cpso/lcco/">Learn about the meaning of call numbers<span class="visually-hidden"> (link points to external site)</span></a>.
+  - :label: Browse by call number (LC and Dewey)
+    :value: browse_by_callnumber
+    :tip: Browse by Library of Congress (LC) and Dewey call numbers, sorted alphanumerically. Learn about the meaning of call numbers. (e.g. RC662.4 .H38 2016; QH 105) <a href="https://www.loc.gov/catdir/cpso/lcco/">Learn about the meaning of call numbers<span class="visually-hidden"> (link points to external site)</span></a>.
     :selected: selected
   - :label: Browse by author (coming soon)
     :value: browse_by_author

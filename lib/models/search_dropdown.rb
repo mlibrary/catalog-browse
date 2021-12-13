@@ -15,7 +15,7 @@ end
 class SearchDropdown::Browse < SearchDropdown
   def url
     case @type
-    when "browse_by_lc_callnumber"
+    when "browse_by_callnumber"
       "#{ENV.fetch("BASE_URL")}/callnumber?query=#{encoded_query}"
     else
       #Users shouldn't be able to do this; 

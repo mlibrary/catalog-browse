@@ -14,7 +14,7 @@ describe SearchDropdown, "#url" do
     expect(subject).to eq("https://search.lib.umich.edu/catalog?query=#{encoded_query("keyword:(Things)")}")
   end
   it "returns appropriate browse url" do
-    @type = 'browse_by_lc_callnumber'
+    @type = 'browse_by_callnumber'
     expect(subject).to eq("#{ENV.fetch("BASE_URL")}/callnumber?query=#{encoded_query("Things")}")
   end
   it "sends the user to search if they submit nonexistent browse_by type" do
