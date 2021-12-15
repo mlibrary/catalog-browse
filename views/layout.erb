@@ -112,10 +112,33 @@
                     </span>
                   </td>
                   <td>
-                    <a href="<%= result.url %>"><%= result.title %></a>
-                    <% result.subtitles.each do |subtitle| %>
-                      <p><%= subtitle %></p>
-                    <% end %>
+                    <dl>
+                      <dt class="visually-hidden">Title:</dt>
+                      <dd>
+                        <a href="<%= result.url %>"><%= result.title %></a>
+                        <% if result.vernacular_title %>
+                          <span class="vernacular"><%= result.vernacular_title %></span>
+                        <% end %>
+                      </dd>
+                      <% if result.author %>
+                        <dt>Main author:</dt>
+                        <dd>
+                          <%= result.author %>
+                          <% if result.vernacular_author %>
+                            <span class="vernacular">| <%= result.vernacular_author %></span>
+                          <% end %>
+                        </dd>
+                      <% end %>
+                      <% if result.publisher %>
+                        <dt>Published/Created:</dt>
+                        <dd>
+                          <%= result.publisher %>
+                          <% if result.vernacular_publisher %>
+                            <span class="vernacular">| <%= result.vernacular_publisher %></span>
+                          <% end %>
+                        </dd>
+                      <% end %>
+                    </dl>
                   </td>
                 </tr>
               <% end %>

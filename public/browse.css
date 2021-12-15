@@ -25,7 +25,7 @@ html {
 }
 
 body {
-  color: var(--search-neutral-600);
+  color: var(--search-neutral-700);
   display: flex;
   flex-direction: column;
   font-family: 'Source Sans Pro', sans-serif;
@@ -443,6 +443,25 @@ table.browse-table {
   font-weight: var(--semibold);
 }
 
+.browse-table dl dt {
+  clear: left;
+  float: left;
+  font-weight: var(--semibold);
+  margin-right: var(--space-x-small);
+}
+
+.browse-table dl dd {
+  margin: 0;
+}
+
+.browse-table .vernacular {
+  color: var(--search-neutral-500);
+}
+
+.browse-table dl dd:first-of-type .vernacular {
+  display: block;
+}
+
 @media only screen and (min-width: 720px) {
   table.browse-table {
     margin: 0;
@@ -492,7 +511,7 @@ table.browse-table {
 
 .give-feedback a {
   align-items: center;
-  display: flex;
+  display: inline-flex;
   gap: var(--space-xx-small);
 }
 
