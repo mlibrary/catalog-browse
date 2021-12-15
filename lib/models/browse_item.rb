@@ -11,6 +11,9 @@ class BrowseItem
     !!@exact_match
   end
   #for the view
+  def callnumber
+    @index_doc["callnumber"]&.strip
+  end
   def url
     "https://search.lib.umich.edu/catalog/record/#{mms_id}"
   end
@@ -27,11 +30,17 @@ class BrowseItem
   def vernacular_author
     @catalog_doc["mainauthor"]&.slice(1)
   end
-  def callnumber
-    @index_doc["callnumber"]&.strip
+  def author
+    catalog_data("mainauthor")
   end
-  def subtitles
-    [ author, publisher].compact
+  def vernacular_author
+    catalog_data("mainauthor", true)
+  end
+  def publisher
+    catalog_data("publisher")
+  end
+  def vernacular_publisher
+    catalog_data("publisher", true)
   end
   def publisher
     @catalog_doc["publisher"]&.first
