@@ -30,18 +30,6 @@ class BrowseItem
   def vernacular_author
     @catalog_doc["mainauthor"]&.slice(1)
   end
-  def author
-    catalog_data("mainauthor")
-  end
-  def vernacular_author
-    catalog_data("mainauthor", true)
-  end
-  def publisher
-    catalog_data("publisher")
-  end
-  def vernacular_publisher
-    catalog_data("publisher", true)
-  end
   def publisher
     @catalog_doc["publisher"]&.first
   end
