@@ -15,7 +15,7 @@ class BrowseList
       index_response = solr_client.browse_reference_on_bottom(reference_id: reference_id, rows: num_rows_to_display + 1)
     else
     #index_before:, index_after:
-      return OpenStruct.new(original_reference: '') if reference_id.nil?
+      return BrowseList::Empty.new if reference_id.nil?
       index_before = solr_client.browse_reference_on_bottom(reference_id: reference_id, rows: 3)
       index_after = solr_client.browse_reference_on_top(reference_id: reference_id, rows: num_rows_to_display - 1)
       my_banner_reference = index_after.parsed_response.dig("response","docs").first["id"]
@@ -75,6 +75,9 @@ class BrowseList
     @num_matches = exact_matches.count
     @exact_matches = exact_matches
     @banner_reference = banner_reference
+  end
+  def show_table?
+    true
   end
   def previous_url
     params = URI.encode_www_form({
@@ -180,4 +183,11 @@ class BrowseList::ReferenceInMiddle < BrowseList::ReferenceOnTop
     [before_docs, after_docs].flatten
   end
 end
-
+class BrowseList::Empty < BrowseList
+  def initialize(original_reference='')
+    @original_reference = original_reference
+  end
+  def show_table?
+    false
+  end
+end

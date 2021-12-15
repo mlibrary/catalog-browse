@@ -2,9 +2,9 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 gem 'sinatra'
-gem 'simple_solr_client'
 gem 'puma'
 gem 'httparty'
+gem 'sinatra-flash'
 
 group :development do
   gem 'sinatra-contrib'
