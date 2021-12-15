@@ -121,7 +121,7 @@
                         <% end %>
                       </dd>
                       <% if result.author %>
-                        <dt>Main author:</dt>
+                        <dt>Main Author:</dt>
                         <dd>
                           <%= result.author %>
                           <% if result.vernacular_author %>
@@ -135,6 +135,15 @@
                           <%= result.publisher %>
                           <% if result.vernacular_publisher %>
                             <span class="vernacular">| <%= result.vernacular_publisher %></span>
+                          <% end %>
+                        </dd>
+                      <% end %>
+                      <% if result.series %>
+                        <dt>Series:</dt>
+                        <dd>
+                          <%= result.series %>
+                          <% if result.vernacular_series %>
+                            <span class="vernacular">| <%= result.vernacular_series %></span>
                           <% end %>
                         </dd>
                       <% end %>
