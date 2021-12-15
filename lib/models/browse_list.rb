@@ -15,8 +15,10 @@ class BrowseList
       index_response = solr_client.browse_reference_on_bottom(reference_id: reference_id, rows: num_rows_to_display + 1)
     else
     #index_before:, index_after:
+      return Ope
       index_before = solr_client.browse_reference_on_bottom(reference_id: reference_id, rows: 3)
       index_after = solr_client.browse_reference_on_top(reference_id: reference_id, rows: num_rows_to_display - 1)
+      raise StandardError.new "Solr error" if [index_before.code, index_after.code].any?{|x| x != 200}
       my_banner_reference = index_after.parsed_response.dig("response","docs").first["id"]
       #need above and below
     end
