@@ -14,10 +14,10 @@ get '/callnumber' do
   
   callnumber = params[:query]
   reference_id = params[:reference_id] || callnumber 
-  if callnumber.nil?
-    list = OpenStruct.new(original_reference: '')
-  else
+  begin
     list = BrowseList.for(direction: params[:direction], reference_id: reference_id, num_rows_to_display: 20, original_reference: callnumber, banner_reference: params[:banner_reference])
+  rescue
+    list = OpenStruct.new(original_reference: reference_id, items: [])
   end
   erb :layout, :locals  => {
     :fields => fields,
