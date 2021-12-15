@@ -59,4 +59,10 @@ describe BrowseItem do
   it "shows appropriate vernacular publisher" do
     expect(subject.vernacular_publisher).to eq("\"Деловой центр\",")
   end
+  it "shows appropriate series" do
+    expect(subject.series).to eq("Zagadki i taĭny sudʹby")
+  end
+  it "shows appropriate vernacular series" do
+    expect(subject.vernacular_series).to eq("Загадки и тайны судьбы.")
+  end
 end

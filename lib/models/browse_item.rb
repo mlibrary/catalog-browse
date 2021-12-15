@@ -36,6 +36,12 @@ class BrowseItem
   def vernacular_publisher
     @catalog_doc["publisher"]&.slice(1)
   end
+  def series
+    @catalog_doc["series"]&.first
+  end
+  def vernacular_series
+    @catalog_doc["series"]&.slice(1)
+  end
   
 
   private
