@@ -1,10 +1,10 @@
 @import url("styles/base.css");
-@import url("styles/search-box.css");
-@import url("styles/website-header.css");
 @import url("styles/text.css");
 @import url("styles/anchors.css");
 @import url("styles/images.css");
 @import url("styles/skip-links.css");
+@import url("styles/website-header.css");
+@import url("styles/search-box.css");
 @import url("styles/datastores-navigation.css");
 @import url("styles/pagination.css");
 @import url("styles/table.css");
