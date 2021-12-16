@@ -1,0 +1,12 @@
+/*
+  Anchors
+*/
+
+a {
+  color: var(--search-blue-400);
+}
+
+a:hover,
+a:focus {
+  text-decoration-thickness: var(--space-xxx-small);
+}

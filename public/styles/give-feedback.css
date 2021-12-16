@@ -1,0 +1,13 @@
+/*
+  Give Feedback
+*/
+
+.give-feedback a {
+  align-items: center;
+  display: inline-flex;
+  gap: var(--space-xx-small);
+}
+
+.give-feedback m-icon svg {
+  width: 1em;
+}

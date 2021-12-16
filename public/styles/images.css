@@ -1,0 +1,13 @@
+/*
+  Images
+*/
+
+m-icon {
+  display: block;
+  line-height: 0;
+}
+
+m-icon svg {
+  height: auto;
+  width: 24px;
+}

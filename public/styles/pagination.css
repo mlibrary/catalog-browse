@@ -1,0 +1,40 @@
+/*
+  Pagination
+*/
+
+nav.pagination ul {
+  display: flex;
+  line-height: 1;
+  list-style: none;
+  padding-left: 0;
+}
+
+nav.pagination ul li + li {
+  margin-left: var(--space-small);
+  padding-left: var(--space-small);
+  position: relative;
+}
+
+nav.pagination ul li + li:before {
+  background-color: var(--color-neutral-400);
+  content: '';
+  display: block;
+  height: 1em;
+  left: 0;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+}
+
+nav.pagination a {
+  align-items: center;
+  display: flex;
+  min-height: var(--space-xxx-large);
+  min-width: var(--space-xxx-large);
+}
+
+nav.pagination m-icon svg {
+  position: relative;
+  top: var(--space-xxx-small);
+}

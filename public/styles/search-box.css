@@ -1,0 +1,127 @@
+/*
+  Search box
+*/
+
+.search-box {
+  background: var(--search-blue-200);
+  border-bottom: solid var(--space-xxx-small) var(--search-blue-300);
+  padding: var(--space-xx-small) 0 var(--space-medium) 0;
+}
+
+.search-box .viewport-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.search-box .viewport-container > * {
+  flex: 1 1 auto;
+  margin-bottom: 0;
+  margin-top: var(--space-small);
+}
+
+.search-box .search-box-dropdown {
+  position: relative;
+  width: 100%;
+}
+
+.search-box select,
+.search-box input,
+.search-box button {
+  all: unset;
+  box-sizing: border-box;
+  line-height: 1.6 !important;
+  padding: var(--space-x-small) var(--space-small);
+}
+
+.search-box select:focus,
+.search-box input:focus,
+.search-box button:focus {
+  outline: 0;
+  box-shadow: 0 0 0 2px var(--color-maize-400),
+    0 0 0 3px var(--color-neutral-400) !important;
+}
+
+.search-box select,
+.search-box input {
+  background: white;
+  border: 1px solid var(--search-blue-400);
+  border-radius: var(--radius-default);
+  max-width: 100%;
+}
+
+.search-box select {
+  background: var(--search-neutral-100);
+  padding-right: var(--space-xx-large);
+  width: 100%;
+}
+
+.search-box .search-box-dropdown m-icon {
+  position: absolute;
+  right: 0.5rem;
+  top: 0.6rem;
+  pointer-events: none;
+}
+
+.search-box input[aria-invalid] {
+  border-color: var(--color-pink-500);
+}
+
+.search-box input[aria-invalid] + .message {
+  color: var(--color-pink-500);
+  font-size: 0.875em;
+}
+
+.search-box input:focus {
+  z-index: 1;
+}
+
+.search-box button {
+  background: var(--search-blue-400);
+  border-bottom: 3px solid var(--search-blue-500);
+  border-radius: var(--radius-default);
+  color: white;
+  cursor: pointer;
+  flex-grow: 0!important;
+  font-weight: 600;
+  margin-left: var(--space-small);
+}
+
+.search-box button:active {
+  background: var(--search-blue-500);
+  border-bottom-color: var(--search-blue-600);
+}
+
+.search-box .search-tip {
+  flex-wrap: nowrap;
+}
+
+.search-box .search-tip > m-icon {
+  flex-grow: 0;
+  margin-right: var(--space-small);
+  padding-top: var(--space-xx-small);
+}
+
+.search-box .search-tip m-icon svg {
+  width: var(--space-medium);
+}
+
+@media only screen and (min-width: 720px) {
+  .search-box .viewport-container {
+    flex-wrap: nowrap;
+  }
+
+  .search-box .search-box-dropdown {
+    max-width: 320px;
+  }
+
+  .search-box select {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  .search-box input {
+    border-bottom-left-radius: 0;
+    border-left: 0;
+    border-top-left-radius: 0;
+  }
+}

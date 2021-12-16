@@ -1,0 +1,50 @@
+/*
+  Search Product original colors:
+  https://github.com/mlibrary/search/blob/master/src/stylesheets/modules/_colors.scss
+*/
+:root {
+  /* Blue */
+  --search-blue-100: #f2f9ff;
+  --search-blue-200: #e6f3ff;
+  --search-blue-300: #cce6ff;
+  --search-blue-400: #126dc1;
+  --search-blue-500: #0c5292;
+  --search-blue-600: var(--color-blue-400);
+  /* Neutral */
+  --search-neutral-100: #fafafa;
+  --search-neutral-200: #f2f2f2;
+  --search-neutral-300: #e5e5e5;
+  --search-neutral-400: #ccc;
+  --search-neutral-500: #6e6e6e;
+  --search-neutral-600: #4e4e4e;
+  --search-neutral-700: #262626;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--search-neutral-700);
+  display: flex;
+  flex-direction: column;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+/*
+  Main
+*/
+
+main {
+  flex-grow: 1;
+  margin-bottom: var(--space-xx-large);
+  margin-top: var(--space-xx-large);
+}
+
+main > *:first-child {
+  margin-top: 0;
+}
+
+main > *:last-child {
+  margin-bottom: 0;
+}
