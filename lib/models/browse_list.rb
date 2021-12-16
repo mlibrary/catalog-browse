@@ -200,6 +200,6 @@ class BrowseList::Error < BrowseList::Empty
     true
   end
   def error_message
-    "#{@original_reference} is invalid. Please input a valid callnumber."
+    "#{@original_reference} is invalid. Please enter a valid call number."
   end
 end
