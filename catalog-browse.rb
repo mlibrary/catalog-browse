@@ -22,7 +22,7 @@ get '/callnumber' do
     list = BrowseList.for(direction: params[:direction], reference_id: reference_id, num_rows_to_display: 20, original_reference: callnumber, banner_reference: params[:banner_reference])
   rescue
     list = BrowseList::Error.new(reference_id)
-    flash.now[:error] = "Bad input: #{callnumber}; Error? #{list.error?}"
+    flash.now[:error] = "Bad input: #{callnumber}"
   end
   erb :layout, :locals  => {
     :fields => fields,

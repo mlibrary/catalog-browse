@@ -44,7 +44,10 @@
           </select>
           <m-icon name="keyboard-arrow-down"></m-icon>
         </div>
-        <input aria-label="Browse text" type="text" autocomplete="on" name="query" value="<%= list.original_reference %>">
+        <div class="search-input">
+          <input aria-label="Browse text" <% if list.error? %>aria-invalid="true" aria-describedby="input-message"<% end %> type="text" autocomplete="on" name="query" value="<%= list.original_reference %>">
+          <%= input_message %>
+        </div>
         <button>
           <m-icon name="search"></m-icon>
           <span class="visually-hidden">Search</span>
@@ -74,9 +77,6 @@
           <% end %>
         </ol>
       </nav>
-    </div>
-    <div class="viewport-container" role=>
-      <%= my_styled_flash %>
     </div>
     <main class="viewport-container">
       <h1 id="maincontent" tabindex="-1">

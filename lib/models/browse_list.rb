@@ -120,6 +120,10 @@ class BrowseList
     end
   end
 
+  def error?
+    false
+  end
+
   private
   def catalog_doc_for_mms_id(mms_id)
     @catalog_docs.find{|x| x["id"] == mms_id}
@@ -160,9 +164,6 @@ class BrowseList::ReferenceOnBottom < BrowseList
   end
   def previous_reference_id
     @index_docs[1]["id"].strip if has_previous_list?
-  end
-  def error?
-    false
   end
 end
 
