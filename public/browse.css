@@ -188,6 +188,15 @@ m-icon svg {
   pointer-events: none;
 }
 
+.search-box input[aria-invalid] {
+  border-color: var(--color-pink-500);
+}
+
+.search-box input[aria-invalid] + .message {
+  color: var(--color-pink-500);
+  font-size: 0.875em;
+}
+
 .search-box input:focus {
   z-index: 1;
 }
