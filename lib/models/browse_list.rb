@@ -161,6 +161,9 @@ class BrowseList::ReferenceOnBottom < BrowseList
   def previous_reference_id
     @index_docs[1]["id"].strip if has_previous_list?
   end
+  def error?
+    false
+  end
 end
 
 class BrowseList::ReferenceInMiddle < BrowseList::ReferenceOnTop
@@ -189,5 +192,10 @@ class BrowseList::Empty < BrowseList
   end
   def show_table?
     false
+  end
+end
+class BrowseList::Error < BrowseList::Empty
+  def error?
+    true
   end
 end
