@@ -76,8 +76,6 @@ GEM
       rack-protection (= 2.1.0)
       sinatra (= 2.1.0)
       tilt (~> 2.0)
-    sinatra-flash (0.3.0)
-      sinatra (>= 1.0.0)
     tilt (2.0.10)
     webmock (3.14.0)
       addressable (>= 2.8.0)
@@ -100,7 +98,6 @@ DEPENDENCIES
   simplecov
   sinatra
   sinatra-contrib
-  sinatra-flash
   webmock
 
 BUNDLED WITH
