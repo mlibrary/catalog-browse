@@ -8,13 +8,14 @@ LABEL maintainer="mrio@umich.edu"
 RUN apt-get update -yqq && apt-get install -yqq --no-install-recommends \
   apt-transport-https
 
-RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_17.x | bash -
 
 RUN apt-get update -yqq && apt-get install -yqq --no-install-recommends \
   nodejs \
   vim-tiny
 
 RUN gem install bundler:2.1.4
+RUN npm install -g npm@8.3.0
 
 
 RUN groupadd -g ${GID} -o ${UNAME}

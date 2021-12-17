@@ -8,9 +8,20 @@ services:
     volumes:
       - .:/app
       - gem_cache:/gems
+    environment:
+      - SHELL=/bin/bash
     env_file:
       - .env
       - .env-dev-values
+
+  css:
+    build: .
+    volumes:
+      - .:/app
+    environment:
+      - SHELL=/bin/bash
+    command: "npm run watch"
+
 
 volumes:
   gem_cache:

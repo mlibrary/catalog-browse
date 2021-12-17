@@ -1,0 +1,26 @@
+/**
+ * images.css
+ * 
+ * Images provide visual assets for the layout.
+ *
+ * -----------------
+ * Table of Contents
+ * -----------------
+ * 1.0 - M-Icon
+ */
+
+
+
+/********************/
+/*** 1.0 - M-Icon ***/
+/********************/
+
+m-icon {
+  display: block;
+  line-height: 0;
+}
+
+m-icon svg {
+  height: auto;
+  width: 24px;
+}
