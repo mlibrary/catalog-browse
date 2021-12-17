@@ -21,10 +21,17 @@ Build the image
 ```
 docker-compose build
 ```
+
 Install the gems
 ```
 docker-compose run --rm web bundle install
 ```
+
+Install the npm packages
+```
+docker-compose run --rm web npm install
+```
+
 Start the app
 ```
 docker-compose up
