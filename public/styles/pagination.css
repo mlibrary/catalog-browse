@@ -1,6 +1,21 @@
-/*
-  Pagination
-*/
+/**
+ * pagination.css
+ * 
+ * Pagination allows users to navigate through the pages of Browse.
+ *
+ * -----------------
+ * Table of Contents
+ * -----------------
+ * 1.0 - List
+ * 2.0 - Anchors
+ * 3.0 - Icons
+ */
+
+
+
+/******************/
+/*** 1.0 - List ***/
+/******************/
 
 nav.pagination ul {
   display: flex;
@@ -27,12 +42,24 @@ nav.pagination ul li + li:before {
   width: 1px;
 }
 
+
+
+/*********************/
+/*** 2.0 - Anchors ***/
+/*********************/
+
 nav.pagination a {
   align-items: center;
   display: flex;
   min-height: var(--space-xxx-large);
   min-width: var(--space-xxx-large);
 }
+
+
+
+/*******************/
+/*** 3.0 - Icons ***/
+/*******************/
 
 nav.pagination m-icon svg {
   position: relative;
