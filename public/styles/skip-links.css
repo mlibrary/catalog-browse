@@ -1,6 +1,22 @@
-/*
-  Skip links
-*/
+/**
+ * skip-links.css
+ * 
+ * Skip Links provides an accessible list that can navigate
+ * keyboard users directly to certain areas of the site.
+ *
+ * -----------------
+ * Table of Contents
+ * -----------------
+ * 1.0 - Container
+ * 2.0 - List
+ * 3.0 - Anchors
+ */
+
+
+
+/***********************/
+/*** 1.0 - Container ***/
+/***********************/
 
 .site-skip-links {
   background: var(--color-blue-400);
@@ -15,10 +31,12 @@
   overflow: hidden;
 }
 
-.site-skip-links a {
-  color: white;
-  padding: var(--space-x-small);
-}
+
+
+/******************/
+/*** 2.0 - List ***/
+/******************/
+
 .site-skip-links ul {
   margin: var(--space-medium) 0;
   text-align: center;
@@ -27,4 +45,15 @@
 
 .site-skip-links ul li + li {
   margin-top: var(--space-medium);
+}
+
+
+
+/*********************/
+/*** 3.0 - Anchors ***/
+/*********************/
+
+.site-skip-links a {
+  color: white;
+  padding: var(--space-x-small);
 }
