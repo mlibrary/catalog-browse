@@ -1,16 +1,39 @@
+/**
+ * base.css
+ * 
+ * Base provides the foundational styling of the layout.
+ *
+ * -----------------
+ * Table of Contents
+ * -----------------
+ * 1.0 - Colors
+ *   1.1 - Blue
+ *   1.2 - Neutral
+ * 2.0 - Layout
+ *   2.1 - HTML
+ *   2.2 - Body
+ *   2.3 - Main
+ */
+
+
+
+/********************/
+/*** 1.0 - Colors ***/
+/********************/
+
 /*
   Search Product original colors:
   https://github.com/mlibrary/search/blob/master/src/stylesheets/modules/_colors.scss
 */
 :root {
-  /* Blue */
+  /*** 1.1 - Blue ***/
   --search-blue-100: #f2f9ff;
   --search-blue-200: #e6f3ff;
   --search-blue-300: #cce6ff;
   --search-blue-400: #126dc1;
   --search-blue-500: #0c5292;
   --search-blue-600: var(--color-blue-400);
-  /* Neutral */
+  /*** 1.2 - Neutral ***/
   --search-neutral-100: #fafafa;
   --search-neutral-200: #f2f2f2;
   --search-neutral-300: #e5e5e5;
@@ -20,20 +43,30 @@
   --search-neutral-700: #262626;
 }
 
+
+
+/********************/
+/*** 2.0 - Layout ***/
+/********************/
+
+/*** 2.1 - HTML ***/
+
 html {
   scroll-behavior: smooth;
 }
 
+/*** 2.2 - Body ***/
+
 body {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
   color: var(--search-neutral-700);
   display: flex;
   flex-direction: column;
   font-family: 'Source Sans Pro', sans-serif;
 }
 
-/*
-  Main
-*/
+/*** 2.3 - Main ***/
 
 main {
   flex-grow: 1;
