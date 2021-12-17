@@ -1,6 +1,22 @@
-/*
-  Datastores navigation
-*/
+/**
+ * datastores-navigation.css
+ * 
+ * Datastores Navigation provides the list of landing pages between
+ * the Search and Browse sites
+ *
+ * -----------------
+ * Table of Contents
+ * -----------------
+ * 1.0 - Container
+ * 2.0 - List
+ *   2.1 - Anchors
+ */
+
+
+
+/***********************/
+/*** 1.0 - Container ***/
+/***********************/
 
 .datastores-nav,
 .datastores-nav ol li a {
@@ -11,6 +27,12 @@
   background: var(--search-neutral-100);
 }
 
+
+
+/******************/
+/*** 2.0 - List ***/
+/******************/
+
 .datastores-nav ol {
   display: flex;
   flex-direction: column;
@@ -20,6 +42,14 @@
   margin-bottom: calc(var(--space-xxx-small) * -1);
   padding: 0;
 }
+
+@media only screen and (min-width: 720px) {
+  .datastores-nav ol {
+    flex-direction: row;
+  }
+}
+
+/*** 2.1 - Anchors ***/
 
 .datastores-nav ol li a {
   display: block;
@@ -51,10 +81,6 @@
 }
 
 @media only screen and (min-width: 720px) {
-  .datastores-nav ol {
-    flex-direction: row;
-  }
-
   .datastores-nav ol li a[aria-current=page]:before {
     height: var(--space-xxx-small);
     top: 100%;
