@@ -1,0 +1,33 @@
+/**
+ * typography.css
+ * 
+ * Typography defines the styling of text elements.
+ *
+ * -----------------
+ * Table of Contents
+ * -----------------
+ * 1.0 - Headings
+ * 2.0 - Font Weights
+ */
+
+
+
+/**********************/
+/*** 1.0 - Headings ***/
+/**********************/
+
+h1 {
+  font-family: inherit;
+  font-size: 2rem;
+  font-weight: 400;
+}
+
+
+
+/**************************/
+/*** 2.0 - Font Weights ***/
+/**************************/
+
+.strong {
+  font-weight: var(--bold);
+}
