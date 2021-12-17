@@ -44,14 +44,12 @@
           </select>
           <m-icon name="keyboard-arrow-down"></m-icon>
         </div>
-        <div class="search-input">
-          <input aria-label="Browse text" <% if list.error? %>aria-invalid="true" aria-describedby="input-message"<% end %> type="text" autocomplete="on" name="query" value="<%= list.original_reference %>">
-          <% if list.error? %>
-            <span class="message message--error" id="input-message" role="alert">
-              <%= list.error_message %>
-            </span>
-          <% end %>
-        </div>
+        <input aria-label="Browse text" <% if list.error? %>aria-invalid="true" aria-describedby="input-message"<% end %> type="text" autocomplete="on" name="query" value="<%= list.original_reference %>">
+        <% if list.error? %>
+          <span class="message message--error" id="input-message" role="alert">
+            <%= list.error_message %>
+          </span>
+        <% end %>
         <button>
           <m-icon name="search"></m-icon>
           <span class="visually-hidden">Search</span>
