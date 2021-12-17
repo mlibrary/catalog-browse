@@ -37,7 +37,7 @@
       </div>
     </m-website-header>
     <form class="search-box" role="search" method="post" action="<%= ENV.fetch('BASE_URL') %>/search">
-      <div class="viewport-container">
+      <div class="viewport-container search-form">
         <div class="search-box-dropdown">
           <select aria-label="Search or browse by" autocomplete="off" name="type">
             <% fields.each do |group| %>
@@ -52,7 +52,12 @@
           </select>
           <m-icon name="keyboard-arrow-down"></m-icon>
         </div>
-        <input aria-label="Browse text" type="text" autocomplete="on" name="query" value="<%= list.original_reference %>">
+        <input aria-label="Browse text" <% if list.error? %>aria-invalid="true" aria-describedby="input-message"<% end %> type="text" autocomplete="on" name="query" value="<%= list.original_reference %>">
+        <% if list.error? %>
+          <span class="message message--error" id="input-message" role="alert">
+            <%= list.error_message %>
+          </span>
+        <% end %>
         <button>
           <m-icon name="search"></m-icon>
           <span class="visually-hidden">Search</span>
@@ -85,7 +90,7 @@
     </div>
     <main class="viewport-container">
       <h1 id="maincontent" tabindex="-1">
-        <% if list.original_reference != '' %>
+        <% if list.show_table? %>
           Browse &ldquo;<%= list.original_reference %>&rdquo; in call numbers
         <% else %>
           Browse by Call Number
@@ -95,7 +100,7 @@
         <span class="strong">Browse by call number help:</span> 
         Search a Library of Congress (LC) or Dewey call number and view an alphabetical list of all call numbers and related titles indexed in the Library catalog. <a href="https://guides.lib.umich.edu/c.php?g=282937">Learn more about call numbers<span class="visually-hidden"> (link points to external site)</span></a>.
       </p>
-      <% if list.original_reference != '' %>
+      <% if list.show_table? %>
         <%= erb :'components/pagination', locals: {label: 'Top pagination', list: list} %>
         <table class="browse-table" aria-labelledby="maincontent">
           <thead>

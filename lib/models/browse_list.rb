@@ -15,6 +15,7 @@ class BrowseList
       index_response = solr_client.browse_reference_on_bottom(reference_id: reference_id, rows: num_rows_to_display + 1)
     else
     #index_before:, index_after:
+      return BrowseList::Empty.new if reference_id.nil?
       index_before = solr_client.browse_reference_on_bottom(reference_id: reference_id, rows: 3)
       index_after = solr_client.browse_reference_on_top(reference_id: reference_id, rows: num_rows_to_display - 1)
       my_banner_reference = index_after.parsed_response.dig("response","docs").first["id"]
@@ -75,6 +76,9 @@ class BrowseList
     @exact_matches = exact_matches
     @banner_reference = banner_reference
   end
+  def show_table?
+    true
+  end
   def previous_url
     params = URI.encode_www_form({
       query: @original_reference, 
@@ -114,6 +118,10 @@ class BrowseList
     else
       "We found #{@num_matches} matching items in our catalog for the call number: <span class=\"strong\">#{original_reference}</span>"
     end
+  end
+
+  def error?
+    false
   end
 
   private
@@ -179,4 +187,19 @@ class BrowseList::ReferenceInMiddle < BrowseList::ReferenceOnTop
     [before_docs, after_docs].flatten
   end
 end
-
+class BrowseList::Empty < BrowseList
+  def initialize(original_reference='')
+    @original_reference = original_reference
+  end
+  def show_table?
+    false
+  end
+end
+class BrowseList::Error < BrowseList::Empty
+  def error?
+    true
+  end
+  def error_message
+    "#{@original_reference} is invalid. Please enter a valid call number."
+  end
+end
