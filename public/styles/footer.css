@@ -1,6 +1,21 @@
-/*
-  Footer
-*/
+/**
+ * footer.css
+ * 
+ * Footer contains extra navigation links and copyright information.
+ *
+ * -----------------
+ * Table of Contents
+ * -----------------
+ * 1.0 - Container
+ * 2.0 - Content
+ * 3.0 - Disclaimer
+ */
+
+
+
+/***********************/
+/*** 1.0 - Container ***/
+/***********************/
 
 .page-footer {
   text-align: center;
@@ -11,6 +26,12 @@
   display: block;
 }
 
+
+
+/***********************/
+/*** 2.0 - Content ***/
+/***********************/
+
 @media only screen and (min-width: 720px) {
   .page-footer__content nav ul {
     margin: 0 -1rem;
@@ -20,7 +41,15 @@
     display: inline-block;
     padding: 0 1rem;
   }
-  
+}
+
+
+
+/************************/
+/*** 3.0 - Disclaimer ***/
+/************************/
+
+@media only screen and (min-width: 720px) {
   .page-footer__disclaimer span {
     display: initial;
   }
