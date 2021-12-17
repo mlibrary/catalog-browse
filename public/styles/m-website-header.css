@@ -1,0 +1,42 @@
+/**
+ * m-website-header.css
+ * 
+ * m-website-header is a Design System component that displays
+ * the Library logo and shows users what U-M Library website
+ * they are using. 
+ *
+ * -----------------
+ * Table of Contents
+ * -----------------
+ * 1.0 - Inner Container
+ * 2.0 - Anchors
+ */
+
+
+
+/*****************************/
+/*** 1.0 - Inner Container ***/
+/*****************************/
+
+m-website-header .website-header-inner-container {
+  background-color: var(--color-blue-400);
+  margin: 0 calc(-1 * var(--space-small));
+}
+
+
+
+/*********************/
+/*** 2.0 - Anchors ***/
+/*********************/
+
+m-website-header a {
+  color: white;
+  display: inline-block;
+  text-decoration: none;
+  padding: var(--space-xx-small) var(--space-small);
+}
+
+m-website-header a:hover {
+  text-decoration: underline;
+  text-underline-offset: var(--space-xxx-small);
+}
