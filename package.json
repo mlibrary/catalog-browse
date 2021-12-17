@@ -1,0 +1,28 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "postcss ./public/browse.css -d ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mlibrary/catalog-browse.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mlibrary/catalog-browse/issues"
+  },
+  "homepage": "https://github.com/mlibrary/catalog-browse#readme",
+  "devDependencies": {
+    "postcss": "^8.4.5",
+    "postcss-cli": "^9.1.0",
+    "postcss-import": "^14.0.2"
+  }
+}

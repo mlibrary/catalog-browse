@@ -1,0 +1,34 @@
+/**
+ * give-feedback.css
+ * 
+ * Give Feedback provides an anchor leading to a form
+ * for users to fill out.
+ *
+ * -----------------
+ * Table of Contents
+ * -----------------
+ * 1.0 - Anchor
+ * 2.0 - Icon
+ */
+
+
+
+/********************/
+/*** 1.0 - Anchor ***/
+/********************/
+
+.give-feedback a {
+  align-items: center;
+  display: inline-flex;
+  gap: var(--space-xx-small);
+}
+
+
+
+/******************/
+/*** 2.0 - Icon ***/
+/******************/
+
+.give-feedback m-icon svg {
+  width: 1em;
+}
