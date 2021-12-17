@@ -1,6 +1,19 @@
-/*
-  Images
-*/
+/**
+ * images.css
+ * 
+ * Images provide visual assets for the layout.
+ *
+ * -----------------
+ * Table of Contents
+ * -----------------
+ * 1.0 - M-Icon
+ */
+
+
+
+/********************/
+/*** 1.0 - M-Icon ***/
+/********************/
 
 m-icon {
   display: block;
