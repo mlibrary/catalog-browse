@@ -1,0 +1,25 @@
+/**
+ * m-callout.css
+ * 
+ * m-callout is a Design System component that displays
+ * a dismissable message that stands out from the rest of the content
+ *
+ * -----------------
+ * Table of Contents
+ * -----------------
+ * 1.0 - Container
+ */
+
+
+
+/***********************/
+/*** 1.0 - Container ***/
+/***********************/
+
+m-callout {
+  margin: 0;
+}
+
+m-callout:empty + * {
+  margin-top: 0;
+}
