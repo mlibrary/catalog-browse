@@ -200,6 +200,6 @@ class BrowseList::Error < BrowseList::Empty
     true
   end
   def error_message
-    "#{@original_reference} is invalid. Please enter a valid call number."
+    "<span class=\"strong\">#{@original_reference}</span> is not a valid call number query. Please try a using a valid Library of Congress call number (enter one or two letters and a number) or valid Dewey call number (start with three numbers)."
   end
 end

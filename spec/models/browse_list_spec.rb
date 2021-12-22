@@ -144,3 +144,38 @@ describe BrowseList::ReferenceInMiddle do
   context "#items" do
   end
 end
+describe BrowseList::Empty do
+  before(:each) do
+    @params = {
+      original_reference: ''
+    }
+  end
+  subject do
+    described_class.new(**@params)
+  end
+  context "#show_table?" do
+    it "returns false" do
+      expect(subject.show_table?).to eq(false)
+    end
+  end
+end
+describe BrowseList::Error do
+  before(:each) do
+    @params = {
+      original_reference: 'OSU'
+    }
+  end
+  subject do
+    described_class.new(**@params)
+  end
+  context "#error?" do
+    it "returns true" do
+      expect(subject.error?).to eq(true)
+    end
+  end
+  context "#error_message" do
+    it "returns an error message" do
+      expect(subject.error_message).to eq("<span class=\"strong\">{:original_reference=>\"OSU\"}</span> is not a valid call number query. Please try a using a valid Library of Congress call number (enter one or two letters and a number) or valid Dewey call number (start with three numbers).")
+    end
+  end
+end

@@ -89,6 +89,14 @@
       </nav>
     </div>
     <main class="viewport-container">
+      <%
+        url_params = request.params.map {|key, value| key} 
+        if !url_params.include? 'direction'
+      %>
+        <m-callout dismissable icon>
+          <p class="give-feedback"><span class="strong">Call number browse beta:</span> We're testing a new feature to browse the catalog by call number. Let us know what you think at our <a href="https://umich.qualtrics.com/jfe/form/SV_bCwYIKueEXs8wBf">feedback form <m-icon name="open-in-new"></m-icon></a>.</p>
+        </m-callout>
+      <% end %>
       <h1 id="maincontent" tabindex="-1">
         <% if list.show_table? %>
           Browse &ldquo;<%= list.original_reference %>&rdquo; in call numbers
