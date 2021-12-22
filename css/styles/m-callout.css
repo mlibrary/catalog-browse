@@ -20,6 +20,6 @@ m-callout {
   margin: 0;
 }
 
-m-callout:empty + * {
+main > m-callout:first-child:empty + * {
   margin-top: 0;
 }
