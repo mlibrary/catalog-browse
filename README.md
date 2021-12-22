@@ -36,4 +36,14 @@ Start the app
 ```
 docker-compose up
 ```
-In a browser go to http://localhost:4567/callnumber?query=U-M
+
+Build the styles
+```
+docker-compose run --rm web npm run build
+```
+
+Run the tests
+```
+docker-compose run web bundle exec rspec
+```
+In a browser go to http://localhost:4567/callnumber?query=UM1
