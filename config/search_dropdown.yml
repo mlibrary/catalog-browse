@@ -32,7 +32,7 @@
 - :label: Browse by
   :tip: Browse Tip
   :options:
-  - :label: Browse by call number (LC and Dewey)
+  - :label: Browse by call number (LC and Dewey) [BETA]
     :value: browse_by_callnumber
     :tip: Browse by Library of Congress (LC) or Dewey call number, sorted alphanumerically (e.g. RC662.4 .H38 2016; QH 105, 880 J375re). <a href="https://www.loc.gov/catdir/cpso/lcco/">Learn about the meaning of call numbers<span class="visually-hidden"> (link points to external site)</span></a>.
     :selected: selected
