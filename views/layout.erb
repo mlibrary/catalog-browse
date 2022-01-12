@@ -25,18 +25,6 @@
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'UA-1341620-18');
-      // Listen for changes in the search box dropdown menu
-      (function() {
-        var selectMenu = document.querySelector('search-box-dropdown > select');
-        var callback = function(event) {
-          var selectedOption = event.target.options[event.target.selectedIndex];
-          window.dataLayer.push({
-            event: 'selectionMade',
-            selectedElement: selectedOption
-          });
-        };
-        selectMenu.addEventListener('change', callback, true);
-      })();
     </script>
     <title>Library Search | Browse by Call Number (Library of Congress and Dewey)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -258,5 +246,19 @@
       <div id="chat" tabindex="-1"></div>
     </m-chat>
     <script src="<%=ENV.fetch('BASE_URL')%>/browse.js"></script>
+    <script>
+      // Listen for changes in the search box dropdown menu
+      (function() {
+        var selectMenu = document.querySelector('.search-box-dropdown > select');
+        var callback = function(event) {
+          var selectedOption = event.target.options[event.target.selectedIndex];
+          window.dataLayer.push({
+            event: 'selectionMade',
+            selectedElement: selectedOption
+          });
+        };
+        selectMenu.addEventListener('change', callback, true);
+      })();
+    </script>
   </body>
 </html>
