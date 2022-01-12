@@ -16,6 +16,18 @@
         j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
         f.parentNode.insertBefore(j, f);
       })(window, document, 'script', 'dataLayer', 'GTM-K92RW5D');
+      // Listen for changes in the search box dropdown menu
+      (function() {
+        var selectMenu = document.querySelector('search-box-dropdown > select');
+        var callback = function(event) {
+          var selectedOption = event.target.options[event.target.selectedIndex];
+          window.dataLayer.push({
+            event: 'selectionMade',
+            selectedElement: selectedOption
+          });
+        };
+        selectMenu.addEventListener('change', callback, true);
+      })();
     </script>
     <!-- End Google Tag Manager -->
     <!-- Global site tag (gtag.js) - Google Analytics -->
