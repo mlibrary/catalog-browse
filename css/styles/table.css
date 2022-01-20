@@ -194,8 +194,19 @@ table.browse-table {
 
 .browse-table tbody .vernacular {
   color: var(--search-neutral-500);
+  display: block;
 }
 
-.browse-table tbody dl dd:first-of-type .vernacular {
-  display: block;
+.browse-table tbody .vernacular.pipe {
+  display: inline;
+}
+
+.browse-table tbody .vernacular.pipe:before {
+  background: var(--search-neutral-500);
+  content: '';
+  display: inline-block;
+  height: 1em;
+  margin: 0 var(--space-x-small);
+  vertical-align: middle;
+  width: 1px;
 }
