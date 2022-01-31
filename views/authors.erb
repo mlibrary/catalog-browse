@@ -1,0 +1,19 @@
+<h1>Authors</h1>
+
+<%= erb :'components/pagination', locals: {label: 'Top pagination', list: list} %>
+<ul>
+  <% list.items.each do |result| %>
+    <li>
+    <% if result.has_see_also?  %>
+      <%= result.num_matches %> | Author: <%=result.author%><% if result.heading_link? %> | <a href="<%= result.heading_link%>">Heading Information</a><%end%>
+      <br/> 
+      See also: <%= result.see_also_num_matches %> <a href="<%=result.see_also_url%>"><%= result.see_also_author%></a> <% if result.heading_link? %> <a href="<%= result.heading_link %>">Heading Information</a> <% end %>
+
+    <% else %>
+      <%= result.num_matches %> | Author: <a href="<%=result.url%>"><%=result.author%></a><% if result.heading_link? %> | <a href="<%=result.heading_link%>">Heading Information </a> <%end%>
+    <% end %> 
+      </li>
+   <% end %>
+</ul>
+
+<%= erb :'components/pagination', locals: {label: 'Bottom pagination', list: list} %>
