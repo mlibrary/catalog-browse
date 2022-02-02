@@ -40,10 +40,10 @@ class FakeAuthorList
 end
 class FakeAuthor
   def self.for(data)
-   if data["see_also"].nil?
+    if data["cross_references"].nil? || data["cross_references"].empty?
      FakeAuthor.new(data)
    else
-     FakeAuthorWithSeeAlso.new(data)
+     FakeAuthorWithCrossReferences.new(data)
     end
   end
   def initialize(data)
@@ -68,33 +68,29 @@ class FakeAuthor
   def heading_link
     @data["heading_link"]
   end
-  def has_see_also?
+  def has_cross_references?
     false
   end
 end
-class FakeAuthorWithSeeAlso < FakeAuthor
+class FakeAuthorWithCrossReferences < FakeAuthor
   def url
     ""
   end
   def num_matches
-    ""
+    0 
   end
-  def has_see_also?
+  def has_cross_references?
     true
   end
-  def see_also_url
-    "#"
+  def cross_references
+    @data["cross_references"].map{|x| FakeAuthorCrossReference.new(x) }
   end
-  def see_also_author
-    @data["see_also"]["author"]
+end
+class FakeAuthorCrossReference < FakeAuthor
+  def url
+    ""
   end
-  def see_also_num_matches
-    @data["see_also"]["num_matches"]
-  end
-  def see_also_heading_link?
-    !!@data["see_also"]["heading_link"]
-  end
-  def see_also_heading_link
-    @data["see_also"]["heading_link"]
+  def kind
+    @data["kind"]
   end
 end
