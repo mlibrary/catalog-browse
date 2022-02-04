@@ -1,0 +1,80 @@
+<h1 id="maincontent" tabindex="-1">
+  <% if list.show_table? %>
+    Browse &ldquo;<%= list.original_reference %>&rdquo; in call numbers
+  <% else %>
+    Browse by Call Number
+  <% end %>
+</h1>
+<p>
+  <span class="strong">Browse by call number help:</span> 
+  Search a Library of Congress (LC) or Dewey call number and view an alphabetical list of all call numbers and related titles indexed in the Library catalog. <a href="https://guides.lib.umich.edu/c.php?g=282937">Learn more about call numbers<span class="visually-hidden"> (link points to external site)</span></a>.
+</p>
+<% if list.show_table? %>
+  <%= erb :'components/pagination', locals: {label: 'Top pagination', list: list} %>
+  <table class="browse-table" aria-labelledby="maincontent">
+    <thead>
+      <tr>
+        <th>Call number</th>
+        <th>Item</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% list.items.each do |result| %>
+        <% if result.match_notice? %>
+          <tr class="match-<%= list.num_matches == 0 ? 'none' : 'notice' %>">
+            <td colspan="2">
+              <%= list.match_text %>
+            </td>
+          </tr>
+        <% else %>
+          <tr <% if result.exact_match? %>class="exact-match"<% end %>>
+            <td>
+              <span <% if result.exact_match? %>class="strong"<% end %>>
+                <%= result.callnumber %>
+              </span>
+            </td>
+            <td>
+              <dl>
+                <dt class="visually-hidden">Title:</dt>
+                <dd>
+                  <a href="<%= result.url %>"><%= result.title %></a>
+                  <% if result.vernacular_title %>
+                    <span class="vernacular"><%= result.vernacular_title %></span>
+                  <% end %>
+                </dd>
+                <% if result.author %>
+                  <dt>Main Author:</dt>
+                  <dd>
+                    <%= result.author %>
+                    <% if result.vernacular_author %>
+                      <span class="vernacular pipe"><%= result.vernacular_author %></span>
+                    <% end %>
+                  </dd>
+                <% end %>
+                <% if result.publisher %>
+                  <dt>Published/Created:</dt>
+                  <dd>
+                    <%= result.publisher %>
+                    <% if result.vernacular_publisher %>
+                      <span class="vernacular pipe"><%= result.vernacular_publisher %></span>
+                    <% end %>
+                  </dd>
+                <% end %>
+                <% if result.series %>
+                  <dt>Series:</dt>
+                  <dd>
+                    <%= result.series %>
+                    <% if result.vernacular_series %>
+                      <span class="vernacular pipe"><%= result.vernacular_series %></span>
+                    <% end %>
+                  </dd>
+                <% end %>
+              </dl>
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+  <%= erb :'components/pagination', locals: {label: 'Bottom pagination', list: list} %>
+<% end %>

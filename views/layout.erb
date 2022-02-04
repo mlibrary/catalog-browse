@@ -63,58 +63,8 @@
         <a href="https://apps.lib.umich.edu/my-account/favorites">My Favorites</a>
       </div>
     </m-website-header>
-    <form class="search-box" role="search" method="post" action="<%= ENV.fetch('BASE_URL') %>/search">
-      <div class="viewport-container search-form">
-        <div class="search-box-dropdown">
-          <select aria-label="Search or browse by" autocomplete="off" name="type">
-            <% fields.each do |group| %>
-              <optgroup label="<%=group[:label]%>">
-                <% group[:options].each do |option| %>
-                  <option <%=option[:disabled]%> <%=option[:selected]%> value="<%=option[:value]%>">
-                    <%=option[:label]%>
-                  </option>
-                <% end %>
-              </optgroup>
-            <% end %>
-          </select>
-          <m-icon name="keyboard-arrow-down"></m-icon>
-        </div>
-        <input aria-label="Browse text" <% if list.error? %>aria-invalid="true" aria-describedby="input-message"<% end %> type="text" autocomplete="on" name="query" value="<%= list.original_reference %>">
-        <% if list.error? %>
-          <span class="message message--error" id="input-message" role="alert">
-            <%= list.error_message %>
-          </span>
-        <% end %>
-        <button>
-          <m-icon name="search"></m-icon>
-          <span class="visually-hidden">Search</span>
-        </button>
-      </div>
-      <div class="viewport-container search-tip">
-        <m-icon name="info-outline"></m-icon>
-        <% fields.each do |group| %>
-          <% group[:options].each do |option| %>
-            <p data-option="<%=option[:value]%>" style="display: <%= option[:selected] ? 'initial' : 'none' %>;">
-              <span class="strong"><%=group[:tip]%>:</span>
-              <%=option[:tip]%>
-            </p>
-          <% end %>
-        <% end %>
-      </div>
-    </form>
-    <div class="datastores-nav">
-      <nav class="viewport-container" aria-label="Datastores">
-        <ol>
-          <% datastores.each do |datastore| %>
-            <li>
-              <a href="<%= datastore.href %>" <% if datastore.current? %>aria-current="page"<% end %>>
-                <%= datastore.label %>
-              </a>
-            </li>
-          <% end %>
-        </ol>
-      </nav>
-    </div>
+    <%#= erb :'layout/search_box' %>
+    <%= erb :'layout/datastore_navigation' %>
     <main class="viewport-container">
       <%
         url_params = request.params.map {|key, value| key} 
@@ -124,86 +74,7 @@
           <p class="give-feedback"><span class="strong">Call number browse beta:</span> We're testing a new feature to browse the catalog by call number. Let us know what you think at our <a href="https://umich.qualtrics.com/jfe/form/SV_bCwYIKueEXs8wBf" target="_blank" rel="noopener noreferrer" aria-label="Feedback form - Opens in new window">feedback form <m-icon name="open-in-new"></m-icon></a>.</p>
         </m-callout>
       <% end %>
-      <h1 id="maincontent" tabindex="-1">
-        <% if list.show_table? %>
-          Browse &ldquo;<%= list.original_reference %>&rdquo; in call numbers
-        <% else %>
-          Browse by Call Number
-        <% end %>
-      </h1>
-      <p>
-        <span class="strong">Browse by call number help:</span> 
-        Search a Library of Congress (LC) or Dewey call number and view an alphabetical list of all call numbers and related titles indexed in the Library catalog. <a href="https://guides.lib.umich.edu/c.php?g=282937">Learn more about call numbers<span class="visually-hidden"> (link points to external site)</span></a>.
-      </p>
-      <% if list.show_table? %>
-        <%= erb :'components/pagination', locals: {label: 'Top pagination', list: list} %>
-        <table class="browse-table" aria-labelledby="maincontent">
-          <thead>
-            <tr>
-              <th>Call number</th>
-              <th>Item</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% list.items.each do |result| %>
-              <% if result.match_notice? %>
-                <tr class="match-<%= list.num_matches == 0 ? 'none' : 'notice' %>">
-                  <td colspan="2">
-                    <%= list.match_text %>
-                  </td>
-                </tr>
-              <% else %>
-                <tr <% if result.exact_match? %>class="exact-match"<% end %>>
-                  <td>
-                    <span <% if result.exact_match? %>class="strong"<% end %>>
-                      <%= result.callnumber %>
-                    </span>
-                  </td>
-                  <td>
-                    <dl>
-                      <dt class="visually-hidden">Title:</dt>
-                      <dd>
-                        <a href="<%= result.url %>"><%= result.title %></a>
-                        <% if result.vernacular_title %>
-                          <span class="vernacular"><%= result.vernacular_title %></span>
-                        <% end %>
-                      </dd>
-                      <% if result.author %>
-                        <dt>Main Author:</dt>
-                        <dd>
-                          <%= result.author %>
-                          <% if result.vernacular_author %>
-                            <span class="vernacular pipe"><%= result.vernacular_author %></span>
-                          <% end %>
-                        </dd>
-                      <% end %>
-                      <% if result.publisher %>
-                        <dt>Published/Created:</dt>
-                        <dd>
-                          <%= result.publisher %>
-                          <% if result.vernacular_publisher %>
-                            <span class="vernacular pipe"><%= result.vernacular_publisher %></span>
-                          <% end %>
-                        </dd>
-                      <% end %>
-                      <% if result.series %>
-                        <dt>Series:</dt>
-                        <dd>
-                          <%= result.series %>
-                          <% if result.vernacular_series %>
-                            <span class="vernacular pipe"><%= result.vernacular_series %></span>
-                          <% end %>
-                        </dd>
-                      <% end %>
-                    </dl>
-                  </td>
-                </tr>
-              <% end %>
-            <% end %>
-          </tbody>
-        </table>
-        <%= erb :'components/pagination', locals: {label: 'Bottom pagination', list: list} %>
-      <% end %>
+      <%= yield %>
       <section class="give-feedback">
         <a href="https://umich.qualtrics.com/jfe/form/SV_bCwYIKueEXs8wBf" target="_blank" rel="noopener noreferrer" aria-label="Give feedback about this page - Opens in new window">Give feedback about this page <m-icon name="open-in-new"></m-icon></a>
       </section>
