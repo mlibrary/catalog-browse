@@ -1,19 +1,66 @@
-<h1>Authors</h1>
-
-<%= erb :'components/pagination', locals: {label: 'Top pagination', list: list} %>
-<ul>
-  <% list.items.each do |result| %>
-    <li>
-      <%= result.num_matches %> | Author: <%=result.author%><% if result.heading_link? %> | <a href="<%= result.heading_link%>">Heading Information</a><%end%>
-      <% if result.has_cross_references?  %>
-        <br/> 
-        <% result.cross_references.each do | cr | %>
-          <% if cr.kind == 'see' %> See: <% end %>
-          <a href="<%=cr.url%>"><%= cr.author%></a> (<%= cr.num_matches %>) <% if cr.heading_link? %> <a href="<%= cr.heading_link %>">Heading Information</a> <% end %>
+<h1 id="maincontent" tabindex="-1">
+  <% if list.show_table? %>
+    Browse &ldquo;<%#= list.original_reference %>Tate, James, 1943-2015&rdquo; in authors
+  <% else %>
+    Browse by Author
+  <% end %>
+</h1>
+<p>
+  <span class="strong">Browse by author help:</span> 
+  Search an author (last name, first name) and view an alphabetical list of all authors headings (personal names and corporate names) and variations of those names indexed in the Library catalog.
+</p>
+<% if list.show_table? %>
+  <%= erb :'components/pagination', locals: { label: 'Top pagination', list: list } %>
+  <table class="browse-table" aria-labelledby="maincontent">
+    <thead>
+      <tr>
+        <th>Titles</th>
+        <th>Author</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% list.items.each do |result| %>
+        <% if result.match_notice? %>
+          <tr class="match-<%= list.num_matches == 0 ? 'none' : 'notice' %>">
+            <td colspan="2">
+              <%= list.match_text %>
+            </td>
+          </tr>
+        <% else %>
+          <tr <% if result.exact_match? %>class="exact-match"<% end %>>
+            <td>
+              <%= result.num_matches %> Records
+            </td>
+            <td>
+              <dl>
+                <dt class="visually-hidden">Author:</dt>
+                <dd>
+                  <span <% if result.exact_match? %>class="strong"<% end %>>
+                    <%=result.author%>
+                  </span>
+                  <% if result.heading_link? %>
+                    <a href="<%= result.heading_link%>" class="vernacular pipe">View Heading Information</a>
+                  <% end %>
+                </dd>
+                <% if result.has_cross_references? %>
+                  <% result.cross_references.each do | cr | %>
+                    <% if cr.kind == 'see' %>
+                      <dt>See:</dt>
+                    <% end %>
+                    <dd>
+                      <a href="<%=cr.url%>"><%= cr.author%></a> (<%= cr.num_matches %>)
+                      <% if cr.heading_link? %>
+                        <a href="<%= cr.heading_link %>" class="vernacular pipe">View Heading Information</a>
+                      <% end %>
+                    </dd>
+                  <% end %>
+                <% end %>
+              </dl>
+            </td>
+          </tr>
         <% end %>
       <% end %>
-    </li>
-  <% end %>
-</ul>
-
-<%= erb :'components/pagination', locals: {label: 'Bottom pagination', list: list} %>
+    </tbody>
+  </table>
+  <%= erb :'components/pagination', locals: { label: 'Bottom pagination', list: list } %>
+<% end %>
