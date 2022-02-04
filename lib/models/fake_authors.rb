@@ -1,10 +1,10 @@
-require 'yaml'
-require 'byebug'
+require "yaml"
+require "byebug"
 class FakeAuthorList
   def initialize
     #load up items from a yaml file.
     
-    @items = YAML.load_file('/app/lib/models/fake_authors.yml').map do |row| 
+    @items = YAML.load_file("/app/lib/models/fake_authors.yml").map do |row| 
       FakeAuthor.for(row) 
     end
   end
@@ -32,10 +32,13 @@ class FakeAuthorList
     true
   end
   def next_reference_id
-    ''
+    ""
   end
   def previous_reference_id
-    ''
+    ""
+  end
+  def original_reference
+    "Tate, James, 1943-2015"
   end
 end
 class FakeAuthor
