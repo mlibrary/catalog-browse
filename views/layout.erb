@@ -63,7 +63,7 @@
         <a href="https://apps.lib.umich.edu/my-account/favorites">My Favorites</a>
       </div>
     </m-website-header>
-    <%#= erb :'layout/search_box' %>
+    <%= erb :'layout/search_box', locals: {list: list} %>
     <%= erb :'layout/datastore_navigation' %>
     <main class="viewport-container">
       <%
