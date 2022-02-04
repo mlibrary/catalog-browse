@@ -1,0 +1,15 @@
+<% datastores = Datastores.new(YAML.load_file("./config/datastores.yml")) %>
+
+<div class="datastores-nav">
+  <nav class="viewport-container" aria-label="Datastores">
+    <ol>
+      <% datastores.each do |datastore| %>
+        <li>
+          <a href="<%= datastore.href %>" <% if datastore.current? %>aria-current="page"<% end %>>
+            <%= datastore.label %>
+          </a>
+        </li>
+      <% end %>
+    </ol>
+  </nav>
+</div>
