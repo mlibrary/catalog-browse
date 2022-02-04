@@ -9,6 +9,7 @@
  * -----------------
  * 1.0 - Anchors
  *   1.1 - Pseudo Classes
+ * 2.0 - Vernacular
  */
 
 
@@ -26,4 +27,14 @@ a {
 a:hover,
 a:focus {
   text-decoration-thickness: var(--space-xxx-small);
+}
+
+
+
+/************************/
+/*** 2.0 - Vernacular ***/
+/************************/
+
+.browse-table tbody a.vernacular {
+  font-weight: inherit;
 }
