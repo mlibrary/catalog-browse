@@ -1,16 +1,4 @@
-<h1 id="maincontent" tabindex="-1">
-  <% if list.show_table? %>
-    Browse &ldquo;<%= list.original_reference %>&rdquo; in authors
-  <% else %>
-    Browse by Author
-  <% end %>
-</h1>
-<p>
-  <span class="strong">Browse by author help:</span> 
-  Search an author (last name, first name) and view an alphabetical list of all authors headings (personal names and corporate names) and variations of those names indexed in the Library catalog.
-</p>
 <% if list.show_table? %>
-  <%= erb :'components/pagination', locals: { label: 'Top pagination', list: list } %>
   <table class="browse-table" aria-labelledby="maincontent">
     <thead>
       <tr>
@@ -62,5 +50,4 @@
       <% end %>
     </tbody>
   </table>
-  <%= erb :'components/pagination', locals: { label: 'Bottom pagination', list: list } %>
 <% end %>

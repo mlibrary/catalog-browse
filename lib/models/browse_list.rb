@@ -76,6 +76,16 @@ class BrowseList
     @exact_matches = exact_matches
     @banner_reference = banner_reference
   end
+  def title
+    if self.show_table?
+      "Browse &ldquo;#{ @original_reference }&rdquo; in call numbers"
+    else
+      "Browse by Call Number"
+    end
+  end
+  def help_text
+    '<span class="strong">Browse by call number help:</span> Search a Library of Congress (LC) or Dewey call number and view an alphabetical list of all call numbers and related titles indexed in the Library catalog. <a href="https://guides.lib.umich.edu/c.php?g=282937">Learn more about call numbers<span class="visually-hidden"> (link points to external site)</span></a>.'
+  end
   def show_table?
     true
   end

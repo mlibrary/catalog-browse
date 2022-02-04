@@ -40,6 +40,16 @@ class FakeAuthorList
   def original_reference
     "Tate, James, 1943-2015"
   end
+  def title
+    if self.show_table?
+      "Browse &ldquo;#{ self.original_reference }&rdquo; in authors"
+    else
+      "Browse by Author"
+    end
+  end
+  def help_text
+    '<span class="strong">Browse by author help:</span> Search an author (last name, first name) and view an alphabetical list of all authors headings (personal names and corporate names) and variations of those names indexed in the Library catalog.'
+  end
 end
 class FakeAuthor
   def self.for(data)
