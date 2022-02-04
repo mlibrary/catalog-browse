@@ -63,7 +63,7 @@
         <a href="https://apps.lib.umich.edu/my-account/favorites">My Favorites</a>
       </div>
     </m-website-header>
-    <%= erb :'layout/search_box', locals: {list: list} %>
+    <%= erb :'layout/search_box', locals: { list: list } %>
     <%= erb :'layout/datastore_navigation' %>
     <main class="viewport-container">
       <%
@@ -74,7 +74,15 @@
           <p class="give-feedback"><span class="strong">Call number browse beta:</span> We're testing a new feature to browse the catalog by call number. Let us know what you think at our <a href="https://umich.qualtrics.com/jfe/form/SV_bCwYIKueEXs8wBf" target="_blank" rel="noopener noreferrer" aria-label="Feedback form - Opens in new window">feedback form <m-icon name="open-in-new"></m-icon></a>.</p>
         </m-callout>
       <% end %>
+      <h1 id="maincontent" tabindex="-1">
+        <%= list.title %>
+      </h1>
+      <% if list.help_text %>
+        <p><%= list.help_text %></p>
+      <% end %>
+      <%= erb :'components/pagination', locals: { label: 'Top pagination', list: list } %>
       <%= yield %>
+      <%= erb :'components/pagination', locals: { label: 'Bottom pagination', list: list } %>
       <section class="give-feedback">
         <a href="https://umich.qualtrics.com/jfe/form/SV_bCwYIKueEXs8wBf" target="_blank" rel="noopener noreferrer" aria-label="Give feedback about this page - Opens in new window">Give feedback about this page <m-icon name="open-in-new"></m-icon></a>
       </section>
