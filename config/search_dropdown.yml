@@ -35,7 +35,6 @@
   - :label: Browse by call number (LC and Dewey)
     :value: browse_by_callnumber
     :tip: Browse by Library of Congress (LC) or Dewey call number, sorted alphanumerically (e.g. RC662.4 .H38 2016; QH 105, 880 J375re). <a href="https://www.loc.gov/catdir/cpso/lcco/">Learn about the meaning of call numbers<span class="visually-hidden"> (link points to external site)</span></a>.
-    :selected: selected
   - :label: Browse by author
     :value: browse_by_author
     :tip: Browse an alphabetical list of authors. Authors can be people (put last names first), organizations, or events (e.g. Kingston, Maxine Hong; United Nations Development Programme; Pong, Chun-ho).
