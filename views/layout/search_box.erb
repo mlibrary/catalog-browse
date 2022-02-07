@@ -1,4 +1,7 @@
-<% fields = YAML.load_file("./config/search_dropdown.yml") %>
+<%
+  fields = YAML.load_file("./config/search_dropdown.yml")
+  active_browse_option = 'browse_by_' + request.path_info[1..-1]
+%>
 
 <form class="search-box" role="search" method="post" action="<%= ENV.fetch('BASE_URL') %>/search">
   <div class="viewport-container search-form">
@@ -7,7 +10,7 @@
         <% fields.each do |group| %>
           <optgroup label="<%=group[:label]%>">
             <% group[:options].each do |option| %>
-              <option <%=option[:disabled]%> <%=option[:selected]%> value="<%=option[:value]%>">
+              <option <%=option[:disabled]%> <% if option[:value] == active_browse_option %>selected<% end %> value="<%=option[:value]%>">
                 <%=option[:label]%>
               </option>
             <% end %>
@@ -31,7 +34,7 @@
     <m-icon name="info-outline"></m-icon>
     <% fields.each do |group| %>
       <% group[:options].each do |option| %>
-        <p data-option="<%=option[:value]%>" style="display: <%= option[:selected] ? 'initial' : 'none' %>;">
+        <p data-option="<%=option[:value]%>" style="display: <%= option[:value] == active_browse_option ? 'initial' : 'none' %>;">
           <span class="strong"><%=group[:tip]%>:</span>
           <%=option[:tip]%>
         </p>
