@@ -2,7 +2,7 @@
   <table class="browse-table" aria-labelledby="maincontent">
     <thead>
       <tr>
-        <th>Titles</th>
+        <th>Records</th>
         <th>Author</th>
       </tr>
     </thead>
@@ -17,7 +17,7 @@
         <% else %>
           <tr <% if result.exact_match? %>class="exact-match"<% end %>>
             <td>
-              <%= result.num_matches %> Records
+              <%= result.record_text %>
             </td>
             <td>
               <dl>
@@ -41,7 +41,7 @@
                       <% if cr.num_matches > 0 %><a href="<%= cr.url%>"><% end %>
                         <%=cr.author%>
                       <% if cr.num_matches > 0 %>
-                        </a> (<%= cr.num_matches %> records)
+                        </a> (<%= cr.record_text %>)
                       <% end %>
                       <% if cr.heading_link? %>
                         <a href="<%= cr.heading_link %>" class="vernacular pipe">View Heading Information</a>
