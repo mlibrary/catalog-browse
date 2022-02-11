@@ -23,11 +23,11 @@
               <dl>
                 <dt class="visually-hidden">Author:</dt>
                 <dd>
-                  <span <% if result.exact_match? %>class="strong"<% end %>>
-                    <% if !result.url.nil? %><a href="<%= result.url%>"><% end %>
+                  <% if result.num_matches > 0 %><a href="<%= result.url%>"><% end %>
+                    <span <% if result.exact_match? %>class="strong"<% end %>>
                       <%=result.author%>
-                    <% if !result.url.nil? %></a><% end %>
-                  </span>
+                    </span>
+                  <% if result.num_matches > 0 %></a><% end %>
                   <% if result.heading_link? %>
                     <a href="<%= result.heading_link%>" class="vernacular pipe">View Heading Information</a>
                   <% end %>
@@ -38,10 +38,11 @@
                       <dt>See:</dt>
                     <% end %>
                     <dd>
-                      <% if !cr.url.nil? %><a href="<%= cr.url%>"><% end %>
+                      <% if cr.num_matches > 0 %><a href="<%= cr.url%>"><% end %>
                         <%=cr.author%>
-                      <% if !cr.url.nil? %></a><% end %>
-                      (<%= cr.num_matches %>)
+                      <% if cr.num_matches > 0 %>
+                        </a> (<%= cr.num_matches %> records)
+                      <% end %>
                       <% if cr.heading_link? %>
                         <a href="<%= cr.heading_link %>" class="vernacular pipe">View Heading Information</a>
                       <% end %>

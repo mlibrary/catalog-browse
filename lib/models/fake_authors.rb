@@ -42,7 +42,7 @@ class FakeAuthorList
   end
   def title
     if self.show_table?
-      "Browse &ldquo;#{ self.original_reference }&rdquo; in authors"
+      "Browse &ldquo;#{self.original_reference}&rdquo; in authors"
     else
       "Browse by Author"
     end
@@ -73,7 +73,7 @@ class FakeAuthor
     @data["num_matches"]
   end
   def url
-    #link to catalog search results
+    "#{ENV.fetch("SEARCH_URL")}/catalog?query=author:(#{self.author})"
   end
   def heading_link?
     !!@data["heading_link"]
