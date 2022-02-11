@@ -72,6 +72,9 @@ class FakeAuthor
   def num_matches
     @data["num_matches"]
   end
+  def record_text
+    "#{self.num_matches} #{self.num_matches == 1 ? "record" : "records"}"
+  end
   def url
     "#{ENV.fetch("SEARCH_URL")}/catalog?query=author:(#{self.author})"
   end
