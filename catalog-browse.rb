@@ -8,9 +8,11 @@ require_relative "lib/models/browse_item"
 require_relative "lib/models/search_dropdown"
 require_relative "lib/models/datastores"
 
-get '/author' do
-  list = FakeAuthorList.new
-  erb :authors, :locals => { :list => list }
+if ENV.fetch('AUTHOR_ON') == 'true'
+  get '/author' do
+    list = FakeAuthorList.new
+    erb :authors, :locals => { :list => list }
+  end
 end
 get '/callnumber' do
   callnumber = params[:query]
