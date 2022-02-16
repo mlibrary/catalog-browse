@@ -23,6 +23,7 @@
   "homepage": "https://github.com/mlibrary/catalog-browse#readme",
   "devDependencies": {
     "chokidar-cli": "^3.0.0",
+    "cssnano": "^5.0.16",
     "postcss": "^8.4.5",
     "postcss-cli": "^9.1.0",
     "postcss-import": "^14.0.2"

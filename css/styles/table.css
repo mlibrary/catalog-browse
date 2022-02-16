@@ -192,6 +192,10 @@ table.browse-table {
   margin: 0;
 }
 
+.browse-table tbody dl dt.visually-hidden:not(:only-of-type) + dd {
+  margin-bottom: var(--space-x-small);
+}
+
 .browse-table tbody .vernacular {
   color: var(--search-neutral-500);
   display: block;

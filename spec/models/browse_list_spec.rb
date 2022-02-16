@@ -158,6 +158,11 @@ describe BrowseList::Empty do
       expect(subject.show_table?).to eq(false)
     end
   end
+  context "#title" do
+    it "returns default title" do
+      expect(subject.title).to eq("Browse by Call Number")
+    end
+  end
 end
 describe BrowseList::Error do
   before(:each) do
@@ -176,6 +181,31 @@ describe BrowseList::Error do
   context "#error_message" do
     it "returns an error message" do
       expect(subject.error_message).to eq("<span class=\"strong\">{:original_reference=>\"OSU\"}</span> is not a valid call number query. Please try a using a valid Library of Congress call number (enter one or two letters and a number) or valid Dewey call number (start with three numbers).")
+    end
+  end
+end
+describe BrowseList do
+  before(:each) do
+    @params = {
+      index_response: JSON.parse(fixture('callnumbers_results.json')),
+      catalog_response: JSON.parse(fixture('biblio_results.json')),
+      num_rows_to_display: 3,
+      original_reference: 'Z 253 .U6 1963',
+      exact_matches: [],
+      banner_reference: 'banner_reference'
+    }
+  end
+  subject do
+    described_class.new(**@params)
+  end
+  context "#title" do
+    it "returns title with original reference" do
+      expect(subject.title).to eq("Browse &ldquo;Z 253 .U6 1963&rdquo; in call numbers")
+    end
+  end
+  context "#help_text" do
+    it "returns help text" do
+      expect(subject.help_text).to eq("<span class=\"strong\">Browse by call number help:</span> Search a Library of Congress (LC) or Dewey call number and view an alphabetical list of all call numbers and related titles indexed in the Library catalog. <a href=\"https://guides.lib.umich.edu/c.php?g=282937\">Learn more about call numbers<span class=\"visually-hidden\"> (link points to external site)</span></a>.")
     end
   end
 end

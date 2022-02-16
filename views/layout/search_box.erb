@@ -1,0 +1,44 @@
+<%
+  fields = YAML.load_file("./config/search_dropdown.yml")
+  active_browse_option = 'browse_by_' + request.path_info[1..-1]
+%>
+
+<form class="search-box" role="search" method="post" action="<%= ENV.fetch('BASE_URL') %>/search">
+  <div class="viewport-container search-form">
+    <div class="search-box-dropdown">
+      <select aria-label="Search or browse by" autocomplete="off" name="type">
+        <% fields.each do |group| %>
+          <optgroup label="<%=group[:label]%>">
+            <% group[:options].each do |option| %>
+              <option <%=option[:disabled]%> <% if option[:value] == active_browse_option %>selected<% end %> value="<%=option[:value]%>">
+                <%=option[:label]%>
+              </option>
+            <% end %>
+          </optgroup>
+        <% end %>
+      </select>
+      <m-icon name="keyboard-arrow-down"></m-icon>
+    </div>
+    <input aria-label="Browse text" <% if list.error? %>aria-invalid="true" aria-describedby="input-message"<% end %> type="text" autocomplete="on" name="query" value="<%= list.original_reference %>">
+    <% if list.error? %>
+      <span class="message message--error" id="input-message" role="alert">
+        <%= list.error_message %>
+      </span>
+    <% end %>
+    <button>
+      <m-icon name="search"></m-icon>
+      <span class="visually-hidden">Search</span>
+    </button>
+  </div>
+  <div class="viewport-container search-tip">
+    <m-icon name="info-outline"></m-icon>
+    <% fields.each do |group| %>
+      <% group[:options].each do |option| %>
+        <p data-option="<%=option[:value]%>" style="display: <%= option[:value] == active_browse_option ? 'initial' : 'none' %>;">
+          <span class="strong"><%=group[:tip]%>:</span>
+          <%=option[:tip]%>
+        </p>
+      <% end %>
+    <% end %>
+  </div>
+</form>
