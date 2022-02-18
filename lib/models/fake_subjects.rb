@@ -38,7 +38,7 @@ class FakeSubjectList
     ""
   end
   def original_reference
-    "Tate, James, 1943-2015"
+    "Physics"
   end
   def title
     if self.show_table?
@@ -48,7 +48,7 @@ class FakeSubjectList
     end
   end
   def help_text
-    '<span class="strong">Browse by subject help:</span> Search subject and view an alphabetical list of all subjects (Library of Congress Subject Headings (LCSH) (left-anchored) indexed in the Library catalog.'
+    '<span class="strong">Browse by subject help:</span> Search within an alphabetical list of all <a href="https://id.loc.gov/authorities/subjects.html">Library of Congress Subject Headings</a> (LCSH) indexed in the Library catalog.'
   end
 end
 class FakeSubject
@@ -89,24 +89,18 @@ class FakeSubject
   end
 end
 class FakeSubjectWithCrossReferences < FakeSubject
-  def url
-    ""
-  end
-  def num_matches
-    0 
-  end
   def has_cross_references?
     true
   end
   def cross_references
-    @data["cross_references"].map{|x| FakeSubjectCrossReference.new(x) }
+    @data["cross_references"].map{|x| FakeSubjectCrossReference.new(x)}
   end
 end
 class FakeSubjectCrossReference < FakeSubject
-  def url
-    ""
-  end
   def kind
     @data["kind"]
+  end
+  def terms
+    ["beep", "boop"]
   end
 end

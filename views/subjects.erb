@@ -23,30 +23,44 @@
               <dl>
                 <dt class="visually-hidden">Subject:</dt>
                 <dd>
-                  <% if result.num_matches > 0 %><a href="<%= result.url%>"><% end %>
+                  <a href="<%= result.url%>">
                     <span <% if result.exact_match? %>class="strong"<% end %>>
                       <%=result.subject%>
                     </span>
-                  <% if result.num_matches > 0 %></a><% end %>
+                  </a>
                   <% if result.heading_link? %>
                     <a href="<%= result.heading_link%>" class="vernacular pipe">View Heading Information</a>
                   <% end %>
                 </dd>
                 <% if result.has_cross_references? %>
                   <% result.cross_references.each do | cr | %>
-                    <% if cr.kind == 'see' %>
-                      <dt>See:</dt>
-                    <% end %>
-                    <dd>
-                      <% if cr.num_matches > 0 %><a href="<%= cr.url%>"><% end %>
-                        <%=cr.subject%>
-                      <% if cr.num_matches > 0 %>
+                    <% if cr.kind == 'use' %>
+                      <dt>Use instead of:</dt>
+                      <dd>
+                        <a href="<%= cr.url%>">
+                          <%=cr.subject%>
                         </a> (<%= cr.record_text %>)
-                      <% end %>
-                      <% if cr.heading_link? %>
-                        <a href="<%= cr.heading_link %>" class="vernacular pipe">View Heading Information</a>
-                      <% end %>
-                    </dd>
+                        <% if cr.heading_link? %>
+                          <a href="<%= cr.heading_link %>" class="vernacular pipe">View Heading Information</a>
+                        <% end %>
+                      </dd>
+                    <% end %>
+                    <% if cr.kind == 'term' %>
+                      <dt>Narrower term:</dt>
+                      <dd>
+                        <% cr.terms.each do | term | %>
+                          <%= term %>
+                          <!--
+                          <a href="<%#= term.url%>">
+                            <%#=term.subject%>
+                          </a> (<%#= term.record_text %>)
+                          <%# if term.heading_link? %>
+                            <a href="<%#= term.heading_link %>" class="vernacular pipe">View Heading Information</a>
+                          <%# end %>
+                          -->
+                        <% end %>
+                      </dd>
+                    <% end %>
                   <% end %>
                 <% end %>
               </dl>

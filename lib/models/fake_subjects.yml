@@ -1,39 +1,40 @@
-- subject: 'Tate, James, 1771-1843'
-  num_matches: 4
-- subject: 'Tate, James, 1943- -'
-  num_matches: nil
-  heading_link: 'https://lccn.loc.gov/n78094025'
+- subject: 'Physicochemical Phenomena -- Periodicals'
+  num_matches: 2
+- subject: 'Physicochemical Processes'
+  num_matches: 5
+- subject: 'Physics'
+  num_matches: 2
+- subject: 'Physics'
+  num_matches: 478
+- subject: 'Physics'
+  num_matches: 5000
+  heading_link: 'https://id.loc.gov/authorities/subjects/sh85101653.html'
   cross_references:
-  - kind: 'see'
-    subject: 'Tate, James, 1943-2015'
-    num_matches: 51
-- subject: 'Tate, James, 1943-2015'
-  num_matches: 51
-  heading_link: 'https://lccn.loc.gov/n78094025'
-- subject: 'Tate, James, A.M'
+  - kind: 'use'
+    subject: 'Natural philosophy'
+    num_matches: 3
+  - kind: 'term'
+    terms:
+    - subject: 'Electricity'
+      num_matches: 5000
+    - subject: 'Nanostructures'
+      num_matches: 5000
+- subject: 'Physics -- Abbreviations'
+  num_matches: 2
+- subject: 'Physics -- Abbreviations -- Dictionaries'
   num_matches: 1
-- subject: 'Tate, James, active 1761 -'
-  num_matches: nil
-  heading_link: 'https://lccn.loc.gov/nr97005154'
-  cross_references: 
-  - kind: 'see'
-    subject: 'Tait, James'
-    num_matches: 4
-- subject: 'Tate, James, O'
+- subject: 'Physics -- Abstracting and indexing -- Periodicals'
+  num_matches: 2
+- subject: 'Physics -- Abstracts'
+  num_matches: 9
+- subject: 'Physics -- Abstracts -- Periodicals'
+  num_matches: 12
+  heading_link: 'https://id.loc.gov/authorities/subjects/sh2010106344.html'
+- subject: 'Physics -- Acronyms -- Dictionaries'
   num_matches: 1
-- subject: 'Tate, James, P'
+- subject: 'Physics -- Africa -- Periodicals'
   num_matches: 1
-- subject: 'Tate, James, P'
-  num_matches: 3
-- subject: 'Tate, James William, 1875-1922 -'
-  num_matches: nil
-  heading_link: 'https://lccn.loc.gov/n50008218'
-  cross_references: 
-  - kind: 'see'
-    subject: 'Tate, Jas. W. (James William), 1875-1922'
-    num_matches: 4
-    heading_link: 'https://lccn.loc.gov/n50008218'
-- subject: 'Tate, Jamey'
+- subject: 'Physics and chemistry -- Dictionaries -- Japanese'
   num_matches: 1
-- subject: 'Tate, Janice'
-  num_matches: 1
+- subject: 'Physics and Mathematics'
+  num_matches: 34
