@@ -3,6 +3,7 @@ require "byebug"
 require "yaml"
 require_relative "lib/utilities/solr_client"
 require_relative "lib/models/fake_authors"
+require_relative "lib/models/fake_subjects"
 require_relative "lib/models/browse_list"
 require_relative "lib/models/browse_item"
 require_relative "lib/models/search_dropdown"
@@ -12,6 +13,13 @@ if ENV.fetch('AUTHOR_ON') == 'true'
   get '/author' do
     list = FakeAuthorList.new
     erb :authors, :locals => { :list => list }
+  end
+end
+
+if ENV.fetch('SUBJECT_ON') == 'true'
+  get '/subject' do
+    list = FakeSubjectList.new
+    erb :subjects, :locals => { :list => list }
   end
 end
 get '/callnumber' do

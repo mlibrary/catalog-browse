@@ -1,0 +1,39 @@
+- subject: 'Tate, James, 1771-1843'
+  num_matches: 4
+- subject: 'Tate, James, 1943- -'
+  num_matches: nil
+  heading_link: 'https://lccn.loc.gov/n78094025'
+  cross_references:
+  - kind: 'see'
+    subject: 'Tate, James, 1943-2015'
+    num_matches: 51
+- subject: 'Tate, James, 1943-2015'
+  num_matches: 51
+  heading_link: 'https://lccn.loc.gov/n78094025'
+- subject: 'Tate, James, A.M'
+  num_matches: 1
+- subject: 'Tate, James, active 1761 -'
+  num_matches: nil
+  heading_link: 'https://lccn.loc.gov/nr97005154'
+  cross_references: 
+  - kind: 'see'
+    subject: 'Tait, James'
+    num_matches: 4
+- subject: 'Tate, James, O'
+  num_matches: 1
+- subject: 'Tate, James, P'
+  num_matches: 1
+- subject: 'Tate, James, P'
+  num_matches: 3
+- subject: 'Tate, James William, 1875-1922 -'
+  num_matches: nil
+  heading_link: 'https://lccn.loc.gov/n50008218'
+  cross_references: 
+  - kind: 'see'
+    subject: 'Tate, Jas. W. (James William), 1875-1922'
+    num_matches: 4
+    heading_link: 'https://lccn.loc.gov/n50008218'
+- subject: 'Tate, Jamey'
+  num_matches: 1
+- subject: 'Tate, Janice'
+  num_matches: 1
