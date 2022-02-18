@@ -37,27 +37,19 @@
                     <% if cr.kind == 'use' %>
                       <dt>Use instead of:</dt>
                       <dd>
-                        <a href="<%= cr.url%>">
-                          <%=cr.subject%>
-                        </a> (<%= cr.record_text %>)
+                        <a href="<%= cr.url%>"><%=cr.subject%></a>
+                        (<%= cr.record_text %>)
                         <% if cr.heading_link? %>
                           <a href="<%= cr.heading_link %>" class="vernacular pipe">View Heading Information</a>
                         <% end %>
                       </dd>
                     <% end %>
-                    <% if cr.kind == 'term' %>
+                    <% if cr.has_terms? %>
                       <dt>Narrower term:</dt>
                       <dd>
-                        <% cr.terms.each do | term | %>
-                          <%= term %>
-                          <!--
-                          <a href="<%#= term.url%>">
-                            <%#=term.subject%>
-                          </a> (<%#= term.record_text %>)
-                          <%# if term.heading_link? %>
-                            <a href="<%#= term.heading_link %>" class="vernacular pipe">View Heading Information</a>
-                          <%# end %>
-                          -->
+                        <% cr.terms.each_with_index do | term, index | %>
+                          <a href="<%= term.url%>"><%=term.subject%></a>
+                          (<%= term.record_text %>)<% if !cr.last_term?(index)%>, <% end %>
                         <% end %>
                       </dd>
                     <% end %>

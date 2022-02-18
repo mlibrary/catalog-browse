@@ -101,6 +101,15 @@ class FakeSubjectCrossReference < FakeSubject
     @data["kind"]
   end
   def terms
-    ["beep", "boop"]
+    @data["terms"].map{|x| FakeSubjectTerm.new(x)}
   end
+  def has_terms?
+    self.kind == "term" && !self.terms.nil?
+  end
+  def last_term?(index)
+    self.terms.length - 1 == index
+  end
+end
+class FakeSubjectTerm < FakeSubject
+  #
 end
