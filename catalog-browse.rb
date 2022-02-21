@@ -13,7 +13,7 @@ require_relative "lib/models/datastores"
 if ENV.fetch("AUTHOR_ON") == "true"
   get "/author" do
     list = FakeAuthorList.new
-    erb :'browse', :locals => { :option => 'author', :list => list, :list => list, :title => list.title }
+    erb :browse, :locals => { :option => 'author', :list => list, :list => list, :title => list.title }
   end
 end
 
@@ -21,7 +21,7 @@ if ENV.fetch("SUBJECT_ON") == "true"
   namespace "/subject" do
     get "" do
       list = FakeSubjectList.new
-      erb :'browse', :locals => { :option => 'subject', :list => list, :title => list.title }
+      erb :browse, :locals => { :option => 'subject', :list => list, :title => list.title }
     end
   end
 end
@@ -33,7 +33,7 @@ get "/callnumber" do
   rescue
     list = BrowseList::Error.new(reference_id)
   end
-  erb :'browse', :locals => { :option => 'callnumber', :list => list, :title => list.title }
+  erb :browse, :locals => { :option => 'callnumber', :list => list, :title => list.title }
 end
 post "/search" do
   redirect SearchDropdown.for(type: params["type"], query: params["query"]).url
