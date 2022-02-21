@@ -75,14 +75,9 @@
         </m-callout>
       <% end %>
       <h1 id="maincontent" tabindex="-1">
-        <%= list.title %>
+        <%= title %>
       </h1>
-      <% if list.help_text %>
-        <p><%= list.help_text %></p>
-      <% end %>
-      <%= erb :'components/pagination', locals: { label: 'Top pagination', list: list } %>
       <%= yield %>
-      <%= erb :'components/pagination', locals: { label: 'Bottom pagination', list: list } %>
       <section class="give-feedback">
         <a href="https://umich.qualtrics.com/jfe/form/SV_bCwYIKueEXs8wBf" target="_blank" rel="noopener noreferrer" aria-label="Give feedback about this page - Opens in new window">Give feedback about this page <m-icon name="open-in-new"></m-icon></a>
       </section>
