@@ -19,9 +19,12 @@ end
 
 if ENV.fetch("SUBJECT_ON") == "true"
   namespace "/subject" do
+    list = FakeSubjectList.new
     get "" do
-      list = FakeSubjectList.new
       erb :browse, :locals => { :option => 'subject', :list => list, :title => list.title }
+    end
+    get "/heading-information" do
+      erb :'subject/heading-information', :locals => { :list => list, :title => "&ldquo;#{params[:query]}&rdquo; subject heading information" }
     end
   end
 end

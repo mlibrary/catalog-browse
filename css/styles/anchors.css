@@ -9,7 +9,8 @@
  * -----------------
  * 1.0 - Anchors
  *   1.1 - Pseudo Classes
- * 2.0 - Vernacular
+ * 2.0 - Definition List
+ *   2.1 - Vernacular
  */
 
 
@@ -31,10 +32,17 @@ a:focus {
 
 
 
-/************************/
-/*** 2.0 - Vernacular ***/
-/************************/
+/*****************************/
+/*** 2.0 - Definition List ***/
+/*****************************/
 
-.browse-table tbody a.vernacular {
+dl dd a {
+  font-weight: var(--semibold);
+}
+
+/*** 2.1 - Vernacular ***/
+
+dl dd a.vernacular,
+dl dd .vernacular a {
   font-weight: inherit;
 }

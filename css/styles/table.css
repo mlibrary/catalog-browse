@@ -12,7 +12,6 @@
  *   2.1 - Cells
  * 3.0 - TBody
  *   3.1 - Cells
- *   3.2 - Data
  */
 
 
@@ -173,44 +172,4 @@ table.browse-table {
 
 .browse-table tbody td > * {
   margin: 0;
-}
-
-.browse-table tbody td a {
-  font-weight: var(--semibold);
-}
-
-/*** 3.2 - Data ***/
-
-.browse-table tbody dl dt {
-  clear: left;
-  float: left;
-  font-weight: var(--semibold);
-  margin-right: var(--space-x-small);
-}
-
-.browse-table tbody dl dd {
-  margin: 0;
-}
-
-.browse-table tbody dl dt.visually-hidden:not(:only-of-type) + dd {
-  margin-bottom: var(--space-x-small);
-}
-
-.browse-table tbody .vernacular {
-  color: var(--search-neutral-500);
-  display: block;
-}
-
-.browse-table tbody .vernacular.pipe {
-  display: inline;
-}
-
-.browse-table tbody .vernacular.pipe:before {
-  background: var(--search-neutral-500);
-  content: '';
-  display: inline-block;
-  height: 1em;
-  margin: 0 var(--space-x-small);
-  vertical-align: middle;
-  width: 1px;
 }

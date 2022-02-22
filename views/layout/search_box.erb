@@ -1,6 +1,10 @@
 <%
   fields = YAML.load_file("./config/search_dropdown.yml")
-  active_browse_option = 'browse_by_' + request.path_info[1..-1]
+  split_path = request.path_info.split("/")
+  if (split_path.last == "heading-information")
+    split_path.pop
+  end
+  active_browse_option = 'browse_by_' + split_path.last
 %>
 
 <form class="search-box" role="search" method="post" action="<%= ENV.fetch('BASE_URL') %>/search">
