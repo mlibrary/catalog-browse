@@ -82,7 +82,7 @@ class FakeSubject
     !!@data["heading_link"]
   end
   def heading_link
-    @data["heading_link"]
+    "#{ENV.fetch("SEARCH_URL")}/heading-information?query=#{self.subject}"
   end
   def has_cross_references?
     false

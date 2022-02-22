@@ -8,7 +8,7 @@
   num_matches: 478
 - subject: 'Physics'
   num_matches: 5000
-  heading_link: 'https://id.loc.gov/authorities/subjects/sh85101653.html'
+  heading_link: true
   cross_references:
   - kind: 'use'
     subject: 'Natural philosophy'
@@ -29,7 +29,7 @@
   num_matches: 9
 - subject: 'Physics -- Abstracts -- Periodicals'
   num_matches: 12
-  heading_link: 'https://id.loc.gov/authorities/subjects/sh2010106344.html'
+  heading_link: true
 - subject: 'Physics -- Acronyms -- Dictionaries'
   num_matches: 1
 - subject: 'Physics -- Africa -- Periodicals'
