@@ -1,8 +1,8 @@
-<table class="browse-table" aria-labelledby="maincontent">
+<table class="browse-table table-subject" aria-labelledby="maincontent">
   <thead>
     <tr>
-      <th>Records</th>
       <th>Subject</th>
+      <th>Records</th>
     </tr>
   </thead>
   <tbody>
@@ -15,9 +15,6 @@
         </tr>
       <% else %>
         <tr <% if result.exact_match? %>class="exact-match"<% end %>>
-          <td>
-            <%= result.record_text %>
-          </td>
           <td>
             <dl>
               <dt class="visually-hidden">Subject:</dt>
@@ -55,6 +52,9 @@
                 <% end %>
               <% end %>
             </dl>
+          </td>
+          <td>
+            <%= result.record_text %>
           </td>
         </tr>
       <% end %>

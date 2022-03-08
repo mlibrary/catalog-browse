@@ -8,6 +8,7 @@
  * -----------------
  * 1.0 - Table
  *   1.1 - Cells
+ *     1.1.1 - Call Number
  * 2.0 - THead
  *   2.1 - Cells
  * 3.0 - TBody
@@ -50,6 +51,9 @@ table.browse-table {
   .browse-table tr > * {
     display: table-cell;
   }
+  .browse-table:not(.table-callnumber) tr > * {
+    width: 50%;
+  }
 }
 
 .browse-table tr:last-child > *:last-child {
@@ -81,12 +85,15 @@ table.browse-table {
 }
 
 .browse-table th,
-.browse-table td:first-of-type:not([colspan]) {
+.browse-table:not(.table-callnumber) td:last-of-type,
+.table-callnumber td:first-of-type:not([colspan]) {
   white-space: nowrap;
 }
 
+/* 1.1.1 - Call Number */
+
 @media only screen and (min-width: 720px) {
-  .browse-table td:first-of-type:not([colspan]) {
+  .table-callnumber td:first-of-type:not([colspan]) {
     width: 200px;
   }
 }

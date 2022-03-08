@@ -1,8 +1,8 @@
-<table class="browse-table" aria-labelledby="maincontent">
+<table class="browse-table table-author" aria-labelledby="maincontent">
   <thead>
     <tr>
-      <th>Records</th>
       <th>Author</th>
+      <th>Records</th>
     </tr>
   </thead>
   <tbody>
@@ -16,9 +16,6 @@
       <% else %>
         <tr <% if result.exact_match? %>class="exact-match"<% end %>>
           <td>
-            <%= result.record_text %>
-          </td>
-          <td>
             <dl>
               <dt class="visually-hidden">Author:</dt>
               <dd>
@@ -26,9 +23,9 @@
                   <span <% if result.exact_match? %>class="strong"<% end %>>
                     <%=result.author%>
                   </span>
-                <% if result.num_matches > 0 %></a><% end %>
+                <% if result.num_matches > 0 %>(catalog results) </a><% end %>
                 <% if result.heading_link? %>
-                  <a href="<%= result.heading_link%>" class="vernacular pipe">View Heading Information</a>
+                  <a href="<%= result.heading_link%>" class="vernacular pipe">About this author</a>
                 <% end %>
               </dd>
               <% if result.has_cross_references? %>
@@ -40,15 +37,18 @@
                     <% if cr.num_matches > 0 %><a href="<%= cr.url%>"><% end %>
                       <%=cr.author%>
                     <% if cr.num_matches > 0 %>
-                      </a> (<%= cr.record_text %>)
+                      (in author list)</a> (<%= cr.record_text %>)
                     <% end %>
                     <% if cr.heading_link? %>
-                      <a href="<%= cr.heading_link %>" class="vernacular pipe">View Heading Information</a>
+                      <a href="<%= cr.heading_link %>" class="vernacular pipe">About this author</a>
                     <% end %>
                   </dd>
                 <% end %>
               <% end %>
             </dl>
+          </td>
+          <td>
+            <%= result.record_text %>
           </td>
         </tr>
       <% end %>
