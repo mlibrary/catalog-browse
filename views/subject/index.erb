@@ -54,7 +54,9 @@
             </dl>
           </td>
           <td>
-            <%= result.record_text %>
+            <% if result.num_matches > 0 %>
+              <%= result.record_text %>
+            <% end %>
           </td>
         </tr>
       <% end %>
