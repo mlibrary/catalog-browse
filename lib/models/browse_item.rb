@@ -25,16 +25,16 @@ class BrowseItem
     [output, edition].compact.join(" ") unless output.nil?
   end
   def author
-    @catalog_doc["mainauthor"]&.first
+    @catalog_doc["main_author_display"]&.first
   end
   def vernacular_author
-    @catalog_doc["mainauthor"]&.slice(1)
+    @catalog_doc["main_author_display"]&.slice(1)
   end
   def publisher
-    @catalog_doc["publisher"]&.first
+    @catalog_doc["publisher_display"]&.first
   end
   def vernacular_publisher
-    @catalog_doc["publisher"]&.slice(1)
+    @catalog_doc["publisher_display"]&.slice(1)
   end
   def series
     @catalog_doc["series"]&.first
