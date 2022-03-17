@@ -22,7 +22,7 @@ class BrowseItem
   end
   def vernacular_title
     output = @catalog_doc["title_display"]&.slice(1)
-    [output, edition].compact.join(" ") unless output.nil?
+    [output, vernacular_edition].compact.join(" ") unless output.nil?
   end
   def author
     @catalog_doc["main_author_display"]&.first
@@ -48,6 +48,9 @@ class BrowseItem
   #component pieces
   def edition
     @catalog_doc["edition"]&.first
+  end
+  def vernacular_edition
+    @catalog_doc["edition"]&.slice(1)
   end
   def mms_id
     @index_doc["bib_id"]

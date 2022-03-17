@@ -22,7 +22,7 @@ describe BrowseItem do
       expect(subject.title).to eq("Zhiznʹ gospodina de Molʹera / M. Bulgakov ; [podgot. teksta i poslesl. V.I. Loseva].")
     end
     it "shows title with edition when there is one" do
-      @catalog_doc["edition"] = ["my edition"]
+      @catalog_doc["edition"] = ["my edition", "vernacular edition"]
       expect(subject.title).to eq("Zhiznʹ gospodina de Molʹera / M. Bulgakov ; [podgot. teksta i poslesl. V.I. Loseva]. my edition")
     end
   end
@@ -30,9 +30,9 @@ describe BrowseItem do
     it "shows vernacular title without edition when there isn't one" do
       expect(subject.vernacular_title).to eq("Жизнь господина де Мольера / М. Булгаков ; [подгот. текста и послесл. В.И. Лосева].")
     end
-    it "shows vernacular title with edition when there is one" do
-      @catalog_doc["edition"] = ["my edition"]
-      expect(subject.vernacular_title).to eq("Жизнь господина де Мольера / М. Булгаков ; [подгот. текста и послесл. В.И. Лосева]. my edition")
+    it "shows vernacular title with vernacular edition when there is one" do
+      @catalog_doc["edition"] = ["my edition", "vernacular edition"]
+      expect(subject.vernacular_title).to eq("Жизнь господина де Мольера / М. Булгаков ; [подгот. текста и послесл. В.И. Лосева]. vernacular edition")
     end
   end
   it "shows appropriate author" do
