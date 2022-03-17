@@ -22,7 +22,7 @@ describe BrowseItem do
       expect(subject.title).to eq("Zhiznʹ gospodina de Molʹera / M. Bulgakov ; [podgot. teksta i poslesl. V.I. Loseva].")
     end
     it "shows title with edition when there is one" do
-      @catalog_doc["edition"] = ["my edition"]
+      @catalog_doc["edition"] = ["my edition", "vernacular edition"]
       expect(subject.title).to eq("Zhiznʹ gospodina de Molʹera / M. Bulgakov ; [podgot. teksta i poslesl. V.I. Loseva]. my edition")
     end
   end
@@ -30,9 +30,9 @@ describe BrowseItem do
     it "shows vernacular title without edition when there isn't one" do
       expect(subject.vernacular_title).to eq("Жизнь господина де Мольера / М. Булгаков ; [подгот. текста и послесл. В.И. Лосева].")
     end
-    it "shows vernacular title with edition when there is one" do
-      @catalog_doc["edition"] = ["my edition"]
-      expect(subject.vernacular_title).to eq("Жизнь господина де Мольера / М. Булгаков ; [подгот. текста и послесл. В.И. Лосева]. my edition")
+    it "shows vernacular title with vernacular edition when there is one" do
+      @catalog_doc["edition"] = ["my edition", "vernacular edition"]
+      expect(subject.vernacular_title).to eq("Жизнь господина де Мольера / М. Булгаков ; [подгот. текста и послесл. В.И. Лосева]. vernacular edition")
     end
   end
   it "shows appropriate author" do
@@ -42,22 +42,16 @@ describe BrowseItem do
     expect(subject.vernacular_author).to eq("Булгаков, Михаил, 1891-1940.")
   end
   it "shows appropriate publisher" do
-    expect(subject.publisher).to eq("\"Delovoĭ t͡sentr\",")
+    expect(subject.publisher).to eq("Moskva : \"Delovoĭ t͡sentr\", 1992.")
   end
   it "shows appropriate vernacular publisher" do
-    expect(subject.vernacular_publisher).to eq("\"Деловой центр\",")
+    expect(subject.vernacular_publisher).to eq("Москва : \"Деловой центр\", 1992.")
   end
   it "shows appropriate author" do
     expect(subject.author).to eq("Bulgakov, Mikhail, 1891-1940.")
   end
   it "shows appropriate vernacular author" do
     expect(subject.vernacular_author).to eq("Булгаков, Михаил, 1891-1940.")
-  end
-  it "shows appropriate publisher" do
-    expect(subject.publisher).to eq("\"Delovoĭ t͡sentr\",")
-  end
-  it "shows appropriate vernacular publisher" do
-    expect(subject.vernacular_publisher).to eq("\"Деловой центр\",")
   end
   it "shows appropriate series" do
     expect(subject.series).to eq("Zagadki i taĭny sudʹby")
