@@ -8,8 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "postcss ./css/browse.css -d ./public/",
-    "watch": "chokidar \"./css/**/*.css\" -c \"npm run build\""
+    "build": "postcss ./css/browse.css -d ./public/"
   },
   "repository": {
     "type": "git",
@@ -22,10 +21,9 @@
   },
   "homepage": "https://github.com/mlibrary/catalog-browse#readme",
   "devDependencies": {
-    "chokidar-cli": "^3.0.0",
-    "cssnano": "^5.0.16",
-    "postcss": "^8.4.5",
+    "cssnano": "^5.1.5",
+    "postcss": "^8.4.12",
     "postcss-cli": "^9.1.0",
-    "postcss-import": "^14.0.2"
+    "postcss-import": "^14.1.0"
   }
 }
