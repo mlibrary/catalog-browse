@@ -1,20 +1,34 @@
 require "sinatra"
+require "sinatra/namespace"
 require "byebug"
 require "yaml"
 require_relative "lib/utilities/solr_client"
 require_relative "lib/models/fake_authors"
+require_relative "lib/models/fake_subjects"
 require_relative "lib/models/browse_list"
 require_relative "lib/models/browse_item"
 require_relative "lib/models/search_dropdown"
 require_relative "lib/models/datastores"
 
-if ENV.fetch('AUTHOR_ON') == 'true'
-  get '/author' do
+if ENV.fetch("AUTHOR_ON") == "true"
+  get "/author" do
     list = FakeAuthorList.new
-    erb :authors, :locals => { :list => list }
+    erb :browse, :locals => { :option => 'author', :list => list, :list => list, :title => list.title }
   end
 end
-get '/callnumber' do
+
+if ENV.fetch("SUBJECT_ON") == "true"
+  namespace "/subject" do
+    list = FakeSubjectList.new
+    get "" do
+      erb :browse, :locals => { :option => 'subject', :list => list, :title => list.title }
+    end
+    get "/heading-information" do
+      erb :'subject/heading-information', :locals => { :list => list, :title => "&ldquo;#{params[:query]}&rdquo; subject heading information" }
+    end
+  end
+end
+get "/callnumber" do
   callnumber = params[:query]
   reference_id = params[:reference_id] || callnumber 
   begin
@@ -22,7 +36,7 @@ get '/callnumber' do
   rescue
     list = BrowseList::Error.new(reference_id)
   end
-  erb :call_number, :locals  => { :list => list }
+  erb :browse, :locals => { :option => 'callnumber', :list => list, :title => list.title }
 end
 post "/search" do
   redirect SearchDropdown.for(type: params["type"], query: params["query"]).url

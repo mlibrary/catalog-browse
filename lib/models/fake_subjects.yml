@@ -1,0 +1,40 @@
+- subject: 'Physicochemical Phenomena -- Periodicals'
+  num_matches: 2
+- subject: 'Physicochemical Processes'
+  num_matches: 5
+- subject: 'Physics'
+  num_matches: 2
+- subject: 'Physics'
+  num_matches: 478
+- subject: 'Physics'
+  num_matches: 5000
+  heading_link: true
+  cross_references:
+  - kind: 'use'
+    subject: 'Natural philosophy'
+    num_matches: 3
+  - kind: 'term'
+    terms:
+    - subject: 'Electricity'
+      num_matches: 5000
+    - subject: 'Nanostructures'
+      num_matches: 5000
+- subject: 'Physics -- Abbreviations'
+  num_matches: 2
+- subject: 'Physics -- Abbreviations -- Dictionaries'
+  num_matches: 1
+- subject: 'Physics -- Abstracting and indexing -- Periodicals'
+  num_matches: 2
+- subject: 'Physics -- Abstracts'
+  num_matches: 9
+- subject: 'Physics -- Abstracts -- Periodicals'
+  num_matches: 12
+  heading_link: true
+- subject: 'Physics -- Acronyms -- Dictionaries'
+  num_matches: 1
+- subject: 'Physics -- Africa -- Periodicals'
+  num_matches: 1
+- subject: 'Physics and chemistry -- Dictionaries -- Japanese'
+  num_matches: 1
+- subject: 'Physics and Mathematics'
+  num_matches: 34

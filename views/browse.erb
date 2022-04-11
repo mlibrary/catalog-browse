@@ -1,0 +1,8 @@
+<% if list.help_text %>
+  <p><%= list.help_text %></p>
+<% end %>
+<% if list.show_table? %>
+  <%= erb :'components/pagination', locals: { label: 'Top pagination', list: list } %>
+  <%= erb :"#{option}/index", locals: { list: list } %>
+  <%= erb :'components/pagination', locals: { label: 'Bottom pagination', list: list } %>
+<% end %>

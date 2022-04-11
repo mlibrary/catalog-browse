@@ -1,0 +1,77 @@
+/**
+ * description-list.css
+ * 
+ * Description lists encloses a groups of terms and descriptions
+ * commonly used to implement a glossary or to display metadata.
+ *
+ * -----------------
+ * Table of Contents
+ * -----------------
+ * 1.0 - Description Term
+ * 2.0 - Browse Table
+ * 3.0 - Reference Info
+ */
+
+
+
+/******************************/
+/*** 1.0 - Description Term ***/
+/******************************/
+
+dl > * {
+  margin: 0;
+}
+
+dl dt {
+  font-weight: var(--semibold);
+}
+
+
+
+/**************************/
+/*** 2.0 - Browse Table ***/
+/**************************/
+
+.browse-table tbody dl dt {
+  clear: left;
+  float: left;
+  margin-right: var(--space-x-small);
+}
+
+.browse-table tbody dl dt.visually-hidden:not(:only-of-type) + dd {
+  margin-bottom: var(--space-x-small);
+}
+
+
+
+/****************************/
+/*** 3.0 - Reference Info ***/
+/****************************/
+
+@media only screen and (min-width: 720px) {
+  dl.reference-info {
+    display: grid;
+    gap: 0 var(--space-xxx-large);
+    grid-template-columns: minmax(min-content, max-content) auto;
+  }
+}
+
+dl.reference-info > dt:not(:first-of-type) {
+  padding-top: var(--space-medium);
+}
+
+@media only screen and (min-width: 720px) {
+  dl.reference-info dt {
+    grid-column-end: 2;
+    grid-column-start: 1;
+  }
+  
+  dl.reference-info dd {
+    grid-column-end: 3;
+    grid-column-start: 2;
+  }
+  
+  dl.reference-info dt:not(:first-of-type) + dd {
+    padding-top: var(--space-medium);
+  }
+}

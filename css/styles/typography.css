@@ -8,6 +8,8 @@
  * -----------------
  * 1.0 - Headings
  * 2.0 - Font Weights
+ * 3.0 - Vernacular
+ *   3.1 - Pipe
  */
 
 
@@ -22,6 +24,14 @@ h1 {
   font-weight: 400;
 }
 
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: var(--semibold);
+}
+
 
 
 /**************************/
@@ -30,4 +40,31 @@ h1 {
 
 .strong {
   font-weight: var(--bold);
+}
+
+
+
+/************************/
+/*** 3.0 - Vernacular ***/
+/************************/
+
+.vernacular {
+  color: var(--search-neutral-500);
+  display: block;
+}
+
+/*** 3.1 - Pipe ***/
+
+.vernacular.pipe {
+  display: inline;
+}
+
+.vernacular.pipe:before {
+  background: var(--search-neutral-500);
+  content: '';
+  display: inline-block;
+  height: 1em;
+  margin: 0 var(--space-x-small);
+  vertical-align: middle;
+  width: 1px;
 }
