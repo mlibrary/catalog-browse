@@ -37,10 +37,10 @@ class BrowseItem
     @catalog_doc["publisher_display"]&.slice(1)
   end
   def series
-    @catalog_doc["series"]&.first
+    @catalog_doc["series_statement"]&.first
   end
   def vernacular_series
-    @catalog_doc["series"]&.slice(1)
+    @catalog_doc["series_statement"]&.slice(1)
   end
   
 
