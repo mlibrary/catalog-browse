@@ -4,6 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 gem 'sinatra'
 gem 'puma'
 gem 'httparty'
+gem 'faraday'
 
 group :development do
   gem 'sinatra-contrib'

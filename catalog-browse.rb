@@ -1,12 +1,20 @@
 require "sinatra"
-require "byebug"
+require "sinatra/reloader" if development?
+require "byebug" if development?
+
 require "yaml"
+
+require_relative "lib/catalog_solr_client"
 require_relative "lib/utilities/solr_client"
 require_relative "lib/models/fake_authors"
 require_relative "lib/models/browse_list"
 require_relative "lib/models/browse_item"
 require_relative "lib/models/search_dropdown"
 require_relative "lib/models/datastores"
+
+CatalogSolrClient.configure do |config|
+  config.solr_url = ENV.fetch("BIBLIO_SOLR")
+end
 
 if ENV.fetch('AUTHOR_ON') == 'true'
   get '/author' do
@@ -19,7 +27,8 @@ get '/callnumber' do
   reference_id = params[:reference_id] || callnumber 
   begin
     list = BrowseList.for(direction: params[:direction], reference_id: reference_id, num_rows_to_display: 20, original_reference: callnumber, banner_reference: params[:banner_reference])
-  rescue
+  rescue => e
+    logger.error (e.message)
     list = BrowseList::Error.new(reference_id)
   end
   erb :call_number, :locals  => { :list => list }
