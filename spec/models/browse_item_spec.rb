@@ -1,8 +1,8 @@
-require_relative '../spec_helper.rb'
+require_relative "../spec_helper"
 describe BrowseItem do
   before(:each) do
-    @catalog_doc = JSON.parse(fixture('zhizn_bib.json'))
-    @index_doc = JSON.parse(fixture('zhizn_browse.json'))
+    @catalog_doc = JSON.parse(fixture("zhizn_bib.json"))
+    @index_doc = JSON.parse(fixture("zhizn_browse.json"))
     @exact_match = false
   end
   subject do
@@ -26,7 +26,7 @@ describe BrowseItem do
       expect(subject.title).to eq("Zhiznʹ gospodina de Molʹera / M. Bulgakov ; [podgot. teksta i poslesl. V.I. Loseva]. my edition")
     end
   end
-  context "#vernacular_title"  do
+  context "#vernacular_title" do
     it "shows vernacular title without edition when there isn't one" do
       expect(subject.vernacular_title).to eq("Жизнь господина де Мольера / М. Булгаков ; [подгот. текста и послесл. В.И. Лосева].")
     end
