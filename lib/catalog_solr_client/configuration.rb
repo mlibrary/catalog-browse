@@ -1,4 +1,4 @@
-module CatalogSolrClient 
+module CatalogSolrClient
   class Configuration
     attr_accessor :solr_url, :core
     def initialize

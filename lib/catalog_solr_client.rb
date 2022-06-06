@@ -7,6 +7,7 @@ module CatalogSolrClient
     def client
       Client.new
     end
+
     def configuration
       @configuration ||= Configuration.new
     end

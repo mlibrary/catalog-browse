@@ -1,15 +1,16 @@
 module CatalogSolrClient
   class Client
-    def initialize 
+    def initialize
       @conn = Faraday.new(
-        url: CatalogSolrClient.configuration.solr_url,
+        url: CatalogSolrClient.configuration.solr_url
       ) do |f|
         f.request :json
-      #  f.request :retry, {max: 1, retry_statuses: [500]}
+        #  f.request :retry, {max: 1, retry_statuses: [500]}
         f.response :json
       end
       @path_prefix = "/solr/#{CatalogSolrClient.configuration.core}"
     end
+
     def get_bibs(bib_ids:, core: "biblio")
       query = {
         q: "id:(#{bib_ids.join(" OR ")})",

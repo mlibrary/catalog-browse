@@ -1,112 +1,118 @@
 class BrowseList
   attr_reader :original_reference, :num_rows_to_display, :num_matches
-  def self.for(direction:,reference_id:,num_rows_to_display:, original_reference:,
-               banner_reference:,
-               solr_client: SolrClient.new,
-                catalog_solr_client: CatalogSolrClient.client)
-    my_banner_reference = banner_reference 
+  def self.for(direction:, reference_id:, num_rows_to_display:, original_reference:,
+    banner_reference:,
+    solr_client: SolrClient.new,
+    catalog_solr_client: CatalogSolrClient.client)
+    my_banner_reference = banner_reference
     exact_matches = solr_client.exact_matches(callnumber: original_reference)
     case direction
-    when 'next'
-      #includes reference in results
+    when "next"
+      # includes reference in results
       index_response = solr_client.browse_reference_on_top(reference_id: reference_id, rows: num_rows_to_display + 2)
-    when 'previous'
-      #doesn't include reference in results
+    when "previous"
+      # doesn't include reference in results
       index_response = solr_client.browse_reference_on_bottom(reference_id: reference_id, rows: num_rows_to_display + 1)
     else
-    #index_before:, index_after:
+      # index_before:, index_after:
       return BrowseList::Empty.new if reference_id.nil?
       index_before = solr_client.browse_reference_on_bottom(reference_id: reference_id, rows: 3)
       index_after = solr_client.browse_reference_on_top(reference_id: reference_id, rows: num_rows_to_display - 1)
-      my_banner_reference = index_after.parsed_response.dig("response","docs").first["id"]
-      #need above and below
+      my_banner_reference = index_after.parsed_response.dig("response", "docs").first["id"]
+      # need above and below
     end
-  
-    #if index_response.code != 200
-      ##Do some error handling
-    #end
-    if index_response 
-      bib_ids = index_response.parsed_response.dig("response","docs").map{|x| x["bib_id"] }
+
+    # if index_response.code != 200
+    # #Do some error handling
+    # end
+    bib_ids = if index_response
+      index_response.parsed_response.dig("response", "docs").map { |x| x["bib_id"] }
     else
-      bib_ids = [index_before.parsed_response.dig("response","docs"), index_after.parsed_response.dig("response","docs")].flatten.map{|x| x["bib_id"]}
+      [index_before.parsed_response.dig("response", "docs"), index_after.parsed_response.dig("response", "docs")].flatten.map { |x| x["bib_id"] }
     end
     catalog_response = catalog_solr_client.get_bibs(bib_ids: bib_ids)
-    #if catalog_response.code != 200
-      ##Do some error handling
-    #end
- 
+    # if catalog_response.code != 200
+    # #Do some error handling
+    # end
+
     case direction
-    when "next" 
+    when "next"
       BrowseList::ReferenceOnTop.new(
-        index_response: index_response.parsed_response, 
-        catalog_response: catalog_response.body, 
-        num_rows_to_display: num_rows_to_display, 
-        original_reference: original_reference,
-        exact_matches: exact_matches,
-        banner_reference: my_banner_reference
-      ) 
-    when "previous"
-      BrowseList::ReferenceOnBottom.new(
-        index_response: index_response.parsed_response, 
-        catalog_response: catalog_response.body, 
-        num_rows_to_display: num_rows_to_display, 
-        original_reference: original_reference,
-        exact_matches: exact_matches,
-        banner_reference: my_banner_reference
-      ) 
-    else
-      BrowseList::ReferenceInMiddle.new(
-        index_before: index_before.parsed_response, 
-        index_after: index_after.parsed_response, 
-        catalog_response: catalog_response.body, 
+        index_response: index_response.parsed_response,
+        catalog_response: catalog_response.body,
         num_rows_to_display: num_rows_to_display,
         original_reference: original_reference,
         exact_matches: exact_matches,
         banner_reference: my_banner_reference
-      ) 
+      )
+    when "previous"
+      BrowseList::ReferenceOnBottom.new(
+        index_response: index_response.parsed_response,
+        catalog_response: catalog_response.body,
+        num_rows_to_display: num_rows_to_display,
+        original_reference: original_reference,
+        exact_matches: exact_matches,
+        banner_reference: my_banner_reference
+      )
+    else
+      BrowseList::ReferenceInMiddle.new(
+        index_before: index_before.parsed_response,
+        index_after: index_after.parsed_response,
+        catalog_response: catalog_response.body,
+        num_rows_to_display: num_rows_to_display,
+        original_reference: original_reference,
+        exact_matches: exact_matches,
+        banner_reference: my_banner_reference
+      )
     end
-
   end
+
   def initialize(index_response:, catalog_response:, num_rows_to_display:, original_reference:, exact_matches:, banner_reference:)
     @original_reference = original_reference
-    @catalog_docs = catalog_response&.dig("response","docs")
+    @catalog_docs = catalog_response&.dig("response", "docs")
     @num_rows_to_display = num_rows_to_display
-    @index_docs = index_response&.dig("response","docs")
+    @index_docs = index_response&.dig("response", "docs")
     @num_matches = exact_matches.count
     @exact_matches = exact_matches
     @banner_reference = banner_reference
   end
+
   def title
-    if self.show_table?
-      "Browse &ldquo;#{ @original_reference }&rdquo; in call numbers"
+    if show_table?
+      "Browse &ldquo;#{@original_reference}&rdquo; in call numbers"
     else
       "Browse by Call Number"
     end
   end
+
   def help_text
     '<span class="strong">Browse by call number help:</span> Search a Library of Congress (LC) or Dewey call number and view an alphabetical list of all call numbers and related titles indexed in the Library catalog. <a href="https://guides.lib.umich.edu/c.php?g=282937">Learn more about call numbers<span class="visually-hidden"> (link points to external site)</span></a>.'
   end
+
   def show_table?
     true
   end
+
   def previous_url
     params = URI.encode_www_form({
-      query: @original_reference, 
+      query: @original_reference,
       direction: "previous",
       reference_id: previous_reference_id,
       banner_reference: @banner_reference
     })
     "#{ENV.fetch("BASE_URL")}/callnumber?#{params}"
   end
+
   def next_url
     params = URI.encode_www_form({
-      query: @original_reference, 
+      query: @original_reference,
       direction: "next",
       reference_id: next_reference_id,
       banner_reference: @banner_reference
     })
     "#{ENV.fetch("BASE_URL")}/callnumber?#{params}"
   end
+
   def items
     banner_index = nil
     match_notice = OpenStruct.new(callnumber: @original_reference.upcase, match_notice?: true)
@@ -116,7 +122,7 @@ class BrowseList
       banner_index = index if (exact_match || banner_match) && banner_index.nil?
       BrowseItem.new(catalog_doc_for_mms_id(index_doc["bib_id"]), index_doc, exact_match)
     end
-    banner_index.nil? ? my_items : my_items.insert(banner_index, match_notice) 
+    banner_index.nil? ? my_items : my_items.insert(banner_index, match_notice)
   end
 
   def match_text
@@ -135,9 +141,11 @@ class BrowseList
   end
 
   private
+
   def catalog_doc_for_mms_id(mms_id)
-    @catalog_docs.find{|x| x["id"] == mms_id}
+    @catalog_docs.find { |x| x["id"] == mms_id }
   end
+
   def exact_match_for?(id)
     @exact_matches.any?(id)
   end
@@ -147,12 +155,15 @@ class BrowseList::ReferenceOnTop < BrowseList
   def has_next_list?
     @index_docs.count == @num_rows_to_display + 2
   end
+
   def has_previous_list?
     true
   end
+
   def next_reference_id
     @index_docs[@index_docs.count - 2]["id"].strip if has_next_list?
   end
+
   def previous_reference_id
     @index_docs[1]["id"].strip if has_previous_list?
   end
@@ -163,52 +174,61 @@ class BrowseList::ReferenceOnBottom < BrowseList
     super
     @index_docs.reverse!
   end
+
   def has_next_list?
     true
   end
+
   def has_previous_list?
     @index_docs.count == @num_rows_to_display + 1
   end
+
   def next_reference_id
     @index_docs.last["id"].strip if has_next_list?
   end
+
   def previous_reference_id
     @index_docs[1]["id"].strip if has_previous_list?
   end
 end
 
 class BrowseList::ReferenceInMiddle < BrowseList::ReferenceOnTop
-  def initialize(index_before:, index_after:, 
-                 catalog_response:, num_rows_to_display:, 
-                 original_reference:, exact_matches:, banner_reference:
-                )
+  def initialize(index_before:, index_after:,
+    catalog_response:, num_rows_to_display:,
+    original_reference:, exact_matches:, banner_reference:)
     @exact_matches = exact_matches
     @num_matches = exact_matches.count
     @original_reference = original_reference
-    @catalog_docs = catalog_response&.dig("response","docs")
+    @catalog_docs = catalog_response&.dig("response", "docs")
     @num_rows_to_display = num_rows_to_display
     @banner_reference = banner_reference
     @index_docs = get_index_docs(index_before, index_after)
   end
+
   private
+
   def get_index_docs(index_before, index_after)
-    before_docs = index_before.dig("response","docs").reverse
-    after_docs = index_after.dig("response","docs")
+    before_docs = index_before.dig("response", "docs").reverse
+    after_docs = index_after.dig("response", "docs")
     [before_docs, after_docs].flatten
   end
 end
+
 class BrowseList::Empty < BrowseList
-  def initialize(original_reference='')
+  def initialize(original_reference = "")
     @original_reference = original_reference
   end
+
   def show_table?
     false
   end
 end
+
 class BrowseList::Error < BrowseList::Empty
   def error?
     true
   end
+
   def error_message
     "<span class=\"strong\">#{@original_reference}</span> is not a valid call number query. Please try a using a valid Library of Congress call number (enter one or two letters and a number) or valid Dewey call number (start with three numbers)."
   end
