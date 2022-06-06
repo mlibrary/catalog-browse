@@ -40,17 +40,6 @@ class SolrClient
     self.class.get("/#{core}/select", query: query)
   end
 
-  def get_bibs(bib_ids:, core: "biblio")
-    self.class.base_uri  ENV.fetch("BIBLIO_SOLR")
-    query = {
-      q: "id:(#{bib_ids.join(" OR ")})",
-      rows: bib_ids.size
-    }
-    response = self.class.get("/#{core}/select", query: query)
-    self.class.base_uri  ENV.fetch("CATALOG_SOLR")
-    response
-  end
-
   def exact_matches(callnumber:, core: ENV.fetch("CALLNUMBERS_CORE"))
     query = {
       q: '*:*',

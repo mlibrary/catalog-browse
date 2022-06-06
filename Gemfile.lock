@@ -10,6 +10,10 @@ GEM
       rexml
     diff-lcs (1.5.0)
     docile (1.4.0)
+    faraday (2.3.0)
+      faraday-net_http (~> 2.0)
+      ruby2_keywords (>= 0.0.4)
+    faraday-net_http (2.0.3)
     ffi (1.15.5)
     hashdiff (1.0.1)
     httparty (0.20.0)
@@ -87,6 +91,7 @@ PLATFORMS
 
 DEPENDENCIES
   climate_control
+  faraday
   httparty
   listen
   pry

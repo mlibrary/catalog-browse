@@ -2,8 +2,8 @@ class BrowseList
   attr_reader :original_reference, :num_rows_to_display, :num_matches
   def self.for(direction:,reference_id:,num_rows_to_display:, original_reference:,
                banner_reference:,
-               solr_client: SolrClient.new)
-
+               solr_client: SolrClient.new,
+                catalog_solr_client: CatalogSolrClient.client)
     my_banner_reference = banner_reference 
     exact_matches = solr_client.exact_matches(callnumber: original_reference)
     case direction
@@ -30,7 +30,7 @@ class BrowseList
     else
       bib_ids = [index_before.parsed_response.dig("response","docs"), index_after.parsed_response.dig("response","docs")].flatten.map{|x| x["bib_id"]}
     end
-    catalog_response = solr_client.get_bibs(bib_ids: bib_ids)
+    catalog_response = catalog_solr_client.get_bibs(bib_ids: bib_ids)
     #if catalog_response.code != 200
       ##Do some error handling
     #end
@@ -39,7 +39,7 @@ class BrowseList
     when "next" 
       BrowseList::ReferenceOnTop.new(
         index_response: index_response.parsed_response, 
-        catalog_response: catalog_response.parsed_response, 
+        catalog_response: catalog_response.body, 
         num_rows_to_display: num_rows_to_display, 
         original_reference: original_reference,
         exact_matches: exact_matches,
@@ -48,7 +48,7 @@ class BrowseList
     when "previous"
       BrowseList::ReferenceOnBottom.new(
         index_response: index_response.parsed_response, 
-        catalog_response: catalog_response.parsed_response, 
+        catalog_response: catalog_response.body, 
         num_rows_to_display: num_rows_to_display, 
         original_reference: original_reference,
         exact_matches: exact_matches,
@@ -58,7 +58,7 @@ class BrowseList
       BrowseList::ReferenceInMiddle.new(
         index_before: index_before.parsed_response, 
         index_after: index_after.parsed_response, 
-        catalog_response: catalog_response.parsed_response, 
+        catalog_response: catalog_response.body, 
         num_rows_to_display: num_rows_to_display,
         original_reference: original_reference,
         exact_matches: exact_matches,
