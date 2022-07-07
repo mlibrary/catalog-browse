@@ -2,7 +2,7 @@ class BrowseList
   attr_reader :original_reference, :num_rows_to_display, :num_matches
   def self.for(direction:, reference_id:, num_rows_to_display:, original_reference:,
     banner_reference:,
-    solr_client: SolrClient.new,
+    solr_client: BrowseSolrClient.new,
     catalog_solr_client: CatalogSolrClient.client)
     my_banner_reference = banner_reference
     exact_matches = solr_client.exact_matches(callnumber: original_reference)
@@ -18,7 +18,7 @@ class BrowseList
       return BrowseList::Empty.new if reference_id.nil?
       index_before = solr_client.browse_reference_on_bottom(reference_id: reference_id, rows: 3)
       index_after = solr_client.browse_reference_on_top(reference_id: reference_id, rows: num_rows_to_display - 1)
-      my_banner_reference = index_after.parsed_response.dig("response", "docs").first["id"]
+      my_banner_reference = index_after.body.dig("response", "docs").first["id"]
       # need above and below
     end
 
@@ -26,9 +26,9 @@ class BrowseList
     # #Do some error handling
     # end
     bib_ids = if index_response
-      index_response.parsed_response.dig("response", "docs").map { |x| x["bib_id"] }
+      index_response.body.dig("response", "docs").map { |x| x["bib_id"] }
     else
-      [index_before.parsed_response.dig("response", "docs"), index_after.parsed_response.dig("response", "docs")].flatten.map { |x| x["bib_id"] }
+      [index_before.body.dig("response", "docs"), index_after.body.dig("response", "docs")].flatten.map { |x| x["bib_id"] }
     end
     catalog_response = catalog_solr_client.get_bibs(bib_ids: bib_ids)
     # if catalog_response.code != 200
@@ -38,7 +38,7 @@ class BrowseList
     case direction
     when "next"
       BrowseList::ReferenceOnTop.new(
-        index_response: index_response.parsed_response,
+        index_response: index_response.body,
         catalog_response: catalog_response.body,
         num_rows_to_display: num_rows_to_display,
         original_reference: original_reference,
@@ -47,7 +47,7 @@ class BrowseList
       )
     when "previous"
       BrowseList::ReferenceOnBottom.new(
-        index_response: index_response.parsed_response,
+        index_response: index_response.body,
         catalog_response: catalog_response.body,
         num_rows_to_display: num_rows_to_display,
         original_reference: original_reference,
@@ -56,8 +56,8 @@ class BrowseList
       )
     else
       BrowseList::ReferenceInMiddle.new(
-        index_before: index_before.parsed_response,
-        index_after: index_after.parsed_response,
+        index_before: index_before.body,
+        index_after: index_after.body,
         catalog_response: catalog_response.body,
         num_rows_to_display: num_rows_to_display,
         original_reference: original_reference,
@@ -208,6 +208,7 @@ class BrowseList::ReferenceInMiddle < BrowseList::ReferenceOnTop
   private
 
   def get_index_docs(index_before, index_after)
+    byebug
     before_docs = index_before.dig("response", "docs").reverse
     after_docs = index_after.dig("response", "docs")
     [before_docs, after_docs].flatten
