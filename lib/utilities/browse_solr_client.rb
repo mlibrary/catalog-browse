@@ -1,17 +1,17 @@
 require "faraday"
 
 class BrowseSolrClient
-  def initialize(solr_url: ENV.fetch("CATALOG_SOLR"), core: ENV.fetch("CALLNUMBERS_CORE") ) 
-      @conn = Faraday.new(
-        url: solr_url 
-      ) do |f|
-        f.request :json
-        #  f.request :retry, {max: 1, retry_statuses: [500]}
-        f.response :json
-      end
-      @path_prefix = "/solr/#{core}" 
+  def initialize(solr_url: ENV.fetch("CATALOG_SOLR"), core: ENV.fetch("CALLNUMBERS_CORE"))
+    @conn = Faraday.new(
+      url: solr_url
+    ) do |f|
+      f.request :json
+      #  f.request :retry, {max: 1, retry_statuses: [500]}
+      f.response :json
+    end
+    @path_prefix = "/solr/#{core}"
   end
-  
+
   def browse_reference_on_top(reference_id:, rows: 20)
     # square brackets includes reference in return
     range = "id:[\"#{reference_id}\" TO *]"
@@ -30,13 +30,13 @@ class BrowseSolrClient
     query = {
       rows: rows,
       q: "*:*",
-      fq: [range],
+      fq: range,
       sort: sort
     }
     @conn.public_send(:get, "#{@path_prefix}/select", query)
   end
 
-  #just for callnumbers?
+  # just for callnumbers?
   def exact_matches(callnumber:)
     query = {
       q: "*:*",
