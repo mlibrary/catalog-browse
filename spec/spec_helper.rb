@@ -117,9 +117,9 @@ end
 def stub_solr_get_request(url:, output: "{}", status: 200, query: nil)
   req_attributes = {}
   req_attributes[:headers] = {
-    "Accept" => "*/*",
+    :accept => "*/*",
     "Accept-Encoding" => "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
-    "User-Agent" => "Ruby"
+    "User-Agent" => "Faraday v2.3.0"
   }
   req_attributes[:query] = query unless query.nil?
   resp = {headers: {content_type: "application/json"}, status: status, body: output}
