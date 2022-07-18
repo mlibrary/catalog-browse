@@ -27,4 +27,10 @@ describe "requests" do
       expect(last_response.status).to eq(200)
     end
   end
+  context "get /-/live" do
+    it "returns status OK" do
+      get "/-/live"
+      expect(last_response.status).to eq(200)
+    end
+  end
 end
