@@ -29,7 +29,7 @@ class BrowseList
     bib_ids = if index_response
       index_response.body.dig("response", "docs").map { |x| x["bib_id"] }
     else
-      [index_before.body.dig("response", "docs"), index_after.parsed_response.dig("response", "docs")].flatten.map { |x| x["bib_id"] }
+      [index_before.body.dig("response", "docs"), index_after.body.dig("response", "docs")].flatten.map { |x| x["bib_id"] }
     end
     begin
       catalog_response = catalog_solr_client.get_bibs(bib_ids: bib_ids)
