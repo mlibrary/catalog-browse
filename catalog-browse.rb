@@ -9,7 +9,7 @@ require_relative "lib/utilities/browse_solr_client"
 require_relative "lib/models/fake_authors"
 require_relative "lib/models/browse_list"
 require_relative "lib/models/browse_item"
-require_relative "lib/models/callnumbers_list"
+require_relative "lib/models/callnumber_list"
 require_relative "lib/models/search_dropdown"
 require_relative "lib/models/datastores"
 
@@ -27,7 +27,7 @@ get "/callnumber" do
   callnumber = params[:query]
   reference_id = params[:reference_id] || callnumber
   begin
-    list = CallnumbersList.for(direction: params[:direction], reference_id: reference_id, num_rows_to_display: 20, original_reference: callnumber, banner_reference: params[:banner_reference])
+    list = CallnumberList.for(direction: params[:direction], reference_id: reference_id, num_rows_to_display: 20, original_reference: callnumber, banner_reference: params[:banner_reference])
   rescue => e
     logger.error(e.message)
     list = BrowseList::Error.new(reference_id)
