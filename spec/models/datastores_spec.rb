@@ -1,4 +1,4 @@
-require_relative '../spec_helper.rb'
+require_relative "../spec_helper"
 describe Datastores do
   before(:each) do
     @data = [{
@@ -13,7 +13,7 @@ describe Datastores do
     it "has a working each" do
       @data.push({label: "Label2", href: "/loc_2"})
       output = []
-      subject.each{|x| output.push(x)}
+      subject.each { |x| output.push(x) }
       expect(output.count).to eq(2)
     end
   end
@@ -31,7 +31,7 @@ describe Datastores do
     end
     context "#href" do
       it "has an href" do
-        expect(datastore.href).to eq("#{ENV.fetch('SEARCH_URL')}/datastore")
+        expect(datastore.href).to eq("#{ENV.fetch("SEARCH_URL")}/datastore")
       end
     end
     context "#current?" do
@@ -45,4 +45,3 @@ describe Datastores do
     end
   end
 end
-

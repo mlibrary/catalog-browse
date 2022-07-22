@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 describe "requests" do
   include Rack::Test::Methods
   before(:each) do
@@ -12,18 +12,11 @@ describe "requests" do
   end
   context "get /callnumber" do
     it "returns status OK" do
-      query = {
-        rows: 5000,
-        sort: "id asc",
-        q: "*:*",
-        fq: 'callnumber:"Thing"'
-      }
-      results = fixture('biblio_results.json')
-      stub = stub_solr_get_request(url: "#{@callnumbers_core}/select", query: hash_including({fq: 'callnumber:"Thing"'}), output: fixture('biblio_results.json'))
-      stub = stub_solr_get_request(url: "#{@callnumbers_core}/select", query: hash_including({sort: "id desc"}), output: fixture('callnumbers_before.json'))
-      stub = stub_solr_get_request(url: "#{@callnumbers_core}/select", query: hash_including({fq: 'id:["Thing" TO *]'}), output: fixture('callnumbers_results.json'))
-      stub = stub_biblio_get_request(url: "biblio/select", query: hash_including({}), output: fixture('biblio_results_middle.json'))
-      get "/callnumber", { query: 'Thing'}
+      stub_solr_get_request(url: "#{@callnumbers_core}/select", query: hash_including({fq: 'callnumber:"Thing"'}), output: fixture("biblio_results.json"))
+      stub_solr_get_request(url: "#{@callnumbers_core}/select", query: hash_including({sort: "id desc"}), output: fixture("callnumbers_before.json"))
+      stub_solr_get_request(url: "#{@callnumbers_core}/select", query: hash_including({fq: 'id:["Thing" TO *]'}), output: fixture("callnumbers_results.json"))
+      stub_biblio_get_request(url: "biblio/select", query: hash_including({}), output: fixture("biblio_results_middle.json"))
+      get "/callnumber", {query: "Thing"}
       expect(last_response.status).to eq(200)
     end
   end

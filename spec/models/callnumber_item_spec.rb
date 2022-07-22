@@ -1,12 +1,12 @@
-require_relative '../spec_helper.rb'
-describe BrowseItem do
+require_relative "../spec_helper"
+describe CallnumberItem do
   before(:each) do
-    @catalog_doc = JSON.parse(fixture('zhizn_bib.json'))
-    @index_doc = JSON.parse(fixture('zhizn_browse.json'))
+    @catalog_doc = JSON.parse(fixture("zhizn_bib.json"))
+    @index_doc = JSON.parse(fixture("zhizn_browse.json"))
     @exact_match = false
   end
   subject do
-    described_class.new(@catalog_doc, @index_doc, @exact_match)
+    described_class.new(catalog_doc: @catalog_doc, browse_doc: @index_doc, exact_match: @exact_match)
   end
   it "has false match_notice?" do
     expect(subject.match_notice?).to eq(false)
@@ -26,7 +26,7 @@ describe BrowseItem do
       expect(subject.title).to eq("Zhiznʹ gospodina de Molʹera / M. Bulgakov ; [podgot. teksta i poslesl. V.I. Loseva]. my edition")
     end
   end
-  context "#vernacular_title"  do
+  context "#vernacular_title" do
     it "shows vernacular title without edition when there isn't one" do
       expect(subject.vernacular_title).to eq("Жизнь господина де Мольера / М. Булгаков ; [подгот. текста и послесл. В.И. Лосева].")
     end
