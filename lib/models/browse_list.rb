@@ -47,7 +47,6 @@ class BrowseList
     end
   end
 
-
   def initialize(index_response:, num_rows_to_display:, original_reference:, exact_matches:, banner_reference:)
     @original_reference = original_reference
     @num_rows_to_display = num_rows_to_display
