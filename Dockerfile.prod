@@ -41,4 +41,4 @@ COPY --chown=${UID}:${GID} . /app
 RUN npm install
 RUN npm run build
 
-CMD ["bundle", "exec", "ruby", "catalog-browse.rb", "-o", "0.0.0.0"]
+CMD ["bundle", "exec", "rackup", "-p", "4567", "--host", "0.0.0.0"]
