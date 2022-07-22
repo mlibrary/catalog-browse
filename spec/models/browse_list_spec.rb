@@ -4,7 +4,6 @@ describe BrowseList::ReferenceOnTop do
     # rows would be 3.
     @params = {
       index_response: JSON.parse(fixture("callnumbers_results.json")),
-      catalog_response: JSON.parse(fixture("biblio_results.json")),
       num_rows_to_display: 3,
       original_reference: "Z 253 .U6 1963",
       exact_matches: [],
@@ -59,26 +58,12 @@ describe BrowseList::ReferenceOnTop do
       expect(subject.next_url).to eq("#{ENV.fetch("BASE_URL")}/callnumber?query=#{URI.encode_www_form_component(@params[:original_reference])}&direction=next&reference_id=#{next_ref}&banner_reference=banner_reference")
     end
   end
-  context "#items" do
-    it "returns an Array of Browse Items with the correct number of rows and the correct first and last item" do
-      items = subject.items
-      expect(items.first.class.to_s).to include("BrowseItem")
-      expect(items.count).to eq(3)
-      expect(items.first.callnumber).to eq("Z 253 .U63 1971")
-      expect(items.last.callnumber).to eq("Z 253 .U69 2017")
-    end
-    it "puts the banner above the banner_match" do
-      @params[:banner_reference] = " Z 253 .U69 2017 ||990155473530106381"
-      items = subject.items
-      expect(items.count).to eq(4)
-      expect(items[2].match_notice?).to eq(true)
-    end
-
-    it "puts banner above exact match" do
-      @params[:exact_matches] = [" Z 253 .U69 2017 ||990155473530106381"]
-      items = subject.items
-      expect(items.count).to eq(4)
-      expect(items[2].match_notice?).to eq(true)
+  context "#docs" do
+    it "returns an Array of browse docs with the correct number of rows and the correct first and last item" do
+      docs = subject.docs
+      expect(docs.count).to eq(3)
+      expect(docs.first["callnumber"].strip).to eq("Z 253 .U63 1971")
+      expect(docs.last["callnumber"].strip).to eq("Z 253 .U69 2017")
     end
   end
 end
@@ -87,7 +72,6 @@ describe BrowseList::ReferenceOnBottom do
     @params = {
       index_response: JSON.parse(fixture("callnumbers_results.json")),
       # has 5 results
-      catalog_response: JSON.parse(fixture("biblio_results.json")),
       num_rows_to_display: 4,
       original_reference: "Z 253 .U6 1963",
       exact_matches: [],
@@ -131,7 +115,6 @@ describe BrowseList::ReferenceInMiddle do
     @params = {
       index_before: JSON.parse(fixture("callnumbers_before.json")),
       index_after: JSON.parse(fixture("callnumbers_results.json")),
-      catalog_response: JSON.parse(fixture("biblio_results_middle.json")),
       num_rows_to_display: 6,
       original_reference: "Z 253 .U6 1963",
       exact_matches: [],
@@ -188,7 +171,6 @@ describe BrowseList do
   before(:each) do
     @params = {
       index_response: JSON.parse(fixture("callnumbers_results.json")),
-      catalog_response: JSON.parse(fixture("biblio_results.json")),
       num_rows_to_display: 3,
       original_reference: "Z 253 .U6 1963",
       exact_matches: [],

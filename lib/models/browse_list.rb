@@ -1,5 +1,5 @@
 class BrowseList
-  attr_reader :original_reference, :num_rows_to_display, :num_matches
+  attr_reader :original_reference, :num_rows_to_display, :num_matches, :exact_matches, :banner_reference
 
   def self.for(direction:, reference_id:, num_rows_to_display:, original_reference:,
     banner_reference:,
@@ -12,9 +12,23 @@ class BrowseList
     when "next"
       # includes reference in results
       index_response = browse_solr_client.browse_reference_on_top(reference_id: reference_id, rows: num_rows_to_display + 2)
+      BrowseList::ReferenceOnTop.new(
+        index_response: index_response.body,
+        num_rows_to_display: num_rows_to_display,
+        original_reference: original_reference,
+        exact_matches: exact_matches,
+        banner_reference: my_banner_reference
+      )
     when "previous"
       # doesn't include reference in results
       index_response = browse_solr_client.browse_reference_on_bottom(reference_id: reference_id, rows: num_rows_to_display + 1)
+      BrowseList::ReferenceOnBottom.new(
+        index_response: index_response.body,
+        num_rows_to_display: num_rows_to_display,
+        original_reference: original_reference,
+        exact_matches: exact_matches,
+        banner_reference: my_banner_reference
+      )
     else
       # index_before:, index_after:
       return BrowseList::Empty.new if reference_id.nil?
@@ -22,45 +36,9 @@ class BrowseList
       index_after = browse_solr_client.browse_reference_on_top(reference_id: reference_id, rows: num_rows_to_display - 1)
       my_banner_reference = index_after.body.dig("response", "docs").first["id"]
       # need above and below
-    end
-
-    # if index_response.status != 200
-    # #Do some error handling
-    # end
-    bib_ids = if index_response
-      index_response.body.dig("response", "docs").map { |x| x["bib_id"] }
-    else
-      [index_before.body.dig("response", "docs"), index_after.body.dig("response", "docs")].flatten.map { |x| x["bib_id"] }
-    end
-    begin
-      catalog_response = catalog_solr_client.get_bibs(bib_ids: bib_ids)
-      raise if catalog_response.status != 200
-    end
-
-    case direction
-    when "next"
-      BrowseList::ReferenceOnTop.new(
-        index_response: index_response.body,
-        catalog_response: catalog_response.body,
-        num_rows_to_display: num_rows_to_display,
-        original_reference: original_reference,
-        exact_matches: exact_matches,
-        banner_reference: my_banner_reference
-      )
-    when "previous"
-      BrowseList::ReferenceOnBottom.new(
-        index_response: index_response.body,
-        catalog_response: catalog_response.body,
-        num_rows_to_display: num_rows_to_display,
-        original_reference: original_reference,
-        exact_matches: exact_matches,
-        banner_reference: my_banner_reference
-      )
-    else
       BrowseList::ReferenceInMiddle.new(
         index_before: index_before.body,
         index_after: index_after.body,
-        catalog_response: catalog_response.body,
         num_rows_to_display: num_rows_to_display,
         original_reference: original_reference,
         exact_matches: exact_matches,
@@ -70,9 +48,8 @@ class BrowseList
   end
 
 
-  def initialize(index_response:, catalog_response:, num_rows_to_display:, original_reference:, exact_matches:, banner_reference:)
+  def initialize(index_response:, num_rows_to_display:, original_reference:, exact_matches:, banner_reference:)
     @original_reference = original_reference
-    @catalog_docs = catalog_response&.dig("response", "docs")
     @num_rows_to_display = num_rows_to_display
     @index_docs = index_response&.dig("response", "docs")
     @num_matches = exact_matches.count
@@ -116,16 +93,8 @@ class BrowseList
     "#{ENV.fetch("BASE_URL")}/callnumber?#{params}"
   end
 
-  def items
-    banner_index = nil
-    match_notice = OpenStruct.new(callnumber: @original_reference.upcase, match_notice?: true)
-    my_items = @index_docs[1, @num_rows_to_display].map.with_index do |index_doc, index|
-      exact_match = exact_match_for?(index_doc["id"])
-      banner_match = (@banner_reference == index_doc["id"])
-      banner_index = index if (exact_match || banner_match) && banner_index.nil?
-      BrowseItem.new(catalog_doc_for_mms_id(index_doc["bib_id"]), index_doc, exact_match)
-    end
-    banner_index.nil? ? my_items : my_items.insert(banner_index, match_notice)
+  def docs
+    @index_docs[1, @num_rows_to_display]
   end
 
   def match_text
@@ -141,16 +110,6 @@ class BrowseList
 
   def error?
     false
-  end
-
-  private
-
-  def catalog_doc_for_mms_id(mms_id)
-    @catalog_docs.find { |x| x["id"] == mms_id }
-  end
-
-  def exact_match_for?(id)
-    @exact_matches.any?(id)
   end
 end
 
@@ -173,7 +132,7 @@ class BrowseList::ReferenceOnTop < BrowseList
 end
 
 class BrowseList::ReferenceOnBottom < BrowseList
-  def initialize(index_response:, catalog_response:, num_rows_to_display:, original_reference:, exact_matches:, banner_reference:)
+  def initialize(index_response:, num_rows_to_display:, original_reference:, exact_matches:, banner_reference:)
     super
     @index_docs.reverse!
   end
@@ -197,12 +156,11 @@ end
 
 class BrowseList::ReferenceInMiddle < BrowseList::ReferenceOnTop
   def initialize(index_before:, index_after:,
-    catalog_response:, num_rows_to_display:,
+    num_rows_to_display:,
     original_reference:, exact_matches:, banner_reference:)
     @exact_matches = exact_matches
     @num_matches = exact_matches.count
     @original_reference = original_reference
-    @catalog_docs = catalog_response&.dig("response", "docs")
     @num_rows_to_display = num_rows_to_display
     @banner_reference = banner_reference
     @index_docs = get_index_docs(index_before, index_after)
