@@ -5,6 +5,10 @@ class BrowseItem
     @exact_match = exact_match
   end
 
+  def [](index)
+    @index_doc[index]
+  end
+
   def match_notice?
     false
   end
