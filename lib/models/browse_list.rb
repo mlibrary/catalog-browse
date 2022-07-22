@@ -1,5 +1,6 @@
 class BrowseList
   attr_reader :original_reference, :num_rows_to_display, :num_matches
+
   def self.for(direction:, reference_id:, num_rows_to_display:, original_reference:,
     banner_reference:,
     catalog_solr_client: CatalogSolrClient.client,
@@ -67,6 +68,7 @@ class BrowseList
       )
     end
   end
+
 
   def initialize(index_response:, catalog_response:, num_rows_to_display:, original_reference:, exact_matches:, banner_reference:)
     @original_reference = original_reference
