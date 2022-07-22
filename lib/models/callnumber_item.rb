@@ -4,6 +4,7 @@ class CallnumberItem
     @catalog_doc = catalog_doc
     @exact_match = exact_match
   end
+
   def match_notice?
     false
   end
@@ -68,5 +69,4 @@ class CallnumberItem
   def mms_id
     @browse_doc["bib_id"]
   end
-  
 end
