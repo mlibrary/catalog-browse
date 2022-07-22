@@ -1,15 +1,9 @@
-class BrowseItem
-  attr_reader :index_doc
-  def initialize(catalog_doc, index_doc, exact_match)
-    @catalog_doc = catalog_doc || {}
-    @index_doc = index_doc
+class CallnumberItem
+  def initialize(browse_doc:, catalog_doc:, exact_match:)
+    @browse_doc = browse_doc
+    @catalog_doc = catalog_doc
     @exact_match = exact_match
   end
-
-  def [](index)
-    @index_doc[index]
-  end
-
   def match_notice?
     false
   end
@@ -20,7 +14,7 @@ class BrowseItem
 
   # for the view
   def callnumber
-    @index_doc["callnumber"]&.strip
+    @browse_doc["callnumber"]&.strip
   end
 
   def url
@@ -72,6 +66,7 @@ class BrowseItem
   end
 
   def mms_id
-    @index_doc["bib_id"]
+    @browse_doc["bib_id"]
   end
+  
 end
