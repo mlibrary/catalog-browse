@@ -16,7 +16,7 @@ class CallnumberList
     new(browse_list: browse_list, catalog_response: catalog_response)
   end
 
-  def initialize(browse_list:, catalog_response:nil)
+  def initialize(browse_list:, catalog_response: nil)
     @browse_list = browse_list
     @catalog_docs = catalog_response&.dig("response", "docs")
   end
@@ -48,6 +48,7 @@ class CallnumberList
   def previous_url
     nav_url(@browse_list.previous_url_params)
   end
+
   def next_url
     nav_url(@browse_list.next_url_params)
   end
@@ -64,6 +65,7 @@ class CallnumberList
   end
 
   private
+
   def nav_url(params)
     "#{ENV.fetch("BASE_URL")}/callnumber?#{URI.encode_www_form(params)}"
   end
@@ -72,7 +74,6 @@ class CallnumberList
     @catalog_docs.find { |x| x["id"] == bib_id }
   end
 end
-
 
 class CallnumberList::Error < CallnumberList
   attr_reader :original_reference
@@ -83,9 +84,11 @@ class CallnumberList::Error < CallnumberList
   def show_table?
     false
   end
+
   def error?
     true
   end
+
   def error_message
     "<span class=\"strong\">#{original_reference}</span> is not a valid call number query. Please try a using a valid Library of Congress call number (enter one or two letters and a number) or valid Dewey call number (start with three numbers)."
   end
