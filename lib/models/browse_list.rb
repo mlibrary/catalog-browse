@@ -55,55 +55,30 @@ class BrowseList
     @banner_reference = banner_reference
   end
 
-  def title
-    if show_table?
-      "Browse &ldquo;#{@original_reference}&rdquo; in call numbers"
-    else
-      "Browse by Call Number"
-    end
-  end
-
-  def help_text
-    '<span class="strong">Browse by call number help:</span> Search a Library of Congress (LC) or Dewey call number and view an alphabetical list of all call numbers and related titles indexed in the Library catalog. <a href="https://guides.lib.umich.edu/c.php?g=282937">Learn more about call numbers<span class="visually-hidden"> (link points to external site)</span></a>.'
-  end
-
   def show_table?
     true
   end
 
-  def previous_url
-    params = URI.encode_www_form({
+  def previous_url_params
+    {
       query: @original_reference,
       direction: "previous",
       reference_id: previous_reference_id,
       banner_reference: @banner_reference
-    })
-    "#{ENV.fetch("BASE_URL")}/callnumber?#{params}"
+    }
   end
 
-  def next_url
-    params = URI.encode_www_form({
+  def next_url_params
+    {
       query: @original_reference,
       direction: "next",
       reference_id: next_reference_id,
       banner_reference: @banner_reference
-    })
-    "#{ENV.fetch("BASE_URL")}/callnumber?#{params}"
+    }
   end
 
   def docs
     @index_docs[1, @num_rows_to_display]
-  end
-
-  def match_text
-    case @num_matches
-    when 0
-      "<span class=\"strong\">#{@original_reference}</span> would appear here. There's no exact match for that call number in our catalog."
-    when 1
-      "We found a matching call number in our catalog for: <span class=\"strong\">#{original_reference}</span>."
-    else
-      "We found #{@num_matches} matching items in our catalog for the call number: <span class=\"strong\">#{original_reference}</span>"
-    end
   end
 
   def error?
@@ -180,15 +155,5 @@ class BrowseList::Empty < BrowseList
 
   def show_table?
     false
-  end
-end
-
-class BrowseList::Error < BrowseList::Empty
-  def error?
-    true
-  end
-
-  def error_message
-    "<span class=\"strong\">#{@original_reference}</span> is not a valid call number query. Please try a using a valid Library of Congress call number (enter one or two letters and a number) or valid Dewey call number (start with three numbers)."
   end
 end

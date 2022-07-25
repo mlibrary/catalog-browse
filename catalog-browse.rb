@@ -32,7 +32,7 @@ get "/callnumber" do
     list = CallnumberList.for(direction: params[:direction], reference_id: reference_id, num_rows_to_display: 20, original_reference: callnumber, banner_reference: params[:banner_reference])
   rescue => e
     logger.error(e.message)
-    list = BrowseList::Error.new(reference_id)
+    list = CallnumberList.new(browse_list: CallnumberList::Error.new(reference_id))
   end
   erb :call_number, locals: {list: list}
 end

@@ -13,20 +13,6 @@ describe BrowseList::ReferenceOnTop do
   subject do
     described_class.new(**@params)
   end
-  context "match_text" do
-    it "returns appropriate text for no matches" do
-      @params[:exact_matches] = []
-      expect(subject.match_text).to include("no exact match")
-    end
-    it "returns appropriate text for 1 match" do
-      @params[:exact_matches] = ["match_id1"]
-      expect(subject.match_text).to include("a matching call number")
-    end
-    it "returns appropriate text for 20 matches" do
-      @params[:exact_matches] = ["match_id1", "match_id2"]
-      expect(subject.match_text).to include("We found 2 matching items")
-    end
-  end
   context "#next_reference_id" do
     it "for edgeless list, returns next to last ref id" do
       expect(subject.next_reference_id).to eq("Z 253 .U69 2017 ||990155473530106381")
@@ -46,16 +32,24 @@ describe BrowseList::ReferenceOnTop do
       expect(subject.has_previous_list?).to eq(true)
     end
   end
-  context "#previous_url" do
+  context "#previous_url_params" do
     it "returns appropriate url" do
-      prev_ref = URI.encode_www_form_component("Z 253 .U63 1971||990017586110106381")
-      expect(subject.previous_url).to eq("#{ENV.fetch("BASE_URL")}/callnumber?query=#{URI.encode_www_form_component(@params[:original_reference])}&direction=previous&reference_id=#{prev_ref}&banner_reference=banner_reference")
+      expect(subject.previous_url_params).to eq({
+        query: @params[:original_reference],
+        direction: "previous",
+        reference_id: "Z 253 .U63 1971||990017586110106381",
+        banner_reference: "banner_reference"
+      })
     end
   end
-  context "#next_url" do
+  context "#next_url_parms" do
     it "returns appropriate url" do
-      next_ref = URI.encode_www_form_component("Z 253 .U69 2017 ||990155473530106381")
-      expect(subject.next_url).to eq("#{ENV.fetch("BASE_URL")}/callnumber?query=#{URI.encode_www_form_component(@params[:original_reference])}&direction=next&reference_id=#{next_ref}&banner_reference=banner_reference")
+      expect(subject.next_url_params).to eq({
+        query: @params[:original_reference],
+        direction: "next",
+        reference_id: "Z 253 .U69 2017 ||990155473530106381",
+        banner_reference: "banner_reference"
+      })
     end
   end
   context "#docs" do
@@ -139,55 +133,6 @@ describe BrowseList::Empty do
   context "#show_table?" do
     it "returns false" do
       expect(subject.show_table?).to eq(false)
-    end
-  end
-  context "#title" do
-    it "returns default title" do
-      expect(subject.title).to eq("Browse by Call Number")
-    end
-  end
-end
-describe BrowseList::Error do
-  before(:each) do
-    @params = {
-      original_reference: "OSU"
-    }
-  end
-  subject do
-    described_class.new(**@params)
-  end
-  context "#error?" do
-    it "returns true" do
-      expect(subject.error?).to eq(true)
-    end
-  end
-  context "#error_message" do
-    it "returns an error message" do
-      expect(subject.error_message).to eq("<span class=\"strong\">{:original_reference=>\"OSU\"}</span> is not a valid call number query. Please try a using a valid Library of Congress call number (enter one or two letters and a number) or valid Dewey call number (start with three numbers).")
-    end
-  end
-end
-describe BrowseList do
-  before(:each) do
-    @params = {
-      index_response: JSON.parse(fixture("callnumbers_results.json")),
-      num_rows_to_display: 3,
-      original_reference: "Z 253 .U6 1963",
-      exact_matches: [],
-      banner_reference: "banner_reference"
-    }
-  end
-  subject do
-    described_class.new(**@params)
-  end
-  context "#title" do
-    it "returns title with original reference" do
-      expect(subject.title).to eq("Browse &ldquo;Z 253 .U6 1963&rdquo; in call numbers")
-    end
-  end
-  context "#help_text" do
-    it "returns help text" do
-      expect(subject.help_text).to eq("<span class=\"strong\">Browse by call number help:</span> Search a Library of Congress (LC) or Dewey call number and view an alphabetical list of all call numbers and related titles indexed in the Library catalog. <a href=\"https://guides.lib.umich.edu/c.php?g=282937\">Learn more about call numbers<span class=\"visually-hidden\"> (link points to external site)</span></a>.")
     end
   end
 end
