@@ -1,5 +1,5 @@
 class BrowseList
-  attr_reader :original_reference, :num_rows_to_display, :num_matches, :exact_matches, :banner_reference
+  attr_reader :original_reference, :num_rows_to_display, :num_matches, :exact_matches, :banner_reference, :index_docs
 
   def self.for(direction:, reference_id:, num_rows_to_display:, original_reference:,
     banner_reference:,
@@ -30,7 +30,7 @@ class BrowseList
       )
     else
       # index_before:, index_after:
-      return BrowseList::Empty.new if reference_id.nil?
+      return BrowseList::Empty.new if reference_id.nil? || reference_id == ""
       index_before = browse_solr_client.browse_reference_on_bottom(reference_id: reference_id, rows: 3)
       index_after = browse_solr_client.browse_reference_on_top(reference_id: reference_id, rows: num_rows_to_display - 1)
       my_banner_reference = index_after.body.dig("response", "docs").first["id"]
@@ -151,6 +151,10 @@ end
 class BrowseList::Empty < BrowseList
   def initialize(original_reference = "")
     @original_reference = original_reference
+  end
+
+  def docs
+    []
   end
 
   def show_table?

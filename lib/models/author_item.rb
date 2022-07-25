@@ -25,7 +25,23 @@ class AuthorItem
     @browse_doc["count"]
   end
 
+  def record_text
+    "#{results_count} #{results_count == 1 ? "record" : "records"}"
+  end
+
   def alternate_forms
     @browse_doc["alternate_forms"]
+  end
+
+  def has_cross_references?
+    false
+  end
+
+  def heading_link?
+    !!heading_link
+  end
+
+  def heading_link
+    @browse_doc["heading_link"]
   end
 end

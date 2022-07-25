@@ -23,11 +23,11 @@
               <dl>
                 <dt class="visually-hidden">Author:</dt>
                 <dd>
-                  <% if result.num_matches > 0 %><a href="<%= result.url%>"><% end %>
+                  <% if result.results_count > 0 %><a href="<%= result.url%>"><% end %>
                     <span <% if result.exact_match? %>class="strong"<% end %>>
                       <%=result.author%>
                     </span>
-                  <% if result.num_matches > 0 %></a><% end %>
+                  <% if result.results_count > 0 %></a><% end %>
                   <% if result.heading_link? %>
                     <a href="<%= result.heading_link%>" class="vernacular pipe">View Heading Information</a>
                   <% end %>

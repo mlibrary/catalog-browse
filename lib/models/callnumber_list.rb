@@ -1,7 +1,4 @@
-class CallnumberList
-  extend Forwardable
-  def_delegators :@browse_list, :show_table?, :error?, :has_next_list?, :has_previous_list?, :next_reference_id, :previous_reference_id, :original_reference, :num_rows_to_display, :num_matches, :exact_matches, :banner_reference, :error_message
-
+class CallnumberList < BrowseListPresenter
   def self.for(direction:, reference_id:, num_rows_to_display:, original_reference:, banner_reference:)
     browse_list = BrowseList.for(
       direction: direction,
@@ -21,6 +18,14 @@ class CallnumberList
     @catalog_docs = catalog_response&.dig("response", "docs")
   end
 
+  def name
+    "call number"
+  end
+
+  def path
+    "callnumber"
+  end
+
   def items
     banner_index = nil
     match_notice = OpenStruct.new(callnumber: original_reference.upcase, match_notice?: true)
@@ -33,42 +38,11 @@ class CallnumberList
     banner_index.nil? ? my_items : my_items.insert(banner_index, match_notice)
   end
 
-  def title
-    if show_table?
-      "Browse &ldquo;#{original_reference}&rdquo; in call numbers"
-    else
-      "Browse by Call Number"
-    end
-  end
-
   def help_text
     '<span class="strong">Browse by call number help:</span> Search a Library of Congress (LC) or Dewey call number and view an alphabetical list of all call numbers and related titles indexed in the Library catalog. <a href="https://guides.lib.umich.edu/c.php?g=282937">Learn more about call numbers<span class="visually-hidden"> (link points to external site)</span></a>.'
   end
 
-  def previous_url
-    nav_url(@browse_list.previous_url_params)
-  end
-
-  def next_url
-    nav_url(@browse_list.next_url_params)
-  end
-
-  def match_text
-    case num_matches
-    when 0
-      "<span class=\"strong\">#{original_reference}</span> would appear here. There's no exact match for that call number in our catalog."
-    when 1
-      "We found a matching call number in our catalog for: <span class=\"strong\">#{original_reference}</span>."
-    else
-      "We found #{num_matches} matching items in our catalog for the call number: <span class=\"strong\">#{original_reference}</span>"
-    end
-  end
-
   private
-
-  def nav_url(params)
-    "#{ENV.fetch("BASE_URL")}/callnumber?#{URI.encode_www_form(params)}"
-  end
 
   def catalog_doc(bib_id)
     @catalog_docs.find { |x| x["id"] == bib_id }

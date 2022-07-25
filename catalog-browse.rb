@@ -8,6 +8,7 @@ require_relative "lib/catalog_solr_client"
 require_relative "lib/utilities/browse_solr_client"
 require_relative "lib/models/fake_authors"
 require_relative "lib/models/browse_list"
+require_relative "lib/models/browse_list_presenter"
 require_relative "lib/models/callnumber_list"
 require_relative "lib/models/callnumber_item"
 require_relative "lib/models/author_list"
@@ -21,7 +22,14 @@ end
 
 if ENV.fetch("AUTHOR_ON") == "true"
   get "/author" do
-    list = FakeAuthorList.new
+    author = params[:query]
+    reference_id = params[:reference_id] || author
+    begin
+      list = AuthorList.for(direction: params[:direction], reference_id: reference_id, num_rows_to_display: 20, original_reference: author, banner_reference: params[:banner_reference])
+    rescue => e
+      logger.error(e.message)
+      list = AuthorList::Error.new(reference_id)
+    end
     erb :authors, locals: {list: list}
   end
 end
@@ -32,7 +40,7 @@ get "/callnumber" do
     list = CallnumberList.for(direction: params[:direction], reference_id: reference_id, num_rows_to_display: 20, original_reference: callnumber, banner_reference: params[:banner_reference])
   rescue => e
     logger.error(e.message)
-    list = CallnumberList.new(browse_list: CallnumberList::Error.new(reference_id))
+    list = CallnumberList::Error.new(reference_id)
   end
   erb :call_number, locals: {list: list}
 end
