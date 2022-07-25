@@ -38,7 +38,7 @@ class AuthorList
       "Browse by Author"
     end
   end
+
   def help_text
   end
-
 end
