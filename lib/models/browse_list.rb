@@ -3,11 +3,10 @@ class BrowseList
 
   def self.for(direction:, reference_id:, num_rows_to_display:, original_reference:,
     banner_reference:,
-    catalog_solr_client: CatalogSolrClient.client,
     browse_solr_client: BrowseSolrClient.new)
 
     my_banner_reference = banner_reference
-    exact_matches = browse_solr_client.exact_matches(callnumber: original_reference)
+    exact_matches = browse_solr_client.exact_matches(value: original_reference)
     case direction
     when "next"
       # includes reference in results
