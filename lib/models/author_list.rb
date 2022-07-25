@@ -1,7 +1,4 @@
-class AuthorList
-  extend Forwardable
-  def_delegators :@browse_list, :show_table?, :previous_url, :next_url, :match_text, :error?, :has_next_list?, :has_previous_list?, :next_reference_id, :previous_reference_id, :original_reference, :num_rows_to_display, :num_matches, :exact_matches, :banner_reference
-
+class AuthorList < BrowseListPresenter
   def self.for(direction:, reference_id:, num_rows_to_display:, original_reference:, banner_reference:)
     browse_list = BrowseList.for(
       direction: direction,
@@ -19,6 +16,14 @@ class AuthorList
     @browse_list = browse_list
   end
 
+  def name
+    "author"
+  end
+
+  def path
+    "author"
+  end
+
   def items
     banner_index = nil
     match_notice = OpenStruct.new(author: original_reference.upcase, match_notice?: true)
@@ -31,14 +36,26 @@ class AuthorList
     banner_index.nil? ? my_items : my_items.insert(banner_index, match_notice)
   end
 
-  def title
-    if show_table?
-      "Browse &ldquo;#{@original_reference}&rdquo; in authors"
-    else
-      "Browse by Author"
-    end
+  def help_text
+    '<span class="strong">Browse by author help:</span> Search an author (last name, first name) and view an alphabetical list of all authors headings (personal names and corporate names) and variations of those names indexed in the Library catalog.'
+  end
+end
+
+class AuthorList::Error < AuthorList
+  attr_reader :original_reference
+  def initialize(original_reference = "")
+    @original_reference = original_reference
   end
 
-  def help_text
+  def show_table?
+    false
+  end
+
+  def error?
+    true
+  end
+
+  def error_message
+    "<span class=\"strong\">#{original_reference}</span> is not a valid author query."
   end
 end
