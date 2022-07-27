@@ -18,7 +18,7 @@ class AuthorItem
   end
 
   def url
-    params = {library: "U-M Ann Arbor Libraries", query: "author:('#{author}')"}
+    params = {library: "U-M Ann Arbor Libraries", query: "author:(\"#{author}\")"}
     "https://search.lib.umich.edu/catalog?#{URI.encode_www_form(params)}"
   end
 
