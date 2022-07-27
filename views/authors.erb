@@ -34,18 +34,11 @@
                 </dd>
                 <% if result.has_cross_references? %>
                   <% result.cross_references.each do | cr | %>
-                    <% if cr.kind == 'see' %>
-                      <dt>See:</dt>
+                    <% if cr.kind == 'see_also' %>
+                      <dt>See Also:</dt>
                     <% end %>
                     <dd>
-                      <% if cr.num_matches > 0 %><a href="<%= cr.url%>"><% end %>
-                        <%=cr.author%>
-                      <% if cr.num_matches > 0 %>
-                        </a> (<%= cr.record_text %>)
-                      <% end %>
-                      <% if cr.heading_link? %>
-                        <a href="<%= cr.heading_link %>" class="vernacular pipe">View Heading Information</a>
-                      <% end %>
+                    <a href="<%= cr.url%>"><%=cr.author%></a>
                     </dd>
                   <% end %>
                 <% end %>

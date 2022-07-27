@@ -31,7 +31,7 @@ class AuthorList < BrowseListPresenter
       exact_match = exact_matches.any?(browse_doc["id"])
       banner_match = (banner_reference == browse_doc["id"])
       banner_index = index if (exact_match || banner_match) && banner_index.nil?
-      AuthorItem.new(browse_doc: browse_doc, exact_match: exact_match)
+      AuthorItem.for(browse_doc: browse_doc, exact_match: exact_match)
     end
     banner_index.nil? ? my_items : my_items.insert(banner_index, match_notice)
   end
