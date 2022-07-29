@@ -37,7 +37,6 @@ class BrowseSolrClient
     @conn.public_send(:get, "#{@path_prefix}/select", query)
   end
 
-  # just for callnumbers?
   def exact_matches(value: callnumber)
     query = {
       q: "*:*",
@@ -46,10 +45,8 @@ class BrowseSolrClient
       rows: 5000
     }
     result = @conn.public_send(:get, "#{@path_prefix}/select", query)
-    if result.status != 200
-      []
-    else
-      result.body["response"]["docs"]&.map { |x| x["id"] }
-    end
+    result.body["response"]["docs"]&.map { |x| x["id"] }
+  rescue
+    []
   end
 end
