@@ -1,0 +1,11 @@
+{
+  "responseHeader":{
+    "status":0,
+    "QTime":0,
+    "params":{
+      "q":"*:*",
+      "fq":"author:\"Marc Twain\"",
+      "sort":"id asc"}},
+  "response":{"numFound":0,"start":0,"docs":[]
+  }
+}

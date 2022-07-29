@@ -6,7 +6,6 @@ require "yaml"
 
 require_relative "lib/catalog_solr_client"
 require_relative "lib/utilities/browse_solr_client"
-require_relative "lib/models/fake_authors"
 require_relative "lib/models/browse_list"
 require_relative "lib/models/browse_list_presenter"
 require_relative "lib/models/callnumber_list"

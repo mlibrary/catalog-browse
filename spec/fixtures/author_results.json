@@ -1,0 +1,34 @@
+{
+    "response": {
+        "docs": [
+            {
+                "_version_": 1737163101826973725,
+                "author": "Twain, Mark 1835-1910",
+                "browse_field": "author",
+                "count": 8,
+                "id": "Twain, Mark 1835-1910~07fb324cb93fee986dfa846cdcac8c2a",
+                "record_type": "record"
+            },
+            {
+                "_version_": 1737163101826973726,
+                "author": "Twain, Mark,  1835-1910",
+                "browse_field": "author",
+                "count": 2,
+                "id": "Twain, Mark,  1835-1910~4a951af4492e133551b42881e1588a0f",
+                "record_type": "record"
+            }
+        ],
+        "numFound": 1512139,
+        "start": 0
+    },
+    "responseHeader": {
+        "QTime": 0,
+        "params": {
+            "fq": "id:[\"Twain, Marc\" TO *]",
+            "q": "*:*",
+            "rows": "2",
+            "sort": "id asc"
+        },
+        "status": 0
+    }
+}
