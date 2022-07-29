@@ -1,4 +1,43 @@
 require_relative "../spec_helper"
+describe BrowseList do
+  context ".for" do
+    before(:each) do
+      @browse_client = instance_double(BrowseSolrClient, exact_matches: [])
+      @params = {
+        direction: nil,
+        reference_id: nil,
+        num_rows_to_display: 20,
+        original_reference: nil,
+        banner_reference: nil,
+        browse_solr_client: @browse_client
+      }
+    end
+    subject do
+      described_class.for(**@params)
+    end
+    it "returns a ReferenceOnTop when direction is next" do
+      @params[:direction] = "next"
+      allow(@browse_client).to receive(:browse_reference_on_top) 
+      expect(subject.class).to eq(BrowseList::ReferenceOnTop)
+    end
+    it "returns a ReferenceOnTop when direction is previous" do
+      @params[:direction] = "previous"
+      allow(@browse_client).to receive(:browse_reference_on_bottom) 
+      expect(subject.class).to eq(BrowseList::ReferenceOnBottom)
+    end
+    context "direction is nil" do
+      it "returns a ReferenceInMiddle if there's a reference_id" do
+        @params[:reference_id] = "Something"
+        allow(@browse_client).to receive(:browse_reference_on_top) 
+        allow(@browse_client).to receive(:browse_reference_on_bottom) 
+        expect(subject.class).to eq(BrowseList::ReferenceInMiddle)
+      end
+      it "returns a Empty if there in not a reference_id" do
+        expect(subject.class).to eq(BrowseList::Empty)
+      end
+    end
+  end
+end
 describe BrowseList::ReferenceOnTop do
   before(:each) do
     # rows would be 3.
@@ -118,7 +157,13 @@ describe BrowseList::ReferenceInMiddle do
   subject do
     described_class.new(**@params)
   end
-  context "#items" do
+  context "#docs" do
+    it "returns starting ending doc from separate solr calls" do
+      docs = subject.docs
+      expect(docs.count).to eq(6)
+      expect(docs.first["callnumber"].strip).to eq("Z 253 .U581")
+      expect(docs.last["callnumber"].strip).to eq("Z 253 .U69 2017")
+    end
   end
 end
 describe BrowseList::Empty do
