@@ -12,7 +12,7 @@ class BrowseList
       # includes reference in results
       index_response = browse_solr_client.browse_reference_on_top(reference_id: reference_id, rows: num_rows_to_display + 2)
       BrowseList::ReferenceOnTop.new(
-        index_response: index_response.body,
+        index_response: index_response&.body,
         num_rows_to_display: num_rows_to_display,
         original_reference: original_reference,
         exact_matches: exact_matches,
@@ -22,7 +22,7 @@ class BrowseList
       # doesn't include reference in results
       index_response = browse_solr_client.browse_reference_on_bottom(reference_id: reference_id, rows: num_rows_to_display + 1)
       BrowseList::ReferenceOnBottom.new(
-        index_response: index_response.body,
+        index_response: index_response&.body,
         num_rows_to_display: num_rows_to_display,
         original_reference: original_reference,
         exact_matches: exact_matches,
@@ -33,11 +33,11 @@ class BrowseList
       return BrowseList::Empty.new if reference_id.nil? || reference_id == ""
       index_before = browse_solr_client.browse_reference_on_bottom(reference_id: reference_id, rows: 3)
       index_after = browse_solr_client.browse_reference_on_top(reference_id: reference_id, rows: num_rows_to_display - 1)
-      my_banner_reference = index_after.body.dig("response", "docs").first["id"]
+      my_banner_reference = index_after&.body&.dig("response", "docs")&.first&.dig("id")
       # need above and below
       BrowseList::ReferenceInMiddle.new(
-        index_before: index_before.body,
-        index_after: index_after.body,
+        index_before: index_before&.body,
+        index_after: index_after&.body,
         num_rows_to_display: num_rows_to_display,
         original_reference: original_reference,
         exact_matches: exact_matches,
@@ -107,7 +107,7 @@ end
 class BrowseList::ReferenceOnBottom < BrowseList
   def initialize(index_response:, num_rows_to_display:, original_reference:, exact_matches:, banner_reference:)
     super
-    @index_docs.reverse!
+    @index_docs&.reverse!
   end
 
   def has_next_list?
@@ -142,8 +142,8 @@ class BrowseList::ReferenceInMiddle < BrowseList::ReferenceOnTop
   private
 
   def get_index_docs(index_before, index_after)
-    before_docs = index_before.dig("response", "docs").reverse
-    after_docs = index_after.dig("response", "docs")
+    before_docs = index_before&.dig("response", "docs")&.reverse
+    after_docs = index_after&.dig("response", "docs")
     [before_docs, after_docs].flatten
   end
 end
@@ -151,10 +151,6 @@ end
 class BrowseList::Empty < BrowseList
   def initialize(original_reference = "")
     @original_reference = original_reference
-  end
-
-  def docs
-    []
   end
 
   def show_table?
