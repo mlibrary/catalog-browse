@@ -17,19 +17,19 @@ describe BrowseList do
     end
     it "returns a ReferenceOnTop when direction is next" do
       @params[:direction] = "next"
-      allow(@browse_client).to receive(:browse_reference_on_top) 
+      allow(@browse_client).to receive(:browse_reference_on_top)
       expect(subject.class).to eq(BrowseList::ReferenceOnTop)
     end
     it "returns a ReferenceOnTop when direction is previous" do
       @params[:direction] = "previous"
-      allow(@browse_client).to receive(:browse_reference_on_bottom) 
+      allow(@browse_client).to receive(:browse_reference_on_bottom)
       expect(subject.class).to eq(BrowseList::ReferenceOnBottom)
     end
     context "direction is nil" do
       it "returns a ReferenceInMiddle if there's a reference_id" do
         @params[:reference_id] = "Something"
-        allow(@browse_client).to receive(:browse_reference_on_top) 
-        allow(@browse_client).to receive(:browse_reference_on_bottom) 
+        allow(@browse_client).to receive(:browse_reference_on_top)
+        allow(@browse_client).to receive(:browse_reference_on_bottom)
         expect(subject.class).to eq(BrowseList::ReferenceInMiddle)
       end
       it "returns a Empty if there in not a reference_id" do

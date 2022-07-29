@@ -38,9 +38,10 @@ class AuthorItem
     "#{results_count} #{results_count == 1 ? "record" : "records"}"
   end
 
-  def alternate_forms
-    @browse_doc["alternate_forms"]
-  end
+  # mrio: commenting out because it isn't currently used in the UI
+  # def alternate_forms
+  # @browse_doc["alternate_forms"]
+  # end
 
   def has_cross_references?
     false
