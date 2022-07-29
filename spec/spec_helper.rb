@@ -114,7 +114,7 @@ def fixture(path)
   File.read("./spec/fixtures/#{path}")
 end
 
-def stub_solr_get_request(url:, output: "{}", status: 200, query: nil)
+def stub_solr_get_request(url:, output: "{}", status: 200, query: nil, no_return: nil)
   req_attributes = {}
   req_attributes[:headers] = {
     :accept => "*/*",
@@ -123,12 +123,16 @@ def stub_solr_get_request(url:, output: "{}", status: 200, query: nil)
   }
   req_attributes[:query] = query unless query.nil?
   resp = {headers: {content_type: "application/json"}, status: status, body: output}
-  stub_request(:get, "#{ENV["CATALOG_SOLR"]}/#{url}")
-    .with(**req_attributes)
-    .to_return(**resp)
+  req = stub_request(:get, "#{ENV["CATALOG_SOLR"]}/#{url}").with(**req_attributes)
+
+  if no_return.nil?
+    req.to_return(**resp)
+  else
+    req
+  end
 end
 
-def stub_biblio_get_request(url:, output: "{}", status: 200, query: nil)
+def stub_biblio_get_request(url:, output: "{}", status: 200, query: nil, no_return: nil)
   req_attributes = {}
   req_attributes[:headers] = {
     "Accept" => "*/*",
@@ -137,7 +141,10 @@ def stub_biblio_get_request(url:, output: "{}", status: 200, query: nil)
   }
   req_attributes[:query] = query unless query.nil?
   resp = {headers: {content_type: "application/json"}, status: status, body: output}
-  stub_request(:get, "#{ENV["BIBLIO_SOLR"]}/#{url}")
-    .with(**req_attributes)
-    .to_return(**resp)
+  req = stub_request(:get, "#{ENV["BIBLIO_SOLR"]}/#{url}").with(**req_attributes)
+  if no_return.nil?
+    req.to_return(**resp)
+  else
+    req
+  end
 end

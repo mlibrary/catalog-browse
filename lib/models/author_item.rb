@@ -6,6 +6,7 @@ class AuthorItem
       AuthorItem.new(browse_doc: browse_doc, exact_match: exact_match)
     end
   end
+
   def initialize(browse_doc:, exact_match:)
     @browse_doc = browse_doc
     @exact_match = exact_match
@@ -53,28 +54,33 @@ class AuthorItem
     @browse_doc["naf_id"]
   end
 end
+
 class AuthorItemWithCrossReferences < AuthorItem
   def has_cross_references?
     true
   end
+
   def cross_references
-    #see_instead because this still needs to be changed in solr
-    @browse_doc["see_instead"].map{|author| AuthorItemSee.new(author) }
+    # see_instead because this still needs to be changed in solr
+    @browse_doc["see_instead"].map { |author| AuthorItemSee.new(author) }
   end
 end
+
 class AuthorItemSee
   attr_reader :author
   def initialize(author)
     @author = author&.strip
   end
+
   def kind
     "see_also"
   end
+
   def url
     "#{ENV.fetch("BASE_URL")}/author?query=#{URI.encode_www_form_component(@author)}"
   end
+
   def heading_link?
     false
   end
-  
 end
