@@ -20,8 +20,9 @@ describe "requests" do
       get "/callnumber", {query: "Thing"}
       expect(last_response.status).to eq(200)
     end
-    it "for a network error, it still returns a successful response, but with an erro message" do
+    it "for a network error, it still returns a successful response, but with an error message" do
       stub_solr_get_request(url: "#{@callnumbers_core}/select", query: hash_including({fq: 'callnumber:"Thing"'}), no_return: true).to_timeout
+      stub_solr_get_request(url: "#{@callnumbers_core}/select", query: hash_including({sort: "id desc"}), no_return: true).to_timeout
       get "/callnumber", {query: "Thing"}
       expect(last_response.status).to eq(200)
     end
@@ -34,8 +35,9 @@ describe "requests" do
       get "/author", {query: "Thing"}
       expect(last_response.status).to eq(200)
     end
-    it "for a network error, it still returns a successful response, but with an erro message" do
+    it "for a network error, it still returns a successful response, but with an error message" do
       stub_solr_get_request(url: "#{@authors_core}/select", query: hash_including({fq: 'author:"Thing"'}), no_return: true).to_timeout
+      stub_solr_get_request(url: "#{@authors_core}/select", query: hash_including({sort: "id desc"}), no_return: true).to_timeout
       get "/author", {query: "Thing"}
       expect(last_response.status).to eq(200)
     end
