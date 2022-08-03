@@ -14,9 +14,6 @@
   - :label: Journal/Serial Title
     :value: journal_title
     :tip: Search the title of a journal or serial publication (e.g. Detroit Free Press; “journal of the american medical association”; African-American newspapers).
-  - :label: Academic Discipline
-    :value: academic_discipline
-    :tip: Search academic disciplines. <a href="https://search.lib.umich.edu/databases/browse?query=sculpture">Browse all Databases</a> alphabetically or by academic discipline (e.g. International business; Latin american and caribbean studies).
   - :label: Call Number starts with
     :value: call_number_starts_with
     :tip: Search the first few letters and numbers of a call number (e.g. RC662.4 .H38 2016; QH 105). <a href="https://www.loc.gov/catdir/cpso/lcco/">Learn about the meaning of call numbers<span class="visually-hidden"> (link points to external site)</span></a>.
