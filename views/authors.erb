@@ -23,29 +23,22 @@
               <dl>
                 <dt class="visually-hidden">Author:</dt>
                 <dd>
-                  <% if result.num_matches > 0 %><a href="<%= result.url%>"><% end %>
+                  <% if result.results_count > 0 %><a href="<%= result.url%>"><% end %>
                     <span <% if result.exact_match? %>class="strong"<% end %>>
                       <%=result.author%>
                     </span>
-                  <% if result.num_matches > 0 %></a><% end %>
+                  <% if result.results_count > 0 %></a><% end %>
                   <% if result.heading_link? %>
                     <a href="<%= result.heading_link%>" class="vernacular pipe">View Heading Information</a>
                   <% end %>
                 </dd>
                 <% if result.has_cross_references? %>
                   <% result.cross_references.each do | cr | %>
-                    <% if cr.kind == 'see' %>
-                      <dt>See:</dt>
+                    <% if cr.kind == 'see_also' %>
+                      <dt>See Also:</dt>
                     <% end %>
                     <dd>
-                      <% if cr.num_matches > 0 %><a href="<%= cr.url%>"><% end %>
-                        <%=cr.author%>
-                      <% if cr.num_matches > 0 %>
-                        </a> (<%= cr.record_text %>)
-                      <% end %>
-                      <% if cr.heading_link? %>
-                        <a href="<%= cr.heading_link %>" class="vernacular pipe">View Heading Information</a>
-                      <% end %>
+                      <a href="<%= cr.url%>"><%=cr.author%></a>
                     </dd>
                   <% end %>
                 <% end %>

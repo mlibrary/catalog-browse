@@ -1,4 +1,8 @@
-FROM ruby:3.0.2
+ARG RUBY_VERSION=3.1
+FROM ruby:${RUBY_VERSION}
+
+ARG BUNDLER_VERSION=2.3
+ARG NPM_VERSION=8.12
 ARG UNAME=app
 ARG UID=1000
 ARG GID=1000
@@ -14,8 +18,8 @@ RUN apt-get update -yqq && apt-get install -yqq --no-install-recommends \
   nodejs \
   vim-tiny
 
-RUN gem install bundler:2.1.4
-RUN npm install -g npm@8.3.0
+RUN gem install bundler:${BUNDLER_VERSION}
+RUN npm install -g npm@${NPM_VERSION}
 
 
 RUN groupadd -g ${GID} -o ${UNAME}
@@ -27,7 +31,6 @@ COPY --chown=${UID}:${GID} Gemfile* /app/
 USER $UNAME
 
 ENV BUNDLE_PATH /gems
-
 
 WORKDIR /app
 
