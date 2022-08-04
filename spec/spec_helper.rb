@@ -119,7 +119,7 @@ def stub_solr_get_request(url:, output: "{}", status: 200, query: nil, no_return
   req_attributes[:headers] = {
     :accept => "*/*",
     "Accept-Encoding" => "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
-    "User-Agent" => "Faraday v2.3.0"
+    "User-Agent" => "Faraday v2.4.0"
   }
   req_attributes[:query] = query unless query.nil?
   resp = {headers: {content_type: "application/json"}, status: status, body: output}
@@ -137,7 +137,7 @@ def stub_biblio_get_request(url:, output: "{}", status: 200, query: nil, no_retu
   req_attributes[:headers] = {
     "Accept" => "*/*",
     "Accept-Encoding" => "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
-    "User-Agent" => "Faraday v2.3.0"
+    "User-Agent" => "Faraday v2.4.0"
   }
   req_attributes[:query] = query unless query.nil?
   resp = {headers: {content_type: "application/json"}, status: status, body: output}
