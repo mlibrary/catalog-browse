@@ -80,7 +80,7 @@
         if !url_params.include? 'direction'
       %>
         <m-callout dismissable icon>
-          <p><span class="strong">Call number browse beta:</span> We're testing a new feature to browse the catalog by call number. Let us know what you think at our <%= erb :'components/external_link', locals: { url: 'https://umich.qualtrics.com/jfe/form/SV_bCwYIKueEXs8wBf', text: 'feedback form' } %>.</p>
+          <p><span class="strong">Browse by <%= callout %> beta:</span> We're testing a new feature to browse the catalog by <%= callout %>. Let us know what you think at our <%= erb :'components/external_link', locals: { url: 'https://umich.qualtrics.com/jfe/form/SV_bCwYIKueEXs8wBf', text: 'feedback form' } %>.</p>
         </m-callout>
       <% end %>
       <h1 id="maincontent" tabindex="-1">
