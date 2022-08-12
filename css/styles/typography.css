@@ -8,6 +8,7 @@
  * -----------------
  * 1.0 - Headings
  * 2.0 - Font Weights
+ * 3.0 - Icons
  */
 
 
@@ -30,4 +31,15 @@ h1 {
 
 .strong {
   font-weight: var(--bold);
+}
+
+
+
+/*******************/
+/*** 3.0 - Icons ***/
+/*******************/
+
+span[class^="material-symbols"] {
+  font-size: 1em;
+  vertical-align: text-bottom;
 }

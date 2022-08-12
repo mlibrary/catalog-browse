@@ -8,11 +8,14 @@
  * -----------------
  * 1.0 - Table
  *   1.1 - Cells
+ *     1.1.1 - Header
  * 2.0 - THead
  *   2.1 - Cells
  * 3.0 - TBody
  *   3.1 - Cells
  *   3.2 - Data
+ *     3.2.1 - Anchors
+ *     3.2.2 - Vernacular
  */
 
 
@@ -44,12 +47,30 @@ table.browse-table {
   border-width: 0;
   display: block;
   padding: var(--space-small) var(--space-medium);
-  vertical-align: top;
 }
 
 @media only screen and (min-width: 720px) {
   .browse-table tr > * {
     display: table-cell;
+    vertical-align: top;
+  }
+}
+
+.browse-table tr > *:not(.column-main):not([colspan]){
+  white-space: nowrap;
+}
+
+@media only screen and (min-width: 720px) {
+  .browse-table tr > *:first-of-type:not([colspan]):not(.column-main),
+  .browse-table tr > *.column-main:first-of-type + * {
+    width: 200px;
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+  .browse-table tr > *.column-main:first-of-type,
+  .browse-table tr > *.column-main:first-of-type + * {
+    width: 50%;
   }
 }
 
@@ -73,23 +94,14 @@ table.browse-table {
   }
 }
 
+/* 1.1.1 - Header */
+
 .browse-table th {
   color: var(--search-neutral-500);
   font-size: var(--text-xxx-small);
   font-weight: var(--extrabold);
   letter-spacing: 1.25px;
   text-transform: uppercase;
-}
-
-.browse-table th,
-.browse-table td:first-of-type:not([colspan]) {
-  white-space: nowrap;
-}
-
-@media only screen and (min-width: 720px) {
-  .browse-table td:first-of-type:not([colspan]) {
-    width: 200px;
-  }
 }
 
 
@@ -171,15 +183,11 @@ table.browse-table {
   border-top-color: var(--color-teal-400);
 }
 
+/*** 3.2 - Data ***/
+
 .browse-table tbody td > * {
   margin: 0;
 }
-
-.browse-table tbody td a {
-  font-weight: var(--semibold);
-}
-
-/*** 3.2 - Data ***/
 
 .browse-table tbody dl dt {
   clear: left;
@@ -195,6 +203,15 @@ table.browse-table {
 .browse-table tbody dl dt.visually-hidden:not(:only-of-type) + dd {
   margin-bottom: var(--space-x-small);
 }
+
+/* 3.2.1 - Anchors */
+
+.browse-table tbody td.column-main dd:first-of-type a:first-of-type {
+  display: inline-block;
+  font-weight: var(--semibold);
+}
+
+/* 3.2.2 - Vernacular */
 
 .browse-table tbody .vernacular {
   color: var(--search-neutral-500);

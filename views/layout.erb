@@ -38,6 +38,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <link rel="stylesheet" href="https://unpkg.com/@umich-lib/web@1/umich-lib.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@48,400,0,200">
     <link rel="stylesheet" href="<%=ENV.fetch('BASE_URL')%>/browse.css">
     <script type="module" src="https://unpkg.com/@umich-lib/web@1/dist/umich-lib/umich-lib.esm.js"></script>
   </head>
@@ -79,7 +80,7 @@
         if !url_params.include? 'direction'
       %>
         <m-callout dismissable icon>
-          <p class="give-feedback"><span class="strong">Call number browse beta:</span> We're testing a new feature to browse the catalog by call number. Let us know what you think at our <a href="https://umich.qualtrics.com/jfe/form/SV_bCwYIKueEXs8wBf" target="_blank" rel="noopener noreferrer" aria-label="Feedback form - Opens in new window">feedback form <m-icon name="open-in-new"></m-icon></a>.</p>
+          <p><span class="strong">Call number browse beta:</span> We're testing a new feature to browse the catalog by call number. Let us know what you think at our <%= erb :'components/external_link', locals: { url: 'https://umich.qualtrics.com/jfe/form/SV_bCwYIKueEXs8wBf', text: 'feedback form' } %>.</p>
         </m-callout>
       <% end %>
       <h1 id="maincontent" tabindex="-1">
@@ -92,7 +93,7 @@
       <%= yield %>
       <%= erb :'components/pagination', locals: { label: 'Bottom pagination', list: list } %>
       <section class="give-feedback">
-        <a href="https://umich.qualtrics.com/jfe/form/SV_bCwYIKueEXs8wBf" target="_blank" rel="noopener noreferrer" aria-label="Give feedback about this page - Opens in new window">Give feedback about this page <m-icon name="open-in-new"></m-icon></a>
+        <%= erb :'components/external_link', locals: { url: 'https://umich.qualtrics.com/jfe/form/SV_bCwYIKueEXs8wBf', text: 'Give feedback about this page' } %>
       </section>
     </main>
     <footer class="page-footer">
