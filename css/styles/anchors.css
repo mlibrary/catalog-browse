@@ -26,7 +26,7 @@ a {
 
 a:hover,
 a:focus {
-  text-decoration-thickness: var(--space-xxx-small);
+  text-decoration-thickness: 0.125rem;
 }
 
 

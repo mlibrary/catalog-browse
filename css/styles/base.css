@@ -70,8 +70,8 @@ body {
 
 main {
   flex-grow: 1;
-  margin-bottom: var(--space-xx-large);
-  margin-top: var(--space-xx-large);
+  margin-bottom: 2.5rem;
+  margin-top: 2.5rem;
 }
 
 main > *:first-child {

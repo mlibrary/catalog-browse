@@ -25,8 +25,8 @@ nav.pagination ul {
 }
 
 nav.pagination ul li + li {
-  margin-left: var(--space-small);
-  padding-left: var(--space-small);
+  margin-left: 0.75rem;
+  padding-left: 0.75rem;
   position: relative;
 }
 
@@ -51,8 +51,8 @@ nav.pagination ul li + li:before {
 nav.pagination a {
   align-items: center;
   display: flex;
-  min-height: var(--space-xxx-large);
-  min-width: var(--space-xxx-large);
+  min-height: 3rem;
+  min-width: 3rem;
 }
 
 
@@ -63,5 +63,5 @@ nav.pagination a {
 
 nav.pagination m-icon svg {
   position: relative;
-  top: var(--space-xxx-small);
+  top: 0.125rem;
 }
