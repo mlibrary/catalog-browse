@@ -50,7 +50,6 @@ nav.pagination ul li + li:before {
 
 nav.pagination a {
   align-items: center;
-  display: flex;
   min-height: 3rem;
   min-width: 3rem;
 }
@@ -61,7 +60,6 @@ nav.pagination a {
 /*** 3.0 - Icons ***/
 /*******************/
 
-nav.pagination m-icon svg {
-  position: relative;
-  top: 0.125rem;
+nav.pagination span[class^="material-symbols"] {
+  font-size: 1.5em;
 }
