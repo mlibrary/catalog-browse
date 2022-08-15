@@ -46,7 +46,7 @@ table.browse-table {
   border-style: solid;
   border-width: 0;
   display: block;
-  padding: var(--space-small) var(--space-medium);
+  padding: 0.75rem 1rem;
 }
 
 @media only screen and (min-width: 720px) {
@@ -75,12 +75,12 @@ table.browse-table {
 }
 
 .browse-table tr:last-child > *:last-child {
-  border-bottom-width: var(--space-xxx-small);
+  border-bottom-width: 0.125rem;
 }
 
 @media only screen and (min-width: 720px) {
   .browse-table tr:last-child > * {
-    border-bottom-width: var(--space-xxx-small);
+    border-bottom-width: 0.125rem;
   }
 }
 
@@ -90,7 +90,7 @@ table.browse-table {
 
 @media only screen and (min-width: 720px) {
   .browse-table tr > * + * {
-    padding-top: var(--space-small);
+    padding-top: 0.75rem;
   }
 }
 
@@ -143,12 +143,12 @@ table.browse-table {
 
 @media only screen and (min-width: 720px) {
   .browse-table tbody tr > * {
-    border-top-width: var(--space-xxx-small);
+    border-top-width: 0.125rem;
   }
 }
 
 .browse-table tbody tr > *:first-of-type {
-  border-top-width: var(--space-xxx-small);
+  border-top-width: 0.125rem;
 }
 
 @media only screen and (min-width: 720px) {
@@ -162,8 +162,8 @@ table.browse-table {
 }
 
 .browse-table tbody tr[class] > * {
-  border-left-width: var(--space-xxx-small);
-  border-right-width: var(--space-xxx-small);
+  border-left-width: 0.125rem;
+  border-right-width: 0.125rem;
 }
 
 .browse-table tbody tr[class^="match-"] > * {
@@ -193,7 +193,7 @@ table.browse-table {
   clear: left;
   float: left;
   font-weight: var(--semibold);
-  margin-right: var(--space-x-small);
+  margin-right: 0.5rem;
 }
 
 .browse-table tbody dl dd {
@@ -201,7 +201,7 @@ table.browse-table {
 }
 
 .browse-table tbody dl dt.visually-hidden:not(:only-of-type) + dd {
-  margin-bottom: var(--space-x-small);
+  margin-bottom: 0.5rem;
 }
 
 /* 3.2.1 - Anchors */
@@ -227,7 +227,7 @@ table.browse-table {
   content: '';
   display: inline-block;
   height: 1em;
-  margin: 0 var(--space-x-small);
+  margin: 0 0.5rem;
   vertical-align: middle;
   width: 1px;
 }

@@ -20,7 +20,7 @@
 
 .datastores-nav,
 .datastores-nav ol li a {
-  border-bottom: solid var(--space-xxx-small) var(--search-neutral-200);
+  border-bottom: solid 0.125rem var(--search-neutral-200);
 }
   
 .datastores-nav {
@@ -38,8 +38,8 @@
   flex-direction: column;
   justify-content: center;
   list-style: none;
-  margin: 0 calc(var(--space-medium) * -1);
-  margin-bottom: calc(var(--space-xxx-small) * -1);
+  margin: 0 -1rem;
+  margin-bottom: -0.125rem;
   padding: 0;
 }
 
@@ -53,7 +53,7 @@
 
 .datastores-nav ol li a {
   display: block;
-  padding: var(--space-small) var(--space-medium);
+  padding: 0.75rem 1rem;
   position: relative;
 }
 
@@ -77,12 +77,12 @@
   left: 0;
   position: absolute;
   top: 0;
-  width: var(--space-xxx-small);
+  width: 0.125rem;
 }
 
 @media only screen and (min-width: 720px) {
   .datastores-nav ol li a[aria-current=page]:before {
-    height: var(--space-xxx-small);
+    height: 0.125rem;
     top: 100%;
     width: 100%;
   }

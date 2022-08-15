@@ -20,7 +20,7 @@
 
 m-website-header .website-header-inner-container {
   background-color: var(--color-blue-400);
-  margin: 0 calc(-1 * var(--space-small));
+  margin: 0 -0.75rem;
 }
 
 
@@ -33,10 +33,10 @@ m-website-header a {
   color: white;
   display: inline-block;
   text-decoration: none;
-  padding: var(--space-xx-small) var(--space-small);
+  padding: 0.25rem 0.75rem;
 }
 
 m-website-header a:hover {
   text-decoration: underline;
-  text-underline-offset: var(--space-xxx-small);
+  text-underline-offset: 0.125rem;
 }

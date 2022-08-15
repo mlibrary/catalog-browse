@@ -38,13 +38,13 @@
 /******************/
 
 .site-skip-links ul {
-  margin: var(--space-medium) 0;
+  margin: 1rem 0;
   text-align: center;
   list-style: none;
 }
 
 .site-skip-links ul li + li {
-  margin-top: var(--space-medium);
+  margin-top: 1rem;
 }
 
 
@@ -55,5 +55,5 @@
 
 .site-skip-links a {
   color: white;
-  padding: var(--space-x-small);
+  padding: 0.5rem;
 }

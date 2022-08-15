@@ -4,7 +4,7 @@
       <% if list.has_previous_list? %>
         <li>
           <a href="<%= list.previous_url %>">
-            <m-icon name="keyboard-arrow-left"></m-icon>
+            <span class="material-symbols-sharp">chevron_left</span>
             Previous page
           </a>
         </li>
@@ -13,7 +13,7 @@
         <li>
           <a href="<%= list.next_url %>">
             Next page
-            <m-icon name="keyboard-arrow-right"></m-icon>
+            <span class="material-symbols-sharp">chevron_right</span>
           </a>
         </li>
       <% end %>
