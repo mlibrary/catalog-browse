@@ -15,7 +15,6 @@
  *     2.3.1 - Message
  *   2.4 - Button
  * 3.0 - Tip
- *   3.1 - Icon
  */
 
 
@@ -107,11 +106,12 @@
   }
 }
 
-.search-box .search-box-dropdown m-icon {
+.search-box .search-box-dropdown span[class^="material-symbols"] {
+  font-size: 1.5rem;
+  pointer-events: none;
   position: absolute;
   right: 0.5rem;
-  top: 0.6rem;
-  pointer-events: none;
+  top: 0.25rem;
 }
 
 @media only screen and (min-width: 720px) {
@@ -185,11 +185,4 @@
 
 .search-box .search-tip > * {
   margin: 0;
-}
-
-/*** 3.1 - Icon ***/
-
-.search-box .search-tip m-icon svg {
-  margin-top: 0.25rem;
-  width: 1rem;
 }

@@ -17,7 +17,7 @@
           </optgroup>
         <% end %>
       </select>
-      <m-icon name="keyboard-arrow-down"></m-icon>
+      <span class="material-symbols-sharp">expand_more</span>
     </div>
     <input aria-label="Browse text" <% if list.error? %>aria-invalid="true" aria-describedby="input-message"<% end %> type="text" autocomplete="on" name="query" value="<%= list.original_reference %>">
     <% if list.error? %>
