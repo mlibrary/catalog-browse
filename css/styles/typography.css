@@ -41,5 +41,6 @@ h1 {
 
 span[class^="material-symbols"] {
   font-size: 1em;
+  line-height: 1.5;
   vertical-align: middle;
 }
