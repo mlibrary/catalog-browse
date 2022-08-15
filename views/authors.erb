@@ -23,9 +23,6 @@
                   <% if result.results_count > 0 %><a href="<%= result.url%>"><% end %>
                     <span <% if result.exact_match? %>class="strong"<% end %>>
                       <%=result.author%>
-                      <% if result.results_count > 0 %>
-                        (catalog results)
-                      <% end %>
                     </span>
                   <% if result.results_count > 0 %></a><% end %>
                   <% if result.heading_link? %>
@@ -38,7 +35,7 @@
                       <dt>See:</dt>
                     <% end %>
                     <dd>
-                      <a href="<%= cr.url%>"><%=cr.author%> (in author list)</a>
+                      <a href="<%= cr.url%>"><%=cr.author%></a>
                     </dd>
                   <% end %>
                 <% end %>
