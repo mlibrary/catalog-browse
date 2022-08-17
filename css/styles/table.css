@@ -8,11 +8,14 @@
  * -----------------
  * 1.0 - Table
  *   1.1 - Cells
+ *     1.1.1 - Header
  * 2.0 - THead
  *   2.1 - Cells
  * 3.0 - TBody
  *   3.1 - Cells
  *   3.2 - Data
+ *     3.2.1 - Anchors
+ *     3.2.2 - Vernacular
  */
 
 
@@ -43,23 +46,41 @@ table.browse-table {
   border-style: solid;
   border-width: 0;
   display: block;
-  padding: var(--space-small) var(--space-medium);
-  vertical-align: top;
+  padding: 0.75rem 1rem;
 }
 
 @media only screen and (min-width: 720px) {
   .browse-table tr > * {
     display: table-cell;
+    vertical-align: top;
+  }
+}
+
+.browse-table tr > *:not(.column-main):not([colspan]){
+  white-space: nowrap;
+}
+
+@media only screen and (min-width: 720px) {
+  .browse-table tr > *:first-of-type:not([colspan]):not(.column-main),
+  .browse-table tr > *.column-main:first-of-type + * {
+    width: 200px;
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+  .browse-table tr > *.column-main:first-of-type,
+  .browse-table tr > *.column-main:first-of-type + * {
+    width: 50%;
   }
 }
 
 .browse-table tr:last-child > *:last-child {
-  border-bottom-width: var(--space-xxx-small);
+  border-bottom-width: 0.125rem;
 }
 
 @media only screen and (min-width: 720px) {
   .browse-table tr:last-child > * {
-    border-bottom-width: var(--space-xxx-small);
+    border-bottom-width: 0.125rem;
   }
 }
 
@@ -69,9 +90,11 @@ table.browse-table {
 
 @media only screen and (min-width: 720px) {
   .browse-table tr > * + * {
-    padding-top: var(--space-small);
+    padding-top: 0.75rem;
   }
 }
+
+/* 1.1.1 - Header */
 
 .browse-table th {
   color: var(--search-neutral-500);
@@ -79,17 +102,6 @@ table.browse-table {
   font-weight: var(--extrabold);
   letter-spacing: 1.25px;
   text-transform: uppercase;
-}
-
-.browse-table th,
-.browse-table td:first-of-type:not([colspan]) {
-  white-space: nowrap;
-}
-
-@media only screen and (min-width: 720px) {
-  .browse-table td:first-of-type:not([colspan]) {
-    width: 200px;
-  }
 }
 
 
@@ -131,12 +143,12 @@ table.browse-table {
 
 @media only screen and (min-width: 720px) {
   .browse-table tbody tr > * {
-    border-top-width: var(--space-xxx-small);
+    border-top-width: 0.125rem;
   }
 }
 
 .browse-table tbody tr > *:first-of-type {
-  border-top-width: var(--space-xxx-small);
+  border-top-width: 0.125rem;
 }
 
 @media only screen and (min-width: 720px) {
@@ -150,8 +162,8 @@ table.browse-table {
 }
 
 .browse-table tbody tr[class] > * {
-  border-left-width: var(--space-xxx-small);
-  border-right-width: var(--space-xxx-small);
+  border-left-width: 0.125rem;
+  border-right-width: 0.125rem;
 }
 
 .browse-table tbody tr[class^="match-"] > * {
@@ -171,21 +183,17 @@ table.browse-table {
   border-top-color: var(--color-teal-400);
 }
 
+/*** 3.2 - Data ***/
+
 .browse-table tbody td > * {
   margin: 0;
 }
-
-.browse-table tbody td a {
-  font-weight: var(--semibold);
-}
-
-/*** 3.2 - Data ***/
 
 .browse-table tbody dl dt {
   clear: left;
   float: left;
   font-weight: var(--semibold);
-  margin-right: var(--space-x-small);
+  margin-right: 0.5rem;
 }
 
 .browse-table tbody dl dd {
@@ -193,8 +201,17 @@ table.browse-table {
 }
 
 .browse-table tbody dl dt.visually-hidden:not(:only-of-type) + dd {
-  margin-bottom: var(--space-x-small);
+  margin-bottom: 0.5rem;
 }
+
+/* 3.2.1 - Anchors */
+
+.browse-table tbody td.column-main dd:first-of-type a:first-of-type {
+  display: inline-block;
+  font-weight: var(--semibold);
+}
+
+/* 3.2.2 - Vernacular */
 
 .browse-table tbody .vernacular {
   color: var(--search-neutral-500);
@@ -210,7 +227,7 @@ table.browse-table {
   content: '';
   display: inline-block;
   height: 1em;
-  margin: 0 var(--space-x-small);
+  margin: 0 0.5rem;
   vertical-align: middle;
   width: 1px;
 }

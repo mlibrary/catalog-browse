@@ -22,7 +22,7 @@ class AuthorItem
 
   # for the view
   def author
-    @browse_doc["author"]&.strip
+    "#{@browse_doc["author"]&.strip}#{" (catalog results)" if results_count > 0}"
   end
 
   def url
@@ -35,7 +35,7 @@ class AuthorItem
   end
 
   def record_text
-    "#{results_count} #{results_count == 1 ? "record" : "records"}"
+    "#{results_count} record#{"s" if results_count != 1}"
   end
 
   # mrio: commenting out because it isn't currently used in the UI
@@ -70,7 +70,7 @@ end
 class AuthorItemSee
   attr_reader :author
   def initialize(author)
-    @author = author&.strip
+    @author = author&.strip + " (in author list)"
   end
 
   def kind

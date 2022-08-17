@@ -15,7 +15,7 @@
  *     2.3.1 - Message
  *   2.4 - Button
  * 3.0 - Tip
- *   3.1 - Icon
+ * 4.0 - Icons
  */
 
 
@@ -26,8 +26,8 @@
 
 .search-box {
   background: var(--search-blue-200);
-  border-bottom: solid var(--space-xxx-small) var(--search-blue-300);
-  padding: var(--space-xx-small) 0 var(--space-medium) 0;
+  border-bottom: solid 0.125rem var(--search-blue-300);
+  padding: 0.25rem 0 1rem 0;
 }
 
 
@@ -58,7 +58,7 @@
 /*** 2.1 - Elements ***/
 
 .search-box .search-form > * {
-  margin-top: var(--space-small);
+  margin-top: 0.75rem;
 }
 
 .search-box select,
@@ -68,7 +68,7 @@
   all: unset;
   box-sizing: border-box;
   line-height: 1.6 !important;
-  padding: var(--space-x-small) var(--space-small);
+  padding: 0.5rem 0.75rem;
 }
 
 .search-box select:focus,
@@ -96,7 +96,8 @@
 
 .search-box select {
   background: var(--search-neutral-100);
-  padding-right: var(--space-xx-large);
+  height: 100%;
+  padding-right: 2.5rem;
   width: 100%;
 }
 
@@ -107,11 +108,12 @@
   }
 }
 
-.search-box .search-box-dropdown m-icon {
+.search-box .search-box-dropdown span[class^="material-symbols"] {
+  pointer-events: none;
   position: absolute;
   right: 0.5rem;
-  top: 0.6rem;
-  pointer-events: none;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 @media only screen and (min-width: 720px) {
@@ -163,7 +165,7 @@
   cursor: pointer;
   grid-area: button;
   font-weight: 600;
-  margin-left: var(--space-small);
+  margin-left: 0.75rem;
 }
 
 .search-box button:active {
@@ -179,17 +181,20 @@
 
 .search-box .search-tip {
   display: flex;
-  gap: var(--space-small);
-  padding-top: var(--space-small);
+  gap: 0.75rem;
+  padding-top: 0.75rem;
 }
 
 .search-box .search-tip > * {
   margin: 0;
 }
 
-/*** 3.1 - Icon ***/
 
-.search-box .search-tip m-icon svg {
-  margin-top: var(--space-xx-small);
-  width: var(--space-medium);
+/*******************/
+/*** 4.0 - Icons ***/
+/*******************/
+
+.search-box :is(.search-box-dropdown, button) span[class^="material-symbols"] {
+  font-size: 1.5rem;
+  line-height: 1;
 }

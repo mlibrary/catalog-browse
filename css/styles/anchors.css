@@ -26,7 +26,7 @@ a {
 
 a:hover,
 a:focus {
-  text-decoration-thickness: var(--space-xxx-small);
+  text-decoration-thickness: 0.125rem;
 }
 
 
@@ -37,4 +37,14 @@ a:focus {
 
 .browse-table tbody a.vernacular {
   font-weight: inherit;
+}
+
+
+
+/****************************/
+/*** 3.0 - External Links ***/
+/****************************/
+
+a[target="_blank"] span[class^="material-symbols"] {
+  padding-left: 0.25em;
 }
