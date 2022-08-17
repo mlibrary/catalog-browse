@@ -24,7 +24,7 @@ class AuthorItem
     @browse_doc["author"]&.strip
   end
 
-  def author_view
+  def author_display
     "#{author}#{" (catalog results)" if results_count > 0}"
   end
 
@@ -76,7 +76,7 @@ class AuthorItemSee
     @author = author&.strip
   end
 
-  def author_view
+  def author_display
     "#{@author} (in author list)"
   end
 
