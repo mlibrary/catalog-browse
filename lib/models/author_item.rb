@@ -20,9 +20,12 @@ class AuthorItem
     !!@exact_match
   end
 
-  # for the view
   def author
-    "#{@browse_doc["author"]&.strip}#{" (catalog results)" if results_count > 0}"
+    @browse_doc["author"]&.strip
+  end
+
+  def author_display
+    "#{author}#{" (catalog results)" if results_count > 0}"
   end
 
   def url
@@ -70,7 +73,11 @@ end
 class AuthorItemSee
   attr_reader :author
   def initialize(author)
-    @author = author&.strip + " (in author list)"
+    @author = author&.strip
+  end
+
+  def author_display
+    "#{@author} (in author list)"
   end
 
   def kind
