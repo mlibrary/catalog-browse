@@ -22,7 +22,7 @@
                 <dd>
                   <% if result.results_count > 0 %><a href="<%= result.url%>"><% end %>
                     <span <% if result.exact_match? %>class="strong"<% end %>>
-                      <%=result.author%>
+                      <%=result.author_view%>
                     </span>
                   <% if result.results_count > 0 %></a><% end %>
                   <% if result.heading_link? %>
@@ -35,7 +35,7 @@
                       <dt>See:</dt>
                     <% end %>
                     <dd>
-                      <a href="<%= cr.url%>"><%=cr.author%></a>
+                      <a href="<%= cr.url%>"><%=cr.author_view%></a>
                     </dd>
                   <% end %>
                 <% end %>
