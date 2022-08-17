@@ -20,12 +20,10 @@ class AuthorItem
     !!@exact_match
   end
 
-  # for the view
   def author
     @browse_doc["author"]&.strip
   end
 
-  # for the view
   def author_view
     "#{author}#{" (catalog results)" if results_count > 0}"
   end
@@ -78,7 +76,6 @@ class AuthorItemSee
     @author = author&.strip
   end
 
-  # for the view
   def author_view
     "#{@author} (in author list)"
   end
