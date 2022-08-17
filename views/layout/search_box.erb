@@ -17,7 +17,7 @@
           </optgroup>
         <% end %>
       </select>
-      <m-icon name="keyboard-arrow-down"></m-icon>
+      <span class="material-symbols-sharp">expand_more</span>
     </div>
     <input aria-label="Browse text" <% if list.error? %>aria-invalid="true" aria-describedby="input-message"<% end %> type="text" autocomplete="on" name="query" value="<%= list.original_reference %>">
     <% if list.error? %>
@@ -26,12 +26,12 @@
       </span>
     <% end %>
     <button>
-      <m-icon name="search"></m-icon>
+      <span class="material-symbols-sharp">search</span>
       <span class="visually-hidden">Search</span>
     </button>
   </div>
   <div class="viewport-container search-tip">
-    <m-icon name="info-outline"></m-icon>
+    <span class="material-symbols-sharp">info</span>
     <% fields.each do |group| %>
       <% group[:options].each do |option| %>
         <p data-option="<%=option[:value]%>" style="display: <%= option[:value] == active_browse_option ? 'initial' : 'none' %>;">
