@@ -46,6 +46,11 @@ end
 post "/search" do
   redirect SearchDropdown.for(type: params["type"], query: params["query"]).url
 end
+
 get "/" do
   # Landing page
+end
+
+get "/-/live" do
+  200
 end
