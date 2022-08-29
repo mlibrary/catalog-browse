@@ -37,7 +37,7 @@ class AuthorList < BrowseListPresenter
   end
 
   def help_text
-    '<span class="strong">Browse by author help:</span> Search an author (last name, first name) and view an alphabetical list of all authors headings (personal names and corporate names) and variations of those names indexed in the Library catalog.'
+    '<span class="strong">Browse by author help:</span> Search an author (last names, first name), organization or conference and view an alphabetical list of all author headings that link to matching records in the library catalog. Also view variations of some author names (pseudonyms) linked to that part of the author index.'
   end
 end
 
