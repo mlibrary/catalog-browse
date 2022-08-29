@@ -24,10 +24,6 @@ class AuthorItem
     @browse_doc["author"]&.strip
   end
 
-  def author_display
-    "#{author}#{" (catalog results)" if results_count > 0}"
-  end
-
   def url
     params = {library: "U-M Ann Arbor Libraries", query: "author:(\"#{author}\")"}
     "https://search.lib.umich.edu/catalog?#{URI.encode_www_form(params)}"
