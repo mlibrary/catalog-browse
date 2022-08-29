@@ -17,7 +17,7 @@ Talk about the intent and scope of the original issue. Go over the general chang
 
 Add links to any documentation or issues that can help give more background information. Is the pull request related to a GitHub or JIRA issue? Link to them while using [closing keywords](https://docs.github.com/articles/closing-issues-using-keywords), like so:
 
-> This pull request resolves/closes/fixes #_1234_/[JIRA-1234](https://tools.lib.umich.edu/jira/browse/JIRA-1234).
+> This pull request resolves/closes/fixes [LIBSEARCH-1234](https://mlit.atlassian.net/browse/LIBSEARCH-1234).
 
 ## Anything else?
 _Optional_. If appropriate, provide additional notes the reviewers should be made aware of. They can be about any "gotchas" or even changes that are expected to be made in the future, but are not applied to this pull request.
@@ -25,7 +25,7 @@ _Optional_. If appropriate, provide additional notes the reviewers should be mad
 ## Testing
 List instructions on how to test the pull request. Some examples:
 
-- Run the tests to make sure they pass (`docker-compose run --rm web bundle exec rspec`/`docker-compose run --rm web npm run test`).
+- Run the tests to make sure they pass (`docker-compose run --rm web bundle exec rspec`).
   - Break the new/updated unit tests to make sure they're working properly.
 - Make sure the PR is consistent in these browsers:
   - [x] Chrome
