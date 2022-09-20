@@ -8,7 +8,14 @@ describe CallnumberList do
 
   context "doc_title" do
     it "returns the document title" do
-      expect(subject.doc_title).to eq("Browse by Call Number (Library of Congress and Dewey)");
+      expect(subject.doc_title).to eq("Browse by Call Number (Library of Congress and Dewey)")
+    end
+  end
+
+  context "feedback_url" do
+    it "has the default form url" do
+      expect(subject.feedback_url.class).to eq(String)
+      expect(subject.feedback_url).to eq(BrowseListPresenter.new(browse_list: nil).feedback_url)
     end
   end
 

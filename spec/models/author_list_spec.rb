@@ -8,7 +8,14 @@ describe AuthorList do
 
   context "doc_title" do
     it "returns the document title" do
-      expect(subject.doc_title).to eq("Browse by Author");
+      expect(subject.doc_title).to eq("Browse by Author")
+    end
+  end
+
+  context "feedback_url" do
+    it "has a different url than the default form" do
+      expect(subject.feedback_url.class).to eq(String)
+      expect(subject.feedback_url).not_to eq(BrowseListPresenter.new(browse_list: nil).feedback_url)
     end
   end
 

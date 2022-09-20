@@ -49,6 +49,14 @@ class BrowseListPresenter
     raise NotImplementedError, "#{self.class} should have implemented..."
   end
 
+  def doc_title
+    raise NotImplementedError, "#{self.class} should have implemented..."
+  end
+
+  def feedback_url
+    "https://umich.qualtrics.com/jfe/form/SV_bCwYIKueEXs8wBf"
+  end
+
   private
 
   def nav_url(params)

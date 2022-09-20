@@ -29,7 +29,7 @@ if ENV.fetch("AUTHOR_ON") == "true"
       logger.error(e.message)
       list = AuthorList::Error.new(reference_id)
     end
-    erb :authors, locals: {list: list, feedback_url: 'https://umich.qualtrics.com/jfe/form/SV_43jm8oGIRVLEBbo'}
+    erb :authors, locals: {list: list}
   end
 end
 get "/callnumber" do

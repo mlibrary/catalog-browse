@@ -16,6 +16,11 @@ class AuthorList < BrowseListPresenter
     @browse_list = browse_list
   end
 
+  def feedback_url
+    # Author Browse specific url
+    "https://umich.qualtrics.com/jfe/form/SV_43jm8oGIRVLEBbo"
+  end
+
   def name
     "author"
   end
