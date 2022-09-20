@@ -24,6 +24,10 @@ class AuthorList < BrowseListPresenter
     "author"
   end
 
+  def doc_title
+    "Browse by Author"
+  end
+
   def items
     banner_index = nil
     match_notice = OpenStruct.new(author: original_reference.upcase, match_notice?: true)
