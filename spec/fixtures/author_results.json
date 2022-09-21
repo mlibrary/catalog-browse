@@ -1,34 +1,62 @@
 {
-    "response": {
-        "docs": [
-            {
-                "_version_": 1737163101826973725,
-                "author": "Twain, Mark 1835-1910",
-                "browse_field": "author",
-                "count": 8,
-                "id": "Twain, Mark 1835-1910~07fb324cb93fee986dfa846cdcac8c2a",
-                "record_type": "record"
-            },
-            {
-                "_version_": 1737163101826973726,
-                "author": "Twain, Mark,  1835-1910",
-                "browse_field": "author",
-                "count": 2,
-                "id": "Twain, Mark,  1835-1910~4a951af4492e133551b42881e1588a0f",
-                "record_type": "record"
-            }
-        ],
-        "numFound": 1512139,
-        "start": 0
-    },
-    "responseHeader": {
-        "QTime": 0,
-        "params": {
-            "fq": "id:[\"Twain, Marc\" TO *]",
-            "q": "*:*",
-            "rows": "2",
-            "sort": "id asc"
-        },
-        "status": 0
-    }
-}
+  "responseHeader":{
+    "status":0,
+    "QTime":0,
+    "params":{
+      "q":"*:*",
+      "fq":"id:[\"Twain, Marc\" TO *]",
+      "sort":"id asc",
+      "rows":"2",
+      "_":"1663766140014"}},
+  "response":{"numFound":621060,"start":0,"docs":[
+      {
+        "id":"twain mark",
+        "term":"Twain, Mark",
+        "count":50,
+        "browse_field":"name",
+        "json":"{\"id\":\"twain mark\",\"label\":\"Twain, Mark\",\"count\":\"50\",\"match_text\":\"twain mark\",\"json_class\":\"AuthorityBrowse::GenericXRef\"}",
+        "_version_":1744350781381804056,
+        "narrower":"false",
+        "broader":"false"},
+      {
+        "id":"twain mark 1835 1910\u001fn79021164",
+        "loc_id":"http://id.loc.gov/authorities/names/n79021164",
+        "browse_field":"name",
+        "term":"Twain, Mark, 1835-1910",
+        "alternate_forms":["Make Teviin, 1835-1910",
+          "Make Tuwen, 1835-1910",
+          "Tivāyn, Mārk, 1835-1910",
+          "Touain, Mark, 1835-1910",
+          "Touen, Makū, 1835-1910",
+          "Tuvāyn, Mārk, 1835-1910",
+          "Tuwayn, Mārk, 1835-1910",
+          "Tuwen, Make, 1835-1910",
+          "Tuėĭn, Mark, 1835-1910",
+          "Tven, M. (Mark), 1835-1910",
+          "Tvāyn, Mārk, 1835-1910",
+          "Tvėn, Mark, 1835-1910",
+          "Twain, Marek, 1835-1910",
+          "Twayn, Mārk, 1835-1910",
+          "Tʻu-wen, Ma-kʻo, 1835-1910",
+          "Твен, Марк, 1835-1910",
+          "טבןַ, מרק, 1835-1910",
+          "טוויין, מארק, 1835-1910",
+          "טוויין, מרק, 1835-1910",
+          "טווין, מארק, 1835-1910",
+          "טווין, מרק, 1835-1910",
+          "טווען, מארק, 1835-1910",
+          "טוין, מרק, 1835-1910",
+          "טװען, מארק, 1835-1910",
+          "טװײן, מארק, 1835-1910",
+          "تواين، مارک",
+          "馬克吐温, 1835-1910"],
+        "see_also":["Clemens, Samuel Langhorne, 1835-1910||7",
+          "Snodgrass, Quintus Curtius, 1835-1910||7",
+          "Conte, Louis de, 1835-1910||7"],
+        "incoming_see_also":["Clemens, Samuel Langhorne, 1835-1910||11"],
+        "count":839,
+        "json":"{\"id\":\"http://id.loc.gov/authorities/names/n79021164\",\"loc_id\":\"n79021164\",\"label\":\"Twain, Mark, 1835-1910\",\"category\":\"name\",\"alternate_forms\":[\"Make Teviin, 1835-1910\",\"Make Tuwen, 1835-1910\",\"Tivāyn, Mārk, 1835-1910\",\"Touain, Mark, 1835-1910\",\"Touen, Makū, 1835-1910\",\"Tuvāyn, Mārk, 1835-1910\",\"Tuwayn, Mārk, 1835-1910\",\"Tuwen, Make, 1835-1910\",\"Tuėĭn, Mark, 1835-1910\",\"Tven, M. (Mark), 1835-1910\",\"Tvāyn, Mārk, 1835-1910\",\"Tvėn, Mark, 1835-1910\",\"Twain, Marek, 1835-1910\",\"Twayn, Mārk, 1835-1910\",\"Tʻu-wen, Ma-kʻo, 1835-1910\",\"Твен, Марк, 1835-1910\",\"טבןַ, מרק, 1835-1910\",\"טוויין, מארק, 1835-1910\",\"טוויין, מרק, 1835-1910\",\"טווין, מארק, 1835-1910\",\"טווין, מרק, 1835-1910\",\"טווען, מארק, 1835-1910\",\"טוין, מרק, 1835-1910\",\"טװען, מארק, 1835-1910\",\"טװײן, מארק, 1835-1910\",\"تواين، مارک\",\"馬克吐温, 1835-1910\"],\"see_also\":{\"http://id.loc.gov/authorities/names/n93099439\":{\"id\":\"http://id.loc.gov/authorities/names/n93099439\",\"label\":\"Clemens, Samuel Langhorne, 1835-1910\",\"count\":7,\"match_text\":\"clemens samuel langhorne 1835 1910\",\"json_class\":\"AuthorityBrowse::GenericXRef\"},\"http://id.loc.gov/authorities/names/n93099461\":{\"id\":\"http://id.loc.gov/authorities/names/n93099461\",\"label\":\"Snodgrass, Quintus Curtius, 1835-1910\",\"count\":7,\"match_text\":\"snodgrass quintus curtius 1835 1910\",\"json_class\":\"AuthorityBrowse::GenericXRef\"},\"http://id.loc.gov/authorities/names/no2003079632\":{\"id\":\"http://id.loc.gov/authorities/names/no2003079632\",\"label\":\"Conte, Louis de, 1835-1910\",\"count\":7,\"match_text\":\"conte louis de 1835 1910\",\"json_class\":\"AuthorityBrowse::GenericXRef\"}},\"incoming_see_also\":{\"http://id.loc.gov/authorities/names/n93099439\":{\"id\":\"http://id.loc.gov/authorities/names/n93099439\",\"label\":\"Clemens, Samuel Langhorne, 1835-1910\",\"count\":11,\"match_text\":\"clemens samuel langhorne 1835 1910\",\"json_class\":\"AuthorityBrowse::GenericXRef\"}},\"count\":839}",
+        "_version_":1744350706686492679,
+        "narrower":"false",
+        "broader":"false"}]
+  }}
