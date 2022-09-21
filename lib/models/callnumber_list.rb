@@ -26,6 +26,10 @@ class CallnumberList < BrowseListPresenter
     "callnumber"
   end
 
+  def doc_title
+    "Browse by Call Number (Library of Congress and Dewey)"
+  end
+
   def items
     banner_index = nil
     match_notice = OpenStruct.new(callnumber: original_reference.upcase, match_notice?: true)

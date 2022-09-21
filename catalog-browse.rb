@@ -29,7 +29,7 @@ if ENV.fetch("AUTHOR_ON") == "true"
       logger.error(e.message)
       list = AuthorList::Error.new(reference_id)
     end
-    erb :authors, locals: {list: list, callout: 'author', feedback_url: 'https://umich.qualtrics.com/jfe/form/SV_43jm8oGIRVLEBbo'}
+    erb :authors, locals: {list: list}
   end
 end
 get "/callnumber" do
@@ -41,7 +41,7 @@ get "/callnumber" do
     logger.error(e.message)
     list = CallnumberList::Error.new(reference_id)
   end
-  erb :call_number, locals: {list: list, callout: 'call number'}
+  erb :call_number, locals: {list: list}
 end
 post "/search" do
   redirect SearchDropdown.for(type: params["type"], query: params["query"]).url
