@@ -1,6 +1,6 @@
 class AuthorItem
   def self.for(browse_doc:, exact_match:)
-    if browse_doc["record_type"] == "redirect"
+    if browse_doc.key?("see_also")
       AuthorItemWithCrossReferences.new(browse_doc: browse_doc, exact_match: exact_match)
     else
       AuthorItem.new(browse_doc: browse_doc, exact_match: exact_match)
@@ -21,7 +21,7 @@ class AuthorItem
   end
 
   def author
-    @browse_doc["author"]&.strip
+    @browse_doc["term"]&.strip
   end
 
   def url
@@ -62,14 +62,14 @@ class AuthorItemWithCrossReferences < AuthorItem
 
   def cross_references
     # see_instead because this still needs to be changed in solr
-    @browse_doc["see_instead"].map { |author| AuthorItemSee.new(author) }
+    @browse_doc["see_also"].map { |author| AuthorItemSeeAlso.new(author) }
   end
 end
 
-class AuthorItemSee
-  attr_reader :author
+class AuthorItemSeeAlso
+  attr_reader :author, :count
   def initialize(author)
-    @author = author&.strip
+    @author, @count = author.split("||").map { |x| x.strip }
   end
 
   def author_display

@@ -4,7 +4,7 @@
     "QTime":0,
     "params":{
       "q":"*:*",
-      "fq":"author:\"Marc Twain\"",
+      "fq":"term:\"Marc Twain\"",
       "sort":"id asc"}},
   "response":{"numFound":0,"start":0,"docs":[]
   }
