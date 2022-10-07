@@ -76,6 +76,10 @@ class AuthorItemSeeAlso
     "#{@author} (in author list)"
   end
 
+  def record_text
+    "#{count} record#{"s" if count != 1}"
+  end
+
   def kind
     "see_also"
   end
