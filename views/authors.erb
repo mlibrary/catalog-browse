@@ -36,6 +36,9 @@
                     <% end %>
                     <dd>
                       <a href="<%= cr.url%>"><%=cr.author_display%></a> (<%=cr.record_text%>)
+                      <% if cr.heading_link? %>
+                        <%= erb :'components/external_link', locals: { url: cr.heading_link, text: 'About this author', classes: 'vernacular pipe' } %>
+                      <% end %>
                     </dd>
                   <% end %>
                 <% end %>
