@@ -52,6 +52,9 @@ describe AuthorItemWithCrossReferences do
     it "has a count" do
       expect(see_also.count).to eq("7")
     end
+    it "displays records" do
+      expect(see_also.record_text).to eq("7 records")
+    end
     it "has a url that's an author query" do
       expect(subject.cross_references.first.url).to include("author?query=")
     end
