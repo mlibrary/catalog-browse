@@ -51,7 +51,7 @@ class AuthorItem
   end
 
   def heading_link
-    @browse_doc["naf_id"]
+    @browse_doc["loc_id"]
   end
 end
 
