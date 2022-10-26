@@ -12,12 +12,20 @@ describe AuthorItem do
     end
   end
   context "author" do
-    it "returns the term field" do
-      params = {
+    before(:each) do
+      @params = {
         browse_doc: JSON.parse(fixture("author_results.json"))["response"]["docs"].first,
         exact_match: false
       }
-      expect(described_class.new(**params).author).to eq("Twain, Mark")
+    end
+    subject do
+      described_class.new(**@params)
+    end
+    it "returns the term field" do
+      expect(subject.author).to eq("Twain, Mark")
+    end
+    it "returns the expected url" do
+      expect(subject.url).to include("query=#{URI.encode_www_form_component("author:(\"Twain, Mark\")")}&filter.search_only=false")
     end
   end
 end
