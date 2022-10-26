@@ -1,6 +1,6 @@
 class AuthorItem
   def self.for(browse_doc:, exact_match:)
-    if browse_doc["record_type"] == "redirect"
+    if browse_doc.key?("see_also")
       AuthorItemWithCrossReferences.new(browse_doc: browse_doc, exact_match: exact_match)
     else
       AuthorItem.new(browse_doc: browse_doc, exact_match: exact_match)
@@ -21,11 +21,11 @@ class AuthorItem
   end
 
   def author
-    @browse_doc["author"]&.strip
+    @browse_doc["term"]&.strip
   end
 
   def url
-    params = {library: "U-M Ann Arbor Libraries", query: "author:(\"#{author}\")"}
+    params = {library: "U-M Ann Arbor Libraries", query: "author:(\"#{author}\")", "filter.search_only": false}
     "https://search.lib.umich.edu/catalog?#{URI.encode_www_form(params)}"
   end
 
@@ -51,7 +51,7 @@ class AuthorItem
   end
 
   def heading_link
-    @browse_doc["naf_id"]
+    @browse_doc["loc_id"]
   end
 end
 
@@ -62,18 +62,22 @@ class AuthorItemWithCrossReferences < AuthorItem
 
   def cross_references
     # see_instead because this still needs to be changed in solr
-    @browse_doc["see_instead"].map { |author| AuthorItemSee.new(author) }
+    @browse_doc["see_also"].map { |author| AuthorItemSeeAlso.new(author) }
   end
 end
 
-class AuthorItemSee
-  attr_reader :author
+class AuthorItemSeeAlso
+  attr_reader :author, :count
   def initialize(author)
-    @author = author&.strip
+    @author, @count = author.split("||").map { |x| x.strip }
   end
 
   def author_display
     "#{@author} (in author list)"
+  end
+
+  def record_text
+    "#{count} record#{"s" if count != 1}"
   end
 
   def kind

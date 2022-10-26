@@ -1,13 +1,32 @@
-describe AuthorItem, ".#for" do
-  it "returns with an Cross Reference if the doc is of type redirect" do
-    cross_reference_doc = {"record_type" => "redirect"}
-    item = described_class.for(browse_doc: cross_reference_doc, exact_match: false)
-    expect(item.class).to eq(AuthorItemWithCrossReferences)
+describe AuthorItem do
+  context ".for" do
+    it "returns with an Cross Reference if the doc has a see_also" do
+      cross_reference_doc = {"see_also" => ["some author || 9"]}
+      item = described_class.for(browse_doc: cross_reference_doc, exact_match: false)
+      expect(item.class).to eq(AuthorItemWithCrossReferences)
+    end
+    it "returns a regular author item if it's any other record type" do
+      doc = {} # doesn't even have a record_type
+      item = described_class.for(browse_doc: doc, exact_match: false)
+      expect(item.class).to eq(AuthorItem)
+    end
   end
-  it "returns a regular author item if it's any other record type" do
-    doc = {} # doesn't even have a record_type
-    item = described_class.for(browse_doc: doc, exact_match: false)
-    expect(item.class).to eq(AuthorItem)
+  context "author" do
+    before(:each) do
+      @params = {
+        browse_doc: JSON.parse(fixture("author_results.json"))["response"]["docs"].first,
+        exact_match: false
+      }
+    end
+    subject do
+      described_class.new(**@params)
+    end
+    it "returns the term field" do
+      expect(subject.author).to eq("Twain, Mark")
+    end
+    it "returns the expected url" do
+      expect(subject.url).to include("query=#{URI.encode_www_form_component("author:(\"Twain, Mark\")")}&filter.search_only=false")
+    end
   end
 end
 describe AuthorItemWithCrossReferences do
@@ -26,11 +45,23 @@ describe AuthorItemWithCrossReferences do
     end
   end
   context "#cross_references.first" do
+    let :see_also do
+      subject.cross_references.first
+    end
     it "has a cross referencess of kind 'see_also'" do
-      expect(subject.cross_references.first.kind).to eq("see_also")
+      expect(see_also.kind).to eq("see_also")
     end
     it "has a false 'heading_link?'" do
-      expect(subject.cross_references.first.heading_link?).to eq(false)
+      expect(see_also.heading_link?).to eq(false)
+    end
+    it "has an author_display" do
+      expect(see_also.author_display).to eq("Clemens, Samuel Langhorne, 1835-1910 (in author list)")
+    end
+    it "has a count" do
+      expect(see_also.count).to eq("7")
+    end
+    it "displays records" do
+      expect(see_also.record_text).to eq("7 records")
     end
     it "has a url that's an author query" do
       expect(subject.cross_references.first.url).to include("author?query=")
