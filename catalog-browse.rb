@@ -19,10 +19,17 @@ CatalogSolrClient.configure do |config|
   config.solr_url = ENV.fetch("BIBLIO_SOLR")
 end
 
+# Remove extraneous (and potentially damaging) stuff from the author string
+# TODO: add bits to remove field prefix (e.g., 'author:') as defined in 00-catalog.yml
+def cleanup_author_browse_string(str)
+  str.gsub(/\p{P}\p{Sm}\p{Sc}\p{So}/, "")
+end
+
 if ENV.fetch("AUTHOR_ON") == "true"
   get "/author" do
     author = params[:query]
-    reference_id = params[:reference_id] || author
+    query_string = cleanup_author_browse_string(author)
+    reference_id = params[:reference_id] || query_string
     begin
       list = AuthorList.for(direction: params[:direction], reference_id: reference_id, num_rows_to_display: 20, original_reference: author, banner_reference: params[:banner_reference])
     rescue => e
