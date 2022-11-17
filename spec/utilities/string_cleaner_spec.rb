@@ -24,7 +24,8 @@ describe StringCleaner do
     it "cleans up symbols" do
       expect(described_class.cleanup_author_browse_string("©+$.")).to eq("")
     end
-    xit "removes 'author:' prefix" do
+    it "removes 'author:' prefix" do
+      expect(described_class.cleanup_author_browse_string('author:"Author Name"')).to eq("Author Name")
     end
   end
 end
