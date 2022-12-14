@@ -26,14 +26,14 @@ module StringCleaner
 
   def self.strip_symbols(str)
     # str.gsub(/[\p{P}\p{Sm}\p{Sc}\p{So}^`]/, "")
-    str.gsub(/["'(){}\[\]]/, "")
+    str.gsub(/["']/, "")
   end
 
   # TODO: add bits to remove field prefix (e.g., 'author:') as defined in 00-catalog.yml
   # this is where the author browse specific cleaning goes
   def self.cleanup_author_browse_string(str)
     prefixes.each do |x|
-      if str.match?(/^#{x}:["(]/)
+      if str.match?(/^#{x}:/)
         str.sub!(/^#{x}:/, "")
         break
       end
