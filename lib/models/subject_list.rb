@@ -37,7 +37,7 @@ class SubjectList < BrowseListPresenter
 
   def items
     banner_index = nil
-    match_notice = OpenStruct.new(author: original_reference.upcase, match_notice?: true)
+    match_notice = OpenStruct.new(subject: original_reference.upcase, match_notice?: true)
     my_items = @browse_list.docs.map.with_index do |browse_doc, index|
       exact_match = exact_matches.any?(browse_doc["id"])
       banner_match = (banner_reference == browse_doc["id"])
@@ -68,6 +68,6 @@ class SubjectList::Error < SubjectList
   end
 
   def error_message
-    "<span class=\"strong\">#{original_reference}</span> is not a valid author query."
+    "<span class=\"strong\">#{original_reference}</span> is not a valid subject query."
   end
 end

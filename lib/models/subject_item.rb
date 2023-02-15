@@ -21,7 +21,7 @@ class SubjectItem
     !!@exact_match
   end
 
-  def author
+  def term
     @browse_doc["term"]&.strip
   end
 
@@ -70,7 +70,7 @@ class SubjectItemWithCrossReferences < SubjectItem
 end
 
 class SubjectItemCrossReference
-  attr_reader :author, :count
+  attr_reader :subject, :count
   def initialize(subject)
     @subject, @count = subject.split("||").map { |x| x.strip }
   end

@@ -22,6 +22,18 @@ CatalogSolrClient.configure do |config|
   config.solr_url = ENV.fetch("BIBLIO_SOLR")
 end
 
+if ENV.fetch("SUBJECT_ON") == "true"
+  get "/subject" do
+    reference_id = params[:reference_id] # || author
+    begin
+      list = SubjectList.for(direction: params[:direction], reference_id: reference_id, num_rows_to_display: 20, original_reference: author, banner_reference: params[:banner_reference])
+    rescue => e
+      logger.error(e.message)
+      list = SubjectList::Error.new(reference_id)
+    end
+    erb :subject, locals: {list: list}
+  end
+end
 if ENV.fetch("AUTHOR_ON") == "true"
   get "/author" do
     author = StringCleaner.cleanup_author_browse_string(params[:query])
