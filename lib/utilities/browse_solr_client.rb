@@ -1,7 +1,7 @@
 require "faraday"
 
 class BrowseSolrClient
-  def initialize(solr_url: ENV.fetch("CATALOG_SOLR"), core: ENV.fetch("CALLNUMBERS_CORE"), match_field: "callnumber")
+  def initialize(solr_url: ENV.fetch("CATALOG_SOLR"), core: ENV.fetch("CALLNUMBERS_CORE"), match_field: "callnumber", q: "*:*")
     @conn = Faraday.new(
       url: solr_url
     ) do |f|
@@ -11,6 +11,7 @@ class BrowseSolrClient
     end
     @path_prefix = "/solr/#{core}"
     @match_field = match_field
+    @q = q
   end
 
   def browse_reference_on_top(reference_id:, rows: 20)
@@ -30,7 +31,7 @@ class BrowseSolrClient
   def browse(rows:, sort:, range:)
     query = {
       rows: rows,
-      q: "*:*",
+      q: @q,
       fq: range,
       sort: sort
     }
@@ -39,7 +40,7 @@ class BrowseSolrClient
 
   def exact_matches(value: callnumber)
     query = {
-      q: "*:*",
+      q: @q,
       fq: %(#{@match_field}:"#{value}"),
       sort: "id asc",
       rows: 5000
