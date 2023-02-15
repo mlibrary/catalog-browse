@@ -1,6 +1,7 @@
 class SubjectItem
+  attr_reader :browse_doc
   def self.for(browse_doc:, exact_match:)
-    if browse_doc.key?("see_also")
+    if browse_doc.key?("broader") || browse_doc.key?("narrower")
       SubjectItemWithCrossReferences.new(browse_doc: browse_doc, exact_match: exact_match)
     else
       SubjectItem.new(browse_doc: browse_doc, exact_match: exact_match)
@@ -25,7 +26,7 @@ class SubjectItem
   end
 
   def url
-    params = {library: "U-M Ann Arbor Libraries", query: "author:(\"#{author}\")", "filter.search_only": false}
+    params = {library: "U-M Ann Arbor Libraries", query: "subject:(\"#{subject}\")", "filter.search_only": false}
     "https://search.lib.umich.edu/catalog?#{URI.encode_www_form(params)}"
   end
 
@@ -62,30 +63,28 @@ class SubjectItemWithCrossReferences < SubjectItem
 
   def cross_references
     # see_instead because this still needs to be changed in solr
-    @browse_doc["see_also"].map { |author| SubjectItemSeeAlso.new(author) }
+    broader = @browse_doc["broader"]&.map { |subject| SubjectItemCrossReference.new(subject) }
+    narrower = @browse_doc["narrower"]&.map { |subject| SubjectItemCrossReference.new(subject) }
+    OpenStruct.new(broader: broader, narrower: narrower)
   end
 end
 
-class SubjectItemSeeAlso
+class SubjectItemCrossReference
   attr_reader :author, :count
-  def initialize(author)
-    @author, @count = author.split("||").map { |x| x.strip }
+  def initialize(subject)
+    @subject, @count = subject.split("||").map { |x| x.strip }
   end
 
-  def author_display
-    "#{@author} (in author list)"
+  def subject_display
+    "#{@subject} (in subject list)"
   end
 
   def record_text
     "#{count} record#{"s" if count != 1}"
   end
 
-  def kind
-    "see_also"
-  end
-
   def url
-    "#{ENV.fetch("BASE_URL")}/author?query=#{URI.encode_www_form_component(@author)}"
+    "#{ENV.fetch("BASE_URL")}/subject?query=#{URI.encode_www_form_component(@subject)}"
   end
 
   def heading_link?

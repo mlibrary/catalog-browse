@@ -13,6 +13,8 @@ require_relative "lib/models/callnumber_list"
 require_relative "lib/models/callnumber_item"
 require_relative "lib/models/author_list"
 require_relative "lib/models/author_item"
+require_relative "lib/models/subject_list"
+require_relative "lib/models/subject_item"
 require_relative "lib/models/search_dropdown"
 require_relative "lib/models/datastores"
 

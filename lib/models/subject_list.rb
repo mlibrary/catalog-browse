@@ -17,8 +17,10 @@ class SubjectList < BrowseListPresenter
   end
 
   def feedback_url
+    # TTD
     # Subject Browse specific url
-    "https://umich.qualtrics.com/jfe/form/SV_43jm8oGIRVLEBbo"
+    # "https://umich.qualtrics.com/jfe/form/"
+    "#"
   end
 
   def name
@@ -46,7 +48,8 @@ class SubjectList < BrowseListPresenter
   end
 
   def help_text
-    '<span class="strong">Browse by author help:</span> Search an author (last names, first name), organization or conference and view an alphabetical list of all author headings that link to matching records in the library catalog. Also view variations of some author names (pseudonyms) linked to that part of the author index.'
+    # TTD add this text
+    '<span class="strong">Browse by subject help:</span> '
   end
 end
 
