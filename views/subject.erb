@@ -1,0 +1,55 @@
+<% if list.show_table? %>
+  <table class="browse-table" aria-labelledby="maincontent">
+    <thead>
+      <tr>
+        <th class="column-main">Subject</th>
+        <th>Records</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% list.items.each do |result| %>
+        <% if result.match_notice? %>
+          <tr class="match-<%= list.num_matches == 0 ? 'none' : 'notice' %>">
+            <td colspan="2">
+              <%= list.match_text %>
+            </td>
+          </tr>
+        <% else %>
+          <tr <% if result.exact_match? %>class="exact-match"<% end %>>
+            <td class="column-main">
+              <dl>
+                <dt class="visually-hidden">Subject:</dt>
+                <dd>
+                  <% if result.results_count > 0 %><a href="<%= result.url%>"><% end %>
+                    <span <% if result.exact_match? %>class="strong"<% end %>>
+                      <%=result.subject%>
+                    </span>
+                  <% if result.results_count > 0 %></a><% end %>
+                  <% if result.heading_link? %>
+                    <%= erb :'components/external_link', locals: { url: result.heading_link, text: 'About this subject', classes: 'vernacular pipe' } %>
+                  <% end %>
+                </dd>
+                <% if result.has_cross_references? %>
+                  <% result.cross_references.each do | cr | %>
+                    <% if cr.kind == 'see_also' %>
+                      <dt>See:</dt>
+                    <% end %>
+                    <dd>
+                      <a href="<%= cr.url%>"><%=cr.subject_display%></a> (<%=cr.record_text%>)
+                      <% if cr.heading_link? %>
+                        <%= erb :'components/external_link', locals: { url: cr.heading_link, text: 'About this subject', classes: 'vernacular pipe' } %>
+                      <% end %>
+                    </dd>
+                  <% end %>
+                <% end %>
+              </dl>
+            </td>
+            <td>
+              <%= result.record_text %>
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

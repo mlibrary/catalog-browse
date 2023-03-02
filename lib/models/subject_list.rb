@@ -17,10 +17,8 @@ class SubjectList < BrowseListPresenter
   end
 
   def feedback_url
-    # TTD
     # Subject Browse specific url
-    # "https://umich.qualtrics.com/jfe/form/"
-    "#"
+    "https://umich.qualtrics.com/jfe/form/SV_brwYt0B1fSx0zFI"
   end
 
   def name
@@ -48,8 +46,7 @@ class SubjectList < BrowseListPresenter
   end
 
   def help_text
-    # TTD add this text
-    '<span class="strong">Browse by subject help:</span> '
+    '<span class="strong">Browse by subject help:</span> Search within an alphabetical list of all <a href="https://id.loc.gov/authorities/subjects.html">Library of Congress Subject Headings</a> (LCSH) indexed in the Library catalog.'
   end
 end
 
