@@ -25,6 +25,10 @@ class SubjectItem
     @browse_doc["term"]&.strip
   end
 
+  def subject
+    term
+  end
+
   def url
     params = {library: "U-M Ann Arbor Libraries", query: "subject:(\"#{subject}\")", "filter.search_only": false}
     "https://search.lib.umich.edu/catalog?#{URI.encode_www_form(params)}"

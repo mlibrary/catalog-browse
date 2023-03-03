@@ -10,6 +10,7 @@ class BrowseList
     case direction
     when "next"
       # includes reference in results
+      # require "byebug"; byebug
       index_response = browse_solr_client.browse_reference_on_top(reference_id: reference_id, rows: num_rows_to_display + 2)
       BrowseList::ReferenceOnTop.new(
         index_response: index_response&.body,

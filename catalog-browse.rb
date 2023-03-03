@@ -27,7 +27,7 @@ if ENV.fetch("SUBJECT_ON") == "true"
     subject = params[:query]
     reference_id = params[:reference_id] || subject
     begin
-      list = SubjectList.for(direction: params[:direction], reference_id: reference_id, num_rows_to_display: 20, original_reference: author, banner_reference: params[:banner_reference])
+      list = SubjectList.for(direction: params[:direction], reference_id: reference_id, num_rows_to_display: 20, original_reference: subject, banner_reference: params[:banner_reference])
     rescue => e
       logger.error(e.message)
       list = SubjectList::Error.new(reference_id)
