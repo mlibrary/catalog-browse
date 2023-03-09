@@ -1,7 +1,7 @@
 class SubjectItem
   attr_reader :browse_doc
   def self.for(browse_doc:, exact_match:)
-    if browse_doc.key?("broader") || browse_doc.key?("narrower")
+    if browse_doc.key?("broader") || browse_doc.key?("narrower") || browse_doc.key?("see_also")
       SubjectItemWithCrossReferences.new(browse_doc: browse_doc, exact_match: exact_match)
     else
       SubjectItem.new(browse_doc: browse_doc, exact_match: exact_match)
@@ -69,7 +69,8 @@ class SubjectItemWithCrossReferences < SubjectItem
     # see_instead because this still needs to be changed in solr
     broader = @browse_doc["broader"]&.map { |subject| SubjectItemCrossReference.new(subject) }
     narrower = @browse_doc["narrower"]&.map { |subject| SubjectItemCrossReference.new(subject) }
-    OpenStruct.new(broader: broader, narrower: narrower)
+    see_also = @browse_doc["see_also"]&.map { |subject| SubjectItemCrossReference.new(subject) }
+    OpenStruct.new(broader: broader, narrower: narrower, see_also: see_also)
   end
 end
 

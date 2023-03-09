@@ -30,16 +30,26 @@
                   <% end %>
                 </dd>
                 <% if result.has_cross_references? %>
-                  <% result.cross_references.each do | cr | %>
-                    <% if cr.kind == 'see_also' %>
-                      <dt>See:</dt>
+                  <% result.cross_references.to_h.keys.each do | cr | %>
+                    <% if !result.cross_references[cr].nil? %>
+                      <dt>
+                        <%=
+                          case cr
+                          when :broader
+                            "Use instead of:"
+                          when :narrower
+                            "Narrower Term(s):"
+                          else
+                            "See:"
+                          end
+                        %>
+                      </dt>
+                      <dd>
+                        <% result.cross_references[cr].each_with_index do | cross_reference, index |%>
+                          <a href="<%= cross_reference.url%>"><%=cross_reference.subject_display%></a> (<%=cross_reference.record_text%>)<% if result.cross_references[cr].length - 1 != index %>, <% end %>
+                        <% end %>
+                      </dd>
                     <% end %>
-                    <dd>
-                      <a href="<%= cr.url%>"><%=cr.subject_display%></a> (<%=cr.record_text%>)
-                      <% if cr.heading_link? %>
-                        <%= erb :'components/external_link', locals: { url: cr.heading_link, text: 'About this subject', classes: 'vernacular pipe' } %>
-                      <% end %>
-                    </dd>
                   <% end %>
                 <% end %>
               </dl>
