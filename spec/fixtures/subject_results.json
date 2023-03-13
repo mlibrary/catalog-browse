@@ -1,0 +1,36 @@
+{
+  "responseHeader":{
+    "status":0,
+    "QTime":0,
+    "params":{
+      "q":"browse_field:subject",
+      "fq":"id:[\"Civil War\" TO *]",
+      "sort":"id asc",
+      "rows":"2"}},
+  "response":{"numFound":4423093,"start":0,"docs":[
+      {
+        "id":"civil war",
+        "loc_id":"http://id.loc.gov/authorities/subjects/sh85026421",
+        "term":"Civil war",
+        "count":257,
+        "alternate_forms":["Civil wars",
+          "Intra-state war",
+          "Rebellions"],
+        "narrower":["Insurgency||199"],
+        "broader":["Government, Resistance to||616",
+          "International law||4618",
+          "Revolutions||1743",
+          "War||2989"],
+        "browse_field":"subject",
+        "json":"{\"id\":\"http://id.loc.gov/authorities/subjects/sh85026421\",\"subject\":\"Civil war\",\"narrower\":{\"http://id.loc.gov/authorities/subjects/sh85067073\":{\"id\":\"http://id.loc.gov/authorities/subjects/sh85067073\",\"label\":\"Insurgency\",\"count\":199,\"match_text\":\"insurgency\",\"json_class\":\"AuthorityBrowse::GenericXRef\"}},\"broader\":{\"http://id.loc.gov/authorities/subjects/sh85056036\":{\"id\":\"http://id.loc.gov/authorities/subjects/sh85056036\",\"label\":\"Government, Resistance to\",\"count\":616,\"match_text\":\"government resistance to\",\"json_class\":\"AuthorityBrowse::GenericXRef\"},\"http://id.loc.gov/authorities/subjects/sh85067417\":{\"id\":\"http://id.loc.gov/authorities/subjects/sh85067417\",\"label\":\"International law\",\"count\":4618,\"match_text\":\"international law\",\"json_class\":\"AuthorityBrowse::GenericXRef\"},\"http://id.loc.gov/authorities/subjects/sh85113507\":{\"id\":\"http://id.loc.gov/authorities/subjects/sh85113507\",\"label\":\"Revolutions\",\"count\":1743,\"match_text\":\"revolutions\",\"json_class\":\"AuthorityBrowse::GenericXRef\"},\"http://id.loc.gov/authorities/subjects/sh85145114\":{\"id\":\"http://id.loc.gov/authorities/subjects/sh85145114\",\"label\":\"War\",\"count\":2989,\"match_text\":\"war\",\"json_class\":\"AuthorityBrowse::GenericXRef\"}},\"see_also\":{},\"incoming_see_also\":null}",
+        "_version_":1757646987054809088,
+        "date_of_index":"2023-02-12T00:00:00Z"},
+      {
+        "id":"civil war 1642 1649",
+        "term":"Civil War, 1642-1649",
+        "count":1,
+        "browse_field":"subject",
+        "json":"{\"id\":\"Civil War, 1642-1649\",\"subject\":\"Civil War, 1642-1649\"}",
+        "_version_":1757647095108468739,
+        "date_of_index":"2023-02-12T00:00:00Z"}]
+  }}
