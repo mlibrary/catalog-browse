@@ -35,7 +35,6 @@
   - :label: Browse by author
     :value: browse_by_author
     :tip: Browse an alphabetical list of authors. Authors can be people (put last names first), organizations, or events (e.g. Kingston, Maxine Hong; United Nations Development Programme; Pong, Chun-ho).
-  - :label: Browse by subject (coming soon)
+  - :label: Browse by subject
     :value: browse_by_subject
     :tip: Browse an A-Z list of subjects (e.g. motion pictures; history--United States; Eliot, George).
-    :disabled: disabled

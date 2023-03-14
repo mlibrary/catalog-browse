@@ -1,4 +1,4 @@
-class AuthorList < BrowseListPresenter
+class SubjectList < BrowseListPresenter
   def self.for(direction:, reference_id:, num_rows_to_display:, original_reference:, banner_reference:)
     browse_list = BrowseList.for(
       direction: direction,
@@ -6,7 +6,7 @@ class AuthorList < BrowseListPresenter
       num_rows_to_display: num_rows_to_display,
       original_reference: original_reference,
       banner_reference: banner_reference,
-      browse_solr_client: BrowseSolrClient.new(core: ENV.fetch("AUTHORS_CORE"), match_field: "term", q: "browse_field:name")
+      browse_solr_client: BrowseSolrClient.new(core: ENV.fetch("AUTHORS_CORE"), match_field: "term", q: "browse_field:subject")
     )
 
     new(browse_list: browse_list)
@@ -17,40 +17,40 @@ class AuthorList < BrowseListPresenter
   end
 
   def feedback_url
-    # Author Browse specific url
-    "https://umich.qualtrics.com/jfe/form/SV_43jm8oGIRVLEBbo"
+    # Subject Browse specific url
+    "https://umich.qualtrics.com/jfe/form/SV_brwYt0B1fSx0zFI"
   end
 
   def name
-    "author"
+    "subject"
   end
 
   def path
-    "author"
+    "subject"
   end
 
   def doc_title
-    "Browse by Author"
+    "Browse by Subject"
   end
 
   def items
     banner_index = nil
-    match_notice = OpenStruct.new(author: original_reference.upcase, match_notice?: true)
+    match_notice = OpenStruct.new(subject: original_reference.upcase, match_notice?: true)
     my_items = @browse_list.docs.map.with_index do |browse_doc, index|
       exact_match = exact_matches.any?(browse_doc["id"])
       banner_match = (banner_reference == browse_doc["id"])
       banner_index = index if (exact_match || banner_match) && banner_index.nil?
-      AuthorItem.for(browse_doc: browse_doc, exact_match: exact_match)
+      SubjectItem.for(browse_doc: browse_doc, exact_match: exact_match)
     end
     banner_index.nil? ? my_items : my_items.insert(banner_index, match_notice)
   end
 
   def help_text
-    '<span class="strong">Browse by author help:</span> Search an author (last names, first name), organization or conference and view an alphabetical list of all author headings that link to matching records in the library catalog. Also view variations of some author names (pseudonyms) linked to that part of the author index.'
+    '<span class="strong">Browse by subject help:</span> Search within an alphabetical list of all <a href="https://id.loc.gov/authorities/subjects.html">Library of Congress Subject Headings</a> (LCSH) indexed in the Library catalog.'
   end
 end
 
-class AuthorList::Error < AuthorList
+class SubjectList::Error < SubjectList
   attr_reader :original_reference
   def initialize(original_reference = "")
     @original_reference = original_reference
@@ -65,6 +65,6 @@ class AuthorList::Error < AuthorList
   end
 
   def error_message
-    "<span class=\"strong\">#{original_reference}</span> is not a valid author query."
+    "<span class=\"strong\">#{original_reference}</span> is not a valid subject query."
   end
 end

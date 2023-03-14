@@ -20,6 +20,8 @@ class SearchDropdown::Browse < SearchDropdown
       "#{ENV.fetch("BASE_URL")}/callnumber?query=#{encoded_query}"
     when "browse_by_author"
       "#{ENV.fetch("BASE_URL")}/author?query=#{encoded_query}"
+    when "browse_by_subject"
+      "#{ENV.fetch("BASE_URL")}/subject?query=#{encoded_query}"
     else
       # Users shouldn't be able to do this;
       # Send them back to search without their query if it happens.

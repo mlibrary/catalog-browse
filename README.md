@@ -15,7 +15,9 @@ Get the actual values from a developer, and update the `.env` file.
 BIBLIO_SOLR='http://biblio-server'
 CATALOG_SOLR='http://catalog-solr-server'
 CALLNUMBERS_CORE='callnumbers'
+AUTHORS_CORE='authors'
 AUTHOR_ON='true'
+SUBJECT_ON='true'
 ```
 
 Build the image
@@ -56,3 +58,4 @@ In this project we create an environment variable for the feature. If it is true
 
 Current Features:
 * `AUTHOR_ON='true'` for enabling Browse By Author
+* `SUBJECT_ON='true'` for enabling Browse By Subject
