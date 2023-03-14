@@ -24,6 +24,9 @@ describe SubjectItem do
     it "returns the term field" do
       expect(subject.subject).to eq("Civil war")
     end
+    it "doesn't have cross references" do
+      expect(subject.has_cross_references?).to eq(false)
+    end
     it "returns the expected url" do
       expect(subject.url).to include("query=#{URI.encode_www_form_component("subject:(\"Civil war\")")}&filter.search_only=false")
     end
