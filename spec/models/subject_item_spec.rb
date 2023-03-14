@@ -61,7 +61,7 @@ describe SubjectItemWithCrossReferences do
       subject.cross_references.broader
     end
     it "has at least one cross reference of 'broader'" do
-      expect(broader).should_not be_nil
+      expect(broader).not_to be_nil
     end
     it "has a false 'heading_link?'" do
       expect(broader.first.heading_link?).to eq(false)
@@ -93,7 +93,7 @@ describe SubjectItemWithCrossReferences do
       subject.cross_references.narrower
     end
     it "has at least one cross reference of 'narrower'" do
-      expect(narrower).should_not be_nil
+      expect(narrower).not_to be_nil
     end
     it "has a false 'heading_link?'" do
       expect(narrower.first.heading_link?).to eq(false)
@@ -125,7 +125,7 @@ describe SubjectItemWithCrossReferences do
       subject.cross_references.see_also
     end
     it "has at least one cross reference of 'see_also'" do
-      expect(see_also).should_not be_nil
+      expect(see_also).not_to be_nil
     end
     it "has a false 'heading_link?'" do
       expect(see_also.first.heading_link?).to eq(false)

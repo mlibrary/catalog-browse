@@ -19,6 +19,13 @@ describe SubjectList do
     end
   end
 
+  context "help_text" do
+    it "returns appropriate help text for browsing by subject" do
+      expect(subject.help_text.class).to eq(String)
+      expect(subject.help_text).to include("help")
+    end
+  end
+
   context "match_text" do
     it "returns appropriate text for no matches" do
       allow(@browse_list).to receive(:num_matches).and_return(0)
@@ -49,11 +56,16 @@ end
 describe SubjectList::Error do
   before(:each) do
     @params = {
-      original_reference: "OSU"
+      original_reference: "Invalid Subject"
     }
   end
   subject do
     described_class.new(**@params)
+  end
+  context "#show_table?" do
+    it "returns false" do
+      expect(subject.show_table?).to eq(false)
+    end
   end
   context "#error?" do
     it "returns true" do
@@ -62,7 +74,7 @@ describe SubjectList::Error do
   end
   context "#error_message" do
     it "returns an error message" do
-      expect(subject.error_message).to eq("<span class=\"strong\">{:original_reference=>\"OSU\"}</span> is not a valid subject query.")
+      expect(subject.error_message).to eq("<span class=\"strong\">{:original_reference=>\"Invalid Subject\"}</span> is not a valid subject query.")
     end
   end
 end
