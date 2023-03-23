@@ -77,7 +77,7 @@ class AuthorItemSeeAlso
   end
 
   def record_text
-    "#{count} record#{"s" if count != 1}"
+    "#{count} record#{"s" if count != "1"}"
   end
 
   def kind

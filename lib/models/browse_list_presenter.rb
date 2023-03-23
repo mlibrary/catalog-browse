@@ -8,10 +8,10 @@ class BrowseListPresenter
 
   def title
     if show_table?
-      if name == "author"
-        "Browse &ldquo;#{original_reference}&rdquo; in an alphabetical list of #{name}s"
-      else
+      if name == "call number"
         "Browse &ldquo;#{original_reference}&rdquo; in #{name}s"
+      else
+        "Browse &ldquo;#{original_reference}&rdquo; in an alphabetical list of #{name}s"
       end
     else
       "Browse by #{name}"
