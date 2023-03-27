@@ -46,7 +46,7 @@ class SubjectList < BrowseListPresenter
   end
 
   def help_text
-    '<span class="strong">Browse by subject help:</span> Search within an alphabetical list of all <a href="https://id.loc.gov/authorities/subjects.html">Library of Congress Subject Headings</a> (LCSH) indexed in the Library catalog.'
+    '<span class="strong">Browse by subject help:</span> Search within an alphabetical list of all <a href="https://id.loc.gov/authorities/subjects.html" target="_blank" rel="noopener noreferrer">Library of Congress Subject Headings<span class="visually-hidden"> - Opens in new window</span><span class="material-symbols-sharp">open_in_new</span></a> (LCSH) indexed in the Library catalog.'
   end
 end
 
