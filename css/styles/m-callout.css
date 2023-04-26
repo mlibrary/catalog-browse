@@ -16,7 +16,7 @@
 /*** 1.0 - Container ***/
 /***********************/
 
-m-callout {
+m-callout:first-child {
   margin: 0;
 }
 
