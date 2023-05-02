@@ -1,11 +1,11 @@
 <%
   fields = YAML.load_file("./config/search_dropdown.yml")
   active_browse_option = 'browse_by_' + request.path_info[1..-1]
-  if ENV.fetch("AUTHOR_ON") == "false"
+  if ENV.fetch("SUBJECT_ON") == "false"
     browse_by = fields.find{|x| x[:label] == "Browse by [BETA]"}
-    browse_by_author = browse_by[:options].find{|x| x[:label] == "Browse by author"}
-    browse_by_author[:label] = "Browse by author (coming soon)"
-    browse_by_author[:disabled] = "disabled"
+    browse_by_subject = browse_by[:options].find{|x| x[:label] == "Browse by subject"}
+    browse_by_subject[:label] = "Browse by subject (coming soon)"
+    browse_by_subject[:disabled] = "disabled"
   end
 %>
 
