@@ -31,7 +31,7 @@
                 </dd>
                 <% if result.has_cross_references? %>
                   <% result.cross_references.to_h.keys.each do | cr | %>
-                    <% if !result.cross_references[cr].nil? %>
+                    <% if result.cross_references[cr].any? %>
                       <dt>
                         <%=
                           case cr
@@ -45,8 +45,16 @@
                         %>
                       </dt>
                       <dd>
-                        <% result.cross_references[cr].each_with_index do | cross_reference, index |%>
-                          <a href="<%= cross_reference.url%>"><%=cross_reference.subject_display%></a> (<%=cross_reference.record_text%>)<% if result.cross_references[cr].length - 1 != index %>, <% end %>
+                        <% result.cross_references[cr].leading.each_with_index do | cross_reference, index |%>
+                          <a href="<%= cross_reference.url%>"><%=cross_reference.subject_display%></a> (<%=cross_reference.record_text%>)<% if result.cross_references[cr].leading.length - 1 != index %>, <% end %>
+                        <% end %>
+                        <% if result.cross_references[cr].has_remaining? %>
+                          <details open>
+                            <summary>Toggle remaining</summary>
+                            <% result.cross_references[cr].remaining.each_with_index do | cross_reference, index |%>
+                              <a href="<%= cross_reference.url%>"><%=cross_reference.subject_display%></a> (<%=cross_reference.record_text%>)<% if result.cross_references[cr].remaining.length - 1 != index %>, <% end %>
+                            <% end %>
+                          </details>
                         <% end %>
                       </dd>
                     <% end %>
