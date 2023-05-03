@@ -104,21 +104,13 @@ end
 
 class BroaderTerms < SubjectItemCrossReferences
   def text
-    if leading.count == 1
-      "Broader Term"
-    else
-      "Broader Terms"
-    end
+    "Broader Term#{"s" if leading.count != 1}"
   end
 end
 
 class NarrowerTerms < SubjectItemCrossReferences
   def text
-    if leading.count == 1
-      "Narrower Term"
-    else
-      "Narrower Terms"
-    end
+    "Narrower Term#{"s" if leading.count != 1}"
   end
 end
 
@@ -135,7 +127,7 @@ class SubjectItemCrossReference
   end
 
   def subject_display
-    "#{@subject} (in subject list)"
+    @subject
   end
 
   def record_text

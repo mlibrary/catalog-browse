@@ -126,7 +126,7 @@ describe SubjectItemWithCrossReferences do
       expect(broader.first.heading_link?).to eq(false)
     end
     it "has a subject_display" do
-      expect(broader.first.subject_display).to eq("Government, Resistance to (in subject list)")
+      expect(broader.first.subject_display).to eq("Government, Resistance to")
     end
     it "has a count" do
       expect(broader.first.count).to eq("616")
@@ -158,7 +158,7 @@ describe SubjectItemWithCrossReferences do
       expect(narrower.first.heading_link?).to eq(false)
     end
     it "has a subject_display" do
-      expect(narrower.first.subject_display).to eq("Insurgency (in subject list)")
+      expect(narrower.first.subject_display).to eq("Insurgency")
     end
     it "has a count" do
       expect(narrower.first.count).to eq("199")
@@ -190,7 +190,7 @@ describe SubjectItemWithCrossReferences do
       expect(see_also.first.heading_link?).to eq(false)
     end
     it "has a subject_display" do
-      expect(see_also.first.subject_display).to eq("Indigenous peoples (in subject list)")
+      expect(see_also.first.subject_display).to eq("Indigenous peoples")
     end
     it "has a count" do
       expect(see_also.first.count).to eq("441")
