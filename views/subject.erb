@@ -33,16 +33,7 @@
                   <% result.cross_references.to_h.keys.each do | cr | %>
                     <% if result.cross_references[cr].any? %>
                       <dt>
-                        <%=
-                          case cr
-                          when :broader
-                            "Broader Term(s):"
-                          when :narrower
-                            "Narrower Term(s):"
-                          else
-                            "See:"
-                          end
-                        %>
+                        <%= result.cross_references[cr].text %>
                       </dt>
                       <dd>
                         <% result.cross_references[cr].leading.each_with_index do | cross_reference, index |%>
