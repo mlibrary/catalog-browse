@@ -67,19 +67,64 @@ class SubjectItemWithCrossReferences < SubjectItem
 
   def cross_references
     # see_instead because this still needs to be changed in solr
-    broader = map_cross_references("broader")
-    narrower = map_cross_references("narrower")
-    see_also = map_cross_references("see_also")
+    broader = BroaderTerms.new(@browse_doc["broader"])
+    narrower = NarrowerTerms.new(@browse_doc["narrower"])
+    see_also = SeeAlsoTerms.new(@browse_doc["see_also"])
     OpenStruct.new(broader: broader, narrower: narrower, see_also: see_also)
+  end
+end
+
+class SubjectItemCrossReferences
+  def initialize(terms)
+    @terms = terms&.map { |subject| SubjectItemCrossReference.new(subject) }
+  end
+
+  def leading
+    @terms&.first(10) || []
+  end
+
+  def remaining
+    @terms&.drop(10) || []
+  end
+
+  def has_remaining?
+    remaining.any?
+  end
+
+  def any?
+    leading.any?
+  end
+
+  def text
+    ""
   end
 
   private
+end
 
-  def map_cross_references(kind)
-    cross_references = @browse_doc[kind]&.map { |subject| SubjectItemCrossReference.new(subject) }
-    leading = cross_references&.first(10) || []
-    remaining = cross_references&.drop(10) || []
-    OpenStruct.new(leading: leading, remaining: remaining, has_remaining?: remaining.any?, any?: leading.any?)
+class BroaderTerms < SubjectItemCrossReferences
+  def text
+    if leading.count == 1
+      "Broader Term"
+    else
+      "Broader Terms"
+    end
+  end
+end
+
+class NarrowerTerms < SubjectItemCrossReferences
+  def text
+    if leading.count == 1
+      "Narrower Term"
+    else
+      "Narrower Terms"
+    end
+  end
+end
+
+class SeeAlsoTerms < SubjectItemCrossReferences
+  def text
+    "See also"
   end
 end
 

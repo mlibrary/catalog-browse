@@ -52,7 +52,6 @@ describe SubjectItemWithCrossReferences do
   end
   context "#cross_references.broader" do
     before(:each) do
-      @items.first["broader"] = @items.first["broader"].concat(["subject||1", "subject||1", "subject||1", "subject||1", "subject||1", "subject||1", "subject||1"])
       @params = {
         browse_doc: @items.first,
         exact_match: false
@@ -61,25 +60,50 @@ describe SubjectItemWithCrossReferences do
     subject do
       described_class.new(**@params).cross_references.broader
     end
-    it "has a leading array with 10 elements" do
-      expect(subject.leading.count).to eq(10)
+    context "11 elements" do
+      before(:each) do
+        @items.first["broader"] = @items.first["broader"].concat(["subject||1", "subject||1", "subject||1", "subject||1", "subject||1", "subject||1", "subject||1"])
+      end
+      it "has a leading array with 10 elements" do
+        expect(subject.leading.count).to eq(10)
+      end
+      it "has a remaining array with 1 element" do
+        expect(subject.remaining.count).to eq(1)
+      end
+      it "knows it has elements" do
+        expect(subject.any?).to eq(true)
+      end
+      it "knows it has a remaining element" do
+        expect(subject.has_remaining?).to eq(true)
+      end
+      it "has plural text" do
+        expect(subject.text).to eq("Broader Terms")
+      end
     end
-    it "has a remaining array with 1 element" do
-      expect(subject.remaining.count).to eq(1)
+    context "no elements" do
+      before(:each) do
+        @items.first["broader"] = []
+      end
+      it "has returns false for has_remaining? when there aren't any remaining" do
+        expect(subject.has_remaining?).to eq(false)
+      end
+      it "has returns false for any? when there aren't any " do
+        expect(subject.any?).to eq(false)
+      end
     end
-    it "knows it has elements" do
-      expect(subject.any?).to eq(true)
-    end
-    it "knows it has a remaining element" do
-      expect(subject.has_remaining?).to eq(true)
-    end
-    it "has returns false for has_remaining? when there aren't any remaining" do
-      @items.first["broader"] = []
-      expect(subject.has_remaining?).to eq(false)
-    end
-    it "has returns false for any? when there aren't any " do
-      @items.first["broader"] = []
-      expect(subject.any?).to eq(false)
+    context "one element" do
+      before(:each) do
+        @items.first["broader"] = ["subject||1"]
+      end
+      it "has returns false for has_remaining?" do
+        expect(subject.has_remaining?).to eq(false)
+      end
+      it "has returns true for any?" do
+        expect(subject.any?).to eq(true)
+      end
+      it "has singular text" do
+        expect(subject.text).to eq("Broader Term")
+      end
     end
   end
   context "#cross_references.broader.leading" do
