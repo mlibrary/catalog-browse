@@ -57,11 +57,19 @@ describe SubjectItemWithCrossReferences do
         exact_match: false
       }
     end
+  end
+  context "#cross_references.broader.leading" do
+    before(:each) do
+      @params = {
+        browse_doc: @items.first,
+        exact_match: false
+      }
+    end
     subject do
       described_class.new(**@params)
     end
     let :broader do
-      subject.cross_references.broader
+      subject.cross_references.broader.leading
     end
     it "has at least one cross reference of 'broader'" do
       expect(broader).not_to be_nil
@@ -79,7 +87,7 @@ describe SubjectItemWithCrossReferences do
       expect(broader.first.record_text).to eq("616 records")
     end
     it "has a url that's a subject query" do
-      expect(subject.cross_references.broader.first.url).to include("subject?query=")
+      expect(broader.first.url).to include("subject?query=")
     end
   end
   context "#cross_references.narrower" do
@@ -93,7 +101,7 @@ describe SubjectItemWithCrossReferences do
       described_class.new(**@params)
     end
     let :narrower do
-      subject.cross_references.narrower
+      subject.cross_references.narrower.leading
     end
     it "has at least one cross reference of 'narrower'" do
       expect(narrower).not_to be_nil
@@ -111,7 +119,7 @@ describe SubjectItemWithCrossReferences do
       expect(narrower.first.record_text).to eq("199 records")
     end
     it "has a url that's a subject query" do
-      expect(subject.cross_references.narrower.first.url).to include("subject?query=")
+      expect(narrower.first.url).to include("subject?query=")
     end
   end
   context "#cross_references.see_also" do
@@ -125,7 +133,7 @@ describe SubjectItemWithCrossReferences do
       described_class.new(**@params)
     end
     let :see_also do
-      subject.cross_references.see_also
+      subject.cross_references.see_also.leading
     end
     it "has at least one cross reference of 'see_also'" do
       expect(see_also).not_to be_nil
@@ -143,7 +151,7 @@ describe SubjectItemWithCrossReferences do
       expect(see_also.first.record_text).to eq("441 records")
     end
     it "has a url that's a subject query" do
-      expect(subject.cross_references.see_also.first.url).to include("subject?query=")
+      expect(see_also.first.url).to include("subject?query=")
     end
   end
 end

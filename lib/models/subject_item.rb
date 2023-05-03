@@ -67,10 +67,19 @@ class SubjectItemWithCrossReferences < SubjectItem
 
   def cross_references
     # see_instead because this still needs to be changed in solr
-    broader = @browse_doc["broader"]&.map { |subject| SubjectItemCrossReference.new(subject) }
-    narrower = @browse_doc["narrower"]&.map { |subject| SubjectItemCrossReference.new(subject) }
-    see_also = @browse_doc["see_also"]&.map { |subject| SubjectItemCrossReference.new(subject) }
+    broader = map_cross_references("broader")
+    narrower = map_cross_references("narrower")
+    see_also = map_cross_references("see_also")
     OpenStruct.new(broader: broader, narrower: narrower, see_also: see_also)
+  end
+
+  private
+
+  def map_cross_references(kind)
+    cross_references = @browse_doc[kind]&.map { |subject| SubjectItemCrossReference.new(subject) }
+    leading = cross_references&.first(10) || []
+    remaining = cross_references&.drop(10) || []
+    OpenStruct.new(leading: leading, remaining: remaining, has_remaining?: remaining.any?, any?: leading.any?)
   end
 end
 
