@@ -34,7 +34,7 @@
                     <% if result.cross_references[cr].any? %>
                       <dt>
                         <%= result.cross_references[cr].text %>
-                      </dt>
+                      </dt> (in subject list):
                       <dd>
                         <% result.cross_references[cr].leading.each_with_index do | cross_reference, index |%>
                           <a href="<%= cross_reference.url%>"><%=cross_reference.subject_display%></a> (<%=cross_reference.record_text%>)<% if result.cross_references[cr].leading.length - 1 != index %>, <% end %>
