@@ -102,7 +102,7 @@ class SubjectItemCrossReferences
   private
 
   def summary_text(closed, type)
-    "#{closed == true ? "Show all #{@terms.length}" : "Hide #{remaining.count}"}#{" #{type}" if !type.nil?} term#{"s" if closed || !closed && remaining.count != 1}"
+    "#{(closed == true) ? "Show all #{@terms.length}" : "Hide #{remaining.count}"}#{" #{type}" if !type.nil?} term#{"s" if closed || !closed && remaining.count != 1}"
   end
 end
 
