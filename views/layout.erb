@@ -92,6 +92,7 @@
       <%= erb :'components/pagination', locals: { label: 'Top pagination', list: list } %>
       <%= yield %>
       <%= erb :'components/pagination', locals: { label: 'Bottom pagination', list: list } %>
+      <%= erb :'components/harmful_language_statement', locals: { view: 'subject' } %>
       <section class="give-feedback">
         <%= erb :'components/external_link', locals: { url: 'https://umich.qualtrics.com/jfe/form/SV_bCwYIKueEXs8wBf', text: 'Give feedback about this page' } %>
       </section>
