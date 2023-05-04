@@ -84,7 +84,7 @@ class SubjectItemCrossReferences
   end
 
   def remaining
-    @terms&.drop(10) || []
+    @terms&.drop(leading.count) || []
   end
 
   def has_remaining?
@@ -100,23 +100,51 @@ class SubjectItemCrossReferences
   end
 
   private
+
+  def summary_text(closed, type)
+    "#{closed == true ? "Show all #{@terms.length}" : "Hide #{remaining.count}"}#{" #{type}" if !type.nil?} term#{"s" if closed || !closed && remaining.count != 1}"
+  end
 end
 
 class BroaderTerms < SubjectItemCrossReferences
   def text
-    "Broader Term#{"s" if leading.count != 1}"
+    "Broader term#{"s" if @terms.count != 1}"
+  end
+
+  def summary_text_closed
+    summary_text(true, "broader")
+  end
+
+  def summary_text_open
+    summary_text(false, "broader")
   end
 end
 
 class NarrowerTerms < SubjectItemCrossReferences
   def text
-    "Narrower Term#{"s" if leading.count != 1}"
+    "Narrower term#{"s" if @terms.count != 1}"
+  end
+
+  def summary_text_closed
+    summary_text(true, "narrower")
+  end
+
+  def summary_text_open
+    summary_text(false, "narrower")
   end
 end
 
 class SeeAlsoTerms < SubjectItemCrossReferences
   def text
     "See also"
+  end
+
+  def summary_text_closed
+    summary_text(true, nil)
+  end
+
+  def summary_text_open
+    summary_text(false, nil)
   end
 end
 

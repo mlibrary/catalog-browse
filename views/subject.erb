@@ -1,5 +1,5 @@
 <% if list.show_table? %>
-  <table class="browse-table" aria-labelledby="maincontent">
+  <table class="browse-table subject-browse" aria-labelledby="maincontent">
     <thead>
       <tr>
         <th class="column-main">Subject</th>
@@ -33,18 +33,40 @@
                   <% result.cross_references.to_h.keys.each do | cr | %>
                     <% if result.cross_references[cr].any? %>
                       <dt>
-                        <%= result.cross_references[cr].text %>
-                      </dt> (in subject list):
+                        <%= result.cross_references[cr].text %> <span class="regular">(in subject list):</span>
+                      </dt>
                       <dd>
-                        <% result.cross_references[cr].leading.each_with_index do | cross_reference, index |%>
-                          <a href="<%= cross_reference.url%>"><%=cross_reference.subject_display%></a> (<%=cross_reference.record_text%>)<% if result.cross_references[cr].leading.length - 1 != index %>, <% end %>
-                        <% end %>
+                        <ol
+                          <%= 'role="none"' if result.cross_references[cr].leading.length == 1 %>
+                          class="cross-references-list"
+                        >
+                          <% result.cross_references[cr].leading.each do | cross_reference |%>
+                            <li>
+                              <a href="<%= cross_reference.url%>"><%=cross_reference.subject_display%></a> (<%=cross_reference.record_text%>)
+                            </li>
+                          <% end %>
+                        </ol>
                         <% if result.cross_references[cr].has_remaining? %>
-                          <details open>
-                            <summary>Toggle remaining</summary>
-                            <% result.cross_references[cr].remaining.each_with_index do | cross_reference, index |%>
-                              <a href="<%= cross_reference.url%>"><%=cross_reference.subject_display%></a> (<%=cross_reference.record_text%>)<% if result.cross_references[cr].remaining.length - 1 != index %>, <% end %>
-                            <% end %>
+                          <details class="toggle-cross-references">
+                            <summary aria-live="polite">
+                              <span class="details-closed">
+                                <%= result.cross_references[cr].summary_text_closed %>
+                              </span>
+                              <span class="details-open">
+                                <%= result.cross_references[cr].summary_text_open %>
+                              </span>
+                            </summary>
+                            <ol
+                              <%= 'role="none"' if result.cross_references[cr].leading.length == 1 %>
+                              start="<%= result.cross_references[cr].leading.length + 1%>"
+                              class="cross-references-list"
+                            >
+                              <% result.cross_references[cr].remaining.each do | cross_reference |%>
+                                <li>
+                                  <a href="<%= cross_reference.url%>"><%=cross_reference.subject_display%></a> (<%=cross_reference.record_text%>)
+                                </li>
+                              <% end %>
+                            </ol>
                           </details>
                         <% end %>
                       </dd>

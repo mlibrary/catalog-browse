@@ -77,7 +77,13 @@ describe SubjectItemWithCrossReferences do
         expect(subject.has_remaining?).to eq(true)
       end
       it "has plural text" do
-        expect(subject.text).to eq("Broader Terms")
+        expect(subject.text).to eq("Broader terms")
+      end
+      it "has text for when the remaining terms are hidden" do
+        expect(subject.summary_text_closed).to eq("Show all 11 broader terms")
+      end
+      it "has text for when the remaining terms are shown" do
+        expect(subject.summary_text_open).to eq("Hide 1 broader term")
       end
     end
     context "no elements" do
@@ -102,7 +108,7 @@ describe SubjectItemWithCrossReferences do
         expect(subject.any?).to eq(true)
       end
       it "has singular text" do
-        expect(subject.text).to eq("Broader Term")
+        expect(subject.text).to eq("Broader term")
       end
     end
   end
