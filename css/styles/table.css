@@ -194,3 +194,23 @@ table.browse-table {
   display: inline-block;
   font-weight: var(--semibold);
 }
+
+/* 3.2.2 - Records */
+
+.browse-table.subject-browse tbody td.column-main .record-text {
+  display: block;
+}
+
+.browse-table.subject-browse tbody td.column-records {
+  display: none;
+}
+
+@media only screen and (min-width: 720px) {
+  .browse-table.subject-browse tbody td.column-main .record-text {
+    display: none;
+  }
+
+  .browse-table.subject-browse tbody td.column-records {
+    display: table-cell;
+  }
+}
