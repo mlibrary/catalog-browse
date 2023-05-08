@@ -28,6 +28,9 @@
                   <% if result.heading_link? %>
                     <%= erb :'components/external_link', locals: { url: result.heading_link, text: 'About this subject', classes: 'vernacular pipe' } %>
                   <% end %>
+                  <span class="record-text">
+                    <%= result.record_text %>
+                  </span>
                 </dd>
                 <% if result.has_cross_references? %>
                   <% result.cross_references.to_h.keys.each do | cr | %>
@@ -75,7 +78,7 @@
                 <% end %>
               </dl>
             </td>
-            <td>
+            <td class="column-records">
               <%= result.record_text %>
             </td>
           </tr>
