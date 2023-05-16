@@ -30,7 +30,7 @@ class SubjectItem
   end
 
   def url
-    params = {library: "U-M Ann Arbor Libraries", query: "subject_browse_leftanchored:(\"#{subject}\")", "filter.search_only": false}
+    params = {library: "U-M Ann Arbor Libraries", query: "lc_subject_starts_with:(\"#{subject}\")", "filter.search_only": false}
     "https://search.lib.umich.edu/catalog?#{URI.encode_www_form(params)}"
   end
 
