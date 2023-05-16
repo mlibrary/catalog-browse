@@ -1,0 +1,40 @@
+/**
+ * description-list.css
+ * 
+ * Description lists are used to display metadata.
+ *
+ * -----------------
+ * Table of Contents
+ * -----------------
+ * 1.0 - Description List
+ *   1.1 - Term
+ *   1.2 - Description
+ */
+
+
+
+/******************************/
+/*** 1.0 - Description List ***/
+/******************************/
+
+/*** 1.1 - Term ***/
+
+dl dt {
+  font-weight: var(--semibold);
+}
+
+.browse-table:not(.subject-browse) dl dt {
+  clear: left;
+  float: left;
+  margin-right: 0.5rem;
+}
+
+/*** 1.2 - Description ***/
+
+dl dd {
+  margin: 0;
+}
+
+dl dt.visually-hidden:not(:only-of-type) + dd {
+  margin-bottom: 0.5rem;
+}

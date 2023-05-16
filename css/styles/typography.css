@@ -9,6 +9,8 @@
  * 1.0 - Headings
  * 2.0 - Font Weights
  * 3.0 - Icons
+ * 4.0 - Vernacular
+ *   4.1 - Pipe
  */
 
 
@@ -29,6 +31,10 @@ h1 {
 /*** 2.0 - Font Weights ***/
 /**************************/
 
+.regular {
+  font-weight: var(--regular);
+}
+
 .strong {
   font-weight: var(--bold);
 }
@@ -43,4 +49,31 @@ span[class^="material-symbols"] {
   font-size: 1em;
   line-height: inherit;
   vertical-align: middle;
+}
+
+
+
+/************************/
+/*** 4.0 - Vernacular ***/
+/************************/
+
+.vernacular {
+  color: var(--search-neutral-500);
+  display: block;
+}
+
+/*** 4.1 - Pipe ***/
+
+.vernacular.pipe {
+  display: inline;
+}
+
+.vernacular.pipe:before {
+  background: var(--search-neutral-500);
+  content: '';
+  display: inline-block;
+  height: 1em;
+  margin: 0 0.5rem;
+  vertical-align: middle;
+  width: 1px;
 }

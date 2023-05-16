@@ -24,7 +24,7 @@ end
 
 if ENV.fetch("SUBJECT_ON") == "true"
   get "/subject" do
-    subject = params[:query]
+    subject = StringCleaner.clean_browse_string(params[:query])
     reference_id = params[:reference_id] || subject
     begin
       list = SubjectList.for(direction: params[:direction], reference_id: reference_id, num_rows_to_display: 20, original_reference: subject, banner_reference: params[:banner_reference])
@@ -37,7 +37,7 @@ if ENV.fetch("SUBJECT_ON") == "true"
 end
 if ENV.fetch("AUTHOR_ON") == "true"
   get "/author" do
-    author = StringCleaner.cleanup_author_browse_string(params[:query])
+    author = StringCleaner.clean_browse_string(params[:query])
     reference_id = params[:reference_id] || author
     begin
       list = AuthorList.for(direction: params[:direction], reference_id: reference_id, num_rows_to_display: 20, original_reference: author, banner_reference: params[:banner_reference])
