@@ -58,10 +58,72 @@ describe SubjectItemWithCrossReferences do
       }
     end
     subject do
+      described_class.new(**@params).cross_references.broader
+    end
+    context "11 elements" do
+      before(:each) do
+        @items.first["broader"] = @items.first["broader"].concat(["subject||1", "subject||1", "subject||1", "subject||1", "subject||1", "subject||1", "subject||1"])
+      end
+      it "has a leading array with 10 elements" do
+        expect(subject.leading.count).to eq(10)
+      end
+      it "has a remaining array with 1 element" do
+        expect(subject.remaining.count).to eq(1)
+      end
+      it "knows it has elements" do
+        expect(subject.any?).to eq(true)
+      end
+      it "knows it has a remaining element" do
+        expect(subject.has_remaining?).to eq(true)
+      end
+      it "has plural text" do
+        expect(subject.text).to eq("Broader terms")
+      end
+      it "has text for when the remaining terms are hidden" do
+        expect(subject.summary_text_closed).to eq("Show all 11 broader terms")
+      end
+      it "has text for when the remaining terms are shown" do
+        expect(subject.summary_text_open).to eq("Hide 1 broader term")
+      end
+    end
+    context "no elements" do
+      before(:each) do
+        @items.first["broader"] = []
+      end
+      it "has returns false for has_remaining? when there aren't any remaining" do
+        expect(subject.has_remaining?).to eq(false)
+      end
+      it "has returns false for any? when there aren't any " do
+        expect(subject.any?).to eq(false)
+      end
+    end
+    context "one element" do
+      before(:each) do
+        @items.first["broader"] = ["subject||1"]
+      end
+      it "has returns false for has_remaining?" do
+        expect(subject.has_remaining?).to eq(false)
+      end
+      it "has returns true for any?" do
+        expect(subject.any?).to eq(true)
+      end
+      it "has singular text" do
+        expect(subject.text).to eq("Broader term")
+      end
+    end
+  end
+  context "#cross_references.broader.leading" do
+    before(:each) do
+      @params = {
+        browse_doc: @items.first,
+        exact_match: false
+      }
+    end
+    subject do
       described_class.new(**@params)
     end
     let :broader do
-      subject.cross_references.broader
+      subject.cross_references.broader.leading
     end
     it "has at least one cross reference of 'broader'" do
       expect(broader).not_to be_nil
@@ -70,7 +132,7 @@ describe SubjectItemWithCrossReferences do
       expect(broader.first.heading_link?).to eq(false)
     end
     it "has a subject_display" do
-      expect(broader.first.subject_display).to eq("Government, Resistance to (in subject list)")
+      expect(broader.first.subject_display).to eq("Government, Resistance to")
     end
     it "has a count" do
       expect(broader.first.count).to eq("616")
@@ -79,7 +141,7 @@ describe SubjectItemWithCrossReferences do
       expect(broader.first.record_text).to eq("616 records")
     end
     it "has a url that's a subject query" do
-      expect(subject.cross_references.broader.first.url).to include("subject?query=")
+      expect(broader.first.url).to include("subject?query=")
     end
   end
   context "#cross_references.narrower" do
@@ -93,7 +155,7 @@ describe SubjectItemWithCrossReferences do
       described_class.new(**@params)
     end
     let :narrower do
-      subject.cross_references.narrower
+      subject.cross_references.narrower.leading
     end
     it "has at least one cross reference of 'narrower'" do
       expect(narrower).not_to be_nil
@@ -102,7 +164,7 @@ describe SubjectItemWithCrossReferences do
       expect(narrower.first.heading_link?).to eq(false)
     end
     it "has a subject_display" do
-      expect(narrower.first.subject_display).to eq("Insurgency (in subject list)")
+      expect(narrower.first.subject_display).to eq("Insurgency")
     end
     it "has a count" do
       expect(narrower.first.count).to eq("199")
@@ -111,7 +173,7 @@ describe SubjectItemWithCrossReferences do
       expect(narrower.first.record_text).to eq("199 records")
     end
     it "has a url that's a subject query" do
-      expect(subject.cross_references.narrower.first.url).to include("subject?query=")
+      expect(narrower.first.url).to include("subject?query=")
     end
   end
   context "#cross_references.see_also" do
@@ -125,7 +187,7 @@ describe SubjectItemWithCrossReferences do
       described_class.new(**@params)
     end
     let :see_also do
-      subject.cross_references.see_also
+      subject.cross_references.see_also.leading
     end
     it "has at least one cross reference of 'see_also'" do
       expect(see_also).not_to be_nil
@@ -134,7 +196,7 @@ describe SubjectItemWithCrossReferences do
       expect(see_also.first.heading_link?).to eq(false)
     end
     it "has a subject_display" do
-      expect(see_also.first.subject_display).to eq("Indigenous peoples (in subject list)")
+      expect(see_also.first.subject_display).to eq("Indigenous peoples")
     end
     it "has a count" do
       expect(see_also.first.count).to eq("441")
@@ -143,7 +205,7 @@ describe SubjectItemWithCrossReferences do
       expect(see_also.first.record_text).to eq("441 records")
     end
     it "has a url that's a subject query" do
-      expect(subject.cross_references.see_also.first.url).to include("subject?query=")
+      expect(see_also.first.url).to include("subject?query=")
     end
   end
 end

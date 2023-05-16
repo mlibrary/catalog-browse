@@ -13,9 +13,8 @@
  *   2.1 - Cells
  * 3.0 - TBody
  *   3.1 - Cells
- *   3.2 - Data
- *     3.2.1 - Anchors
- *     3.2.2 - Vernacular
+ *   3.2 - Content
+ *     3.2.1 - Anchor
  */
 
 
@@ -183,51 +182,35 @@ table.browse-table {
   border-top-color: var(--color-teal-400);
 }
 
-/*** 3.2 - Data ***/
+/*** 3.2 - Content ***/
 
 .browse-table tbody td > * {
   margin: 0;
 }
 
-.browse-table tbody dl dt {
-  clear: left;
-  float: left;
-  font-weight: var(--semibold);
-  margin-right: 0.5rem;
-}
-
-.browse-table tbody dl dd {
-  margin: 0;
-}
-
-.browse-table tbody dl dt.visually-hidden:not(:only-of-type) + dd {
-  margin-bottom: 0.5rem;
-}
-
-/* 3.2.1 - Anchors */
+/* 3.2.1 - Anchor */
 
 .browse-table tbody td.column-main dd:first-of-type a:first-of-type {
   display: inline-block;
   font-weight: var(--semibold);
 }
 
-/* 3.2.2 - Vernacular */
+/* 3.2.2 - Records */
 
-.browse-table tbody .vernacular {
-  color: var(--search-neutral-500);
+.browse-table.subject-browse tbody td.column-main .record-text {
   display: block;
 }
 
-.browse-table tbody .vernacular.pipe {
-  display: inline;
+.browse-table.subject-browse tbody td.column-records {
+  display: none;
 }
 
-.browse-table tbody .vernacular.pipe:before {
-  background: var(--search-neutral-500);
-  content: '';
-  display: inline-block;
-  height: 1em;
-  margin: 0 0.5rem;
-  vertical-align: middle;
-  width: 1px;
+@media only screen and (min-width: 720px) {
+  .browse-table.subject-browse tbody td.column-main .record-text {
+    display: none;
+  }
+
+  .browse-table.subject-browse tbody td.column-records {
+    display: table-cell;
+  }
 }

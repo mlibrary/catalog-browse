@@ -67,10 +67,84 @@ class SubjectItemWithCrossReferences < SubjectItem
 
   def cross_references
     # see_instead because this still needs to be changed in solr
-    broader = @browse_doc["broader"]&.map { |subject| SubjectItemCrossReference.new(subject) }
-    narrower = @browse_doc["narrower"]&.map { |subject| SubjectItemCrossReference.new(subject) }
-    see_also = @browse_doc["see_also"]&.map { |subject| SubjectItemCrossReference.new(subject) }
+    broader = BroaderTerms.new(@browse_doc["broader"])
+    narrower = NarrowerTerms.new(@browse_doc["narrower"])
+    see_also = SeeAlsoTerms.new(@browse_doc["see_also"])
     OpenStruct.new(broader: broader, narrower: narrower, see_also: see_also)
+  end
+end
+
+class SubjectItemCrossReferences
+  def initialize(terms)
+    @terms = terms&.map { |subject| SubjectItemCrossReference.new(subject) }
+  end
+
+  def leading
+    @terms&.first(10) || []
+  end
+
+  def remaining
+    @terms&.drop(leading.count) || []
+  end
+
+  def has_remaining?
+    remaining.any?
+  end
+
+  def any?
+    leading.any?
+  end
+
+  def text
+    ""
+  end
+
+  private
+
+  def summary_text(closed, type)
+    "#{(closed == true) ? "Show all #{@terms.length}" : "Hide #{remaining.count}"}#{" #{type}" if !type.nil?} term#{"s" if closed || !closed && remaining.count != 1}"
+  end
+end
+
+class BroaderTerms < SubjectItemCrossReferences
+  def text
+    "Broader term#{"s" if @terms.count != 1}"
+  end
+
+  def summary_text_closed
+    summary_text(true, "broader")
+  end
+
+  def summary_text_open
+    summary_text(false, "broader")
+  end
+end
+
+class NarrowerTerms < SubjectItemCrossReferences
+  def text
+    "Narrower term#{"s" if @terms.count != 1}"
+  end
+
+  def summary_text_closed
+    summary_text(true, "narrower")
+  end
+
+  def summary_text_open
+    summary_text(false, "narrower")
+  end
+end
+
+class SeeAlsoTerms < SubjectItemCrossReferences
+  def text
+    "See also"
+  end
+
+  def summary_text_closed
+    summary_text(true, nil)
+  end
+
+  def summary_text_open
+    summary_text(false, nil)
   end
 end
 
@@ -81,7 +155,7 @@ class SubjectItemCrossReference
   end
 
   def subject_display
-    "#{@subject} (in subject list)"
+    @subject
   end
 
   def record_text

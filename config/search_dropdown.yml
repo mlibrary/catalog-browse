@@ -21,7 +21,7 @@
     :value: subject
     :tip: Use words or phrases to search subjects (e.g., plant physiology, Baldwin, James).
   - :label: LC Subject starts with
-    :value: subject_browse_leftanchored
+    :value: lc_subject_starts_with
     :tip: Enter words or phrases to see subjects that start with them (e.g., Baldwin, James; sociology dictionaries).
   - :label: Call Number starts with
     :value: call_number_starts_with

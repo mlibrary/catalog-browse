@@ -1,27 +1,37 @@
-name: Build latest from main and AutoDeploy to Testing
+name: Manual Deploy Unstable
 
 on:
-  workflow_run:
-    workflows: [ 'Run Tests' ]
-    branches: [ 'main' ]
-    types: [ completed ]
+  workflow_dispatch:
+    inputs:
+      deploy_environment:
+        description: 'namespace to deploy to'
+        required: true
+        type: choice
+        default: "testing"
+        options:
+          - "testing"
+          - "staging"
+      tag:
+        description: tag
+        required: true
+
 
 jobs:
   build-unstable:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    name: Build unstable ${{ github.event.inputs.tag }}
     uses: mlibrary/platform-engineering-workflows/.github/workflows/build-unstable.yml@v1
     with:
       image_name: ${{ vars.IMAGE_NAME }}
-      tag: ${{ github.sha }}
+      tag: ${{ github.event.inputs.tag }}
       dockerfile: Dockerfile.prod
     secrets: inherit
 
-  deploy-testing:
+  deploy:
     needs: build-unstable
     runs-on: ubuntu-latest
-    environment: testing
+    environment: ${{ github.event.inputs.deploy_environment }}
     steps:
-    - name: Deploy to Testing
+    - name: Deploy to ${{ github.event.inputs.deploy_environment }}
       uses: mlibrary/deploy-to-kubernetes@v3
       with:
         registry_token: ${{ secrets.GITHUB_TOKEN }}
