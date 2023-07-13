@@ -4,12 +4,10 @@ ARG UNAME=app
 ARG UID=1000
 ARG GID=1000
 
-RUN apt-get update -yqq && apt-get install -yqq --no-install-recommends \
-  apt-transport-https
-
 RUN curl -sL https://deb.nodesource.com/setup_18.x | bash -
 
 RUN apt-get update -yqq && apt-get install -yqq --no-install-recommends \
+  apt-transport-https \
   nodejs \
   vim-tiny
 
