@@ -25,6 +25,10 @@ describe CallnumberItem do
       @catalog_doc["edition"] = ["my edition", "vernacular edition"]
       expect(subject.title).to eq("Zhiznʹ gospodina de Molʹera / M. Bulgakov ; [podgot. teksta i poslesl. V.I. Loseva]. my edition")
     end
+    it "is an empty string when there is no matching catalog record" do
+      @catalog_doc = nil
+      expect(subject.title).to eq("")
+    end
   end
   context "#vernacular_title" do
     it "shows vernacular title without edition when there isn't one" do
