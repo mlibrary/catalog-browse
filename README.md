@@ -5,44 +5,17 @@ Connect to the U-M Library VPN
 
 ![Screen Shot 2021-11-18 at 2 44 56 PM](https://user-images.githubusercontent.com/27687379/142486728-5fe21b80-b02c-4e89-a2ef-e74440e99bfa.png)
 
-Copy the environment file example
-```
-cp -r .env-example .env
-```
-
-Get the actual values from a developer, and update the `.env` file.
-```
-BIBLIO_SOLR='http://biblio-server'
-CATALOG_SOLR='http://catalog-solr-server'
-CALLNUMBERS_CORE='callnumbers'
-AUTHORS_CORE='authors'
-AUTHOR_ON='true'
-SUBJECT_ON='true'
+run the `init.sh` script. 
+```bash
+./init.sh
 ```
 
-Build the image
-```
-docker-compose build
-```
+edit .env with the appropriate environment variables 
 
-Install the gems
-```
-docker-compose run --rm web bundle install
-```
+start containers
 
-Install the npm packages
-```
-docker-compose run --rm web npm install
-```
-
-Start the app
-```
-docker-compose up
-```
-
-Build the styles
-```
-docker-compose run --rm web npm run build
+```bash
+docker-compose up -d
 ```
 
 Run the tests
