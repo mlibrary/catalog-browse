@@ -15,7 +15,7 @@ services:
       - SHELL=/bin/bash
     env_file:
       - .env
-      - .env-dev-values
+      - env.development
 
 volumes:
   gem_cache:

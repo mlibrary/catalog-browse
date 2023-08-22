@@ -1,6 +1,6 @@
 require "faraday"
-require_relative "./catalog_solr_client/configuration"
-require_relative "./catalog_solr_client/client"
+require_relative "catalog_solr_client/configuration"
+require_relative "catalog_solr_client/client"
 
 module CatalogSolrClient
   class << self
