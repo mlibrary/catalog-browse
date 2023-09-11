@@ -30,5 +30,3 @@ If you are working on features, set up a gate so that the feature can be turned 
 In this project we create an environment variable for the feature. If it is true the feature is enabled. If it is false then it is turned off. 
 
 Current Features:
-* `AUTHOR_ON='true'` for enabling Browse By Author
-* `SUBJECT_ON='true'` for enabling Browse By Subject
