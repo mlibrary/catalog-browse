@@ -122,7 +122,7 @@ def stub_solr_get_request(url:, output: "{}", status: 200, query: nil, no_return
   }
   req_attributes[:query] = query unless query.nil?
   resp = {headers: {content_type: "application/json"}, status: status, body: output}
-  req = stub_request(:get, "#{ENV["CATALOG_SOLR"]}/#{url}").with(**req_attributes)
+  req = stub_request(:get, "#{ENV["BROWSE_SOLR"]}/#{url}").with(**req_attributes)
 
   if no_return.nil?
     req.to_return(**resp)
