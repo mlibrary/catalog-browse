@@ -2,8 +2,8 @@ require "spec_helper"
 describe "requests" do
   include Rack::Test::Methods
   before(:each) do
-    @callnumbers_core = ENV.fetch("CALLNUMBERS_CORE")
-    @authors_core = ENV.fetch("AUTHORS_CORE")
+    @callnumbers_core = ENV.fetch("CALLNUMBER_CORE")
+    @authors_core = ENV.fetch("AUTHORITY_CORE")
   end
   context "get /" do
     it "has status OK" do

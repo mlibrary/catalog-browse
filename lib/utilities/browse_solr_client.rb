@@ -1,7 +1,7 @@
 require "faraday"
 
 class BrowseSolrClient
-  def initialize(solr_url: ENV.fetch("BROWSE_SOLR"), core: ENV.fetch("CALLNUMBERS_CORE"), match_field: "callnumber", q: "*:*")
+  def initialize(solr_url: ENV.fetch("BROWSE_SOLR"), core: ENV.fetch("CALLNUMBER_CORE"), match_field: "callnumber", q: "*:*")
     @conn = Faraday.new(
       url: solr_url
     ) do |f|
