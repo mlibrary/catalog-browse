@@ -17,6 +17,20 @@ jobs:
       dockerfile: Dockerfile
     secrets: inherit
 
+  scan-image:
+    needs: build-production
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: ghcr.io/mlibrary/${{ vars.IMAGE_NAME }}:${{ github.event.release.tag_name }}
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
+
   deploy-production:
     needs: build-production
     runs-on: ubuntu-latest

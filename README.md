@@ -15,12 +15,12 @@ edit .env with the appropriate environment variables
 start containers
 
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 Run the tests
 ```
-docker-compose run web bundle exec rspec
+docker compose run web bundle exec rspec
 ```
 In a browser go to http://localhost:4567/callnumber?query=UM1
 
