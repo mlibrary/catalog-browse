@@ -6,6 +6,7 @@ gem "puma"
 gem "faraday"
 gem "yabeda-puma-plugin"
 gem "yabeda-prometheus"
+gem "canister"
 
 group :development do
   gem "sinatra-contrib"
