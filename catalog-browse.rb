@@ -4,6 +4,7 @@ require "byebug" if development?
 
 require "yaml"
 
+require_relative "lib/services"
 require_relative "lib/catalog_solr_client"
 require_relative "lib/utilities/browse_solr_client"
 require_relative "lib/utilities/string_cleaner"

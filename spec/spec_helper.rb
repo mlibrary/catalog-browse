@@ -26,6 +26,11 @@ module RSpecMixin
   include Rack::Test::Methods
   def app = Sinatra::Application
 end
+
+# set up dependencies
+S.register(:author_solr) { S.browse_solr }
+S.register(:solr_cloud_on?) { false }
+
 RSpec.configure do |config|
   config.include RSpecMixin
   # rspec-expectations config goes here. You can use an alternate
