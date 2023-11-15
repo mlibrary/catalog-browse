@@ -11,6 +11,10 @@ S.register(:author_solr) do
   ENV["AUTHOR_SOLR"] || ENV["BROWSE_SOLR"]
 end
 
+S.register(:author_collection) do
+  ENV["AUTHOR_COLLECTION"] || ENV["AUTHORITY_CORE"]
+end
+
 [
   "BROWSE_SOLR", "BIBLIO_SOLR", "SOLR_USER", "SOLR_PASSWORD",
   "CALLNUMBER_CORE", "AUTHORITY_CORE"

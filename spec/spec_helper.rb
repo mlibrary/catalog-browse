@@ -29,6 +29,7 @@ end
 
 # set up dependencies
 S.register(:author_solr) { S.browse_solr }
+S.register(:author_collection) { S.authority_core }
 S.register(:solr_cloud_on?) { false }
 
 RSpec.configure do |config|
