@@ -3,16 +3,16 @@ require "canister"
 Services = Canister.new
 S = Services
 
-S.register(:solr_cloud_on?) do
-  ENV["SOLR_CLOUD_ON"] == "true"
+S.register(:solrcloud_on?) do
+  ENV["SOLRCLOUD_ON"] == "true"
 end
 
-S.register(:author_solr) do
-  ENV["AUTHOR_SOLR"] || ENV["BROWSE_SOLR"]
+S.register(:authority_collection) do
+  S.solrcloud_on? ? ENV["AUTHORITY_COLLECTION"] : ENV["AUTHORITY_CORE"]
 end
 
-S.register(:author_collection) do
-  ENV["AUTHOR_COLLECTION"] || ENV["AUTHORITY_CORE"]
+S.register(:solrcloud_url) do
+  S.solrcloud_on? ? ENV["SOLRCLOUD_URL"] : ENV["BROWSE_SOLR"]
 end
 
 [
