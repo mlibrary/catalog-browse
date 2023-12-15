@@ -10,8 +10,8 @@ require_relative "lib/utilities/browse_solr_client"
 require_relative "lib/utilities/string_cleaner"
 require_relative "lib/models/browse_list"
 require_relative "lib/models/browse_list_presenter"
-require_relative "lib/models/callnumber_list"
-require_relative "lib/models/callnumber_item"
+require_relative "lib/models/call_number_list"
+require_relative "lib/models/call_number_item"
 require_relative "lib/models/author_list"
 require_relative "lib/models/author_item"
 require_relative "lib/models/subject_list"
@@ -20,7 +20,7 @@ require_relative "lib/models/search_dropdown"
 require_relative "lib/models/datastores"
 
 CatalogSolrClient.configure do |config|
-  config.solr_url = ENV.fetch("BIBLIO_SOLR")
+  config.solr_url = S.biblio_solr
 end
 
 get "/subject" do
@@ -47,13 +47,13 @@ get "/author" do
   erb :authors, locals: {list: list}
 end
 get "/callnumber" do
-  callnumber = params[:query]
-  reference_id = params[:reference_id] || callnumber
+  call_number = params[:query]
+  reference_id = params[:reference_id] || call_number
   begin
-    list = CallnumberList.for(direction: params[:direction], reference_id: reference_id, num_rows_to_display: 20, original_reference: callnumber, banner_reference: params[:banner_reference])
+    list = CallNumberList.for(direction: params[:direction], reference_id: reference_id, num_rows_to_display: 20, original_reference: call_number, banner_reference: params[:banner_reference])
   rescue => e
     logger.error(e.message)
-    list = CallnumberList::Error.new(reference_id)
+    list = CallNumberList::Error.new(reference_id)
   end
   erb :call_number, locals: {list: list}
 end

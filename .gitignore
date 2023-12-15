@@ -8,3 +8,4 @@ node_modules/
 public/browse.css
 .bash_history
 .cache/
+.solargraph.yml 

@@ -23,7 +23,7 @@ class Datastores
     end
 
     def href
-      ENV.fetch("SEARCH_URL") + @datastore[:href]
+      S.search_url + @datastore[:href]
     end
 
     def current?

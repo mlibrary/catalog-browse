@@ -85,7 +85,7 @@ class AuthorItemSeeAlso
   end
 
   def url
-    "#{ENV.fetch("BASE_URL")}/author?query=#{URI.encode_www_form_component(@author)}"
+    "#{S.base_url}/author?query=#{URI.encode_www_form_component(@author)}"
   end
 
   def heading_link?

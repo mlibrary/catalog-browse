@@ -6,7 +6,7 @@ class SubjectList < BrowseListPresenter
       num_rows_to_display: num_rows_to_display,
       original_reference: original_reference,
       banner_reference: banner_reference,
-      browse_solr_client: BrowseSolrClient.new(core: ENV.fetch("AUTHORITY_CORE"), match_field: "term", q: "browse_field:subject")
+      browse_solr_client: BrowseSolrClient.new(core: S.authority_collection, match_field: "term", q: "browse_field:subject")
     )
 
     new(browse_list: browse_list)

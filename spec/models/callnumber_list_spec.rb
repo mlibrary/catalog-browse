@@ -1,4 +1,4 @@
-describe CallnumberList do
+describe CallNumberList do
   before(:each) do
     @browse_list = instance_double(BrowseList, original_reference: "callnumber")
   end
@@ -36,17 +36,17 @@ describe CallnumberList do
   context "#previous_url" do
     it "returns appropriate url" do
       allow(@browse_list).to receive(:previous_url_params).and_return({param_1: "value_1", param_2: "value_2"})
-      expect(subject.previous_url).to eq("#{ENV.fetch("BASE_URL")}/callnumber?param_1=value_1&param_2=value_2")
+      expect(subject.previous_url).to eq("#{S.base_url}/callnumber?param_1=value_1&param_2=value_2")
     end
   end
   context "#next_url" do
     it "returns appropriate url" do
       allow(@browse_list).to receive(:next_url_params).and_return({param_1: "value_1", param_2: "value_2"})
-      expect(subject.next_url).to eq("#{ENV.fetch("BASE_URL")}/callnumber?param_1=value_1&param_2=value_2")
+      expect(subject.next_url).to eq("#{S.base_url}/callnumber?param_1=value_1&param_2=value_2")
     end
   end
 end
-describe CallnumberList::Error do
+describe CallNumberList::Error do
   before(:each) do
     @params = {
       original_reference: "OSU"

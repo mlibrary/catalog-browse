@@ -60,6 +60,6 @@ class BrowseListPresenter
   private
 
   def nav_url(params)
-    "#{ENV.fetch("BASE_URL")}/#{path}?#{URI.encode_www_form(params)}"
+    "#{S.base_url}/#{path}?#{URI.encode_www_form(params)}"
   end
 end
