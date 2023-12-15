@@ -1,12 +1,12 @@
 require "faraday"
 
 class BrowseSolrClient
-  def initialize(solr_url: ENV.fetch("SOLRCLOUD_URL"), core: ENV.fetch("CALLNUMBER_COLLECTION"), match_field: "callnumber", q: "*:*", solrcloud_on: true)
+  def initialize(solr_url: S.solr_url, core: S.call_number_collection, match_field: "callnumber", q: "*:*")
     @conn = Faraday.new(
       url: solr_url
     ) do |f|
       f.request :json
-      f.request :authorization, :basic, ENV["SOLR_USER"], ENV["SOLR_PASSWORD"] if solrcloud_on
+      f.request :authorization, :basic, S.solr_user, S.solr_password if S.solrcloud_on?
       #  f.request :retry, {max: 1, retry_statuses: [500]}
       f.response :json
     end

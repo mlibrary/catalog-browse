@@ -129,7 +129,7 @@ def stub_solr_get_request(url:, output: "{}", status: 200, query: nil, no_return
   req_attributes[:basic_auth] = [S.solr_user, S.solr_password]
   req_attributes[:query] = query unless query.nil?
   resp = {headers: {content_type: "application/json"}, status: status, body: output}
-  req = stub_request(:get, "#{S.solrcloud_url}/#{url}").with(**req_attributes)
+  req = stub_request(:get, "#{S.solr_url}/#{url}").with(**req_attributes)
 
   if no_return.nil?
     req.to_return(**resp)
@@ -146,7 +146,7 @@ def stub_biblio_get_request(url:, output: "{}", status: 200, query: nil, no_retu
   }
   req_attributes[:query] = query unless query.nil?
   resp = {headers: {content_type: "application/json"}, status: status, body: output}
-  req = stub_request(:get, "#{ENV["BIBLIO_SOLR"]}/#{url}").with(**req_attributes)
+  req = stub_request(:get, "#{S.biblio_solr}/#{url}").with(**req_attributes)
   if no_return.nil?
     req.to_return(**resp)
   else
