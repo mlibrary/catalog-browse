@@ -1,4 +1,4 @@
-class CallnumberList < BrowseListPresenter
+class CallNumberList < BrowseListPresenter
   def self.for(direction:, reference_id:, num_rows_to_display:, original_reference:, banner_reference:)
     browse_list = BrowseList.for(
       direction: direction,
@@ -37,7 +37,7 @@ class CallnumberList < BrowseListPresenter
       exact_match = exact_matches.any?(browse_doc["id"])
       banner_match = (banner_reference == browse_doc["id"])
       banner_index = index if (exact_match || banner_match) && banner_index.nil?
-      CallnumberItem.new(browse_doc: browse_doc, catalog_doc: catalog_doc(browse_doc["bib_id"]), exact_match: exact_match)
+      CallNumberItem.new(browse_doc: browse_doc, catalog_doc: catalog_doc(browse_doc["bib_id"]), exact_match: exact_match)
     end
     banner_index.nil? ? my_items : my_items.insert(banner_index, match_notice)
   end
@@ -53,7 +53,7 @@ class CallnumberList < BrowseListPresenter
   end
 end
 
-class CallnumberList::Error < CallnumberList
+class CallNumberList::Error < CallNumberList
   attr_reader :original_reference
   def initialize(original_reference = "")
     @original_reference = original_reference

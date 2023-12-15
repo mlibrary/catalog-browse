@@ -1,5 +1,5 @@
 require_relative "../spec_helper"
-describe CallnumberItem do
+describe CallNumberItem do
   before(:each) do
     @catalog_doc = JSON.parse(fixture("zhizn_bib.json"))
     @index_doc = JSON.parse(fixture("zhizn_browse.json"))
@@ -10,6 +10,9 @@ describe CallnumberItem do
   end
   it "has false match_notice?" do
     expect(subject.match_notice?).to eq(false)
+  end
+  it "shows call_number" do
+    expect(subject.call_number).to eq("PQ 1852 .B85 1992")
   end
   it "shows callnumber" do
     expect(subject.callnumber).to eq("PQ 1852 .B85 1992")

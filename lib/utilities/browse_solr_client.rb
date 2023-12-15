@@ -39,7 +39,7 @@ class BrowseSolrClient
     @conn.public_send(:get, "#{@path_prefix}/select", query)
   end
 
-  def exact_matches(value: callnumber)
+  def exact_matches(value:)
     query = {
       q: @q,
       fq: %(#{@match_field}:"#{value}"),

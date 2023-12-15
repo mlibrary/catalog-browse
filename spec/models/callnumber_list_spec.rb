@@ -1,4 +1,4 @@
-describe CallnumberList do
+describe CallNumberList do
   before(:each) do
     @browse_list = instance_double(BrowseList, original_reference: "callnumber")
   end
@@ -46,7 +46,7 @@ describe CallnumberList do
     end
   end
 end
-describe CallnumberList::Error do
+describe CallNumberList::Error do
   before(:each) do
     @params = {
       original_reference: "OSU"

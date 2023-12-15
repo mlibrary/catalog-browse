@@ -1,4 +1,4 @@
-class CallnumberItem
+class CallNumberItem
   def initialize(browse_doc:, catalog_doc:, exact_match:)
     @browse_doc = browse_doc
     @catalog_doc = catalog_doc || {}
@@ -11,6 +11,11 @@ class CallnumberItem
 
   def exact_match?
     !!@exact_match
+  end
+
+  # for the view
+  def call_number
+    @browse_doc["callnumber"]&.strip
   end
 
   # for the view
