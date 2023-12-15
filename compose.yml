@@ -14,12 +14,6 @@ services:
     env_file:
       - .env
       - env.development
-    networks:
-      - mynetwork
 
 volumes:
   gem_cache:
-
-networks:
-  mynetwork:
-    external: true
