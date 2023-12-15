@@ -15,7 +15,7 @@ describe SearchDropdown, "#url" do
   end
   it "returns appropriate browse url" do
     @type = "browse_by_callnumber"
-    expect(subject).to eq("#{ENV.fetch("BASE_URL")}/callnumber?query=#{encoded_query("Things")}")
+    expect(subject).to eq("#{S.base_url}/callnumber?query=#{encoded_query("Things")}")
   end
   it "sends the user to search if they submit nonexistent browse_by type" do
     @type = "browse_by_something_that_does_not_exist"

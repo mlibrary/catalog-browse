@@ -61,7 +61,7 @@ describe "requests" do
     it "redirects to appropriate url for given parameters" do
       post "/search", {type: "browse_by_author", query: "Thing"}
       expect(last_response.status).to eq(302)
-      expect(last_response.headers["Location"]).to eq("#{ENV.fetch("BASE_URL")}/author?query=Thing")
+      expect(last_response.headers["Location"]).to eq("#{S.base_url}/author?query=Thing")
     end
   end
   context "get /-/live" do

@@ -3,7 +3,7 @@
   active_browse_option = 'browse_by_' + request.path_info[1..-1]
 %>
 
-<form class="search-box" role="search" method="post" action="<%= ENV.fetch('BASE_URL') %>/search">
+<form class="search-box" role="search" method="post" action="<%= S.base_url %>/search">
   <div class="viewport-container search-form">
     <div class="search-box-dropdown">
       <select aria-label="Search or browse by" autocomplete="off" name="type">

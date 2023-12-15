@@ -20,7 +20,7 @@ require_relative "lib/models/search_dropdown"
 require_relative "lib/models/datastores"
 
 CatalogSolrClient.configure do |config|
-  config.solr_url = ENV.fetch("BIBLIO_SOLR")
+  config.solr_url = S.biblio_solr
 end
 
 get "/subject" do

@@ -163,7 +163,7 @@ class SubjectItemCrossReference
   end
 
   def url
-    "#{ENV.fetch("BASE_URL")}/subject?query=#{URI.encode_www_form_component(@subject)}"
+    "#{S.base_url}/subject?query=#{URI.encode_www_form_component(@subject)}"
   end
 
   def heading_link?

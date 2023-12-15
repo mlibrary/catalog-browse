@@ -31,7 +31,7 @@ describe Datastores do
     end
     context "#href" do
       it "has an href" do
-        expect(datastore.href).to eq("#{ENV.fetch("SEARCH_URL")}/datastore")
+        expect(datastore.href).to eq("#{S.search_url}/datastore")
       end
     end
     context "#current?" do
