@@ -78,14 +78,6 @@
     <%= erb :'layout/search_box', locals: { list: list } %>
     <%= erb :'layout/datastore_navigation' %>
     <main class="viewport-container">
-      <%
-        url_params = request.params.map {|key, value| key} 
-        if !url_params.include? 'direction'
-      %>
-        <m-callout dismissable icon>
-          <p><span class="strong">Browse by <%= list.name %> beta:</span> We're testing a new feature to browse the catalog by <%= list.name %>. Let us know what you think at our <%= erb :'components/external_link', locals: { url: list.feedback_url, text: 'feedback form' } %>.</p>
-        </m-callout>
-      <% end %>
       <h1 id="maincontent" tabindex="-1">
         <%= list.title %>
       </h1>

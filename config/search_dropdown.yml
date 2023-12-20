@@ -32,7 +32,7 @@
   - :label: ISBN/ISSN/OCLC/etc
     :value: isn
     :tip: Search by ISSN (8-digit code), ISBN (13 or 10-digit code), or OCLC number (e.g., 0040-781X; 0747581088; 921446069).
-- :label: Browse by [BETA]
+- :label: Browse by
   :tip: Browse Tip
   :options:
   - :label: Browse by call number (LC and Dewey)
