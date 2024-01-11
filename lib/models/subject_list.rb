@@ -16,11 +16,6 @@ class SubjectList < BrowseListPresenter
     @browse_list = browse_list
   end
 
-  def feedback_url
-    # Subject Browse specific url
-    "https://umich.qualtrics.com/jfe/form/SV_brwYt0B1fSx0zFI"
-  end
-
   def name
     "subject"
   end

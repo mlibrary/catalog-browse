@@ -12,13 +12,6 @@ describe AuthorList do
     end
   end
 
-  context "feedback_url" do
-    it "has a different url than the default form" do
-      expect(subject.feedback_url.class).to eq(String)
-      expect(subject.feedback_url).not_to eq(BrowseListPresenter.new(browse_list: nil).feedback_url)
-    end
-  end
-
   context "match_text" do
     it "returns appropriate text for no matches" do
       allow(@browse_list).to receive(:num_matches).and_return(0)

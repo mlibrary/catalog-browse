@@ -12,13 +12,6 @@ describe CallNumberList do
     end
   end
 
-  context "feedback_url" do
-    it "has the default form url" do
-      expect(subject.feedback_url.class).to eq(String)
-      expect(subject.feedback_url).to eq(BrowseListPresenter.new(browse_list: nil).feedback_url)
-    end
-  end
-
   context "match_text" do
     it "returns appropriate text for no matches" do
       allow(@browse_list).to receive(:num_matches).and_return(0)

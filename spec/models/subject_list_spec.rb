@@ -12,13 +12,6 @@ describe SubjectList do
     end
   end
 
-  context "feedback_url" do
-    it "has a different url than the default form" do
-      expect(subject.feedback_url.class).to eq(String)
-      expect(subject.feedback_url).not_to eq(BrowseListPresenter.new(browse_list: nil).feedback_url)
-    end
-  end
-
   context "help_text" do
     it "returns appropriate help text for browsing by subject" do
       expect(subject.help_text.class).to eq(String)
