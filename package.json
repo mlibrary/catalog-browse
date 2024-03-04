@@ -21,9 +21,9 @@
   },
   "homepage": "https://github.com/mlibrary/catalog-browse#readme",
   "devDependencies": {
-    "cssnano": "^6.0.3",
-    "postcss": "^8.4.33",
+    "cssnano": "^6.0.5",
+    "postcss": "^8.4.35",
     "postcss-cli": "^11.0.0",
-    "postcss-import": "^16.0.0"
+    "postcss-import": "^16.0.1"
   }
 }
