@@ -21,10 +21,10 @@ jobs:
   deploy-unstable:
     needs: build-unstable
     name: Deploy to workshop
-    uses: mlibrary/platform-engineering-workflows/.github/workflows/deploy.yml@v1
+    uses: mlibrary/platform-engineering-workflows/.github/workflows/deploy.yml@add-environment-to-deploy
     with:
       image: ${{ needs.build-unstable.outputs.image }}
       file: environments/browse/workshop/web-image.txt
-      CONFIG_REPO_RW_APP_ID: ${{ vars.CONFIG_REPO_RW_APP_ID }}
-      CONFIG_REPO_FULL_NAME: ${{ vars.CONFIG_REPO_FULL_NAME }}
+      #CONFIG_REPO_RW_APP_ID: ${{ vars.CONFIG_REPO_RW_APP_ID }}
+      #CONFIG_REPO_FULL_NAME: ${{ vars.CONFIG_REPO_FULL_NAME }}
     secrets: inherit
