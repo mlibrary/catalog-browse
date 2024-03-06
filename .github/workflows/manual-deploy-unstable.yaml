@@ -25,6 +25,6 @@ jobs:
     with:
       image: ${{ needs.build-unstable.outputs.image }}
       file: environments/browse/workshop/web-image.txt
-      #CONFIG_REPO_RW_APP_ID: ${{ vars.CONFIG_REPO_RW_APP_ID }}
-      #CONFIG_REPO_FULL_NAME: ${{ vars.CONFIG_REPO_FULL_NAME }}
+      CONFIG_REPO_RW_APP_ID: ${{ vars.CONFIG_REPO_RW_APP_ID }}
+      CONFIG_REPO_FULL_NAME: ${{ vars.CONFIG_REPO_FULL_NAME }}
     secrets: inherit
