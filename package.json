@@ -7,8 +7,9 @@
     "lib": "lib"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "postcss ./css/browse.css -d ./public/"
+    "build": "npm run build:type --type=css && npm run build:type --type=js",
+    "build:type": "esbuild ${npm_config_type}/browse.${npm_config_type} --bundle --minify --outdir=public $*",
+    "build:watch": "npm run build:type --type=${npm_config_type} -- --watch"
   },
   "repository": {
     "type": "git",
@@ -21,9 +22,6 @@
   },
   "homepage": "https://github.com/mlibrary/catalog-browse#readme",
   "devDependencies": {
-    "cssnano": "^7.0.1",
-    "postcss": "^8.4.38",
-    "postcss-cli": "^11.0.0",
-    "postcss-import": "^16.1.0"
+    "esbuild": "0.21.1"
   }
 }
