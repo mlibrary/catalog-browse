@@ -68,24 +68,24 @@ jobs:
           echo "SHA=${{ steps.cpr.outputs.pull-request-head-sha }}"  >> $GITHUB_OUTPUT
           
 
-    build-unstable:
-      needs: update
-      name: Build unstable ${{ needs.update.outputs.SHA }}
-      uses: mlibrary/platform-engineering-workflows/.github/workflows/build-unstable.yml@v1
-      with:
-        image_name: ${{ vars.IMAGE_NAME }}
-        tag: ${{ needs.update.outputs.SHA }}
-        dockerfile: Dockerfile
-      secrets: inherit
-        
-    deploy-unstable:
-      needs: build-unstable
-      name: Deploy to workshop
-      uses: mlibrary/platform-engineering-workflows/.github/workflows/deploy.yml@v1
-      with:
-        image: ${{ needs.build-unstable.outputs.image }}
-        file: environments/browse/workshop/web-image.txt
-        CONFIG_REPO_RW_APP_ID: ${{ vars.CONFIG_REPO_RW_APP_ID }}
-        CONFIG_REPO_FULL_NAME: ${{ vars.CONFIG_REPO_FULL_NAME }}
-      secrets: inherit
+  build-unstable:
+    needs: update
+    name: Build unstable ${{ needs.update.outputs.SHA }}
+    uses: mlibrary/platform-engineering-workflows/.github/workflows/build-unstable.yml@v1
+    with:
+      image_name: ${{ vars.IMAGE_NAME }}
+      tag: ${{ needs.update.outputs.SHA }}
+      dockerfile: Dockerfile
+    secrets: inherit
+      
+  deploy-unstable:
+    needs: build-unstable
+    name: Deploy to workshop
+    uses: mlibrary/platform-engineering-workflows/.github/workflows/deploy.yml@v1
+    with:
+      image: ${{ needs.build-unstable.outputs.image }}
+      file: environments/browse/workshop/web-image.txt
+      CONFIG_REPO_RW_APP_ID: ${{ vars.CONFIG_REPO_RW_APP_ID }}
+      CONFIG_REPO_FULL_NAME: ${{ vars.CONFIG_REPO_FULL_NAME }}
+    secrets: inherit
 
