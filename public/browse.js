@@ -1,12 +1,1 @@
-/*
- * Select Dropdown Tips
- */
-const selectDropdown = document.querySelector('.search-box-dropdown select');
-const optionTips = document.querySelectorAll('p[data-option]');
-
-selectDropdown.addEventListener('change', (event) => {
-  optionTips.forEach((optionTip) => {
-    const dataOptionValue = optionTip.getAttribute('data-option');
-    optionTip.style.display = dataOptionValue === event.target.value ? 'initial' : 'none';
-  });
-});
+(()=>{var n=document.querySelector(".search-box-dropdown select"),a=document.querySelectorAll("p[data-option]");n.addEventListener("change",e=>{a.forEach(t=>{let o=t.getAttribute("data-option");t.style.display=o===e.target.value?"initial":"none"})});})();

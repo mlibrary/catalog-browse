@@ -5,7 +5,6 @@ coverage/
 .irb_history
 node_modules/
 .npm/
-public/browse.css
 .bash_history
 .cache/
 .solargraph.yml 

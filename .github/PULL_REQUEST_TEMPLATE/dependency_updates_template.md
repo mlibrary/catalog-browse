@@ -3,10 +3,7 @@ Monthly dependency update to help maintain Catalog Browse.
 
 ## NPM
 These dependencies have been updated to their latest versions:
-- `cssnano`
-- `postcss`
-- `postcss-cli`
-- `postcss-import`
+- `esbuild`
 
 ## Workflows
 These actions have been updated to their latest versions:
