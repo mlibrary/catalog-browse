@@ -9,6 +9,8 @@ on:
 jobs:
   update:
     runs-on: ubuntu-latest
+    outputs: 
+      sha: ${{ steps.cpr.outputs.pull-request-head-sha }}
     steps:
       - uses: actions/checkout@v4
       - name: Create .env file
@@ -60,21 +62,14 @@ jobs:
           title: ${{ env.PR_TITLE }}
           body-path: /tmp/pr_body.md
           assignees: niquerio, erinesullivan
-      - name: Get PR outputs
-        if: ${{ steps.cpr.outputs.pull-request-number }}
-        run: |
-          echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
-          echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
-          echo "SHA=${{ steps.cpr.outputs.pull-request-head-sha }}"  >> $GITHUB_OUTPUT
-          
 
   build-unstable:
     needs: update
-    name: Build unstable ${{ needs.update.outputs.SHA }}
+    name: Build unstable ${{ needs.update.outputs.sha }}
     uses: mlibrary/platform-engineering-workflows/.github/workflows/build-unstable.yml@v1
     with:
       image_name: ${{ vars.IMAGE_NAME }}
-      tag: ${{ needs.update.outputs.SHA }}
+      tag: ${{ needs.update.outputs.sha}}
       dockerfile: Dockerfile
     secrets: inherit
       
