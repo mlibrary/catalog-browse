@@ -22,6 +22,6 @@
   },
   "homepage": "https://github.com/mlibrary/catalog-browse#readme",
   "devDependencies": {
-    "esbuild": "0.21.1"
+    "esbuild": "0.21.3"
   }
 }
