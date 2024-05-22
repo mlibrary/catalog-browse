@@ -208,4 +208,36 @@ describe SubjectItemWithCrossReferences do
       expect(see_also.first.url).to include("subject?query=")
     end
   end
+  context "#cross_references.see_instead" do
+    before(:each) do
+      @params = {
+        browse_doc: @items[2],
+        exact_match: false
+      }
+    end
+    subject do
+      described_class.new(**@params)
+    end
+    let :see_instead do
+      subject.cross_references.see_instead.leading
+    end
+    it "has at least one cross reference of 'see_instead'" do
+      expect(see_instead).not_to be_nil
+    end
+    it "has a false 'heading_link?'" do
+      expect(see_instead.first.heading_link?).to eq(false)
+    end
+    it "has a subject_display" do
+      expect(see_instead.first.subject_display).to eq("Undocumented immigrants")
+    end
+    it "has a count" do
+      expect(see_instead.first.count).to eq("250")
+    end
+    it "displays records" do
+      expect(see_instead.first.record_text).to eq("250 records")
+    end
+    it "has a url that's a subject query" do
+      expect(see_instead.first.url).to include("subject?query=")
+    end
+  end
 end
