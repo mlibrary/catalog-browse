@@ -34,6 +34,14 @@
         "browse_field":"subject",
         "json":"{\"id\":\"http://id.loc.gov/authorities/subjects/sh85000887\",\"subject\":\"Adivasis\",\"narrower\":{},\"broader\":{},\"see_also\":{\"http://id.loc.gov/authorities/subjects/sh85090174\":{\"id\":\"http://id.loc.gov/authorities/subjects/sh85090174\",\"label\":\"Indigenous peoples\",\"count\":441,\"match_text\":\"indigenous peoples\",\"json_class\":\"AuthorityBrowse::GenericXRef\"}},\"incoming_see_also\":null}",
         "_version_":1757646983890206728,
-        "date_of_index":"2023-02-12T00:00:00Z"}
-  ]
+        "date_of_index":"2023-02-12T00:00:00Z"},
+	{
+        "id":"illegal aliens\u001fsubject",
+        "loc_id":"http://id.loc.gov/authorities/subjects/sh85003553",
+        "browse_field":"subject",
+        "term":"Illegal aliens",
+        "count":0,
+        "date_of_index":"2024-05-22T00:00:00Z",
+	"see_instead":["Undocumented immigrants||250"],
+        "_version_":1799776250073448465}]
   }}
