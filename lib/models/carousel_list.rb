@@ -1,4 +1,3 @@
-require "byebug"
 class CarouselList
   def self.list(call_number)
     browse_solr_client = BrowseSolrClient.new
