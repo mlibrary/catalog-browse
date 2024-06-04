@@ -15,17 +15,17 @@ class BrowseSolrClient
     @q = q
   end
 
-  def browse_reference_on_top(reference_id:, rows: 20)
+  def browse_reference_on_top(reference_id:, rows: 20, field: "id")
     # square brackets includes reference in return
-    range = "id:[\"#{reference_id}\" TO *]"
-    sort = "id asc"
+    range = "#{field}:[\"#{reference_id}\" TO *]"
+    sort = "#{field} asc"
     browse(rows: rows, sort: sort, range: range)
   end
 
-  def browse_reference_on_bottom(reference_id:, rows: 20)
+  def browse_reference_on_bottom(reference_id:, rows: 20, field: "id")
     # curly brackets exclues reference in return
-    range = "id:{* TO \"#{reference_id}\"}"
-    sort = "id desc"
+    range = "#{field}:{* TO \"#{reference_id}\"}"
+    sort = "#{field} desc"
     browse(rows: rows, sort: sort, range: range)
   end
 
