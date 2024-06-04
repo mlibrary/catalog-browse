@@ -17,6 +17,7 @@ require_relative "lib/models/call_number_item"
 require_relative "lib/models/author_list"
 require_relative "lib/models/author_item"
 require_relative "lib/models/subject_list"
+require_relative "lib/models/carousel_list"
 require_relative "lib/models/subject_item"
 require_relative "lib/models/search_dropdown"
 require_relative "lib/models/datastores"
@@ -60,6 +61,17 @@ get "/callnumber" do
     list = CallNumberList::Error.new(reference_id)
   end
   erb :call_number, locals: {list: list}
+end
+
+get "/carousel" do
+  call_number = params[:query]
+  begin
+    content_type :json
+    CarouselList.list(call_number).to_json
+  rescue => e
+    logger.error(e.message)
+    status 500
+  end
 end
 post "/search" do
   redirect SearchDropdown.for(type: params["type"], query: params["query"]).url
