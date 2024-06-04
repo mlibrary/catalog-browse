@@ -6,6 +6,7 @@ class AuthorList < BrowseListPresenter
       num_rows_to_display: num_rows_to_display,
       original_reference: original_reference,
       banner_reference: banner_reference,
+      match_field: "term",
       browse_solr_client: BrowseSolrClient.new(core: S.authority_collection, match_field: "term", q: "browse_field:name")
     )
 
