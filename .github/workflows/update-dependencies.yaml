@@ -25,7 +25,11 @@ jobs:
           BUNDLE_RUBYGEMS__PKG__GITHUB__COM: ${{ secrets.GITHUB_TOKEN }}
       - name: Get gems to update
         continue-on-error: true
-        run: bundle outdated --only-explicit > /tmp/bundle_summary.txt
+        run: bundle outdated > /tmp/bundle_summary.txt
+      - name: clean up bundle_summary.txt
+        run: |
+          sed -i -n '/^Gem\s.*Current/,$p' /tmp/bundle_summary.txt
+          cat /tmp/bundle_summary.txt
       - name: Update bundler
         run: bundle update --bundler
       - name: Update gems
@@ -50,7 +54,7 @@ jobs:
         run: bundle exec rspec
       - name: generate pr body
         run: |
-          sed $'/BUNDLER_SUMMARY/{r /tmp/bundle_summary.txt\nd}' .github/dependency_update_template.md > /tmp/pr_body_first.md
+          sed $'/BUNDLER_SUMMARY/{r /tmp/bundle_summary.txt\nd}' .github/update_dependencies_template.md > /tmp/pr_body_first.md
           sed $'/NPM_SUMMARY/{r /tmp/npm_summary.txt\nd}' /tmp/pr_body_first.md > /tmp/pr_body.md
       - name: Get PR title
         run: echo "PR_TITLE=$(date +'%B %Y') dependency updates" >> $GITHUB_ENV
