@@ -67,6 +67,7 @@ get "/carousel" do
   call_number = params[:query]
   begin
     content_type :json
+    headers "Access-Control-Allow-Origin" => "*"
     CarouselList.list(call_number).to_json
   rescue => e
     logger.error(e.message)
