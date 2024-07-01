@@ -9,7 +9,8 @@ describe BrowseList do
         num_rows_to_display: 20,
         original_reference: nil,
         banner_reference: nil,
-        browse_solr_client: @browse_client
+        browse_solr_client: @browse_client,
+        match_field: "my_match_field"
       }
     end
     subject do
@@ -19,11 +20,17 @@ describe BrowseList do
       @params[:direction] = "next"
       allow(@browse_client).to receive(:browse_reference_on_top)
       expect(subject.class).to eq(BrowseList::ReferenceOnTop)
+      expect(@browse_client).to have_received(:browse_reference_on_top).with(
+        {reference_id: nil, rows: 22}
+      )
     end
     it "returns a ReferenceOnTop when direction is previous" do
       @params[:direction] = "previous"
       allow(@browse_client).to receive(:browse_reference_on_bottom)
       expect(subject.class).to eq(BrowseList::ReferenceOnBottom)
+      expect(@browse_client).to have_received(:browse_reference_on_bottom).with(
+        {reference_id: nil, rows: 21}
+      )
     end
     context "direction is nil" do
       it "returns a ReferenceInMiddle if there's a reference_id" do
@@ -31,6 +38,8 @@ describe BrowseList do
         allow(@browse_client).to receive(:browse_reference_on_top)
         allow(@browse_client).to receive(:browse_reference_on_bottom)
         expect(subject.class).to eq(BrowseList::ReferenceInMiddle)
+        expect(@browse_client).to have_received(:browse_reference_on_top).with({field: "my_match_field", reference_id: "Something", rows: 19})
+        expect(@browse_client).to have_received(:browse_reference_on_bottom).with({field: "my_match_field", reference_id: "Something", rows: 3})
       end
       it "returns a Empty if there in not a reference_id" do
         expect(subject.class).to eq(BrowseList::Empty)

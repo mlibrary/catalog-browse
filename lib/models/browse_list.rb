@@ -1,16 +1,21 @@
 class BrowseList
   attr_reader :original_reference, :num_rows_to_display, :num_matches, :exact_matches, :banner_reference, :index_docs
 
-  def self.for(direction:, reference_id:, num_rows_to_display:, original_reference:,
+  def self.for(
+    direction:,
+    reference_id:,
+    num_rows_to_display:,
+    original_reference:,
     banner_reference:,
-    browse_solr_client: BrowseSolrClient.new)
+    browse_solr_client: BrowseSolrClient.new,
+    match_field: "PlACEHOLDER"
+  )
 
     my_banner_reference = banner_reference
     exact_matches = browse_solr_client.exact_matches(value: original_reference)
     case direction
     when "next"
       # includes reference in results
-      # require "byebug"; byebug
       index_response = browse_solr_client.browse_reference_on_top(reference_id: reference_id, rows: num_rows_to_display + 2)
       BrowseList::ReferenceOnTop.new(
         index_response: index_response&.body,
@@ -32,8 +37,8 @@ class BrowseList
     else
       # index_before:, index_after:
       return BrowseList::Empty.new if reference_id.nil? || reference_id == ""
-      index_before = browse_solr_client.browse_reference_on_bottom(reference_id: reference_id, rows: 3)
-      index_after = browse_solr_client.browse_reference_on_top(reference_id: reference_id, rows: num_rows_to_display - 1)
+      index_before = browse_solr_client.browse_reference_on_bottom(reference_id: reference_id, rows: 3, field: match_field)
+      index_after = browse_solr_client.browse_reference_on_top(reference_id: reference_id, rows: num_rows_to_display - 1, field: match_field)
       my_banner_reference = index_after&.body&.dig("response", "docs")&.first&.dig("id")
       # need above and below
       BrowseList::ReferenceInMiddle.new(

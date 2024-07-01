@@ -2,6 +2,50 @@ describe BrowseSolrClient do
   subject do
     described_class.new
   end
+  context "#browse_reference_on_top" do
+    it "uses id as the default range and sort field" do
+      s = stub_solr_get_request(url: "#{S.call_number_collection}/select", query: hash_including(
+        {
+          fq: 'id:["whatever" TO *]',
+          sort: "id asc"
+        }
+      ))
+      subject.browse_reference_on_top(reference_id: "whatever")
+      expect(s).to have_been_requested
+    end
+    it "uses field value as the default range and sort field when given" do
+      s = stub_solr_get_request(url: "#{S.call_number_collection}/select", query: hash_including(
+        {
+          fq: 'some_other_field:["whatever" TO *]',
+          sort: "some_other_field asc"
+        }
+      ))
+      subject.browse_reference_on_top(reference_id: "whatever", field: "some_other_field")
+      expect(s).to have_been_requested
+    end
+  end
+  context "#browse_reference_on_bottom" do
+    it "uses id as the default range and sort field" do
+      s = stub_solr_get_request(url: "#{S.call_number_collection}/select", query: hash_including(
+        {
+          fq: 'id:{* TO "whatever"}',
+          sort: "id desc"
+        }
+      ))
+      subject.browse_reference_on_bottom(reference_id: "whatever")
+      expect(s).to have_been_requested
+    end
+    it "uses field value as the default range and sort field when given" do
+      s = stub_solr_get_request(url: "#{S.call_number_collection}/select", query: hash_including(
+        {
+          fq: 'some_other_field:{* TO "whatever"}',
+          sort: "some_other_field desc"
+        }
+      ))
+      subject.browse_reference_on_bottom(reference_id: "whatever", field: "some_other_field")
+      expect(s).to have_been_requested
+    end
+  end
   context "#exact_matches" do
     it "returns an array of ids for an exact match" do
       stub_solr_get_request(url: "#{S.call_number_collection}/select", query: hash_including({fq: 'callnumber:"Thing"'}), output: fixture("biblio_results.json"))

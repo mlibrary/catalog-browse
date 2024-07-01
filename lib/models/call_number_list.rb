@@ -5,7 +5,8 @@ class CallNumberList < BrowseListPresenter
       reference_id: reference_id,
       num_rows_to_display: num_rows_to_display,
       original_reference: original_reference,
-      banner_reference: banner_reference
+      banner_reference: banner_reference,
+      match_field: "callnumber"
     )
 
     bib_ids = browse_list.docs.map { |x| x["bib_id"] }
