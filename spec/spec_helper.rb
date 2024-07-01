@@ -21,6 +21,7 @@ require "simplecov"
 require "climate_control"
 SimpleCov.start
 ENV["RACK_ENV"] = "test"
+ENV["APP_ENV"] = "test"
 require File.expand_path "../../catalog-browse.rb", __FILE__
 module RSpecMixin
   include Rack::Test::Methods
