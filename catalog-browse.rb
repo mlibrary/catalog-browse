@@ -3,6 +3,7 @@ require "sinatra/reloader" if development?
 require "byebug" if development?
 
 require "yaml"
+require "ostruct"
 
 require_relative "lib/services"
 require_relative "lib/catalog_solr_client"
