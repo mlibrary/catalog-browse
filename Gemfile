@@ -8,9 +8,10 @@ gem "yabeda-puma-plugin"
 gem "yabeda-prometheus"
 gem "canister"
 gem "rackup"
+gem "semantic_logger"
+gem "sinatra-contrib"
 
 group :development do
-  gem "sinatra-contrib"
   gem "listen"
   gem "standard"
 end

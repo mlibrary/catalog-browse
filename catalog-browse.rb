@@ -1,5 +1,6 @@
 require "sinatra"
 require "sinatra/reloader" if development?
+require "sinatra/custom_logger"
 require "byebug" if development?
 
 require "yaml"
@@ -19,6 +20,8 @@ require_relative "lib/models/subject_list"
 require_relative "lib/models/subject_item"
 require_relative "lib/models/search_dropdown"
 require_relative "lib/models/datastores"
+
+set :logger, S.logger
 
 CatalogSolrClient.configure do |config|
   config.solr_url = S.biblio_solr
