@@ -1,18 +1,16 @@
 class CarouselList
-  def self.list(call_number)
-    browse_solr_client = BrowseSolrClient.new
-
+  def self.list(call_number, browse_solr_client = BrowseSolrClient.new, catalog_client = CatalongSolrClient.client)
     before = browse_solr_client.browse_reference_on_bottom(reference_id: call_number, rows: 22, field: "callnumber").body["response"]["docs"].reverse
     after = browse_solr_client.browse_reference_on_top(reference_id: call_number, rows: 23, field: "callnumber").body["response"]["docs"]
 
     ordered_call_number_docs = [before, after].flatten
 
     bib_ids = ordered_call_number_docs.map { |x| x["bib_id"] }
-    catalog_response = CatalogSolrClient.client.get_bibs(bib_ids: bib_ids).body
+    catalog_response = catalog_client.get_bibs(bib_ids: bib_ids).body
     items = ordered_call_number_docs.map do |browse_doc|
       catalog_doc = catalog_response["response"]["docs"].find do |x|
         x["id"] == browse_doc["bib_id"]
-      end
+      end || {}
       CarouselItem.new(catalog_doc, browse_doc)
     end
     items.map { |x| x.to_h }
