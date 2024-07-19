@@ -1,5 +1,5 @@
 class CarouselList
-  def self.list(call_number, browse_solr_client = BrowseSolrClient.new, catalog_client = CatalongSolrClient.client)
+  def self.list(call_number, browse_solr_client = BrowseSolrClient.new, catalog_client = CatalogSolrClient.client)
     before = browse_solr_client.browse_reference_on_bottom(reference_id: call_number, rows: 22, field: "callnumber").body["response"]["docs"].reverse
     after = browse_solr_client.browse_reference_on_top(reference_id: call_number, rows: 23, field: "callnumber").body["response"]["docs"]
 

@@ -65,6 +65,16 @@ describe "requests" do
       expect(last_response.headers["Location"]).to eq("#{S.base_url}/author?query=Thing")
     end
   end
+  context "get /carousel" do
+    it "returns some json" do
+      stub_solr_get_request(url: "#{@call_number_collection}/select", query: hash_including({fq: 'callnumber:"Thing"'}), output: fixture("biblio_results.json"))
+      stub_solr_get_request(url: "#{@call_number_collection}/select", query: hash_including({sort: "callnumber desc"}), output: fixture("callnumbers_before.json"))
+      stub_solr_get_request(url: "#{@call_number_collection}/select", query: hash_including({fq: 'callnumber:["Thing" TO *]'}), output: fixture("callnumbers_results.json"))
+      stub_biblio_get_request(url: "biblio/select", query: hash_including({}), output: fixture("biblio_results_middle.json"))
+      get "/carousel", {query: "Thing"}
+      expect(last_response.status).to eq(200)
+    end
+  end
   context "get /-/live" do
     it "returns status OK" do
       get "/-/live"
