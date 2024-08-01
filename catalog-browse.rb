@@ -23,6 +23,7 @@ require_relative "lib/models/search_dropdown"
 require_relative "lib/models/datastores"
 
 set :logger, S.logger
+set :protection, except: [:json_csrf]
 
 CatalogSolrClient.configure do |config|
   config.solr_url = S.biblio_solr
