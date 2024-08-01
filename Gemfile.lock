@@ -17,11 +17,12 @@ GEM
       bigdecimal
       rexml
     diff-lcs (1.5.1)
-    docile (1.4.0)
+    docile (1.4.1)
     dry-initializer (3.1.1)
-    faraday (2.9.2)
+    faraday (2.10.1)
       faraday-net_http (>= 2.0, < 3.2)
-    faraday-net_http (3.1.0)
+      logger
+    faraday-net_http (3.1.1)
       net-http
     ffi (1.17.0-x86_64-linux-gnu)
     hashdiff (1.1.0)
@@ -31,15 +32,16 @@ GEM
     listen (3.9.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
+    logger (1.6.0)
     method_source (1.1.0)
     multi_json (1.15.0)
-    mustermann (3.0.0)
+    mustermann (3.0.1)
       ruby2_keywords (~> 0.0.1)
     net-http (0.4.1)
       uri
     nio4r (2.7.3)
     parallel (1.25.1)
-    parser (3.3.3.0)
+    parser (3.3.4.0)
       ast (~> 2.4.1)
       racc
     prometheus-client (4.2.3)
@@ -50,11 +52,11 @@ GEM
     pry-byebug (3.10.1)
       byebug (~> 11.0)
       pry (>= 0.13, < 0.15)
-    public_suffix (6.0.0)
+    public_suffix (6.0.1)
     puma (6.4.2)
       nio4r (~> 2.0)
-    racc (1.8.0)
-    rack (3.1.4)
+    racc (1.8.1)
+    rack (3.1.7)
     rack-protection (4.0.0)
       base64 (>= 0.1.0)
       rack (>= 3.0.0, < 4)
@@ -70,7 +72,7 @@ GEM
     rb-inotify (0.11.1)
       ffi (~> 1.0)
     regexp_parser (2.9.2)
-    rexml (3.3.1)
+    rexml (3.3.4)
       strscan
     rspec (3.13.0)
       rspec-core (~> 3.13.0)
@@ -104,7 +106,7 @@ GEM
     ruby-next-core (1.0.3)
     ruby-progressbar (1.13.0)
     ruby2_keywords (0.0.5)
-    semantic_logger (4.15.0)
+    semantic_logger (4.16.0)
       concurrent-ruby (~> 1.0)
     simplecov (0.22.0)
       docile (~> 1.1)
@@ -124,7 +126,7 @@ GEM
       rack-protection (= 4.0.0)
       sinatra (= 4.0.0)
       tilt (~> 2.0)
-    standard (1.39.0)
+    standard (1.39.2)
       language_server-protocol (~> 3.17.0.2)
       lint_roller (~> 1.0)
       rubocop (~> 1.64.0)
@@ -182,4 +184,4 @@ DEPENDENCIES
   yabeda-puma-plugin
 
 BUNDLED WITH
-   2.5.14
+   2.5.16
