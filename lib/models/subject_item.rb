@@ -1,7 +1,8 @@
 class SubjectItem
   attr_reader :browse_doc
   def self.for(browse_doc:, exact_match:)
-    if browse_doc.key?("broader") || browse_doc.key?("narrower") || browse_doc.key?("see_also")
+    if ["broader", "narrower", "see_also", "see_instead"]
+        .any? { |xref_kind| browse_doc.key?(xref_kind) }
       SubjectItemWithCrossReferences.new(browse_doc: browse_doc, exact_match: exact_match)
     else
       SubjectItem.new(browse_doc: browse_doc, exact_match: exact_match)
@@ -66,11 +67,13 @@ class SubjectItemWithCrossReferences < SubjectItem
   end
 
   def cross_references
-    # see_instead because this still needs to be changed in solr
-    broader = BroaderTerms.new(@browse_doc["broader"])
-    narrower = NarrowerTerms.new(@browse_doc["narrower"])
-    see_also = SeeAlsoTerms.new(@browse_doc["see_also"])
-    OpenStruct.new(broader: broader, narrower: narrower, see_also: see_also)
+    xrefs = {}
+    [:broader, :narrower, :see_also, :see_instead].each do |xref|
+      # get the terms class from the xref name (example: BroaderTerms)
+      terms_klass = Module.const_get "#{xref.to_s.split("_").collect(&:capitalize).join}Terms"
+      xrefs[xref] = terms_klass.new(@browse_doc[xref.to_s])
+    end
+    OpenStruct.new(**xrefs)
   end
 end
 
@@ -145,6 +148,20 @@ class SeeAlsoTerms < SubjectItemCrossReferences
 
   def summary_text_open
     summary_text(false, nil)
+  end
+end
+
+class SeeInsteadTerms < SubjectItemCrossReferences
+  def text
+    "See instead"
+  end
+
+  def summary_text_closed
+    summary_text(true, "see instead")
+  end
+
+  def summary_text_open
+    summary_text(false, "see instead")
   end
 end
 
