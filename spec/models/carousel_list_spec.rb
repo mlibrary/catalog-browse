@@ -34,6 +34,15 @@ describe CarouselList::CarouselItem do
   it "has a call_number" do
     expect(subject.call_number).to eq("Z 253 .U6 1963")
   end
+  it "has an isbn" do
+    expect(subject.isbn).to eq(nil)
+  end
+  it "has an issn" do
+    expect(subject.issn).to eq(nil)
+  end
+  it "has an oclc" do
+    expect(subject.oclc).to eq("2497305")
+  end
   it "has an mms_id" do
     expect(subject.mms_id).to eq("990011613060106381")
   end
@@ -49,6 +58,9 @@ describe CarouselList::CarouselItem do
         author: "United States. Government Printing Office",
         call_number: "Z 253 .U6 1963",
         date: "1950",
+        isbn: nil,
+        issn: nil,
+        oclc: "2497305",
         title: "Theory and practice of composition.",
         url: "#{S.search_url}/catalog/record/990011613060106381"
 

@@ -34,6 +34,18 @@ class CarouselList
       @browse_doc["callnumber"]&.strip
     end
 
+    def isbn
+      @catalog_doc["isbn"]&.first&.strip
+    end
+
+    def issn
+      @catalog_doc["issn"]&.first&.strip
+    end
+
+    def oclc
+      @catalog_doc["oclc"]&.first&.strip
+    end
+
     def mms_id
       @browse_doc["bib_id"]
     end
@@ -52,6 +64,9 @@ class CarouselList
         author: author,
         date: date,
         call_number: call_number,
+        isbn: isbn,
+        issn: issn,
+        oclc: oclc,
         url: url
       }
     end
