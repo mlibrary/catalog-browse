@@ -4,6 +4,10 @@ require "semantic_logger"
 Services = Canister.new
 S = Services
 
+S.register(:version) do
+  ENV["APP_VERSION"] || "APP_VERSION"
+end
+
 S.register(:solrcloud_on?) do
   ENV["SOLRCLOUD_ON"] == "true"
 end
