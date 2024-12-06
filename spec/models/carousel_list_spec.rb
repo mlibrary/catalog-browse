@@ -20,6 +20,8 @@ end
 describe CarouselList::CarouselItem do
   before(:each) do
     @catalog_doc = JSON.parse(fixture("biblio_results.json"))["response"]["docs"].first
+    @catalog_doc["isbn"] = ["1-5011-8342-7"]
+    @catalog_doc["issn"] = ["1096-9942"]
     @browse_doc = JSON.parse(fixture("callnumbers_results.json"))["response"]["docs"].first
   end
   subject do
@@ -33,6 +35,15 @@ describe CarouselList::CarouselItem do
   end
   it "has a call_number" do
     expect(subject.call_number).to eq("Z 253 .U6 1963")
+  end
+  it "has an isbn" do
+    expect(subject.isbn).to eq("1-5011-8342-7")
+  end
+  it "has an issn" do
+    expect(subject.issn).to eq("1096-9942")
+  end
+  it "has an oclc" do
+    expect(subject.oclc).to eq("2497305")
   end
   it "has an mms_id" do
     expect(subject.mms_id).to eq("990011613060106381")
@@ -49,6 +60,9 @@ describe CarouselList::CarouselItem do
         author: "United States. Government Printing Office",
         call_number: "Z 253 .U6 1963",
         date: "1950",
+        isbn: "1-5011-8342-7",
+        issn: "1096-9942",
+        oclc: "2497305",
         title: "Theory and practice of composition.",
         url: "#{S.search_url}/catalog/record/990011613060106381"
 
