@@ -10,7 +10,6 @@ class BrowseList
     browse_solr_client: BrowseSolrClient.new,
     match_field: "PlACEHOLDER"
   )
-
     my_banner_reference = banner_reference
     exact_matches = browse_solr_client.exact_matches(value: original_reference)
     case direction
