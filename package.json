@@ -7,9 +7,10 @@
     "lib": "lib"
   },
   "scripts": {
-    "build": "npm run build:type --type=css && npm run build:type --type=js",
-    "build:type": "esbuild \"${npm_config_type}/*.${npm_config_type}\" --bundle --minify --outdir=public $*",
-    "build:watch": "npm run build:type --type=${npm_config_type} -- --watch"
+    "build": "FILE_TYPE=css npm run build:type && FILE_TYPE=js npm run build:type",
+    "build:type": "esbuild \"$FILE_TYPE/*.$FILE_TYPE\" --bundle --minify --outdir=public $*",
+    "watch:css": "FILE_TYPE=css npm run build:type -- --watch",
+    "watch:js": "FILE_TYPE=js npm run build:type -- --watch"
   },
   "repository": {
     "type": "git",
