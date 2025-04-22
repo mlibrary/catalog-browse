@@ -54,6 +54,9 @@ describe CarouselList::CarouselItem do
   it "has a url" do
     expect(subject.url).to eq("#{S.search_url}/catalog/record/990011613060106381")
   end
+  it "has a book_cover_url" do
+    expect(subject.book_cover_url).to eq("https://www.syndetics.com/index.php?client=umichaa&pagename=lc.jpg&isbn=1-5011-8342-7&issn=1096-9942&oclc=2497305")
+  end
   it "has a hash output" do
     expect(subject.to_h).to eq(
       {
@@ -64,8 +67,8 @@ describe CarouselList::CarouselItem do
         issn: "1096-9942",
         oclc: "2497305",
         title: "Theory and practice of composition.",
-        url: "#{S.search_url}/catalog/record/990011613060106381"
-
+        url: "#{S.search_url}/catalog/record/990011613060106381",
+        book_cover_url: "https://www.syndetics.com/index.php?client=umichaa&pagename=lc.jpg&isbn=1-5011-8342-7&issn=1096-9942&oclc=2497305"
       }
     )
   end
