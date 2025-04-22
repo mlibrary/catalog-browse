@@ -68,7 +68,7 @@ describe CarouselList::CarouselItem do
         oclc: "2497305",
         title: "Theory and practice of composition.",
         url: "#{S.search_url}/catalog/record/990011613060106381",
-        book_cover: "https://www.syndetics.com/index.php?client=umichaa&pagename=lc.jpg&isbn=1-5011-8342-7&issn=1096-9942&oclc=2497305",
+        book_cover: "https://www.syndetics.com/index.php?client=umichaa&pagename=lc.jpg&isbn=1-5011-8342-7&issn=1096-9942&oclc=2497305"
       }
     )
   end

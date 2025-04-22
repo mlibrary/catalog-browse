@@ -58,12 +58,12 @@ class CarouselList
       "https://search.lib.umich.edu/catalog/record/#{mms_id}"
     end
 
-    def book_cover  
+    def book_cover
       query_params = [:isbn, :issn, :oclc].map do |parameter|
         value = send(parameter)
         "#{parameter}=#{value}" unless value.nil? || value.empty?
       end
-      "https://www.syndetics.com/index.php?client=umichaa&pagename=lc.jpg&#{query_params.compact.join('&')}"
+      "https://www.syndetics.com/index.php?client=umichaa&pagename=lc.jpg&#{query_params.compact.join("&")}"
     end
 
     def to_h
