@@ -54,12 +54,11 @@ class CarouselList
       @catalog_doc["display_date"]
     end
 
-    # Remove this method when logic gets moved into the Search back end.
     def url
       "https://search.lib.umich.edu/catalog/record/#{mms_id}"
     end
 
-
+    # Remove this method when logic gets moved into the Search back end.
     def book_cover_url
       query_params = [:isbn, :issn, :oclc].map do |parameter|
         value = send(parameter)
