@@ -1,5 +1,6 @@
 class BrowseListPresenter
   extend Forwardable
+
   def_delegators :@browse_list, :show_table?, :error?, :has_next_list?, :has_previous_list?, :next_reference_id, :previous_reference_id, :original_reference, :num_rows_to_display, :num_matches, :exact_matches, :banner_reference, :error_message, :index_docs
 
   def initialize(browse_list:)
