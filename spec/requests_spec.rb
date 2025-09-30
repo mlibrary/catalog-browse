@@ -1,6 +1,7 @@
 require "spec_helper"
 describe "requests" do
   include Rack::Test::Methods
+
   before(:each) do
     @call_number_collection = S.call_number_collection
     @authority_collection = S.authority_collection
